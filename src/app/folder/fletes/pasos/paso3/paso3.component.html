@@ -10,12 +10,26 @@
     </ul>
     <!-- fieldsets -->
     <fieldset>
-      <h2 class="fs-title">Personal Details</h2>
-      <h3 class="fs-subtitle">We will never sell it</h3>
-      <input type="text" name="fname" placeholder="First Name" />
-      <input type="text" name="lname" placeholder="Last Name" />
-      <input type="text" name="phone" placeholder="Phone" />
-      <textarea name="address" placeholder="Address"></textarea>
+      <h2 class="fs-title">Corrobore sus datos</h2>
+      <h3 class="fs-subtitle">Si esta todo ok imprima su factura</h3>
+      <input type="text" name="desde" placeholder="Desde" />
+      <input type="text" name="hasta" placeholder="Hasta" />
+      <textarea name="address" placeholder="Cargamento"></textarea>
+      <ion-item>
+        <ion-icon name="people-outline">Ayudantes</ion-icon>
+        <ion-label >Ayudantes</ion-label>
+      </ion-item>
+
+      <ion-list class="list">
+        <ion-item>
+          <ion-select placeholder="Tipo de vehiculo" [multiple]="true">
+            <ion-select-option  value="Camion">Camion</ion-select-option>
+            <ion-select-option value="Camioneta">Camioneta</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-list>
+
+
       <input type="button" name="previous" class="previous action-button" value="Atras"  (click)="rediBack()"   />
       <input type="submit" name="submit" class="submit action-button" value="Finalizar"  (click)="redi()" />
     </fieldset>

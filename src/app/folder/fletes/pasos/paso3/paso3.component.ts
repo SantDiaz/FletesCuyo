@@ -14,7 +14,7 @@ export class Paso3Component implements OnInit {
 
 
   redi(){
-    this.routes.navigate(['/paso3']);
+    this.routes.navigate(['/home']);
   }
 
   rediBack(){
