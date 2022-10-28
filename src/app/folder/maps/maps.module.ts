@@ -5,6 +5,11 @@ import { LoadingComponent } from './components/loading/loading.component';
 import { MapViewComponent } from './components/map-view/map-view.component';
 import { RouterModule } from '@angular/router';
 import { FletesPageRoutingModule } from '../fletes/fletes-routing.module';
+import { FletesLogoComponent } from './components/fletes-logo/fletes-logo.component';
+import { BtnMyLocationComponent } from './components/btn-my-location/btn-my-location.component';
+import { SearchResultComponent } from './components/search-result/search-result.component';
+import { SearchBarComponent } from './components/search-bar/search-bar.component';
+import { BtnDesdeComponent } from './components/btn-desde/btn-desde.component';
 
 
 
@@ -13,6 +18,11 @@ import { FletesPageRoutingModule } from '../fletes/fletes-routing.module';
     MapScreenComponent,
     LoadingComponent,
     MapViewComponent,
+    FletesLogoComponent,
+    BtnMyLocationComponent,
+    SearchResultComponent,
+    SearchBarComponent,
+    BtnDesdeComponent,
 
   ],
   imports: [
@@ -25,6 +35,11 @@ import { FletesPageRoutingModule } from '../fletes/fletes-routing.module';
     MapScreenComponent,
     LoadingComponent,
     MapViewComponent,
+    FletesLogoComponent,
+    BtnMyLocationComponent,
+    SearchResultComponent,
+    SearchBarComponent,
+    BtnDesdeComponent,
   ]
 })
 export class MapsModule { }

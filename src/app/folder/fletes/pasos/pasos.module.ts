@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { Paso3Component } from './paso3/paso3.component';
 import { FletesPageRoutingModule } from '../fletes-routing.module';
 import { ComponentsModule } from 'src/app/components/components.module';
+// import { MapsModule } from '../../maps/maps.module';
 
 
 
@@ -21,6 +22,7 @@ import { ComponentsModule } from 'src/app/components/components.module';
     FletesPageRoutingModule,
     RouterModule,
     ComponentsModule,
+    // MapsModule,
 
   ],
   exports:[
