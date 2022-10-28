@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ComponentsModule } from './components/components.module';
 import { PasosModule } from './folder/fletes/pasos/pasos.module';
+import { MapsModule } from './folder/maps/maps.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -17,6 +18,7 @@ import { PasosModule } from './folder/fletes/pasos/pasos.module';
       AppRoutingModule,
       ComponentsModule,
       PasosModule,
+      MapsModule,
     ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

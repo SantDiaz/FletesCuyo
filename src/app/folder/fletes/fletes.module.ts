@@ -9,6 +9,7 @@ import { FletesPageRoutingModule } from './fletes-routing.module';
 import { FletesPage } from './fletes.page';
 import { ComponentsModule } from 'src/app/components/components.module';
 import { PasosModule } from './pasos/pasos.module';
+import { MapsModule } from '../maps/maps.module';
 
 @NgModule({
   imports: [
@@ -18,6 +19,7 @@ import { PasosModule } from './pasos/pasos.module';
     FletesPageRoutingModule,
     ComponentsModule,
     PasosModule,
+    MapsModule
   ],
   declarations: [FletesPage]
 })

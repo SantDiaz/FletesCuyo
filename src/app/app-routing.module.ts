@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { MapScreenComponent } from './folder/maps/screens/map-screen/map-screen.component';
 
 const routes: Routes = [
   {
@@ -19,7 +20,7 @@ const routes: Routes = [
     path: 'fletes',
     loadChildren: () => import('./folder/fletes/fletes.module').then( m => m.FletesPageModule)
   },
-  
+
 
 ];
 

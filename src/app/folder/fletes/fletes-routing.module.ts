@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { LoadingComponent } from '../maps/components/loading/loading.component';
+import { MapViewComponent } from '../maps/components/map-view/map-view.component';
+import { MapScreenComponent } from '../maps/screens/map-screen/map-screen.component';
 import { FletesPage } from './fletes.page';
 import { Paso1Component } from './pasos/paso1/paso1.component';
 import { Paso2Component } from './pasos/paso2/paso2.component';
@@ -21,6 +24,18 @@ const routes: Routes = [
   {
     path: 'paso3',
     component: Paso3Component
+  },
+  {
+    path: 'maps',
+    component: MapScreenComponent
+  },
+  {
+    path: 'loading',
+    component: LoadingComponent
+  },
+  {
+    path: 'map-view',
+    component: MapViewComponent
   },
 
 ];
