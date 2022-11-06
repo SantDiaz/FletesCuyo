@@ -10,6 +10,7 @@ import { ComponentsModule } from './components/components.module';
 import { PasosModule } from './folder/fletes/pasos/pasos.module';
 import { MapsModule } from './folder/maps/maps.module';
 import { HttpClientModule } from '@angular/common/http';
+import { Maps2Module } from './folder/maps2/maps2.module';
 @NgModule({
   declarations: [AppComponent],
   imports: 
@@ -19,6 +20,7 @@ import { HttpClientModule } from '@angular/common/http';
       ComponentsModule,
       PasosModule,
       MapsModule,
+      Maps2Module,
       HttpClientModule,
     ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],

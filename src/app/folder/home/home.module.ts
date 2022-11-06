@@ -8,6 +8,7 @@ import { HomePageRoutingModule } from './home-routing.module';
 
 import { HomePage } from './home.page';
 import { MapsModule } from '../maps/maps.module';
+import { Maps2Module } from '../maps2/maps2.module';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { MapsModule } from '../maps/maps.module';
     FormsModule,
     IonicModule,
     HomePageRoutingModule,
-    MapsModule
+    MapsModule,
+    Maps2Module,
   ],
   declarations: [HomePage]
 })

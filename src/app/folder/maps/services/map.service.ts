@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Map, LngLatLike } from 'mapbox-gl';
+import { environment } from 'src/environments/environment';
 import { DirectionApiClient } from '../api/directionApiClient';
 import { DirectionsResponse } from '../interface/directions';
 
@@ -39,8 +40,14 @@ export class MapService {
   }
 
 
+// loadCoords(coords):void{
 
-  // const url = [`fffff`].join('');
+//   const url = [
+//     `https://api.mapbox.com/directions/v5/mapbox/driving`,
+//     `${coords[0][0],${coords[0][1]};${coords[1][0],${coords[1][1]}`,
+//     `?steps=true&goemtries=geojson&acess_token=${environment.apiKey}`
+//   ].join('');
+
 
 
 

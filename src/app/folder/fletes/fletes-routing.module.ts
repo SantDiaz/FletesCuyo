@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoadingComponent } from '../maps/components/loading/loading.component';
 import { MapViewComponent } from '../maps/components/map-view/map-view.component';
 import { MapScreenComponent } from '../maps/screens/map-screen/map-screen.component';
+import { Screen2Component } from '../maps2/screen2/screen2.component';
 import { FletesPage } from './fletes.page';
 import { Paso1Component } from './pasos/paso1/paso1.component';
 import { Paso2Component } from './pasos/paso2/paso2.component';
@@ -36,6 +37,10 @@ const routes: Routes = [
   {
     path: 'map-view',
     component: MapViewComponent
+  },
+  {
+    path: 'maps2',
+    component: Screen2Component
   },
 
 ];
