@@ -11,6 +11,8 @@ import { PasosModule } from './folder/fletes/pasos/pasos.module';
 import { MapsModule } from './folder/maps/maps.module';
 import { HttpClientModule } from '@angular/common/http';
 import { Maps2Module } from './folder/maps2/maps2.module';
+import { MapsGoogleModule } from './folder/maps-google/mapsGoogle.module';
+import { RegisterModule } from './folder/register/register.module';
 @NgModule({
   declarations: [AppComponent],
   imports: 
@@ -22,6 +24,9 @@ import { Maps2Module } from './folder/maps2/maps2.module';
       MapsModule,
       Maps2Module,
       HttpClientModule,
+      MapsGoogleModule,
+      RegisterModule
+      
     ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomePage implements OnInit {
 
+  valueSelected:string = "1";
+  
   constructor() { }
 
   ngOnInit() {
   }
-
+  
+  segmentChanged(event: CustomEvent){
+    this.valueSelected = event.detail.value;
+    console.log(this.valueSelected);
+  }
 }

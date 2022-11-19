@@ -1,31 +1,36 @@
-<<ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button>
-        <img src="../../../assets/menu_bar.svg" />
-      </ion-menu-button>
-    </ion-buttons>
-    <div class="searcho">
-      <div class="search ">
-        <ion-item lines="none">
-          <ion-input placeholder="Buscar productos..."></ion-input>
-          <ion-icon name="search-outline" slot="start"></ion-icon>
-        </ion-item>
-      </div>
-    </div>
-    <ion-buttons slot="end">
-      <ion-button class="cart">
-        <ion-icon name="cart-outline"></ion-icon>
-        <span>&nbsp;</span>
-      </ion-button>
-      
-      <ion-button class="filter">
-        <ion-icon name="person-circle-outline"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>>
+<app-header></app-header>
 
-<ion-content>
-  <app-screen2></app-screen2>
+<ion-content class="backg">
+
+  <div class="segments">
+    <ion-segment (ionChange)="segmentChanged($event)" [value]="valueSelected" scrollable="true" color="danger">
+      <ion-segment-button  value="1">
+        <ion-icon name="chatbubbles-outline"></ion-icon>
+        <ion-label>Chat Virtual</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="2">
+        <ion-icon name="stats-chart-outline"></ion-icon>
+        <ion-label>Historial de Fletes</ion-label>
+      </ion-segment-button>
+      <ion-segment-button  value="3">
+        <ion-icon name="rocket-outline"></ion-icon>
+        <ion-label>Fletes disponibles</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  
+  
+  
+    <div class="center" *ngIf="valueSelected == 1">
+      <h1>Hola1</h1>
+      <app-paso1></app-paso1>
+    </div>
+    <div class="center" *ngIf="valueSelected == 2">
+      <h1>Hola2</h1>
+    </div>
+    <div class="center" *ngIf="valueSelected == 3">
+      <h1>Hola3</h1>
+    </div>
+  </div>
+
+    <!-- <app-map-screen></app-map-screen> -->
 </ion-content>

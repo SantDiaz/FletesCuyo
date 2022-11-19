@@ -9,41 +9,50 @@
     </ul>
     <!-- fieldsets -->
     <fieldset>
-      <h2 class="fs-title">Create your account</h2>
+      <h2 class="fs-title">Datos personales</h2>
       <h3 class="fs-subtitle">This is step 1</h3>
-      <input type="text" name="nombre" placeholder="Nombre y apellido" />
+      <input  type="text" name="nombre" placeholder="Nombre y apellido" />
       <input type="text" name="dni" placeholder="Dni" />
       <input type="text" name="tel" placeholder="Telefono" />
       <input type="text" name="direccion" placeholder="Direccion" />
-      <ion-list>
-        <ion-item>
-          <ion-select placeholder="Selecciona departamento" [multiple]="true">
-            <ion-select-option  value="25 de Mayo">25 de Mayo</ion-select-option>
-            <ion-select-option value="9 de Julio">9 de Julio</ion-select-option>
-            <ion-select-option value="Albardón">Albardón</ion-select-option>
-            <ion-select-option value="Angaco">Angaco</ion-select-option>
-            <ion-select-option value="Calingasta">Calingasta</ion-select-option>
-            <ion-select-option value="Capital">Capital</ion-select-option>
-            <ion-select-option value="Caucete">Caucete</ion-select-option>
-            <ion-select-option value="Chimbas">Chimbas</ion-select-option>
-            <ion-select-option value="Iglesia">Iglesia</ion-select-option>
-            <ion-select-option value="Jáchal">Jáchal</ion-select-option>
-            <ion-select-option value="Pocito">Pocito</ion-select-option>
-            <ion-select-option value="Rawson">Rawson</ion-select-option>
-            <ion-select-option value="Rivadavia">Rivadavia</ion-select-option>
-            <ion-select-option value="San Martín">San Martín</ion-select-option>
-            <ion-select-option value="Santa Lucía">Santa Lucía</ion-select-option>
-            <ion-select-option value="Sarmiento">Sarmiento</ion-select-option>
-            <ion-select-option value=" Ullum"> Ullum</ion-select-option>
-            <ion-select-option value="Valle Fértil">Valle Fértil</ion-select-option>
-            <ion-select-option value=" Zonda"> Zonda</ion-select-option>
-          </ion-select>
-        </ion-item>
-      </ion-list>
-      <!-- [routerLink]="['/paso2']" -->
-      <!-- (click)="redi()" -->
-      <!-- <ion-button   routerLink="['/paso2']" routerLinkActive="active" >Go to detail</ion-button> -->
+      <ion-datetime minuteValues="0,15,30,45" dayValues="5,10,15,20,25,30"></ion-datetime>
       <input type="button"  name="next" class="next action-button" value="Siguiente"  (click)="redi()" />
     </fieldset>
   
   </form>
+
+
+
+
+
+
+
+
+
+
+
+  <!-- <ion-list>
+    <ion-item>
+      <ion-select placeholder="Selecciona departamento" [multiple]="true">
+        <ion-select-option  value="25 de Mayo">25 de Mayo</ion-select-option>
+        <ion-select-option value="9 de Julio">9 de Julio</ion-select-option>
+        <ion-select-option value="Albardón">Albardón</ion-select-option>
+        <ion-select-option value="Angaco">Angaco</ion-select-option>
+        <ion-select-option value="Calingasta">Calingasta</ion-select-option>
+        <ion-select-option value="Capital">Capital</ion-select-option>
+        <ion-select-option value="Caucete">Caucete</ion-select-option>
+        <ion-select-option value="Chimbas">Chimbas</ion-select-option>
+        <ion-select-option value="Iglesia">Iglesia</ion-select-option>
+        <ion-select-option value="Jáchal">Jáchal</ion-select-option>
+        <ion-select-option value="Pocito">Pocito</ion-select-option>
+        <ion-select-option value="Rawson">Rawson</ion-select-option>
+        <ion-select-option value="Rivadavia">Rivadavia</ion-select-option>
+        <ion-select-option value="San Martín">San Martín</ion-select-option>
+        <ion-select-option value="Santa Lucía">Santa Lucía</ion-select-option>
+        <ion-select-option value="Sarmiento">Sarmiento</ion-select-option>
+        <ion-select-option value=" Ullum"> Ullum</ion-select-option>
+        <ion-select-option value="Valle Fértil">Valle Fértil</ion-select-option>
+        <ion-select-option value=" Zonda"> Zonda</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-list> -->
