@@ -1,3 +1,4 @@
+<ion-comp
 <div class="container">
     <div class="wrapper">
       <ul class="steps">
@@ -7,21 +8,28 @@
 
           <fieldset class="section is-active">
               <h3>Seleccione como quiere registrarse</h3>
-              <div class="row cf">
-                  <div class="four col">
-                      <input type="radio" name="r1" id="r1" checked>
-                      <label for="r1">
-          <h4>Quiero pedir un flete</h4>
-        </label>
-      </div>
 
-        <div class="four col">
-            <input type="radio" name="r1" id="r3"><label for="r3">
-                <h4>Soy fletero</h4>
-            </label>
-        </div>
+<ion-options>
+
+    <div class="row cf">
+                <div class="four col">
+                    <input type="radio" name="r1" id="r1" #newU value="User" checked>
+                    <label for="r1">
+        <h4>{{user}}</h4>
+      </label>
     </div>
-    <input type="button"  name="next" class="button2" value="Siguiente"  (click)="siguiente()" />
+
+      <div class="four col">
+          <input type="radio" name="r1" id="r2" #newF value="Fletero" >
+          <label for="r2" >
+              <h4>{{fletero}}</h4>
+          </label>
+      </div>
+  </div>
+</ion-options>
+
+
+    <input type="button"  name="next" class="button2" value="Siguiente"  (click)="siguiente(newU.value, newF.value)" />
 </fieldset>
 </form>
     </div>

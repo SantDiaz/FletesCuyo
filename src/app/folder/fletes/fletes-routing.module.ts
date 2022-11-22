@@ -10,6 +10,7 @@ import { Screen2Component } from '../maps2/screen2/screen2.component';
 import { RegisterComponent } from '../register/register.component';
 import { Form1Component } from '../register/registerFlete/form1/form1.component';
 import { Form2Component } from '../register/registerFlete/form2/form2.component';
+import { Form3Component } from '../register/registerFlete/form3/form3.component';
 import { FletesPage } from './fletes.page';
 import { Paso1Component } from './pasos/paso1/paso1.component';
 import { Paso2Component } from './pasos/paso2/paso2.component';
@@ -71,6 +72,10 @@ const routes: Routes = [
   {
     path: 'formF2',
     component: Form2Component,
+  },
+  {
+    path: 'formF3',
+    component: Form3Component,
   },
   
   

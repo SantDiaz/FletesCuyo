@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
+// import { EventEmitter } from 'stream';
 
 @Component({
   selector: 'app-register',
@@ -8,12 +9,29 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
 
+  
+
+  @Input() user = "Quiero pedir un flete";
+  @Input() fletero = "Soy fletero";
+  @Output() newU = new EventEmitter<string>();
+  @Output() newF = new EventEmitter<string>();
+
   constructor(private routes: Router) { }
 
   ngOnInit() {}
 
-  siguiente(){
-    this.routes.navigate(['/formF1']);
+  siguiente(value: string){
+    this.newU.emit(value);
+    this.newF.emit(value);
+    console.log(value);
+    
+    if (value == "User" ){
+      this.routes.navigate(['/formF1']);
+      console.log(value);
+    }else{
+      this.routes.navigate(['/formF2']);
+      console.log(value);
+    }
   }
 
 }
