@@ -19,4 +19,16 @@ export class Form1Component implements OnInit {
   siguiente(){
     this.routes.navigate(['/formF2']);
   }
+
+
+  logs: string[] = [];
+
+  pushLog(msg) {
+    this.logs.unshift(msg);
+  }
+
+  handleChange(e) {
+    this.pushLog('ionChange fired with value: ' + e.detail.value);
+  }
+
 }

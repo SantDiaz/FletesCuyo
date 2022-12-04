@@ -11,6 +11,9 @@ import { RegisterComponent } from '../register/register.component';
 import { Form1Component } from '../register/registerFlete/form1/form1.component';
 import { Form2Component } from '../register/registerFlete/form2/form2.component';
 import { Form3Component } from '../register/registerFlete/form3/form3.component';
+import { FormUserComponent } from '../register/registerUser/form-user/form-user.component';
+import { FormUser2Component } from '../register/registerUser/form-user2/form-user2.component';
+import { FormUser3Component } from '../register/registerUser/form-user3/form-user3.component';
 import { FletesPage } from './fletes.page';
 import { Paso1Component } from './pasos/paso1/paso1.component';
 import { Paso2Component } from './pasos/paso2/paso2.component';
@@ -77,7 +80,18 @@ const routes: Routes = [
     path: 'formF3',
     component: Form3Component,
   },
-  
+  {
+    path: 'formUser1',
+    component: FormUserComponent,
+  },
+  {
+    path: 'formUser2',
+    component: FormUser2Component,
+  },
+  {
+    path: 'formUser3',
+    component: FormUser3Component,
+  },
   
 ];
 

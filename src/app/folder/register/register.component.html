@@ -1,36 +1,36 @@
-<ion-comp
-<div class="container">
-    <div class="wrapper">
-      <ul class="steps">
-        <li class="is-active">Tipo de registro</li>
-      </ul>
-      <form class="form-wrapper">
+<ion-component>
 
-          <fieldset class="section is-active">
-              <h3>Seleccione como quiere registrarse</h3>
+  <div class="container">
+  
+      <div class="wrapper">
+        <ul class="steps">
+          <li class="is-active">Tipo de registro</li>
+        </ul>
+        <form class="form-wrapper">
+  
+   <fieldset (ionChange)="tipoRegister($event)" class="section is-active">
+           <h3>Seleccione como quiere registrarse</h3>
+  
 
-<ion-options>
-
-    <div class="row cf">
-                <div class="four col">
-                    <input type="radio" name="r1" id="r1" #newU value="User" checked>
-                    <label for="r1">
-        <h4>{{user}}</h4>
-      </label>
-    </div>
-
-      <div class="four col">
-          <input type="radio" name="r1" id="r2" #newF value="Fletero" >
-          <label for="r2" >
-              <h4>{{fletero}}</h4>
-          </label>
+                <div >
+                  <div class="row cf">
+                    <div class="four col">
+                      <input type="radio" name="r1" id="r1"  value="User" (click)="user()" checked>
+                      <label for="r1">
+                        <h4>Usuario</h4>
+                      </label>
+                    </div>
+                    <!--  -->
+                    <div class="four col">
+                      <input type="radio" name="r1" id="r2"  value="Fletero" (click)="fletero()" >
+                        <label for="r2" >
+                            <h4>Fletero</h4>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+  </fieldset>
+  </form>
       </div>
   </div>
-</ion-options>
-
-
-    <input type="button"  name="next" class="button2" value="Siguiente"  (click)="siguiente(newU.value, newF.value)" />
-</fieldset>
-</form>
-    </div>
-</div>
+</ion-component>

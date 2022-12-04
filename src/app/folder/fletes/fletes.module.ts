@@ -10,7 +10,8 @@ import { FletesPage } from './fletes.page';
 import { ComponentsModule } from 'src/app/components/components.module';
 import { PasosModule } from './pasos/pasos.module';
 import { MapsModule } from '../maps/maps.module';
-// import { LoginRegModule } from 'src/app/login-Reg/login-reg.module';
+import { RegisterModule } from '../register/register.module';
+
 
 @NgModule({
   imports: [
@@ -21,7 +22,7 @@ import { MapsModule } from '../maps/maps.module';
     ComponentsModule,
     PasosModule,
     MapsModule,
-    // LoginRegModule
+    RegisterModule,
   ],
   declarations: [FletesPage]
 })

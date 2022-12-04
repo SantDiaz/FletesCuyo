@@ -262,7 +262,7 @@ html, body{
 	list-style-type: none;
 	color: white;
 	text-transform: uppercase;
-	font-size: 9px;
+	font-size: 14px;
 	width: 33.33%;
 	float: left;
 	position: relative;
@@ -299,4 +299,6 @@ html, body{
 #progressbar li.active:before,  #progressbar li.active:after{
 	background: #27AE60;
 	color: white;
+	font-size: 19px;
+	
 }

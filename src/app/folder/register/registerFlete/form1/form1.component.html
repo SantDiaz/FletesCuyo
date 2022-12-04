@@ -10,7 +10,23 @@
       <form class="form-wrapper">
         <fieldset class="section is-active">
           <h3>Your Details</h3>
-          <input type="text" name="name" id="name" placeholder="Name">
+          <input type="text" name="name" id="name" placeholder="Nombre">
+          <input type="text" name="apellido" id="apellido" placeholder="Apellido">
+          <input type="text" name="dni" id="dni" placeholder="DNI">
+          <ion-list class="list">
+            <ion-item class="list2">
+              <ion-select class="list3"
+                placeholder="Su edad"
+                (ionChange)="handleChange($event)"
+                (ionCancel)="pushLog('ionCancel fired')"
+                (ionDismiss)="pushLog('ionDismiss fired')"
+              >
+                <ion-select-option value="apples">Apples</ion-select-option>
+                <ion-select-option value="oranges">Oranges</ion-select-option>
+                <ion-select-option value="bananas">Bananas</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-list>
           <input type="text" name="email" id="email" placeholder="Email">
           <input type="button"  name="next" class="button2" value="Atras" (click)="atras()"  />
           <input type="button"  name="next" class="button2" value="Siguiente"  (click)="siguiente()"  />

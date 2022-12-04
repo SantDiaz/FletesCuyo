@@ -6,6 +6,7 @@ import { FormUser2Component } from './registerUser/form-user2/form-user2.compone
 import { FormUserComponent } from './registerUser/form-user/form-user.component';
 import { Form3Component } from './registerFlete/form3/form3.component';
 import { IonicModule } from '@ionic/angular';
+import { FormUser3Component } from './registerUser/form-user3/form-user3.component';
 
 
 
@@ -15,7 +16,8 @@ import { IonicModule } from '@ionic/angular';
     Form2Component,
     Form3Component,
     FormUserComponent,
-    FormUser2Component
+    FormUser2Component,
+    FormUser3Component,
   ],
   imports: [
     CommonModule,
@@ -27,7 +29,8 @@ import { IonicModule } from '@ionic/angular';
     Form2Component,
     Form3Component,
     FormUserComponent,
-    FormUser2Component
+    FormUser2Component,
+    FormUser3Component,
     
   ]
 })
