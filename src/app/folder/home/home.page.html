@@ -2,8 +2,8 @@
 
 <ion-content  class="background2">
 
-  <div class="segments">
-    <ion-segment (ionChange)="segmentChanged($event)" [value]="valueSelected" scrollable="true" color="danger">
+  <div >
+    <ion-segment  (ionChange)="segmentChanged($event)" [value]="valueSelected" scrollable="true" color="dark">
       <ion-segment-button  value="1">
         <ion-icon name="chatbubbles-outline"></ion-icon>
         <ion-label>Chat Virtual</ion-label>
@@ -26,6 +26,7 @@
     </div>
     <div class="center" *ngIf="valueSelected == 2">
       <h1>Hola2</h1>
+      <app-form1></app-form1>
     </div>
     <div class="center" *ngIf="valueSelected == 3">
       <h1>Hola3</h1>

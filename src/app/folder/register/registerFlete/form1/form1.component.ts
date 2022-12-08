@@ -21,14 +21,6 @@ export class Form1Component implements OnInit {
   }
 
 
-  logs: string[] = [];
 
-  pushLog(msg) {
-    this.logs.unshift(msg);
-  }
-
-  handleChange(e) {
-    this.pushLog('ionChange fired with value: ' + e.detail.value);
-  }
 
 }

@@ -11,6 +11,7 @@ import { MapsModule } from '../maps/maps.module';
 import { Maps2Module } from '../maps2/maps2.module';
 import { ComponentsModule } from 'src/app/components/components.module';
 import { PasosModule } from '../fletes/pasos/pasos.module';
+import { RegisterModule } from '../register/register.module';
 
 @NgModule({
   imports: [
@@ -22,6 +23,7 @@ import { PasosModule } from '../fletes/pasos/pasos.module';
     MapsModule,
     Maps2Module,
     PasosModule,
+    RegisterModule,
   ],
   declarations: [HomePage]
 })

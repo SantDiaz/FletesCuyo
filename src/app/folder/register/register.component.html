@@ -1,16 +1,13 @@
-<ion-component>
+<ion-content class="background2">
 
   <div class="container">
-  
-      <div class="wrapper">
-        <ul class="steps">
-          <li class="is-active">Tipo de registro</li>
-        </ul>
-        <form class="form-wrapper">
-  
-   <fieldset (ionChange)="tipoRegister($event)" class="section is-active">
-           <h3>Seleccione como quiere registrarse</h3>
-  
+    <div class="wrapper">
+      <form class="form-wrapper">
+        <fieldset (ionChange)="tipoRegister($event)" class="section is-active">
+          <ul class="steps">
+            <li class="is-active">Tipo de registro</li>
+          </ul>
+          
 
                 <div >
                   <div class="row cf">
@@ -33,4 +30,4 @@
   </form>
       </div>
   </div>
-</ion-component>
+</ion-content>

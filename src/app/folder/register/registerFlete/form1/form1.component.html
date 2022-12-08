@@ -3,31 +3,21 @@
   <div class="container">
     <div class="wrapper">
       <ul id="progressbar">
-        <li class="active">Datos personales</li>
-        <li>Datos del vehiculo</li>
+        <li class="active">Personales</li>
+        <li>Vehicular</li>
         <li>Perfil</li>
       </ul>
       <form class="form-wrapper">
         <fieldset class="section is-active">
-          <h3>Your Details</h3>
+          <ul class="steps">
+            <li class="is-active">Tipo de registro</li>
+          </ul>
           <input type="text" name="name" id="name" placeholder="Nombre">
           <input type="text" name="apellido" id="apellido" placeholder="Apellido">
           <input type="text" name="dni" id="dni" placeholder="DNI">
-          <ion-list class="list">
-            <ion-item class="list2">
-              <ion-select class="list3"
-                placeholder="Su edad"
-                (ionChange)="handleChange($event)"
-                (ionCancel)="pushLog('ionCancel fired')"
-                (ionDismiss)="pushLog('ionDismiss fired')"
-              >
-                <ion-select-option value="apples">Apples</ion-select-option>
-                <ion-select-option value="oranges">Oranges</ion-select-option>
-                <ion-select-option value="bananas">Bananas</ion-select-option>
-              </ion-select>
-            </ion-item>
-          </ion-list>
-          <input type="text" name="email" id="email" placeholder="Email">
+          <input type="text" name="edad" id="edad" placeholder="Edad">
+          <input type="text" name="domicilio" id="domicilio" placeholder="Domicilio">
+          <input type="text" name="telefono" id="telefono" placeholder="Telefono">
           <input type="button"  name="next" class="button2" value="Atras" (click)="atras()"  />
           <input type="button"  name="next" class="button2" value="Siguiente"  (click)="siguiente()"  />
           

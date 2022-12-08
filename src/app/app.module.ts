@@ -13,6 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { Maps2Module } from './folder/maps2/maps2.module';
 import { MapsGoogleModule } from './folder/maps-google/mapsGoogle.module';
 import { RegisterModule } from './folder/register/register.module';
+import { HomeLogModule } from './folder/home-log/home-log.module';
 @NgModule({
   declarations: [AppComponent],
   imports: 
@@ -25,7 +26,8 @@ import { RegisterModule } from './folder/register/register.module';
       Maps2Module,
       HttpClientModule,
       MapsGoogleModule,
-      RegisterModule
+      RegisterModule,
+      HomeLogModule,
       
     ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],

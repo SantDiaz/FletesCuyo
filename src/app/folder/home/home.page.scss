@@ -1,24 +1,24 @@
 .segments{
-  width: 100%;
-}
+  // column-gap: 360px;
+  // margin-left: 50px;
 
-.backg{
-  background: rgb(183,181,226);
-  background: linear-gradient(90deg, rgba(183,181,226,1) 0%, rgba(41,174,228,1) 0%, rgba(31,100,126,1) 41%, rgba(0,80,62,1) 48%, rgba(18,210,195,1) 100%);
 }
 
 
-ion-content.background2{
+
+.background2{
+  --ion-background-color: rgb(115, 108, 255);
   background: rgb(183,181,226);
   background: linear-gradient(90deg, rgba(183,181,226,1) 0%, rgba(41,174,228,1) 0%, rgba(12,49,62,1) 0%, rgba(6,102,80,1) 50%, rgba(12,49,62,1) 100%);
   }
 
 
        /*Media Querie*/
-       @media only screen and (min-width : 150px) and (max-width : 530px){
+       @media only screen and (min-width : 150px) and (max-width : 1660px){
 
         .segments{
-          width: 100%;
+          column-gap: 10px;
+          margin-left: 0px;
         }
     
         }

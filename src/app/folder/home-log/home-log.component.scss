@@ -6,6 +6,11 @@ html, body{
 	font-family: 'Open Sans', sans-serif;
 	background-color: #3498db;
   }
+
+  .background2{
+    --ion-background-color: rgb(115, 108, 255);
+	
+    }
   
   h1, h2, h3, h4, h5 ,h6{
 	font-weight: 200;
@@ -231,3 +236,51 @@ html, body{
 	color: #3498db;
   }
   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  .segments{
+	// column-gap: 360px;
+	// margin-left: 50px;
+  
+  }
+  
+  
+  
+  .background2{
+	--ion-background-color: rgb(115, 108, 255);
+	background: rgb(183,181,226);
+	background: linear-gradient(90deg, rgba(183,181,226,1) 0%, rgba(41,174,228,1) 0%, rgba(12,49,62,1) 0%, rgba(6,102,80,1) 50%, rgba(12,49,62,1) 100%);
+	}
+  
+  
+		 /*Media Querie*/
+		 @media only screen and (min-width : 150px) and (max-width : 1660px){
+  
+		  .segments{
+			column-gap: 10px;
+			margin-left: 0px;
+		  }
+	  
+		  }

@@ -7,21 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeLogComponent implements OnInit {
 
-  // const switchers = [...document.querySelectorAll('.switcher')];
 
-  // switchers: Document["querySelectorAll"];
-
+  valueSelected:string = "1";
   constructor() { }
 
   ngOnInit() {}
 
-// click(){
-//   switchers.forEach(item => {
-//     item.addEventListener('click', function() {
-//       switchers.forEach(item => item.parentElement.classList.remove('is-active'))
-//       this.parentElement.classList.add('is-active')
-//     })
-//   })
-// }
 
+  
+segmentChanged(event: CustomEvent){
+  this.valueSelected = event.detail.value;
+  console.log(this.valueSelected);
+}
 }
