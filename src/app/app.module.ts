@@ -14,6 +14,7 @@ import { Maps2Module } from './folder/maps2/maps2.module';
 import { MapsGoogleModule } from './folder/maps-google/mapsGoogle.module';
 import { RegisterModule } from './folder/register/register.module';
 import { HomeLogModule } from './folder/home-log/home-log.module';
+import { ChatModule } from './folder/chat/chat.module';
 @NgModule({
   declarations: [AppComponent],
   imports: 
@@ -28,6 +29,7 @@ import { HomeLogModule } from './folder/home-log/home-log.module';
       MapsGoogleModule,
       RegisterModule,
       HomeLogModule,
+      ChatModule,
       
     ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],

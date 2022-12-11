@@ -1,17 +1,17 @@
-<app-header></app-header>
+<!-- <app-header></app-header> -->
 <ion-content class="background2">
 
 <!-- boton modal -->
 
 <ion-button  class="chat" expand="block" (click)="setOpen(true)">Open</ion-button>
-<ion-modal  [isOpen]="isModalOpen">
+<ion-modal [isOpen]="isModalOpen">
   <ng-template>
     <ion-header>
       <ion-toolbar>
         <ion-title>Chat Virtual</ion-title>
         <ion-buttons slot="end">
           <!-- <ion-button (click)="setOpen(false)">Close</ion-button> -->
-          <ion-button (click)="setOpen(false)" class="logout" color="danger">Salir</ion-button>
+          <ion-button (click)="setOpen(false)"  class="logout" color="danger">Salir</ion-button>
         </ion-buttons>
       </ion-toolbar>
     </ion-header>

@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-home-log',
-  templateUrl: './home-log.component.html',
-  styleUrls: ['./home-log.component.scss'],
+  selector: 'app-chat',
+  templateUrl: './chat.component.html',
+  styleUrls: ['./chat.component.scss'],
 })
-export class HomeLogComponent implements OnInit {
+export class ChatComponent implements OnInit {
 
   items = [];
   valueSelected:string = "1";
@@ -18,6 +18,7 @@ export class HomeLogComponent implements OnInit {
     }
   }
   
+
   
   setOpen(isOpen: boolean) {
     this.isModalOpen = isOpen;
@@ -27,4 +28,5 @@ segmentChanged(event: CustomEvent){
   this.valueSelected = event.detail.value;
   console.log(this.valueSelected);
 }
+
 }

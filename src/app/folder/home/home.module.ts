@@ -12,6 +12,7 @@ import { Maps2Module } from '../maps2/maps2.module';
 import { ComponentsModule } from 'src/app/components/components.module';
 import { PasosModule } from '../fletes/pasos/pasos.module';
 import { RegisterModule } from '../register/register.module';
+import { ChatModule } from '../chat/chat.module';
 
 @NgModule({
   imports: [
@@ -24,6 +25,8 @@ import { RegisterModule } from '../register/register.module';
     Maps2Module,
     PasosModule,
     RegisterModule,
+    ChatModule,
+    
   ],
   declarations: [HomePage]
 })

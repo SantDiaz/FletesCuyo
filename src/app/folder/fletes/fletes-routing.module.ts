@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { ChatComponent } from '../chat/chat.component';
 import { HomeLogComponent } from '../home-log/home-log.component';
 import { LoginComponent } from '../login/login.component';
 import { MapsGoogleComponent } from '../maps-google/maps-google.component';
@@ -91,6 +92,10 @@ const routes: Routes = [
   {
     path: 'formUser3',
     component: FormUser3Component,
+  },
+  {
+    path: 'chat',
+    component: ChatComponent,
   },
   
 ];

@@ -1,7 +1,7 @@
 <app-header></app-header>
 
 <ion-content  class="background2">
-
+  <app-chat></app-chat>
   <div >
     <ion-segment  (ionChange)="segmentChanged($event)" [value]="valueSelected" scrollable="true" color="dark">
       <ion-segment-button  value="1">
@@ -21,12 +21,11 @@
   
   
     <div class="center" *ngIf="valueSelected == 1">
-      <h1>Hola1</h1>
-      <app-paso1></app-paso1>
+
+      <!-- <app-paso1></app-paso1> -->
     </div>
     <div class="center" *ngIf="valueSelected == 2">
       <h1>Hola2</h1>
-      <app-form1></app-form1>
     </div>
     <div class="center" *ngIf="valueSelected == 3">
       <h1>Hola3</h1>
