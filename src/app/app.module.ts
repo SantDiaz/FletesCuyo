@@ -15,6 +15,15 @@ import { MapsGoogleModule } from './folder/maps-google/mapsGoogle.module';
 import { RegisterModule } from './folder/register/register.module';
 import { HomeLogModule } from './folder/home-log/home-log.module';
 import { ChatModule } from './folder/chat/chat.module';
+import { LoginModule } from './folder/login/login.module';
+import { AngularFireModule } from '@angular/fire/compat';
+import {  environment2 } from 'src/environments/environment';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+// import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+
+
+
 @NgModule({
   declarations: [AppComponent],
   imports: 
@@ -27,9 +36,15 @@ import { ChatModule } from './folder/chat/chat.module';
       Maps2Module,
       HttpClientModule,
       MapsGoogleModule,
+      LoginModule,
       RegisterModule,
       HomeLogModule,
       ChatModule,
+      AngularFireModule.initializeApp(environment2.firebaseConfig),
+      AngularFireAuthModule,
+      AngularFirestoreModule,
+
+ 
       
     ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],

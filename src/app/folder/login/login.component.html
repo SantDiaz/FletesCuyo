@@ -1,23 +1,32 @@
-<!-- <app-header></app-header> -->
-<div class="main">  	
-  <input type="checkbox" id="chk" aria-hidden="true">
+<app-header></app-header>
+<ion-content class="background2">
 
+  <div class="main">  	
+    <input type="checkbox" id="chk" aria-hidden="true">
+    <ion-title >Iniciar sesion</ion-title>
     <div class="signup">
       <form>
-        <label for="chk" aria-hidden="true">Sign up</label>
-        <input type="text" name="txt" placeholder="User name" required="">
-        <input type="email" name="email" placeholder="Email" required="">
-        <input type="password" name="pswd" placeholder="Password" required="">
-        <button>Sign up</button>
+        <input [(ngModel)]="credenciales.email" name="email" placeholder="Email" required="" >
+        <input [(ngModel)]="credenciales.password" name="Password" placeholder="Contraseña" required="">
+        <button (click)="login()">Iniciar Sesion</button>
       </form>
     </div>
-
-    <div class="login">
+    
+    <div class="registrarse">
       <form>
-        <label for="chk" aria-hidden="true">Login</label>
-        <input type="email" name="email" placeholder="Email" required="">
-        <input type="password" name="pswd" placeholder="Password" required="">
-        <button>Login</button>
+        <label for="chk" aria-hidden="true">Registrarse</label>
+        <div >
+          <div class="row cf">
+            <div class="four col">
+              <button class="btn" (click)="user()">Usuario</button>
+            </div>
+            <!--  -->
+            <div class="four col">
+              <button class="btn"(click)="fletero()">Fletero</button>
+                </div>
+              </div>
+            </div>
       </form>
     </div>
-</div>
+  </div>
+</ion-content>

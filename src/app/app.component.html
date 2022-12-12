@@ -51,21 +51,21 @@
             </ion-label>
             <ion-icon slot="start" name="person-outline"></ion-icon>
           </ion-item>
-
-          <ion-item  color="light"  >
-            <ion-label [routerLink]="['/login']">
-            Iniciar Sesion
-            </ion-label>
-            <ion-icon slot="start" name="person-outline"></ion-icon>
-          </ion-item>
           <ion-item  color="light"  >
             <ion-label [routerLink]="['/chat']">
             Chat
             </ion-label>
             <ion-icon slot="start" name="person-outline"></ion-icon>
           </ion-item>
+          
+          <ion-item  color="light"  >
+            <ion-label [routerLink]="['/login']">
+            Iniciar Sesion
+            </ion-label>
+            <ion-icon slot="start" name="person-outline"></ion-icon>
+          </ion-item>
 
-          <ion-item  color="light" >
+          <ion-item (click)="logout()" color="light" >
             <ion-label>
             Cerrar Sesion 
             </ion-label>
