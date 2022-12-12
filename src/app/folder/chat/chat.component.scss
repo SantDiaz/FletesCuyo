@@ -6,11 +6,9 @@ html, body{
 	font-family: 'Open Sans', sans-serif;
 	background-color: #3498db;
   }
-
-  .background2{
-    --ion-background-color: rgb(115, 108, 255);
-	
-    }
+  .background{
+	--ion-background-color: linear-gradient(90deg, rgba(183,181,226,1) 0%, rgba(41,174,228,1) 0%, rgba(12,49,62,1) 0%, rgba(6,102,80,1) 50%, rgba(12,49,62,1) 100%);
+	}
   
   h1, h2, h3, h4, h5 ,h6{
 	font-weight: 200;
@@ -23,7 +21,14 @@ html, body{
   p, li, a{
 	font-size: 14px;
   }
-  
+
+  .logout{
+	height: 35px;
+	width: 70px;
+	color: #ccc;
+	background: #ff0000;
+  }
+
   fieldset{
 	margin: 0;
 	padding: 0;

@@ -1,17 +1,16 @@
-<!-- <app-header></app-header> -->
-<ion-content class="background2">
+<ion-content class="background">
 
 <!-- boton modal -->
 
-<ion-button  class="chat" expand="block" (click)="setOpen(true)">Open</ion-button>
-<ion-modal [isOpen]="isModalOpen">
-  <ng-template>
-    <ion-header>
+<ion-button color="tee" (click)="setOpen(true)">Open</ion-button>
+<ion-modal  [isOpen]="isModalOpen">
+  <ng-template >
+    <ion-header >
       <ion-toolbar>
         <ion-title>Chat Virtual</ion-title>
         <ion-buttons slot="end">
           <!-- <ion-button (click)="setOpen(false)">Close</ion-button> -->
-          <ion-button (click)="setOpen(false)"  class="logout" color="danger">Salir</ion-button>
+          <ion-button (click)="setOpen(false)"  class="logout" >Salir</ion-button>
         </ion-buttons>
       </ion-toolbar>
     </ion-header>
@@ -24,7 +23,22 @@
               <div style="clear:both"></div>
           </div>
            
-          <div id="chatbox"></div>
+          <div id="chatbox">
+            <ion-item >
+              <ion-avatar slot="start">
+                <img [src]="'https://picsum.photos/80/80?random=' + index" alt="avatar" />
+              </ion-avatar>
+              <ion-label>Juan Diaz</ion-label>
+              <!-- <ion-text> Hola quiero pedir un flete, soy de rawson, hasta chimbas, es un mueble</ion-text> -->
+            </ion-item>
+
+            <ion-item >
+              <ion-avatar slot="end">
+                <img [src]="'https://picsum.photos/80/80?random=' + index" alt="avatar" />
+              </ion-avatar>
+              <ion-label slot="end">Martin Diaz</ion-label>
+            </ion-item>
+          </div>
            
           <form name="message" action="">
               <input name="usermsg" type="text" id="usermsg" size="63" />
@@ -37,44 +51,5 @@
 </ion-modal>
 
   <!-- Scroll -->
-  <!-- <div >
-    <ion-segment  (ionChange)="segmentChanged($event)" [value]="valueSelected" scrollable="true" color="dark">
-      <ion-segment-button  value="1">
-        <ion-icon name="chatbubbles-outline"></ion-icon>
-        <ion-label>¿Quienes somos?</ion-label>
-      </ion-segment-button>
-      <ion-segment-button value="2">
-        <ion-icon name="rocket-outline"></ion-icon>
-        <ion-label>Pedir Flete</ion-label>
-      </ion-segment-button>
-      <ion-segment-button  value="3">
-        <ion-icon name="stats-chart-outline"></ion-icon>
-        <ion-label>Ayuda</ion-label>
-      </ion-segment-button>
-    </ion-segment>
   
-  
-  
-    <div class="center" *ngIf="valueSelected == 1">
-        <ion-list>
-          <ion-item *ngFor="let item of items; let index">
-            <ion-avatar slot="start">
-              <img [src]="'https://picsum.photos/80/80?random=' + index" alt="avatar" />
-            </ion-avatar>
-            <ion-label>{{ item }}</ion-label>
-          </ion-item>
-        </ion-list>
-        <ion-infinite-scroll>
-          <ion-infinite-scroll-content loadingText="Please wait..." loadingSpinner="bubbles"></ion-infinite-scroll-content>
-        </ion-infinite-scroll>
-    </div>
-    <div class="center" *ngIf="valueSelected == 2">
-      <h1>Hola2</h1>
-      <app-register></app-register>
-
-    </div>
-    <div class="center" *ngIf="valueSelected == 3">
-      <h1>Hola3</h1>
-    </div>
-  </div> -->
 </ion-content>

@@ -13,7 +13,7 @@ export class HomeLogComponent implements OnInit {
   isModalOpen = false;
 
   ngOnInit() {
-    for (let i = 1; i < 31; i++) {
+    for (let i = 1; i < 6; i++) {
       this.items.push(`Item ${i}`);
     }
   }

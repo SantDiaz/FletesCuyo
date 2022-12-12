@@ -1,36 +1,47 @@
 <app-header></app-header>
 
 <ion-content  class="background2">
-  <app-chat></app-chat>
   <div >
     <ion-segment  (ionChange)="segmentChanged($event)" [value]="valueSelected" scrollable="true" color="dark">
       <ion-segment-button  value="1">
         <ion-icon name="chatbubbles-outline"></ion-icon>
-        <ion-label>Chat Virtual</ion-label>
+        <ion-label>¿Quienes somos?</ion-label>
       </ion-segment-button>
       <ion-segment-button value="2">
-        <ion-icon name="stats-chart-outline"></ion-icon>
-        <ion-label>Historial de Fletes</ion-label>
+        <ion-icon name="rocket-outline"></ion-icon>
+        <ion-label>Pedir Flete</ion-label>
       </ion-segment-button>
       <ion-segment-button  value="3">
-        <ion-icon name="rocket-outline"></ion-icon>
-        <ion-label>Fletes disponibles</ion-label>
+        <ion-icon name="stats-chart-outline"></ion-icon>
+        <ion-label>Ayuda</ion-label>
       </ion-segment-button>
     </ion-segment>
   
   
   
     <div class="center" *ngIf="valueSelected == 1">
-
-      <!-- <app-paso1></app-paso1> -->
+        <ion-list>
+          <ion-item *ngFor="let item of items; let index">
+            <ion-avatar slot="start">
+              <img [src]="'https://picsum.photos/80/80?random=' + index" alt="avatar" />
+            </ion-avatar>
+            <ion-label>{{ item }}</ion-label>
+          </ion-item>
+        </ion-list>
+        <ion-infinite-scroll>
+          <ion-infinite-scroll-content loadingText="Please wait..." loadingSpinner="bubbles"></ion-infinite-scroll-content>
+        </ion-infinite-scroll>
     </div>
     <div class="center" *ngIf="valueSelected == 2">
       <h1>Hola2</h1>
-    </div>
+      <app-paso1> </app-paso1> 
+</div>
     <div class="center" *ngIf="valueSelected == 3">
       <h1>Hola3</h1>
+  <app-chat></app-chat>
+
     </div>
   </div>
-
-    <!-- <app-map-screen></app-map-screen> -->
+  
+  <!-- <app-map-screen></app-map-screen> -->
 </ion-content>
