@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
-import { UserF, UserI } from '../models/models';
+import { UserF, UserU } from '../models/models';
 import { InteractionService } from './interaction.service';
 
 @Injectable({
@@ -23,8 +23,12 @@ export class AuthService {
     this.router.navigate(['/login']);
   }
 
-  registerU(registerF: UserF){
+  registerF(registerF: UserF){
     return   this.authS.createUserWithEmailAndPassword(registerF.email, registerF.password);
+  }
+
+  registerU(registerU: UserU){
+    return   this.authS.createUserWithEmailAndPassword(registerU.email, registerU.password);
   }
 
 }

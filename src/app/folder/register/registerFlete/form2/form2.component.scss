@@ -156,6 +156,7 @@ html, body{
 	transform: scale(1, 1);
   }
   
+ 
   .form-wrapper .button, .form-wrapper .submit{
 	background-color: #49e041;
 	display: inline-block;
@@ -179,6 +180,8 @@ html, body{
 	-moz-appearance: none;
 	appearance: none;
   }
+  .form-wrapper ion-list,
+  .form-wrapper ion-item, 
   .form-wrapper input[type="file"],
   .form-wrapper input[type="text"],
   .form-wrapper input[type="password"]{

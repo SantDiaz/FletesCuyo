@@ -41,7 +41,7 @@ export class Form1Component implements OnInit {
   async siguiente(){
     this.interaction.presentLoading("Registrando...")
     console.log(this.registerF);
-    const res = await this.authS.registerU(this.registerF).catch(error =>{
+    const res = await this.authS.registerF(this.registerF).catch(error =>{
       console.log(error);
       this.interaction.closeLoading();
       this.interaction.presentToast('error')
