@@ -1,4 +1,28 @@
 <ion-content padding class="background2" >
 
-
-</ion-content>
+    <div class="container">
+      <div class="wrapper">
+        <ul id="progressbar">
+          <li class="active">Personales</li>
+          <li>Opcionales</li>
+          <li>Perfil</li>
+        </ul>
+        <form class="form-wrapper">
+          <fieldset class="section is-active">
+            <ul class="steps">
+              <li class="is-active">Datos Personales</li>
+            </ul>
+            <!-- <input  [(ngModel)]="registerF.nombre" type="text" name="name"  placeholder="Nombre" required="">
+            <input  [(ngModel)]="registerF.apellido" type="text" name="apellido"  placeholder="Apellido" required="">
+            <input  [(ngModel)]="registerF.dni" type="text" name="dni" placeholder="DNI" required="">
+            <input  [(ngModel)]="registerF.edad" type="text" name="edad" placeholder="Edad" required="">
+            <input  [(ngModel)]="registerF.domicilio" type="text" name="domicilio"  placeholder="Domicilio" required="">
+            <input  [(ngModel)]="registerF.telefono" type="text" name="telefono"  placeholder="Telefono" required=""> -->
+            <input type="button"  name="next" class="button2" value="Atras" (click)="atras()"  />
+            <input type="button"  name="next" class="button2" value="Siguiente"  (click)="siguiente()"  />
+            
+          </fieldset>
+  </form>
+      </div>
+    </div>
+  </ion-content>

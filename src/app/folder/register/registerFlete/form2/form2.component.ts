@@ -12,7 +12,7 @@ export class Form2Component implements OnInit {
 
   ngOnInit() {}
   atras(){
-    this.routes.navigate(['/register']);
+    this.routes.navigate(['/formF1']);
   }
   siguiente(){
     this.routes.navigate(['/formF3']);

@@ -9,6 +9,7 @@ import { IonicModule } from '@ionic/angular';
 import { FormUser3Component } from './registerUser/form-user3/form-user3.component';
 import { ComponentsModule } from 'src/app/components/components.module';
 import { RegisterComponent } from './register.component';
+import { FormsModule } from '@angular/forms';
 // import { HomeLogModule } from '../home-log/home-log.module';
 
 
@@ -25,6 +26,7 @@ import { RegisterComponent } from './register.component';
   ],
   imports: [
     CommonModule,
+    FormsModule,
     IonicModule,
     ComponentsModule,
     // HomeLogModule,

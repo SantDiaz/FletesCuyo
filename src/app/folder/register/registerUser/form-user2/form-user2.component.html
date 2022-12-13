@@ -1,4 +1,23 @@
 <ion-content padding class="background2" >
 
-
-</ion-content>
+    <div class="container">
+      <div class="wrapper">
+        <ul id="progressbar">
+          <li class="active">Personales</li>
+          <li class="active">Foto de Perfil</li>
+          <li>Perfil</li>
+        </ul>
+        <form class="form-wrapper">
+          <fieldset class="section is-active">
+            <ul class="steps">
+              <li class="is-active">Selecciona foto de perfil</li>
+            </ul>
+            <input type="file" name="name" id="name" placeholder="Subir foto">
+            <input type="button"  name="next" class="button2" value="Atras" (click)="atras()"  />
+            <input type="button"  name="next" class="button2" value="Siguiente"  (click)="siguiente()"  />
+            
+          </fieldset>
+  </form>
+      </div>
+    </div>
+  </ion-content>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-form-user2',
@@ -7,8 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FormUser2Component implements OnInit {
 
-  constructor() { }
+  constructor(private routes: Router) { }
 
   ngOnInit() {}
+  atras(){
+    this.routes.navigate(['/formUser1']);
+  }
 
+  siguiente(){
+    this.routes.navigate(['/formUser3']);
+  }
 }

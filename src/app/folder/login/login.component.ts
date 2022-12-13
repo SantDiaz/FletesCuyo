@@ -40,7 +40,8 @@ export class LoginComponent implements OnInit {
     })
     if(res){
       console.log("res ==>",res);
-      this.interaction.presentToast("Ingresado con exito");
+      this.interaction.closeLoading();
+      await this.interaction.presentToast("Ingresado con exito");
       this.router.navigate(['/home']);
     }
   }
