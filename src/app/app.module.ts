@@ -21,6 +21,8 @@ import {  environment2 } from 'src/environments/environment';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 // import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AdminModule } from './folder/admin/admin.module';
+import { ProfileModule } from './folder/profile/profile.module';
 
 
 
@@ -32,8 +34,10 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
       AppRoutingModule,
       ComponentsModule,
       PasosModule,
+      ProfileModule,
       MapsModule,
       Maps2Module,
+      AdminModule,
       HttpClientModule,
       MapsGoogleModule,
       LoginModule,

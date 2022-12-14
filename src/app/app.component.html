@@ -11,29 +11,56 @@
        
           <!-- Lista de menu -->
           <ion-menu-toggle   >
+
+            <ion-item  *ngIf="login == true " [routerLink]="['/profile']" color="light"  >
+              <ion-label >
+                Perfil
+              </ion-label>
+              <ion-icon slot="start" name="person-outline"></ion-icon>
+            </ion-item>
+
+              <ion-item  *ngIf="login == true && rol == 'Fletero'" [routerLink]="['/home2']" color="light"  >
+                <ion-label >
+                  home2
+                </ion-label>
+                <ion-icon slot="start" name="home-outline"></ion-icon>
+              </ion-item>
           
-              <ion-item color="light"  >
-                <ion-label  [routerLink]="['/home']"> 
+              <ion-item *ngIf="login == true && rol == 'Usuario'"  [routerLink]="['/home']"  color="light"  >
+                <ion-label  > 
                   Home
                 </ion-label>
                 <ion-icon slot="start" name="home-outline"></ion-icon>
               </ion-item>
-              <ion-item color="light"  >
-                <ion-label  [routerLink]="['/maps']"> 
+
+              <ion-item *ngIf="rol === 'Fletero' && login == true " [routerLink]="['/maps']" color="light"  >
+                <ion-label  > 
                   Maps
                 </ion-label>
                 <ion-icon slot="start" name="home-outline"></ion-icon>
               </ion-item>
-              <ion-item color="light"  >
-                <ion-label  [routerLink]="['/fletes']"> 
+
+              <ion-item *ngIf="rol === 'Usuario' && login == true "  [routerLink]="['/fletes']" color="light"  >
+                <ion-label > 
                   Quiero pedir un flete
                 </ion-label>
                 <ion-icon slot="start" name="car-outline"></ion-icon>
               </ion-item>
-            
 
 
+              <ion-item *ngIf="login == true && rol === 'Usuario'" [routerLink]="['/chat']" color="light"  >
+                <ion-label >
+                Chat
+                </ion-label>
+                <ion-icon slot="start" name="person-outline"></ion-icon>
+              </ion-item>
 
+              <ion-item *ngIf="rol === 'Admin' && login == true " [routerLink]="['/admin']" color="light"  >
+                <ion-label >
+                Admin
+                </ion-label>
+                <ion-icon slot="start" name="person-outline"></ion-icon>
+              </ion-item>
 
           </ion-menu-toggle>
         
@@ -43,36 +70,22 @@
 
       <ion-list class="back-menu" id="labels-list">
         <ion-menu-toggle   >
-
-
-          <ion-item  color="light"  >
-            <ion-label [routerLink]="['/home2']">
-          home2
-            </ion-label>
-            <ion-icon slot="start" name="person-outline"></ion-icon>
-          </ion-item>
-          <ion-item  color="light"  >
-            <ion-label [routerLink]="['/chat']">
-            Chat
-            </ion-label>
-            <ion-icon slot="start" name="person-outline"></ion-icon>
-          </ion-item>
           
-          <ion-item  color="light"  >
-            <ion-label [routerLink]="['/login']">
+          <ion-item *ngIf="login == false" [routerLink]="['/login']" color="light"  >
+            <ion-label >
             Iniciar Sesion
             </ion-label>
             <ion-icon slot="start" name="person-outline"></ion-icon>
           </ion-item>
 
-          <ion-item (click)="logout()" color="light" >
+          <ion-item  *ngIf="login" (click)="logout()" color="light" >
             <ion-label>
             Cerrar Sesion 
             </ion-label>
             <ion-icon slot="start" name="log-out-outline"></ion-icon>
           </ion-item>
           
-          <ion-item color="light" >
+          <ion-item *ngIf="login == false" color="light" >
             <ion-label [routerLink]="['/register']">
             Registrarse
             </ion-label>

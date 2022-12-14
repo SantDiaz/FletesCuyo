@@ -119,7 +119,9 @@ button:hover{
 
 
 
-
+.center{
+	width: 80%;
+}
 
 
 
@@ -136,6 +138,10 @@ button:hover{
 		box-shadow: 5px 20px 50px rgb(103, 220, 179);
 	}
 
+	.center{
+		width: 80%;
+	}
+
 	.signup{
 		margin-top: 20%;
 	}
@@ -144,7 +150,7 @@ button:hover{
 		height: 600px;
 		background: rgb(186, 226, 182);
 		border-radius: 60% / 10%;
-		transform: translateY(-300px);
+		transform: translateY(-280px);
 		transition: .8s ease-in-out;
 	}
 

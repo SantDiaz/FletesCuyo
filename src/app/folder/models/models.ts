@@ -24,5 +24,5 @@ export interface UserU {
     image: string; 
     email: string;
     password: string;
-    perfil:  'Fletero' ,
+    perfil:  'Fletero' | 'Admin' ,
   }

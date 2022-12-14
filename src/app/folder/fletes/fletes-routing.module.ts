@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AdminComponent } from '../admin/admin.component';
 import { ChatComponent } from '../chat/chat.component';
 import { HomeLogComponent } from '../home-log/home-log.component';
 import { LoginComponent } from '../login/login.component';
@@ -8,6 +9,7 @@ import { LoadingComponent } from '../maps/components/loading/loading.component';
 import { MapViewComponent } from '../maps/components/map-view/map-view.component';
 import { MapScreenComponent } from '../maps/screens/map-screen/map-screen.component';
 import { Screen2Component } from '../maps2/screen2/screen2.component';
+import { ProfileComponent } from '../profile/profile.component';
 import { RegisterComponent } from '../register/register.component';
 import { Form1Component } from '../register/registerFlete/form1/form1.component';
 import { Form2Component } from '../register/registerFlete/form2/form2.component';
@@ -96,6 +98,14 @@ const routes: Routes = [
   {
     path: 'chat',
     component: ChatComponent,
+  },
+  {
+    path: 'admin',
+    component: AdminComponent,
+  },
+  {
+    path: 'profile',
+    component: ProfileComponent,
   },
   
 ];

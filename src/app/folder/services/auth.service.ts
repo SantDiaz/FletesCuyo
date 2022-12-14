@@ -30,5 +30,8 @@ export class AuthService {
   registerU(registerU: UserU){
     return   this.authS.createUserWithEmailAndPassword(registerU.email, registerU.password);
   }
+  stateUser(){
+    return this.authS.authState
+  }
 
 }

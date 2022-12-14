@@ -3,9 +3,9 @@
 
   <div class="main">  	
     <input type="checkbox" id="chk" aria-hidden="true">
-    <ion-title >Iniciar sesion</ion-title>
     <div class="signup">
       <form>
+        <label class="center" aria-hidden="true">Iniciar sesion</label>
         <input [(ngModel)]="credenciales.email" name="email" placeholder="Email" required="" >
         <input [(ngModel)]="credenciales.password" name="Password" placeholder="Contraseña" required="">
         <button (click)="login()">Iniciar Sesion</button>
@@ -14,7 +14,9 @@
     
     <div class="registrarse">
       <form>
+        <!-- <ion-icon name="arrow-up-outline"></ion-icon> -->
         <label for="chk" aria-hidden="true">Registrarse</label>
+        <!-- <ion-icon name="arrow-down-outline"></ion-icon> -->
         <div >
           <div class="row cf">
             <div class="four col">
