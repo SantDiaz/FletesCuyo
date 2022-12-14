@@ -9,7 +9,7 @@ export interface UserU {
     image: string; 
     email: string;
     password: string;
-    perfil: 'Usuario',
+    perfil: 'Usuario' | 'Admin',
     // | 'Fletero'| 'Admin' 
   }
 
@@ -24,5 +24,12 @@ export interface UserU {
     image: string; 
     email: string;
     password: string;
-    perfil:  'Fletero' | 'Admin' ,
+    perfil:  'Fletero',
+  }
+
+  export interface Chat {
+    id?: string;
+    message: string;
+    name: string;
+    rol: string;
   }

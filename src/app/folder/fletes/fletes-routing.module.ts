@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AdminComponent } from '../admin/admin.component';
 import { ChatComponent } from '../chat/chat.component';
-import { HomeLogComponent } from '../home-log/home-log.component';
+import { HomeLogComponent } from '../homeF/home-log.component';
 import { LoginComponent } from '../login/login.component';
 import { MapsGoogleComponent } from '../maps-google/maps-google.component';
 import { LoadingComponent } from '../maps/components/loading/loading.component';
@@ -21,6 +21,25 @@ import { FletesPage } from './fletes.page';
 import { Paso1Component } from './pasos/paso1/paso1.component';
 import { Paso2Component } from './pasos/paso2/paso2.component';
 import { Paso3Component } from './pasos/paso3/paso3.component';
+import { AngularFireAuthGuard } from '@angular/fire/compat/auth-guard';
+import { map } from 'rxjs/operators';
+import { canActivate } from '@angular/fire/compat/auth-guard';
+import { UserF } from 'src/app/folder/models/models';
+import { pipe } from 'rxjs';
+import { customClaims } from '@angular/fire/compat/auth-guard';
+
+
+
+const uidAdmin = 'fsfPU1AMSwUBihOXISnw6ZBFeun1'; 
+const onlyAdmin = () => map((user: any) => !!user && user.uid  === uidAdmin); 
+
+
+const User = 'Fletero'
+const onlyUser = () => map((user: any) => !!user && user.uid  === User); 
+// const onlyUser = () => map((user: any) => !!user && uidUser  === User); 
+
+
+
 
 const routes: Routes = [
   {
@@ -77,11 +96,11 @@ const routes: Routes = [
   },
   {
     path: 'formF2',
-    component: Form2Component,
+    component: Form2Component, canActivate: [AngularFireAuthGuard]
   },
   {
     path: 'formF3',
-    component: Form3Component,
+    component: Form3Component, canActivate: [AngularFireAuthGuard]
   },
   {
     path: 'formUser1',
@@ -89,23 +108,23 @@ const routes: Routes = [
   },
   {
     path: 'formUser2',
-    component: FormUser2Component,
+    component: FormUser2Component,canActivate: [AngularFireAuthGuard]
   },
   {
     path: 'formUser3',
-    component: FormUser3Component,
+    component: FormUser3Component,canActivate: [AngularFireAuthGuard]
   },
   {
     path: 'chat',
-    component: ChatComponent,
+    component: ChatComponent, ...canActivate(onlyUser) 
   },
   {
     path: 'admin',
-    component: AdminComponent,
+    component: AdminComponent, ...canActivate(onlyAdmin) 
   },
   {
     path: 'profile',
-    component: ProfileComponent,
+    component: ProfileComponent, canActivate: [AngularFireAuthGuard]
   },
   
 ];
@@ -114,4 +133,6 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class FletesPageRoutingModule {}
+export class FletesPageRoutingModule {
+
+}

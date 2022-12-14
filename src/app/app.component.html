@@ -46,16 +46,17 @@
                 </ion-label>
                 <ion-icon slot="start" name="car-outline"></ion-icon>
               </ion-item>
+              
+              <!-- && rol === 'Usuario' -->
 
-
-              <ion-item *ngIf="login == true && rol === 'Usuario'" [routerLink]="['/chat']" color="light"  >
+              <ion-item *ngIf="login == true" [routerLink]="['/chat']" color="light"  >
                 <ion-label >
                 Chat
                 </ion-label>
-                <ion-icon slot="start" name="person-outline"></ion-icon>
+                <ion-icon  slot="start" name="chatbubbles-outline"></ion-icon>
               </ion-item>
 
-              <ion-item *ngIf="rol === 'Admin' && login == true " [routerLink]="['/admin']" color="light"  >
+              <ion-item *ngIf=" login == true " [routerLink]="['/admin']" color="light"  >
                 <ion-label >
                 Admin
                 </ion-label>
