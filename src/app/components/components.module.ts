@@ -3,8 +3,6 @@ import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './header/header.component';
 import { TabsUComponent } from './tabs-u/tabs-u.component';
 
-import { TabsFComponent } from './tabs-f/tabs-f.component';
-
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
@@ -14,7 +12,6 @@ import { IonicModule } from '@ionic/angular';
   declarations: [
     HeaderComponent,
     TabsUComponent,
-    TabsFComponent,
   ],
   imports: [
     CommonModule,
@@ -24,7 +21,6 @@ import { IonicModule } from '@ionic/angular';
   exports: [
     HeaderComponent,
     TabsUComponent,
-    TabsFComponent,
   ], 
 })
 export class ComponentsModule { }

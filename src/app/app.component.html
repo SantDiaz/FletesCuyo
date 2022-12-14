@@ -18,15 +18,16 @@
               </ion-label>
               <ion-icon slot="start" name="person-outline"></ion-icon>
             </ion-item>
+            
+            <ion-item  *ngIf="login == true " [routerLink]="['/home2']" color="light"  >
+              <ion-label >
+                Pruebas
+              </ion-label>
+              <ion-icon slot="start" name="home-outline"></ion-icon>
+            </ion-item>
 
-              <ion-item  *ngIf="login == true && rol == 'Fletero'" [routerLink]="['/home2']" color="light"  >
-                <ion-label >
-                  home2
-                </ion-label>
-                <ion-icon slot="start" name="home-outline"></ion-icon>
-              </ion-item>
           
-              <ion-item *ngIf="login == true && rol == 'Usuario'"  [routerLink]="['/home']"  color="light"  >
+              <ion-item *ngIf="login == true "  [routerLink]="['/home']"  color="light"  >
                 <ion-label  > 
                   Home
                 </ion-label>
