@@ -5,6 +5,9 @@ import { TabsUComponent } from './tabs-u/tabs-u.component';
 
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
+import { HomeUserComponent } from './ComponentesUsuario/home-user/home-user.component';
+import { AnunciosComponent } from './ComponentesUsuario/anuncios/anuncios.component';
+import { HomeFleteroComponent } from './ComponentesFleteros/home-fletero/home-fletero.component';
 
 
 
@@ -12,6 +15,9 @@ import { IonicModule } from '@ionic/angular';
   declarations: [
     HeaderComponent,
     TabsUComponent,
+    HomeUserComponent,
+    AnunciosComponent,
+    HomeFleteroComponent,
   ],
   imports: [
     CommonModule,
@@ -21,6 +27,9 @@ import { IonicModule } from '@ionic/angular';
   exports: [
     HeaderComponent,
     TabsUComponent,
+    HomeUserComponent,
+    AnunciosComponent,
+    HomeFleteroComponent,
   ], 
 })
 export class ComponentsModule { }

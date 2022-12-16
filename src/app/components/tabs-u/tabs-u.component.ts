@@ -42,11 +42,11 @@ PedirFlete(){
 }
 
 Profile(){
-  this.router.navigate(['/profile`']);
+  this.router.navigate(['/profile']);
 }
 
 Home(){
-  this.router.navigate(['/home`']);
+  this.router.navigate(['/home']);
 }
 
   logout(){

@@ -13,6 +13,7 @@ import { ComponentsModule } from 'src/app/components/components.module';
 import { PasosModule } from '../fletes/pasos/pasos.module';
 import { RegisterModule } from '../register/register.module';
 import { ChatModule } from '../chat/chat.module';
+import { ProfileModule } from '../profile/profile.module';
 
 @NgModule({
   imports: [
@@ -26,6 +27,7 @@ import { ChatModule } from '../chat/chat.module';
     PasosModule,
     RegisterModule,
     ChatModule,
+    ProfileModule
     
   ],
   declarations: [HomePage]
