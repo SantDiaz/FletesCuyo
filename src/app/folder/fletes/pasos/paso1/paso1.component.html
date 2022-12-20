@@ -2,23 +2,46 @@
 
 <ion-content  class="background2">
 
-  <form id="msform">
-    <!-- progressbar -->
+  <section class="u-align-center u-clearfix u-section-1" id="sec-fe91">
+    <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
+      <h1 class="u-text u-text-default u-text-1">Fecha y hora</h1>
+      <div class="u-form u-form-1">
+        <form action="https://forms.nicepagesrv.com/Form/Process" class="u-clearfix u-form-spacing-20 u-form-vertical u-inner-form" style="padding: 10px" source="email" name="form">
+          <div class="u-form-group u-form-name u-label-none">
+            <label for="name-3b9a" class="u-label">Name</label>
+            <input type="text" placeholder="DNI" id="name-3b9a" name="name" class="u-border-2 u-border-black u-border-no-left u-border-no-right u-border-no-top u-input u-input-rectangle u-input-1" required="">
+          </div>
+          <div class="u-form-email u-form-group u-label-none">
+            <label for="email-3b9a" class="u-label">Email</label>
+            <input type="email" placeholder="telefono" id="email-3b9a" name="email" class="u-border-2 u-border-black u-border-no-left u-border-no-right u-border-no-top u-input u-input-rectangle u-input-2" required="">
+            <ion-datetime minuteValues="0,15,30,45" dayValues="5,10,15,20,25,30"></ion-datetime>
+          </div>
+          <div class="u-align-center u-form-group u-form-submit">
+            <a href="#" class="u-border-2 u-border-black u-btn u-btn-rectangle u-btn-submit u-button-style u-none u-btn-1">Submit</a>
+            <input type="submit" value="submit" class="u-form-control-hidden">
+          </div>
+          <div class="u-form-send-message u-form-send-success"> Thank you! Your message has been sent. </div>
+          <div class="u-form-send-error u-form-send-message"> Unable to send your message. Please fix errors then try again. </div>
+          <input type="hidden" value="" name="recaptchaResponse">
+          <input type="hidden" name="formServices" value="d9280f9b08b1809d357e7ca9476e0a23">
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- <form id="msform">
     <ul id="progressbar">
       <li class="active">Datos personales</li>
       <li>Tipo de carga</li>
       <li>Comprobante</li>
     </ul>
-    <!-- fieldsets -->
     <fieldset>
       <h2 class="fs-title">Fecha y hora</h2>
       <h3 class="fs-subtitle">Seleccionar </h3>
       <input type="text" name="tel" placeholder="Telefono" />
-      <ion-datetime minuteValues="0,15,30,45" dayValues="5,10,15,20,25,30"></ion-datetime>
       <input type="button"  name="next" class="next action-button" value="Siguiente"  (click)="redi()" />
     </fieldset>
-  
-  </form>
+  </form> -->
 
 
 </ion-content>
