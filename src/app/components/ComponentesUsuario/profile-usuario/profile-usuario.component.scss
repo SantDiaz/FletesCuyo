@@ -220,10 +220,6 @@
   }
   
   @media (max-width: 767px) {
-    .u-section-1 .u-sheet-1 {
-      min-height: 1282px;
-    }
-  
     .u-section-1 .u-text-2 {
       font-size: 3rem;
     }
@@ -244,10 +240,6 @@
   
     .u-section-1 .u-text-8 {
       font-size: 2.25rem;
-    }
-  
-    .u-section-1 .u-btn-2 {
-      margin-bottom: 60px;
     }
   }
   
@@ -303,8 +295,11 @@
   
     .u-section-1 .u-btn-2 {
       margin-top: -1235px;
+      margin-bottom: 60px;
     }
-  }/*begin-commonstyles library*//*!
+  }
+
+  /*begin-commonstyles library*//*!
  * froala_editor v4.0.6 (https://www.froala.com/wysiwyg-editor)
  * License https://froala.com/wysiwyg-editor/terms/
  * Copyright 2014-2021 Froala Labs
