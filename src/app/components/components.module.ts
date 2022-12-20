@@ -8,6 +8,8 @@ import { IonicModule } from '@ionic/angular';
 import { HomeUserComponent } from './ComponentesUsuario/home-user/home-user.component';
 import { AnunciosComponent } from './ComponentesUsuario/anuncios/anuncios.component';
 import { HomeFleteroComponent } from './ComponentesFleteros/home-fletero/home-fletero.component';
+import { ProfileUsuarioComponent } from './ComponentesUsuario/profile-usuario/profile-usuario.component';
+import { ProfileFleteroComponent } from './ComponentesFleteros/profile-fletero/profile-fletero.component';
 
 
 
@@ -18,6 +20,8 @@ import { HomeFleteroComponent } from './ComponentesFleteros/home-fletero/home-fl
     HomeUserComponent,
     AnunciosComponent,
     HomeFleteroComponent,
+    ProfileFleteroComponent,
+    ProfileUsuarioComponent,
   ],
   imports: [
     CommonModule,
@@ -30,6 +34,8 @@ import { HomeFleteroComponent } from './ComponentesFleteros/home-fletero/home-fl
     HomeUserComponent,
     AnunciosComponent,
     HomeFleteroComponent,
+    ProfileFleteroComponent,
+    ProfileUsuarioComponent,
   ], 
 })
 export class ComponentsModule { }

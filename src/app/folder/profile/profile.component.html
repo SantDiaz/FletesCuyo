@@ -1,0 +1,10 @@
+<app-header></app-header>
+    <ion-content class="background2">
+    
+      <!-- <app-profile-fletero  ></app-profile-fletero> -->
+      <app-profile-fletero *ngIf="login == true && rol == 'Fletero'"></app-profile-fletero>
+      <app-profile-usuario *ngIf="login == true && rol == 'Usuario'"></app-profile-usuario>
+
+      
+</ion-content>
+<app-tabs-u ></app-tabs-u>
