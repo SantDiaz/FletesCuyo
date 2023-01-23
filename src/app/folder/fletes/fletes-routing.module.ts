@@ -28,6 +28,7 @@ import { UserF } from 'src/app/folder/models/models';
 import { pipe } from 'rxjs';
 import { customClaims } from '@angular/fire/compat/auth-guard';
 import { HomeUserComponent } from 'src/app/components/ComponentesUsuario/home-user/home-user.component';
+import { FletesDisComponent } from './fletes-dis/fletes-dis.component';
 
 
 
@@ -130,6 +131,10 @@ const routes: Routes = [
   {
     path: 'homeUser',
     component: HomeUserComponent, canActivate: [AngularFireAuthGuard]
+  },
+  {
+    path: 'fletesDis',
+    component: FletesDisComponent, canActivate: [AngularFireAuthGuard]
   },
   
   

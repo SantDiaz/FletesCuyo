@@ -23,6 +23,7 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AdminModule } from './folder/admin/admin.module';
 import { ProfileModule } from './folder/profile/profile.module';
+import { FletesDisComponent } from './folder/fletes/fletes-dis/fletes-dis.component';
 
 
 

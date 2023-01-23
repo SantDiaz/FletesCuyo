@@ -37,6 +37,10 @@ export class TabsUComponent implements OnInit {
 
  ngOnInit() {}
   
+ FleteDisplonibles(){
+  this.router.navigate(['/fletesDis']);
+}
+
 PedirFlete(){
   this.router.navigate(['/fletes']);
 }
