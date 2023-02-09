@@ -47,7 +47,7 @@ export class Form1Component implements OnInit {
       this.interaction.presentToast('error')
     })
     if (res) {
-      console.log("funciona con exito");
+      // console.log("funciona con exito");
       const path = 'Fleteros'
       const id = res.user.uid;
       this.registerF.uid = id;

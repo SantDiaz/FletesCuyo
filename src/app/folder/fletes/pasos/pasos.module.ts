@@ -7,6 +7,8 @@ import { Paso3Component } from './paso3/paso3.component';
 import { FletesPageRoutingModule } from '../fletes-routing.module';
 import { ComponentsModule } from 'src/app/components/components.module';
 import { FletesDisComponent } from '../fletes-dis/fletes-dis.component';
+import { FormsModule } from '@angular/forms';
+import { CardComponent } from '../fletes-dis/card/card.component';
 // import { MapsModule } from '../../maps/maps.module';
 
 
@@ -18,12 +20,14 @@ import { FletesDisComponent } from '../fletes-dis/fletes-dis.component';
     Paso2Component,
     Paso3Component,
     FletesDisComponent,
+    CardComponent,
   ],
   imports: [
     CommonModule,
     FletesPageRoutingModule,
     RouterModule,
-    ComponentsModule,
+    ComponentsModule,    
+    FormsModule,
     // MapsModule,
 
   ],
@@ -32,6 +36,7 @@ import { FletesDisComponent } from '../fletes-dis/fletes-dis.component';
     Paso2Component,
     Paso3Component,
     FletesDisComponent,
+    CardComponent,
   ], 
 })
 export class PasosModule { }

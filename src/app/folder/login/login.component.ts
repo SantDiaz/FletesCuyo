@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
       this.interaction.presentToast("Usuario o Contraseña invalidos");
     })
     if(res){
-      console.log("res ==>",res);
+      // console.log("res ==>",res);
       this.interaction.closeLoading();
       await this.interaction.presentToast("Ingresado con exito");
       this.router.navigate(['/home']);

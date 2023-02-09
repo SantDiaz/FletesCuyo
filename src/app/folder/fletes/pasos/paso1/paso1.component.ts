@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Pasos } from 'src/app/folder/models/models';
+import { FirestoreService } from 'src/app/folder/services/firestore.service';
 
 @Component({
   selector: 'app-paso1',
@@ -8,17 +10,38 @@ import { Router } from '@angular/router';
 })
 export class Paso1Component implements OnInit {
   
-  isModalOpen = false;
+data:any;
+ pasosFlete: Pasos={
+  id: '',
+  nombre: '',
+  dni: '',
+  direccion: '',
+  telefono: null,
+  // fecha: null,
+  // hora: null,
+  // uDesde: '',
+  // uHasta: '',
+  // cargamento: '',
+  // tipoVehiculo: null ,
+  // ayudantes:  null ,
+ };
+//  
   
-  constructor(private routes: Router) { }
+  constructor(private routes: Router,
+              private db: FirestoreService) { }
 
   ngOnInit() {}
 
+
+
+
   redi(){
+    // console.log("funciona -->", this.pasosFlete)
     this.routes.navigate(['/paso2']);
+    const data = this.pasosFlete;
+    data.id = this.db.createId();
+    const enlace = "DatosFlete"
+    this.db.createDocument<Pasos>(data, enlace);
   }
 
-  setOpen(isOpen: boolean) {
-    this.isModalOpen = isOpen;
-  }
 }

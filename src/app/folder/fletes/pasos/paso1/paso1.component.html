@@ -1,80 +1,38 @@
-
-
-<ion-content  class="background2">
+<ion-content class="background2">
 
   <section class="u-align-center u-clearfix u-section-1" id="sec-e3b5">
-    <ul id="progressbar">
-      <li class="active" (click)="redi()">Datos personales</li>
-      <li (click)="redi()">Tipo de carga</li>
-      <li class="" (click)="redi()">Comprobante</li>
-    </ul>
     <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
       <div class="u-form u-grey-15 u-form-1">
-        <form action="https://forms.nicepagesrv.com/Form/Process" class="u-clearfix u-form-spacing-15 u-form-vertical u-inner-form" style="padding: 15px;" source="email" name="form">
+        <form   class="u-clearfix u-form-spacing-15 u-form-vertical u-inner-form" style="padding: 15px;" source="email" name="form">
           <div class="u-form-group u-form-name u-label-top u-form-group-1">
             <label for="name-7c2c" class="u-label">Nombre y Apellido</label>
-            <input type="text" placeholder="Introduzca su nombre" id="name-7c2c" name="name" class="u-border-1 u-border-grey-60 u-input u-input-rectangle" required="">
+            <input   [(ngModel)]="pasosFlete.nombre" type="text" placeholder="Introduzca su nombre" id="name-7c2c" name="name" class="u-border-1 u-border-grey-60 u-input u-input-rectangle" required="">
           </div>
-          <div class="u-form-group u-form-name u-label-top u-form-group-2">
-            <label for="name-85e7" class="u-label">DNI</label>
-            <input type="text" placeholder="Introduzca su DNI sin &quot;.&quot; o &quot;,&quot; " id="name-85e7" name="name-1" class="u-border-1 u-border-grey-60 u-input u-input-rectangle" required="">
-          </div>
-          <div class="u-form-address u-form-group u-label-top u-form-group-3">
-            <label for="address-ef4e" class="u-label">Dirección</label>
-            <input type="text" placeholder="Ingrese su dirección" id="address-ef4e" name="address" class="u-border-1 u-border-grey-60 u-input u-input-rectangle" required="">
-          </div>
-          <div class="u-form-group u-form-phone u-label-top u-form-group-4">
-            <label for="phone-e765" class="u-label">Teléfono</label>
-            <input type="tel" pattern="\+?\d{0,3}[\s\(\-]?([0-9]{2,3})[\s\)\-]?([\s\-]?)([0-9]{3})[\s\-]?([0-9]{2})[\s\-]?([0-9]{2})" placeholder="Ingrese su numero de teléfono " id="phone-e765" name="phone" class="u-border-1 u-border-grey-60 u-input u-input-rectangle" required="">
-          </div>
-          <div (click)="redi()" class="u-align-center u-form-group u-form-submit u-label-top u-form-group-5">
-            <a href="#" class="u-border-none u-btn u-btn-submit u-button-style u-custom-color-2 u-btn-1">Siguiente<br>
-            </a>
-            <input type="submit" value="submit" class="u-form-control-hidden">
-          </div>
-          <div class="u-form-send-message u-form-send-success">Thank you! Your message has been sent.</div>
-          <div class="u-form-send-error u-form-send-message">Unable to send your message. Please fix errors then try again.</div>
-          <input type="hidden" value="" name="recaptchaResponse">
-          <input type="hidden" name="formServices" value="d9280f9b08b1809d357e7ca9476e0a23">
-        </form>
-      </div>
-      <h2 class="u-text u-text-1">Completar formulario</h2>
+        <div class="u-form-group u-form-name u-label-top u-form-group-2">
+          <label for="name-85e7" class="u-label">DNI</label>
+          <input  [(ngModel)]="pasosFlete.dni" type="number" placeholder="Introduzca su DNI sin &quot;.&quot; o &quot;,&quot; " id="name-85e7" name="name-1" class="u-border-1 u-border-grey-60 u-input u-input-rectangle" required="">
+        </div>
+        <div class="u-form-address u-form-group u-label-top u-form-group-3">
+          <label for="address-ef4e" class="u-label">Dirección</label>
+          <input [(ngModel)]="pasosFlete.direccion"  type="text" placeholder="Ingrese su dirección" id="address-ef4e" name="address" class="u-border-1 u-border-grey-60 u-input u-input-rectangle" required="">
+        </div>
+        <div class="u-form-group u-form-phone u-label-top u-form-group-4">
+          <label for="phone-e765" class="u-label">Teléfono</label>
+          <input  [(ngModel)]="pasosFlete.telefono" type="number" pattern="\+?\d{0,3}[\s\(\-]?([0-9]{2,3})[\s\)\-]?([\s\-]?)([0-9]{3})[\s\-]?([0-9]{2})[\s\-]?([0-9]{2})" placeholder="Ingrese su numero de teléfono " id="phone-e765" name="phone" class="u-border-1 u-border-grey-60 u-input u-input-rectangle" required="">
+        </div>
+        <div (click)="redi()" class="u-align-center u-form-group u-form-submit u-label-top u-form-group-5">
+          <a  class="u-border-none u-btn u-btn-submit u-button-style u-custom-color-2 u-btn-1">Siguiente<br>
+          </a>
+          <input type="submit" value="submit" class="u-form-control-hidden">
+        </div>
+        <div class="u-form-send-message u-form-send-success">Thank you! Your message has been sent.</div>
+        <div class="u-form-send-error u-form-send-message">Unable to send your message. Please fix errors then try again.</div>
+        <input type="hidden" value="" name="recaptchaResponse">
+        <input type="hidden" name="formServices" value="d9280f9b08b1809d357e7ca9476e0a23">
+      </form>
     </div>
-  </section>
+    <h2 class="u-text u-text-1">Completar formulario</h2>
+  </div>
+</section>
 </ion-content>
 
-
-
-
-
-
-  
-
-
-
-
-  <!-- <ion-list>
-    <ion-item>
-      <ion-select placeholder="Selecciona departamento" [multiple]="true">
-        <ion-select-option  value="25 de Mayo">25 de Mayo</ion-select-option>
-        <ion-select-option value="9 de Julio">9 de Julio</ion-select-option>
-        <ion-select-option value="Albardón">Albardón</ion-select-option>
-        <ion-select-option value="Angaco">Angaco</ion-select-option>
-        <ion-select-option value="Calingasta">Calingasta</ion-select-option>
-        <ion-select-option value="Capital">Capital</ion-select-option>
-        <ion-select-option value="Caucete">Caucete</ion-select-option>
-        <ion-select-option value="Chimbas">Chimbas</ion-select-option>
-        <ion-select-option value="Iglesia">Iglesia</ion-select-option>
-        <ion-select-option value="Jáchal">Jáchal</ion-select-option>
-        <ion-select-option value="Pocito">Pocito</ion-select-option>
-        <ion-select-option value="Rawson">Rawson</ion-select-option>
-        <ion-select-option value="Rivadavia">Rivadavia</ion-select-option>
-        <ion-select-option value="San Martín">San Martín</ion-select-option>
-        <ion-select-option value="Santa Lucía">Santa Lucía</ion-select-option>
-        <ion-select-option value="Sarmiento">Sarmiento</ion-select-option>
-        <ion-select-option value=" Ullum"> Ullum</ion-select-option>
-        <ion-select-option value="Valle Fértil">Valle Fértil</ion-select-option>
-        <ion-select-option value=" Zonda"> Zonda</ion-select-option>
-      </ion-select>
-    </ion-item>
-  </ion-list> -->

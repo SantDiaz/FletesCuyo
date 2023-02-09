@@ -23,7 +23,10 @@ import { RegisterModule } from '../register/register.module';
     PasosModule,
     MapsModule,
     RegisterModule,
+    
   ],
-  declarations: [FletesPage]
+  declarations: [FletesPage],
+  exports: [
+  ]
 })
 export class FletesPageModule {}

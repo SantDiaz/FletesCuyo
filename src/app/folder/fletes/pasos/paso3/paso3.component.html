@@ -1,43 +1,69 @@
 <app-header></app-header>
-<ion-content padding class="background2">
 
-<div class="form">
-
-  <form id="msform">
-    <!-- progressbar -->
-    <ul id="progressbar">
-      <li class="active">Datos personales</li>
-      <li class="active">Tipo de carga </li>
-      <li class="active">Comprobante</li>
-    </ul>
-    <!-- fieldsets -->
-    <fieldset>
-      <h2 class="fs-title">Corrobore sus datos</h2>
-      <h3 class="fs-subtitle">Si esta todo ok imprima su factura</h3>
-      <input type="text" name="desde" placeholder="Desde" />
-      <input type="text" name="hasta" placeholder="Hasta" />
-      <textarea name="address" placeholder="Cargamento"></textarea>
-      <ion-item>
-        <ion-icon name="people-outline">Ayudantes</ion-icon>
-        <ion-label >Ayudantes</ion-label>
-      </ion-item>
-      <ion-list class="list">
-        <ion-item>
-          <ion-select placeholder="Tipo de vehiculo" [multiple]="true">
-            <ion-select-option  value="Camion">Camion</ion-select-option>
-            <ion-select-option value="Camioneta">Camioneta</ion-select-option>
-          </ion-select>
-        </ion-item>
-      </ion-list>
-      
-      
-      <input type="button" name="previous" class="previous action-button" value="Atras"  (click)="rediBack()"   />
-      <input type="submit" name="submit" class="submit action-button" value="Finalizar"  (click)="redi()" />
-    </fieldset>
-  </form>
-</div>
+  <ion-content  class="background2">
 
 
+    <section class="u-clearfix u-section-1" id="sec-c9b2">
+      <div class="u-clearfix u-sheet u-sheet-1">
+        <div class="u-form u-grey-15 u-form-1">
+          <form action="https://forms.nicepagesrv.com/Form/Process" class="u-clearfix u-form-spacing-15 u-form-vertical u-inner-form" style="padding: 15px;" source="email" name="form">
+            <div class="u-form-date u-form-group u-label-top u-form-group-1">
+              <label for="date-3ded" class="u-label">Fecha a realizar el flete</label>
+              <input  [(ngModel)]="DatosFlete.fecha" type="text" readonly="readonly" placeholder="Dia/Mes/año" id="date-3ded" name="date" class="u-border-1 u-border-grey-60 u-input u-input-rectangle" required="" data-date-format="dd/mm/yyyy">
+            </div>
+            <div class="u-form-group u-form-number u-form-number-layout-number u-label-top u-form-group-2">
+              <label for="number-5c0c" class="u-label">Hora</label>
+              <div class="u-input-row">
+                <input [(ngModel)]="DatosFlete.hora"  value="0" min="0" max="24" step="1" type="number" placeholder="" id="number-5c0c" name="number" class="u-border-1 u-border-grey-60 u-input u-input-rectangle">
+              </div>
+            </div>
+            <div class="u-form-group u-form-name u-label-top u-form-group-3">
+              <label for="name-ab05" class="u-label">Desde</label>
+              <input [(ngModel)]="DatosFlete.uDesde"  type="text" placeholder="Ubicacion de partida" id="name-ab05" name="name" class="u-border-1 u-border-grey-60 u-input u-input-rectangle" required="">
+            </div>
+            <div class="u-form-group u-form-name u-label-top u-form-group-4">
+              <label for="name-3efa" class="u-label">Hasta</label>
+              <input [(ngModel)]="DatosFlete.uHasta" type="text" placeholder="Ubicacion de llegada" id="name-3efa" name="name-1" class="u-border-1 u-border-grey-60 u-input u-input-rectangle" required="">
+            </div>
+            <div class="u-form-group u-form-message u-label-top u-form-group-5">
+              <label for="message-0577" class="u-label">Cargamento</label>
+              <textarea placeholder="Ingrese lo que lleva su flete" rows="4" cols="50" id="message-0577" name="message" class="u-border-1 u-border-grey-60 u-input u-input-rectangle" required=""></textarea>
+            </div>
+            <div class="u-form-group u-form-select u-label-top u-form-group-6">
+              <label for="select-f8ed" class="u-label">Tipo de vehiculo</label>
+              <div class="u-form-select-wrapper">
+                <select  id="select-f8ed" name="select" class="u-border-1 u-border-grey-60 u-input u-input-rectangle">
+                  <option value="Camioneta">Camioneta</option>
+                  <option value="Camion">Camion</option>
+                  <option value="Utilitario">Utilitario</option>
+                </select>
+                <svg class="u-caret u-caret-svg" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="16px" height="16px" viewBox="0 0 16 16" style="fill:currentColor;" xml:space="preserve"><polygon class="st0" points="8,12 2,4 14,4 "></polygon></svg>
+              </div>
+            </div>
+            <div class="u-form-group u-form-select u-label-top u-form-group-7">
+              <label for="select-e343" class="u-label">Ayudantes?</label>
+              <div class="u-form-select-wrapper">
+                <select id="select-e343" name="select-1" class="u-border-1 u-border-grey-60 u-input u-input-rectangle">
+                  <option value="Sin ayudantes">Sin ayudantes</option>
+                  <option value="+ 1">+ 1</option>
+                  <option value="+ 2">+ 2</option>
+                </select>
+                <svg class="u-caret u-caret-svg" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="16px" height="16px" viewBox="0 0 16 16" style="fill:currentColor;" xml:space="preserve"><polygon class="st0" points="8,12 2,4 14,4 "></polygon></svg>
+              </div>
+            </div>
+            <div (click)="enviar()" class="u-align-center u-form-group u-form-submit u-label-top">
+              <a class="u-border-none u-btn u-btn-submit u-button-style u-custom-color-5 u-hover-custom-color-7 u-btn-1">Enviar<br>
+              </a>
+              <input type="submit" value="submit" class="u-form-control-hidden">
+            </div>
+            <div class="u-form-send-message u-form-send-success">Thank you! Your message has been sent.</div>
+            <div class="u-form-send-error u-form-send-message">Unable to send your message. Please fix errors then try again.</div>
+            <input type="hidden" value="" name="recaptchaResponse">
+            <input type="hidden" name="formServices" value="d9280f9b08b1809d357e7ca9476e0a23">
+          </form>
+        </div>
+      </div>
+    </section>
+    
 </ion-content>
 <app-tabs-u></app-tabs-u>
-  

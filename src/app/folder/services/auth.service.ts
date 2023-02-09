@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import { UserF, UserU } from '../models/models';
 import { InteractionService } from './interaction.service';
@@ -11,7 +12,8 @@ export class AuthService {
 
   constructor( private authS: AngularFireAuth,
                private interaction: InteractionService, 
-               private router: Router,) { }
+               private router: Router,
+               private firestore: AngularFirestore ) { }
 
   login(email:string, password:string){
     return  this.authS.signInWithEmailAndPassword(email, password);
@@ -32,6 +34,13 @@ export class AuthService {
   }
   stateUser(){
     return this.authS.authState
+  }
+
+  getCollection<UserI>(path: string) {
+
+    const collection = this.firestore.collection<UserI>(path);
+    return collection.valueChanges();
+
   }
 
 }

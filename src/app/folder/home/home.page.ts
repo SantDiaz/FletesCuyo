@@ -43,7 +43,7 @@ export class HomePage implements OnInit {
     const path = 'Usuarios';
     const id = uid;
     this.firestore.getDoc<UserU>(path, id).subscribe( res => {
-        console.log('datos -> ', res);
+        // console.log('datos -> ', res);
         if (res) {
           this.rol = res.perfil
         }
@@ -54,7 +54,7 @@ export class HomePage implements OnInit {
     const path = 'Fleteros';
     const id = uid;
     this.firestore.getDoc<UserF>(path, id).subscribe( res => {
-        console.log('datos -> ', res);
+        // console.log('datos -> ', res);
         if (res) {
           this.rol = res.perfil
         }

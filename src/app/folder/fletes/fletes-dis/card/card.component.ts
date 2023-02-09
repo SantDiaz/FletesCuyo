@@ -1,18 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { DatosFlete } from '../../models/models';
-import { FirestoreService } from '../../services/firestore.service';
+import { DatosFlete } from 'src/app/folder/models/models';
+import { FirestoreService } from 'src/app/folder/services/firestore.service';
 
 @Component({
-  selector: 'app-fletes-dis',
-  templateUrl: './fletes-dis.component.html',
-  styleUrls: ['./fletes-dis.component.scss'],
+  selector: 'app-card',
+  templateUrl: './card.component.html',
+  styleUrls: ['./card.component.scss'],
 })
-export class FletesDisComponent implements OnInit {
-
-  filter: string = "PedirFlete";
+export class CardComponent implements OnInit {
+  filter: string = "filtro";
   fletes: DatosFlete[] = []
-  constructor(
-    private db: FirestoreService,
+  constructor(private db: FirestoreService,
     ) { }
 
   ngOnInit() {
@@ -20,7 +18,7 @@ export class FletesDisComponent implements OnInit {
     this.getItems();
   }
 
-  // getItems(){
+    // getItems(){
   //   const enlace = 'PedirFlete'; 
   //   this.db.getCollection<DatosFlete>(enlace).subscribe({
   //     next: (data : any) => {
@@ -34,12 +32,10 @@ export class FletesDisComponent implements OnInit {
   //   })
   // }
 
-
   getItems() {
     const enlace = 'PedirFlete'; 
     this.db.getCollection<DatosFlete>(enlace).subscribe(res => {
       this.fletes = res;
     });
   }
-
 }

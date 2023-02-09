@@ -1,31 +1,37 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { DatosFlete } from '../models/models';
 
 @Injectable({
   providedIn: 'root'
 })
-export class FirestoreService {
 
+
+export class FirestoreService {
+  
+  fletes: DatosFlete[] = []
+  
   constructor(private firestore: AngularFirestore,
               public fireStorage: AngularFireStorage,
              ) { }
 
+// guarda datos sin idÇ
+  createDocument<tipo>(data: tipo, enlace: string) {
+    const ref = this.firestore.collection(enlace);  
+    return ref.add(data)
+            }
 
-  createDoc(data: any, path: string, id: string) {
 
+// guarda datos con id            
+  createDoc<tipo>(data: any, path: string, id: string) {
     const collection = this.firestore.collection(path);
     return collection.doc(id).set(data);
 
   }
-  // createDocF(data: any, path: string, id: string) {
 
-  //   const collection = this.firestore.collection(path);
-  //   return collection.doc(id).set(data);
-
-  // }
-
-  getId() {
+// crea un id unico 
+  createId() {
     return this.firestore.createId();
   }
 

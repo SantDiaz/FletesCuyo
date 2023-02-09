@@ -29,6 +29,7 @@ import { pipe } from 'rxjs';
 import { customClaims } from '@angular/fire/compat/auth-guard';
 import { HomeUserComponent } from 'src/app/components/ComponentesUsuario/home-user/home-user.component';
 import { FletesDisComponent } from './fletes-dis/fletes-dis.component';
+import { CardComponent } from './fletes-dis/card/card.component';
 
 
 
@@ -135,6 +136,10 @@ const routes: Routes = [
   {
     path: 'fletesDis',
     component: FletesDisComponent, canActivate: [AngularFireAuthGuard]
+  },
+  {
+    path: 'card',
+    component: CardComponent, canActivate: [AngularFireAuthGuard]
   },
   
   
