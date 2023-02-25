@@ -29,6 +29,10 @@ export class LoginComponent implements OnInit {
   fletero(){
     this.router.navigate(['/formF1']);
   }
+  
+  redi(){
+    this.router.navigate(['/register']);
+  }
 
   async login(){
     await this.interaction.presentLoading("Ingresando...");

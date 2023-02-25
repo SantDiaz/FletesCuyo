@@ -24,6 +24,7 @@ export class Form1Component implements OnInit {
     email: null,
     password: null,
     perfil:  'Fletero',
+    datosVehiculos: null,
   }
 
   constructor(private routes: Router,
@@ -54,7 +55,7 @@ export class Form1Component implements OnInit {
       this.registerF.password = null;
       await this.firestore.createDoc(this.registerF, path, id);
       this.interaction.closeLoading();
-      await this.interaction.presentToast('registrado con exito');
+      await this.interaction.presentToast('Primer paso completado');
       this.routes.navigate(['/formF2']);
     }
   }

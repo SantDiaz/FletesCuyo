@@ -1,44 +1,52 @@
-<section class="u-align-center-lg u-align-center-md u-align-center-xl u-align-center-xs u-align-left-sm u-clearfix u-section-1" id="carousel_4a3c">
+
+
+
+
+
+<section *ngIf="DatosF" class="u-align-center-lg u-align-center-md u-align-center-xl u-align-center-xs u-align-left-sm u-clearfix u-section-1" id="carousel_4a3c">
   <div class="u-clearfix u-sheet u-sheet-1">
+    <a href="https://nicepage.com/c/food-restaurant-website-templates" class="u-active-none u-border-2 u-border-active-palette-1-light-1 u-border-hover-palette-1-light-1 u-border-no-bottom u-border-no-left u-border-no-right u-border-no-top u-border-palette-1-light-3 u-btn u-button-style u-hover-none u-none u-text-body-alt-color u-text-hover-grey-15 u-btn-1"><span class="u-file-icon u-icon u-text-white u-icon-1"><img src="images/3447476-457ca6c1.png" alt=""></span>&nbsp;
+    </a>
     <h2 class="u-align-center u-text u-text-1" data-lang-en="​My name is ​Nat ​Norton.
 <br>Digital Product Designer">Perfil</h2>
-    <div class="u-border-7 u-border-grey-10 u-image u-image-circle u-image-1" data-image-width="501" data-image-height="501" data-animation-name="customAnimationIn" data-animation-duration="1500" data-animation-delay="500"></div>
+    <div class="u-border-7 u-border-grey-10 u-image u-image-circle u-image-1" data-image-width="501" data-image-height="501" data-animation-name="customAnimationIn" data-animation-duration="1500" data-animation-delay="500"></div><span class="u-icon u-icon-2"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 58 58" style=""><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-dd27"></use></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" xml:space="preserve" class="u-svg-content" viewBox="0 0 58 58" x="0px" y="0px" id="svg-dd27" style="enable-background:new 0 0 58 58;"><path style="fill:#556080;" d="M45,15.5l-4-10H17l-4,10H3.799C1.701,15.5,0,17.201,0,19.299v29.368C0,50.784,1.716,52.5,3.833,52.5
+h50.333c2.117,0,3.833-1.716,3.833-3.833V19.299c0-2.098-1.701-3.799-3.799-3.799H45z"></path><circle style="fill:#424A60;stroke:#2B313D;stroke-width:2;stroke-linecap:round;stroke-miterlimit:10;" cx="29" cy="31.5" r="17"></circle><circle style="fill:#7383BF;" cx="29" cy="31.5" r="11"></circle><rect x="6" y="10.5" style="fill:#38454F;" width="4" height="5"></rect><circle style="fill:#EFCE4A;" cx="51" cy="22.5" r="3"></circle><path style="fill:#879AD8;" d="M32,31.5c0,3.595,1.418,6.778,3.6,8.785c2.667-2.007,4.4-5.19,4.4-8.785s-1.733-6.778-4.4-8.785
+C33.418,24.722,32,27.905,32,31.5z"></path><path style="fill:#879AD8;" d="M18,31.5c0,3.595,1.733,6.778,4.4,8.785c2.182-2.007,3.6-5.19,3.6-8.785s-1.418-6.778-3.6-8.785
+C19.733,24.722,18,27.905,18,31.5z"></path><path style="fill:#556080;" d="M29,43.5c-6.617,0-12-5.383-12-12s5.383-12,12-12s12,5.383,12,12S35.617,43.5,29,43.5z M29,21.5
+c-5.514,0-10,4.486-10,10s4.486,10,10,10s10-4.486,10-10S34.514,21.5,29,21.5z"></path><circle style="fill:#4674E8;" cx="30.5" cy="28" r="3.5"></circle><circle style="fill:#BF4D90;" cx="28" cy="29.5" r="2"></circle><circle style="fill:#BCCEF7;" cx="25" cy="27.5" r="2"></circle></svg></span>
     <h2 class="u-align-center u-text u-text-2" data-lang-en="​My name is ​Nat ​Norton.
-<br>Digital Product Designer">Nombre y apellido</h2>
-    <h5 class="u-align-center u-text u-text-3" data-animation-name="customAnimationIn" data-animation-duration="1500" data-animation-delay="500" data-lang-en="​Head of Design Studio">Fletero</h5>
-    <a href="https://nicepage.com/c/food-restaurant-website-templates" class="u-active-none u-border-2 u-border-active-palette-1-light-1 u-border-hover-palette-1-light-1 u-border-no-bottom u-border-no-left u-border-no-right u-border-no-top u-border-palette-1-light-3 u-btn u-button-style u-hover-none u-none u-text-active-grey-30 u-text-body-alt-color u-text-hover-grey-25 u-btn-1"><span class="u-file-icon u-icon u-text-white u-icon-1"><img src="../../../assets/imagesProfile/3447476-457ca6c1.png" alt=""></span>&nbsp;Chatea ahora
+<br>Digital Product Designer">{{DatosF.nombre}}  {{DatosF.apellido}}</h2>
+    <h5 class="u-align-center u-hidden-xs u-text u-text-3" data-animation-name="customAnimationIn" data-animation-duration="1500" data-animation-delay="500" data-lang-en="​Head of Design Studio">Rol</h5>
+    <a href="https://nicepage.com/c/food-restaurant-website-templates" class="u-active-none u-border-2 u-border-active-palette-1-light-1 u-border-hover-palette-1-light-1 u-border-no-bottom u-border-no-left u-border-no-right u-border-no-top u-border-palette-1-light-3 u-btn u-button-style u-hover-none u-none u-text-active-grey-30 u-text-body-alt-color u-text-hover-grey-25 u-btn-2"><span class="u-file-icon u-icon u-text-white u-icon-3"><img src="images/3447476-457ca6c1.png" alt=""></span>&nbsp;
     </a>
-    <div class="u-expanded-width u-list u-list-1">
+    <div class="u-expanded-width-lg u-expanded-width-md u-expanded-width-sm u-expanded-width-xs u-list u-list-1">
       <div class="u-repeater u-repeater-1">
         <div class="u-align-center u-container-style u-gradient u-list-item u-repeater-item u-shape-rectangle u-list-item-1" data-animation-name="customAnimationIn" data-animation-duration="1500" data-animation-delay="250">
-          <div class="u-container-layout u-similar-container u-container-layout-1"><span class="u-custom-item u-file-icon u-icon u-icon-circle u-palette-1-base u-text-white u-icon-2" data-animation-name="customAnimationIn" data-animation-duration="1500" data-animation-delay="750"><img src="../../../assets/imagesProfile/1250592-1cc8e92b.png" alt=""></span>
+          <div class="u-container-layout u-similar-container u-valign-top-xs u-container-layout-1"><span class="u-custom-item u-file-icon u-icon u-icon-circle u-palette-1-base u-text-white u-icon-4" data-animation-name="customAnimationIn" data-animation-duration="1500" data-animation-delay="750"><img src="../../../../assets/imagesProfile/1250592-1cc8e92b.png" alt=""></span>
             <h4 class="u-text u-text-4" data-lang-en="​Graphic Design">Contacto</h4>
-            <h6 class="u-text u-text-5">Titular de muestra</h6>
-            <h6 class="u-text u-text-6">Titular de muestra</h6>
-            <h6 class="u-text u-text-7">Titular de muestra</h6>
-            <h6 class="u-text u-text-8">Titular de muestra</h6>
+            <h6 class="u-text u-text-5">+54 {{DatosF.telefono}}</h6>
+            <h6 class="u-text u-text-6">{{DatosF.email}}</h6>
+            <!-- <h6 class="u-text u-text-7">Titular de muestra</h6>
+            <h6 class="u-text u-text-8">Titular de muestra</h6> -->
           </div>
         </div>
-        <div class="u-align-center u-container-style u-gradient u-list-item u-repeater-item u-shape-rectangle u-video-cover u-list-item-2" data-animation-name="customAnimationIn" data-animation-duration="1500" data-animation-delay="250">
-          <div class="u-container-layout u-similar-container u-container-layout-2"><span class="u-custom-item u-file-icon u-icon u-icon-circle u-palette-1-base u-text-white u-icon-3" data-animation-name="customAnimationIn" data-animation-duration="1500" data-animation-delay="750"><img src="../../../assets/imagesProfile/3097192-cdaddaa6.png" alt=""></span>
-            <h4 class="u-text u-text-9" data-lang-en="​Web Design">Tipo de vehiculo</h4>
-            <h6 class="u-text u-text-10">Titular de muestra</h6>
-            <h6 class="u-text u-text-11">Titular de muestra</h6>
-            <h6 class="u-text u-text-12">Titular de muestra</h6>
-            <h6 class="u-text u-text-13">Titular de muestra</h6>
+        <div   class="u-align-center u-container-style u-gradient u-list-item u-repeater-item u-shape-rectangle u-video-cover u-list-item-2" data-animation-name="customAnimationIn" data-animation-duration="1500" data-animation-delay="250">
+          <div *ngIf="DatosV" class="u-container-layout u-similar-container u-valign-top-xs u-container-layout-2"><span class="u-custom-item u-file-icon u-icon u-icon-circle u-palette-1-base u-text-white u-icon-5" data-animation-name="customAnimationIn" data-animation-duration="1500" data-animation-delay="750"><img src="../../../../assets/imagesProfile/3097192-cdaddaa6.png" alt=""></span>
+            <h4 class="u-text u-text-9" data-lang-en="​Web Design">Vehiculo</h4>
+            <h6 class="u-text u-text-10">{{DatosV.marca}}</h6>
+            <h6 class="u-text u-text-11">{{DatosV.modelo}}</h6>
           </div>
         </div>
         <div class="u-align-center u-container-style u-gradient u-list-item u-repeater-item u-shape-rectangle u-video-cover u-list-item-3" data-animation-name="customAnimationIn" data-animation-duration="1500" data-animation-delay="250">
-          <div class="u-container-layout u-similar-container u-container-layout-3"><span class="u-custom-item u-file-icon u-icon u-icon-circle u-palette-1-base u-text-white u-icon-4" data-animation-name="customAnimationIn" data-animation-duration="1500" data-animation-delay="750"><img src="../../../assets/imagesProfile/4552640-50f2d8fb.png" alt=""></span>
+          <div class="u-container-layout u-similar-container u-valign-top-xs u-container-layout-3"><span class="u-custom-item u-file-icon u-icon u-icon-circle u-palette-1-base u-text-white u-icon-6" data-animation-name="customAnimationIn" data-animation-duration="1500" data-animation-delay="750"><img src="../../../../assets/imagesProfile/4552640-50f2d8fb.png" alt=""></span>
             <h4 class="u-text u-text-14" data-lang-en="​Software"> Datos personales</h4>
-            <h6 class="u-text u-text-15">Titular de muestra</h6>
-            <h6 class="u-text u-text-16">Titular de muestra</h6>
-            <h6 class="u-text u-text-17">Titular de muestra</h6>
-            <h6 class="u-text u-text-18">Titular de muestra</h6>
+            <h6 class="u-text u-text-15">Edad: {{DatosF.edad}} </h6>
+            <h6 class="u-text u-text-16">Domicilio: {{DatosF.domicilio}}</h6>
+
           </div>
         </div>
         <div class="u-align-center u-container-style u-gradient u-list-item u-repeater-item u-shape-rectangle u-video-cover u-list-item-4" data-animation-name="customAnimationIn" data-animation-duration="1500" data-animation-delay="250">
-          <div class="u-container-layout u-similar-container u-container-layout-4"><span class="u-custom-item u-file-icon u-icon u-icon-circle u-palette-1-base u-icon-5" data-animation-name="customAnimationIn" data-animation-duration="1500" data-animation-delay="750"><img src="../../../assets/imagesProfile/148808.png" alt=""></span>
+          <div class="u-container-layout u-similar-container u-valign-top-xs u-container-layout-4"><span class="u-custom-item u-file-icon u-icon u-icon-circle u-palette-1-base u-icon-7" data-animation-name="customAnimationIn" data-animation-duration="1500" data-animation-delay="750"><img src="../../../../assets/imagesProfile/148808.png" alt=""></span>
             <h4 class="u-text u-text-19" data-lang-en="​Application"> Aptitudes</h4>
             <h6 class="u-text u-text-20">Titular de muestra</h6>
             <h6 class="u-text u-text-21">Titular de muestra</h6>
@@ -48,7 +56,6 @@
         </div>
       </div>
     </div>
-    <a href="https://nicepage.com/c/food-restaurant-website-templates" class="u-active-none u-border-2 u-border-active-palette-1-light-1 u-border-hover-palette-1-light-1 u-border-no-bottom u-border-no-left u-border-no-right u-border-no-top u-border-palette-1-light-3 u-btn u-button-style u-hover-none u-none u-text-body-alt-color u-text-hover-grey-15 u-btn-2"><span class="u-file-icon u-icon u-text-white u-icon-6"><img src="../../../assets/imagesProfile/3447476-457ca6c1.png" alt=""></span>&nbsp;Chatea ahora
-    </a>
   </div>
 </section>
+

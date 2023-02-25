@@ -23,12 +23,12 @@ export class TabsUComponent implements OnInit {
                
     ) {      this.auth.stateUser().subscribe( res => {
       if (res) {
-           console.log('está logeado');
+          //  console.log('está logeado');
            this.login = true;
            this.getDatosUser(res.uid);
            this.getDatosFletero(res.uid);
       } else {
-        console.log('no está logeado');
+        // console.log('no está logeado');
         this.login = false;
        this.router.navigate(['/login'])
         
@@ -61,7 +61,6 @@ Home(){
     const path = 'Usuarios';
     const id = uid;
     this.firestore.getDoc<UserU>(path, id).subscribe( res => {
-        console.log('datos -> ', res);
         if (res) {
           this.rol = res.perfil
         }
@@ -72,7 +71,6 @@ Home(){
     const path = 'Fleteros';
     const id = uid;
     this.firestore.getDoc<UserF>(path, id).subscribe( res => {
-        console.log('datos -> ', res);
         if (res) {
           this.rol = res.perfil
         }

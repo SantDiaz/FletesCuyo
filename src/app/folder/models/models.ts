@@ -1,3 +1,5 @@
+import { Timestamp } from "rxjs/internal/operators/timestamp";
+
 export interface UserU {
     uid: string;
     nombre: string;
@@ -25,26 +27,22 @@ export interface UserU {
     email: string;
     password: string;
     perfil:  'Fletero',
+    datosVehiculos: datosVehiculo;
+  }
+  
+  export interface datosVehiculo {
+    uid: string;
+    tipoVehiculo:  'Camioneta' | 'Camion' | 'Utilitario';
+    marca: string;
+    modelo: string;
+    patente: number;
   }
 
-  export interface Chat {
-    id?: string;
-    message: string;
-    name: string;
-    rol: string;
-  }
 
 
-  export interface Pasos {
-    id: string;
-    nombre: string;
-    dni: string;
-    direccion: string;
-    telefono: number;
-  }
 
   export interface DatosFlete {
-    fecha: number;
+    fecha: Timestamp<24>;
     hora: number;
     uDesde: string;
     uHasta: string;
@@ -57,3 +55,13 @@ export interface UserU {
 
   export const tipoVehiculo = ['Camioneta' , 'Camion' , 'Utilitario'];
   export const ayudantes = ['Sin ayudantes' , '+1' , '+2'];
+export const datosVehiculo =  []
+
+
+export interface Pasos {
+  id: string;
+  nombre: string;
+  dni: string;
+  direccion: string;
+  telefono: number;
+}

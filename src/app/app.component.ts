@@ -41,7 +41,7 @@ export class AppComponent {
     const path = 'Usuarios';
     const id = uid;
     this.firestore.getDoc<UserU>(path, id).subscribe( res => {
-        console.log('datos -> ', res);
+        // console.log('datos -> ', res);
         if (res) {
           this.rol = res.perfil
         }

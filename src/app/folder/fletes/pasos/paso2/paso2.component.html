@@ -3,7 +3,61 @@
   <ion-content  class="background2">
 
 
-    <section class="u-clearfix u-section-1" id="sec-c9b2">
+    <section class="u-clearfix u-section-1" id="sec-9b40">
+      <div class="u-clearfix u-sheet u-sheet-1">
+        <div class="u-align-center u-border-2 u-border-grey-75 u-container-style u-custom-color-7 u-group u-radius-24 u-shape-round u-group-1">
+          <div class="u-container-layout u-valign-top-xs u-container-layout-1"><span class="u-file-icon u-icon u-icon-1"><img src="../../../../../assets/imagesFleteros/1021085.png" alt=""></span>
+            <h2 class="u-text u-text-1">Segundo paso</h2>
+            <h4 class="u-text u-text-2">Datos del flete</h4>
+            <div class="u-form u-palette-1-light-3 u-radius-4 u-form-1">
+              <form action="https://forms.nicepagesrv.com/Form/Process" class="u-clearfix u-form-spacing-15 u-form-vertical u-inner-form" style="padding: 15px;" source="email" name="form">
+                <div class="u-form-group u-form-name u-label-top u-form-group-1">
+                  <label for="name-ab05" class="u-label">Punto de partida</label>
+                  <input [(ngModel)]="DatosFlete.uDesde"  type="text" placeholder="Ubicacion de partida" id="name-ab05" name="name" class="u-border-1 u-border-grey-60 u-input u-input-rectangle" required="">
+                </div>
+                <div class="u-form-group u-form-name u-label-top u-form-group-2">
+                  <label for="name-3efa" class="u-label">Punto de llegada</label>
+                  <input  [(ngModel)]="DatosFlete.hasta" type="text" placeholder="Ubicacion de llegada" id="name-3efa" name="name-1" class="u-border-1 u-border-grey-60 u-input u-input-rectangle" required="">
+                </div>
+                <div class="u-form-group u-form-message u-label-top u-form-group-3">
+                  <label for="message-0577" class="u-label">Cargamento</label>
+                  <textarea  [(ngModel)]="DatosFlete.cargamento" placeholder="Ingrese lo que lleva su flete" rows="4" cols="50" id="message-0577" name="message" class="u-border-1 u-border-grey-60 u-input u-input-rectangle" required=""></textarea>
+                </div>
+                <div class="u-form-group u-form-select u-label-top u-form-group-4">
+                  <label for="select-f8ed" class="u-label">Tipo de vehiculo</label>
+                  <div class="u-form-select-wrapper">
+                    <select [(ngModel)]="DatosFlete.tipoVehiculo"  id="select-f8ed" name="select" class="u-border-1 u-border-grey-60 u-input u-input-rectangle">
+                      <option  *ngFor="let tipoVehiculo  of vehiculos" [value]="tipoVehiculo">{{tipoVehiculo}}</option>
+                    </select>
+                    <svg class="u-caret u-caret-svg" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="16px" height="16px" viewBox="0 0 16 16" style="fill:currentColor;" xml:space="preserve"><polygon class="st0" points="8,12 2,4 14,4 "></polygon></svg>
+                  </div>
+                </div>
+                <div class="u-form-group u-form-select u-label-top u-form-group-5">
+                  <label for="select-e343" class="u-label">Ayudantes?</label>
+                  <div class="u-form-select-wrapper">
+                    <select [(ngModel)]="DatosFlete.ayudantes"  id="select-e343" name="select-1" class="u-border-1 u-border-grey-60 u-input u-input-rectangle">
+                      <option *ngFor="let ayudantes  of ayudante" [value]="ayudantes">{{ayudantes}}</option>
+                    </select>
+                    <svg class="u-caret u-caret-svg" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="16px" height="16px" viewBox="0 0 16 16" style="fill:currentColor;" xml:space="preserve"><polygon class="st0" points="8,12 2,4 14,4 "></polygon></svg>
+                  </div>
+                </div>
+                <div (click)="enviar()" class="u-align-center u-form-group u-form-submit u-label-top">
+                  <a class="u-border-none u-btn u-btn-submit u-button-style u-custom-color-5 u-hover-custom-color-7 u-btn-1">Enviar<br>
+                  </a>
+                  <input type="submit" value="submit" class="u-form-control-hidden">
+                </div>
+                <div class="u-form-send-message u-form-send-success">Thank you! Your message has been sent.</div>
+                <div class="u-form-send-error u-form-send-message">Unable to send your message. Please fix errors then try again.</div>
+                <input type="hidden" value="" name="recaptchaResponse">
+                <input type="hidden" name="formServices" value="d9280f9b08b1809d357e7ca9476e0a23">
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- <section class="u-clearfix u-section-1" id="sec-c9b2">
       <div class="u-clearfix u-sheet u-sheet-1">
         <div class="u-form u-grey-15 u-form-1">
           <form action="https://forms.nicepagesrv.com/Form/Process" class="u-clearfix u-form-spacing-15 u-form-vertical u-inner-form" style="padding: 15px;" source="email" name="form">
@@ -60,6 +114,6 @@
         </div>
       </div>
     </section>
-    
+     -->
 </ion-content>
 <!-- <app-tabs-u></app-tabs-u> -->

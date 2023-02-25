@@ -1,35 +1,61 @@
 <app-header></app-header>
 <ion-content padding class="background2" >
+  <ul id="progressbar">
+    <li class="active">Personales</li>
+    <li>Opcionales</li>
+    <li>Perfil</li>
+  </ul>
 
-  <div class="container">
-    <div class="wrapper">
-      <ul id="progressbar">
-        <li class="active">Personales</li>
-        <li class="active">Foto de Perfil</li>
-        <li>Perfil</li>
-      </ul>
-      <form class="form-wrapper">
-        <fieldset class="section is-active">
-          <ul class="steps">
-            <li class="is-active">Datos vehicular</li>
-          </ul>
-          <ion-list class="tipoV">
-            <ion-item >
-              <ion-select placeholder="Tipo de vehiculo">
-                <ion-select-option value="Utilitario">Utilitario</ion-select-option>
-                <ion-select-option value="Camioneta">Camioneta</ion-select-option>
-                <ion-select-option value="Camion">Camion</ion-select-option>
-              </ion-select>
-            </ion-item>
-          </ion-list>
-          <input type="text" name="vehiculo" id="vehiculo" placeholder="Marca del vehiculo">
-          <input type="file" name="name" id="name" placeholder="Patente del automotor">
-          <input type="text" name="dni" id="dni" placeholder="DNI">
-          <input type="button"  name="next" class="button2" value="Atras" (click)="atras()"  />
-          <input type="button"  name="next" class="button2" value="Siguiente"  (click)="siguiente()"  />
-          
-        </fieldset>
-</form>
+
+  <section class="u-clearfix u-section-1" id="sec-598b">
+    <div class="u-clearfix u-sheet u-sheet-1">
+      <div class="u-container-style u-custom-color-6 u-expanded-width-sm u-expanded-width-xs u-group u-radius-5 u-shape-round u-group-1">
+        <div class="u-container-layout u-container-layout-1">
+          <h1 class="u-align-center u-text u-text-1">Datos vehiculares</h1>
+          <h4 class="u-align-center u-text u-text-2">Por seguridad pedimos datos del vehiculo en el que trabajara</h4>
+          <div class="u-border-2 u-border-grey-75 u-container-style u-custom-color-7 u-expanded-width-sm u-expanded-width-xs u-group u-radius-24 u-shape-round u-group-2">
+            <div class="u-container-layout u-valign-middle u-container-layout-2">
+              <div class="u-form u-palette-1-light-3 u-radius-14 u-form-1">
+                <form action="https://forms.nicepagesrv.com/Form/Process" class="u-clearfix u-form-spacing-15 u-form-vertical u-inner-form" style="padding: 15px;" source="email" name="form">
+                  <div class="u-form-group u-form-select u-label-top u-form-group-1">
+                    <label for="select-9970" class="u-label">Tipo de vehiculo que maneja</label>
+                    <div class="u-form-select-wrapper">
+                      <select [(ngModel)]="Datovehicular.tipoVehiculo"  id="select-9970" name="select" class="u-border-1 u-border-grey-60 u-input u-input-rectangle" required="required">
+                        <option  *ngFor="let tipoVehiculo  of vehiculo" [value]="tipoVehiculo">{{tipoVehiculo}}</option>
+                      </select>
+                      <svg class="u-caret u-caret-svg" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="16px" height="16px" viewBox="0 0 16 16" style="fill:currentColor;" xml:space="preserve"><polygon class="st0" points="8,12 2,4 14,4 "></polygon></svg>
+                    </div>
+                  </div>
+                  <div class="u-form-group u-form-name u-form-partition-factor-2 u-label-top">
+                    <label for="name-85e7" class="u-label">Marca del automotor</label>
+                    <input [(ngModel)]="Datovehicular.marca" type="text" placeholder="Ej: Ford" id="name-85e7" name="name-1" class="u-border-1 u-border-grey-60 u-input u-input-rectangle" required="">
+                  </div>
+                  <div class="u-form-group u-form-name u-form-partition-factor-2 u-label-top u-form-group-3">
+                    <label for="name-5d22" class="u-label">Modelo del automotor</label>
+                    <input [(ngModel)]="Datovehicular.modelo" type="text" placeholder="Ej: F100" id="name-5d22" name="name-4" class="u-border-1 u-border-grey-60 u-input u-input-rectangle" required="">
+                  </div>
+                  <div class="u-form-group u-form-name u-label-top u-form-group-4">
+                    <label for="name-ae7a" class="u-label">Patente</label>
+                    <input [(ngModel)]="Datovehicular.patente" type="text" placeholder="Ingrese sus 6 valores" id="name-ae7a" name="name-3" class="u-border-1 u-border-grey-60 u-input u-input-rectangle" required="">
+                  </div>
+                  <div (click)="enviar()" class="u-align-center u-form-group u-form-submit u-label-top">
+                    <a  class="u-border-none u-btn u-btn-submit u-button-style u-custom-color-8 u-btn-1">Enviar<br>
+                    </a>
+                    <input type="submit" value="submit" class="u-form-control-hidden">
+                  </div>
+                  <div class="u-form-send-message u-form-send-success">Thank you! Your message has been sent.</div>
+                  <div class="u-form-send-error u-form-send-message">Unable to send your message. Please fix errors then try again.</div>
+                  <input type="hidden" value="" name="recaptchaResponse">
+                  <input type="hidden" name="formServices" value="d9280f9b08b1809d357e7ca9476e0a23">
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
+  </section>
+  
+  
+
 </ion-content>

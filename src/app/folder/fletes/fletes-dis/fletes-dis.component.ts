@@ -16,7 +16,7 @@ export class FletesDisComponent implements OnInit {
     ) { }
 
   ngOnInit() {
-
+    
     this.getItems();
   }
 

@@ -30,6 +30,7 @@ import { customClaims } from '@angular/fire/compat/auth-guard';
 import { HomeUserComponent } from 'src/app/components/ComponentesUsuario/home-user/home-user.component';
 import { FletesDisComponent } from './fletes-dis/fletes-dis.component';
 import { CardComponent } from './fletes-dis/card/card.component';
+import { ProfileUsuarioComponent } from 'src/app/components/ComponentesUsuario/profile-usuario/profile-usuario.component';
 
 
 
@@ -132,6 +133,10 @@ const routes: Routes = [
   {
     path: 'homeUser',
     component: HomeUserComponent, canActivate: [AngularFireAuthGuard]
+  },
+  {
+    path: 'profile-User',
+    component: ProfileUsuarioComponent, canActivate: [AngularFireAuthGuard]
   },
   {
     path: 'fletesDis',

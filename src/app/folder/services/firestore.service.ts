@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
-import { DatosFlete } from '../models/models';
+import { DatosFlete, datosVehiculo } from '../models/models';
 
 @Injectable({
   providedIn: 'root'
@@ -30,17 +30,31 @@ export class FirestoreService {
 
   }
 
+
+  createDoc2<tipo>(data: any, path: string, uid: string) {
+    const collection = this.firestore.collection(path);
+    return collection.doc(uid).set(data);
+
+  }
+
 // crea un id unico 
   createId() {
     return this.firestore.createId();
   }
 
-  getCollection<tipo>(path: string) {
+  getCollection<tipo>(path: string) { 
 
     const collection = this.firestore.collection<tipo>(path);
     return collection.valueChanges();
 
   }
+
+  getCollection2<tipo>(path: string, id : string) {
+
+    const collection = this.firestore.collection<tipo>(path);
+    return collection.valueChanges(id);
+  }
+
 
   getDoc<tipo>(path: string, id: string) {
    return this.firestore.collection(path).doc<tipo>(id).valueChanges()
