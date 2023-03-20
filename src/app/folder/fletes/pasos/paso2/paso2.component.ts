@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoadingController, ToastController } from '@ionic/angular';
-import { ayudantes, DatosFlete, Pasos, tipoVehiculo, UserU } from 'src/app/folder/models/models';
+import { ayudantes, DatosFlete, hora, minutos, Pasos, tipoVehiculo, UserU } from 'src/app/folder/models/models';
 import { AuthService } from 'src/app/folder/services/auth.service';
 import { FirestoreService } from 'src/app/folder/services/firestore.service';
 
@@ -12,24 +12,29 @@ import { FirestoreService } from 'src/app/folder/services/firestore.service';
 })
 export class Paso2Component implements OnInit {
 
-
-
+  vehiculos = tipoVehiculo;
+  ayudante = ayudantes;
   registerU: UserU; 
-  DatosFlete: DatosFlete={
+  loading: any;
+  horas = hora
+  minuto = minutos
+  
+
+  pasosFlete: DatosFlete={
     fecha: null,
     hora: null,
+    minutos: null,
     uDesde: '',
     uHasta: '',
     cargamento: '',
     tipoVehiculo:  null,
     ayudantes:  null ,
-    id:  "" ,
-    
-   };
-   loading: any;
+    uid:  null ,
+    id: '',
+    precio: null,
 
-   vehiculos = tipoVehiculo;
-   ayudante = ayudantes;
+   };
+
   
 
 
@@ -40,39 +45,46 @@ export class Paso2Component implements OnInit {
               public toastController: ToastController,
               private loadingCtrl: LoadingController, ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+
+    
+  }
+
 
   enviar(){
     this.authS.stateUser<UserU>().subscribe( res  => {
-      if (res) {
-        // console.log('la respuesta es:', res);
-        this.presentLoading();
-        const data = this.DatosFlete;
-        const enlace = '/PedirFlete2';
-        const id = res.uid;
-        // console.log('id es:', id);
-        this.db.createDoc<DatosFlete>(data, enlace, id).then((_) =>{
-          // console.log('name,', id)
-            this.presentToast('Guardado con exito', 2000);
-            this.loading.dismiss();
-                this.DatosFlete={
-                    fecha: null,
-                    hora: null,
-                    uDesde: '',
-                    uHasta: '',
-                    cargamento: '',
-                    tipoVehiculo:  null,
-                    ayudantes:  null ,
-                    id:  "" ,
-                  };
-             this.routes.navigate(['/home'])
-        } );
+  if (res) {
+    
+    this.presentLoading();
+    const data = this.pasosFlete;
+    data.uid = this.db.createId();
+    data.id = res.uid;
+const enlace = "PedirFlete3"
+this.db.createDoc<DatosFlete>(data, enlace, data.uid).then((_) =>{
+    this.presentToast('Guardado con exito', 2000);
+    this.loading.dismiss();
+    this.routes.navigate(['/paso3']);
+    this.pasosFlete={
+      fecha: null,
+      hora: null,
+      minutos: null,
+      uDesde: '',
+      uHasta: '',
+      cargamento: '',
+      tipoVehiculo:  null,
+      ayudantes:  null ,
+      uid:  null ,
+      precio: null,
+      id: res.uid,
+     };
+} );
+}   
+}) 
+} 
 
-      } else {
-         this.routes.navigate(['/login'])
-      }   
-  }) 
 
+
+  
   // enviar(){
   //   this.presentLoading();
   //   const data = this.DatosFlete;
@@ -95,7 +107,7 @@ export class Paso2Component implements OnInit {
   //   } );
 
 
-  } 
+ 
 
   async presentToast(mensaje: string, tiempo: number) {
     const toast = await this.toastController.create({

@@ -9,6 +9,7 @@ import { ComponentsModule } from 'src/app/components/components.module';
 import { FletesDisComponent } from '../fletes-dis/fletes-dis.component';
 import { FormsModule } from '@angular/forms';
 import { CardComponent } from '../fletes-dis/card/card.component';
+import { IonicModule } from '@ionic/angular';
 // import { MapsModule } from '../../maps/maps.module';
 
 
@@ -24,11 +25,12 @@ import { CardComponent } from '../fletes-dis/card/card.component';
   ],
   imports: [
     CommonModule,
+    IonicModule,
     FletesPageRoutingModule,
     RouterModule,
     ComponentsModule,    
-    FormsModule,
-    // MapsModule,
+    FormsModule
+        // MapsModule,
 
   ],
   exports:[

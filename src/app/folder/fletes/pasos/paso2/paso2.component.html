@@ -1,4 +1,4 @@
-<app-header></app-header>
+<!-- <app-header></app-header> -->
 
   <ion-content  class="background2">
 
@@ -11,38 +11,69 @@
             <h4 class="u-text u-text-2">Datos del flete</h4>
             <div class="u-form u-palette-1-light-3 u-radius-4 u-form-1">
               <form action="https://forms.nicepagesrv.com/Form/Process" class="u-clearfix u-form-spacing-15 u-form-vertical u-inner-form" style="padding: 15px;" source="email" name="form">
+                <div class="u-form-date u-form-group u-label-top u-form-group-1">
+                  <label for="date-e295" class="u-label">Fecha</label>
+                  <input [(ngModel)]="pasosFlete.fecha" type="date"  placeholder="MM/DD/AAAA" id="date-e295" name="date" class="u-border-1 u-border-grey-60 u-input u-input-rectangle" required="" data-date-format="mm/dd/yyyy" required="required">
+                </div>
+                <div class="u-form-group u-form-partition-factor-2 u-form-select u-label-top u-form-group-2">
+                  <label for="select-f389" class="u-label">Hora</label>
+                  <div class="u-form-select-wrapper">
+
+                    <ion-select [(ngModel)]="pasosFlete.hora" [ngModelOptions]="{standalone: true}" aria-label="Fruit" placeholder="Seleccione un horario" required="required" [multiple]="true">
+                      <ion-select-option  *ngFor="let hora  of horas" [value]="hora">{{hora}}</ion-select-option>
+                    </ion-select>
+
+                  </div>
+                </div>
+                <div class="u-form-group u-form-partition-factor-2 u-form-select u-label-top u-form-group-3">
+                  <label for="select-d7a9" class="u-label">Minutos</label>
+                  <div class="u-form-select-wrapper">
+                    
+                    <ion-select [(ngModel)]="pasosFlete.minutos" [ngModelOptions]="{standalone: true}" a ria-label="Fruit" placeholder="Seleccione minutos" required="required" [multiple]="true">
+                      <ion-select-option  *ngFor="let minutos  of minuto" [value]="minutos">{{minutos}}</ion-select-option>
+                    </ion-select>
+
+                  </div>
+                </div>
                 <div class="u-form-group u-form-name u-label-top u-form-group-1">
                   <label for="name-ab05" class="u-label">Punto de partida</label>
-                  <input [(ngModel)]="DatosFlete.uDesde"  type="text" placeholder="Ubicacion de partida" id="name-ab05" name="name" class="u-border-1 u-border-grey-60 u-input u-input-rectangle" required="">
+                  <input [(ngModel)]="pasosFlete.uDesde"  type="text" placeholder="Ubicacion de partida" id="name-ab05" name="name" class="u-border-1 u-border-grey-60 u-input u-input-rectangle" required="">
                 </div>
                 <div class="u-form-group u-form-name u-label-top u-form-group-2">
                   <label for="name-3efa" class="u-label">Punto de llegada</label>
-                  <input  [(ngModel)]="DatosFlete.hasta" type="text" placeholder="Ubicacion de llegada" id="name-3efa" name="name-1" class="u-border-1 u-border-grey-60 u-input u-input-rectangle" required="">
+                  <input  [(ngModel)]="pasosFlete.uHasta" type="text" placeholder="Ubicacion de llegada" id="name-3efa" name="name-1" class="u-border-1 u-border-grey-60 u-input u-input-rectangle" required="">
                 </div>
                 <div class="u-form-group u-form-message u-label-top u-form-group-3">
                   <label for="message-0577" class="u-label">Cargamento</label>
-                  <textarea  [(ngModel)]="DatosFlete.cargamento" placeholder="Ingrese lo que lleva su flete" rows="4" cols="50" id="message-0577" name="message" class="u-border-1 u-border-grey-60 u-input u-input-rectangle" required=""></textarea>
+                  <textarea  [(ngModel)]="pasosFlete.cargamento" placeholder="Ingrese lo que lleva su flete" rows="4" cols="50" id="message-0577" name="message" class="u-border-1 u-border-grey-60 u-input u-input-rectangle" required=""></textarea>
                 </div>
                 <div class="u-form-group u-form-select u-label-top u-form-group-4">
                   <label for="select-f8ed" class="u-label">Tipo de vehiculo</label>
                   <div class="u-form-select-wrapper">
-                    <select [(ngModel)]="DatosFlete.tipoVehiculo"  id="select-f8ed" name="select" class="u-border-1 u-border-grey-60 u-input u-input-rectangle">
-                      <option  *ngFor="let tipoVehiculo  of vehiculos" [value]="tipoVehiculo">{{tipoVehiculo}}</option>
-                    </select>
+                    
+                    
+   
+                    <ion-select  [(ngModel)]="pasosFlete.tipoVehiculo" [ngModelOptions]="{standalone: true}" aria-label="Fruit" placeholder="Seleccione un horario" required="required" [multiple]="true">
+                      <ion-select-option   *ngFor="let tipoVehiculo  of vehiculos" [value]="tipoVehiculo">{{tipoVehiculo}}</ion-select-option>
+                    </ion-select>
+
+
                     <svg class="u-caret u-caret-svg" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="16px" height="16px" viewBox="0 0 16 16" style="fill:currentColor;" xml:space="preserve"><polygon class="st0" points="8,12 2,4 14,4 "></polygon></svg>
                   </div>
                 </div>
                 <div class="u-form-group u-form-select u-label-top u-form-group-5">
                   <label for="select-e343" class="u-label">Ayudantes?</label>
                   <div class="u-form-select-wrapper">
-                    <select [(ngModel)]="DatosFlete.ayudantes"  id="select-e343" name="select-1" class="u-border-1 u-border-grey-60 u-input u-input-rectangle">
-                      <option *ngFor="let ayudantes  of ayudante" [value]="ayudantes">{{ayudantes}}</option>
-                    </select>
+   
+                    <ion-select  [(ngModel)]="pasosFlete.ayudantes" [ngModelOptions]="{standalone: true}" aria-label="Fruit" placeholder="Seleccione un horario" required="required" [multiple]="true">
+                      <ion-select-option   *ngFor="let ayudantes  of ayudante" [value]="ayudantes">{{ayudantes}}</ion-select-option>
+                    </ion-select>
+
                     <svg class="u-caret u-caret-svg" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="16px" height="16px" viewBox="0 0 16 16" style="fill:currentColor;" xml:space="preserve"><polygon class="st0" points="8,12 2,4 14,4 "></polygon></svg>
                   </div>
                 </div>
-                <div (click)="enviar()" class="u-align-center u-form-group u-form-submit u-label-top">
-                  <a class="u-border-none u-btn u-btn-submit u-button-style u-custom-color-5 u-hover-custom-color-7 u-btn-1">Enviar<br>
+                <div  (click)="enviar()"  class="u-align-center u-form-group u-form-submit u-label-top">
+                  <a  class="u-border-none u-btn u-btn-round u-btn-submit u-button-style u-custom-color-8 u-radius-13 u-btn-1">Siguiente<br>
                   </a>
                   <input type="submit" value="submit" class="u-form-control-hidden">
                 </div>

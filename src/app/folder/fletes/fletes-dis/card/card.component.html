@@ -1,13 +1,17 @@
 <ion-content class="background">
 
-  <section class="u-align-center u-clearfix u-section-1" id="carousel_8899">
+
+
+  <section  class="u-clearfix u-section-1" id="sec-ecfb">
     <div class="u-clearfix u-sheet u-sheet-1">
-      <h2 class="u-align-center u-text u-text-1" data-animation-name="customAnimationIn" data-animation-duration="1500" data-animation-delay="0">Ultimos fletes</h2>
-      <p class="u-align-center u-text u-text-2" data-animation-name="customAnimationIn" data-animation-duration="1500" data-animation-delay="250">Hay mucho trabajo por hacer en toda tu ciudad</p>
-      <div  class="u-list u-list-1 ">
-        <div   class="u-repeater u-repeater-1">
-          <div *ngFor="let datos of fletes" class="u-container-style  u-list-item u-radius-12 u-repeater-item u-shape-round u-white u-list-item-1" data-animation-name="customAnimationIn" data-animation-duration="1500" data-animation-delay="500">
-            <div  class="u-container-layout u-similar-container u-container-layout-1"><span class="u-icon u-icon-1"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 53 53" style=""><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-a31a"></use></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" xml:space="preserve" class="u-svg-content" viewBox="0 0 53 53" x="0px" y="0px" id="svg-a31a" style="enable-background:new 0 0 53 53;"><path style="fill:#E7ECED;" d="M18.613,41.552l-7.907,4.313c-0.464,0.253-0.881,0.564-1.269,0.903C14.047,50.655,19.998,53,26.5,53
+      <h1 class="u-align-center u-text u-text-1">Ultimos fletes disponibles</h1>
+      <div  class="u-list u-list-1">
+        <div class="u-repeater u-repeater-1">
+        
+          <div *ngFor="let datos of fletes" class="u-container-style u-list-item u-palette-1-light-3 u-repeater-item u-list-item-3">
+            <div class="u-container-layout u-similar-container u-valign-top-md u-valign-top-sm u-valign-top-xs u-container-layout-5">
+              <div class="u-container-style u-custom-color-2 u-group u-group-3">
+                <div class="u-container-layout u-container-layout-6"><span class="u-icon u-icon-17"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 53 53" style=""><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-9239"></use></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" xml:space="preserve" class="u-svg-content" viewBox="0 0 53 53" x="0px" y="0px" id="svg-9239" style="enable-background:new 0 0 53 53;"><path style="fill:#E7ECED;" d="M18.613,41.552l-7.907,4.313c-0.464,0.253-0.881,0.564-1.269,0.903C14.047,50.655,19.998,53,26.5,53
 c6.454,0,12.367-2.31,16.964-6.144c-0.424-0.358-0.884-0.68-1.394-0.934l-8.467-4.233c-1.094-0.547-1.785-1.665-1.785-2.888v-3.322
 c0.238-0.271,0.51-0.619,0.801-1.03c1.154-1.63,2.027-3.423,2.632-5.304c1.086-0.335,1.886-1.338,1.886-2.53v-3.546
 c0-0.78-0.347-1.477-0.886-1.965v-5.126c0,0,1.053-7.977-9.75-7.977s-9.75,7.977-9.75,7.977v5.126
@@ -19,13 +23,54 @@ C20.296,39.899,19.65,40.986,18.613,41.552z"></path><g><path style="fill:#556080;
   c-0.605,1.881-1.478,3.674-2.632,5.304c-0.291,0.411-0.563,0.759-0.801,1.03V38.8c0,1.223,0.691,2.342,1.785,2.888l8.467,4.233
   c0.508,0.254,0.967,0.575,1.39,0.932c5.71-4.762,9.399-11.882,9.536-19.9C53.246,12.32,41.587,0.254,26.953,0.004z"></path>
 </g></svg></span>
-              <h4 class="u-align-left-xl u-text u-text-black u-text-3">Nombre y apellido</h4><span class="u-icon u-icon-2"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 52 52" style=""><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-3449"></use></svg><svg class="u-svg-content" viewBox="0 0 52 52" x="0px" y="0px" id="svg-3449" style="enable-background:new 0 0 52 52;"><path style="fill:currentColor;" d="M38.853,5.324L38.853,5.324c-7.098-7.098-18.607-7.098-25.706,0h0
+<!-- {{DatosU.nombre}} {{DatosU.apellido}} -->
+                  <h4 class="u-text u-text-18">Nombre y apellido</h4><span class="u-icon u-icon-18"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 52 52" style=""><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-7f39"></use></svg><svg class="u-svg-content" viewBox="0 0 52 52" x="0px" y="0px" id="svg-7f39" style="enable-background:new 0 0 52 52;"><path style="fill:currentColor;" d="M38.853,5.324L38.853,5.324c-7.098-7.098-18.607-7.098-25.706,0h0
 C6.751,11.72,6.031,23.763,11.459,31L26,52l14.541-21C45.969,23.763,45.249,11.72,38.853,5.324z M26.177,24c-3.314,0-6-2.686-6-6
 s2.686-6,6-6s6,2.686,6,6S29.491,24,26.177,24z"></path></svg></span>
-              <h4 class="u-align-left-xl u-text u-text-4">{{datos.uDesde}}</h4><span class="u-icon u-text-palette-2-base u-icon-3"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 52 52" style=""><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-5533"></use></svg><svg class="u-svg-content" viewBox="0 0 52 52" x="0px" y="0px" id="svg-5533" style="enable-background:new 0 0 52 52;"><path style="fill:currentColor;" d="M38.853,5.324L38.853,5.324c-7.098-7.098-18.607-7.098-25.706,0h0
+                  <h4 class="u-text u-text-19">{{datos.uDesde}}</h4><span class="u-icon u-text-palette-2-base u-icon-19"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 52 52" style=""><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-2fca"></use></svg><svg class="u-svg-content" viewBox="0 0 52 52" x="0px" y="0px" id="svg-2fca" style="enable-background:new 0 0 52 52;"><path style="fill:currentColor;" d="M38.853,5.324L38.853,5.324c-7.098-7.098-18.607-7.098-25.706,0h0
 C6.751,11.72,6.031,23.763,11.459,31L26,52l14.541-21C45.969,23.763,45.249,11.72,38.853,5.324z M26.177,24c-3.314,0-6-2.686-6-6
 s2.686-6,6-6s6,2.686,6,6S29.491,24,26.177,24z"></path></svg></span>
-              <h4 class="u-align-left-xl u-text u-text-5"> {{datos.uHasta}}</h4><span class="u-icon u-icon-4"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 58 58" style=""><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-b8d8"></use></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" xml:space="preserve" class="u-svg-content" viewBox="0 0 58 58" x="0px" y="0px" id="svg-b8d8" style="enable-background:new 0 0 58 58;"><circle style="fill:#E7ECED;" cx="29" cy="29" r="29"></circle><path style="fill:#424A60;" d="M29,4c13.785,0,25,11.215,25,25S42.785,54,29,54S4,42.785,4,29S15.215,4,29,4 M29,0
+                  <h4 class="u-text u-text-20">{{datos.uHasta}}</h4>
+                  <h4 class="u-text u-text-21">Cantidad de km</h4><span class="u-icon u-icon-20"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 59 59" style=""><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-831b"></use></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" xml:space="preserve" class="u-svg-content" viewBox="0 0 59 59" x="0px" y="0px" id="svg-831b" style="enable-background:new 0 0 59 59;"><path style="fill:#ED8A19;" d="M45.07,59c-0.553,0-1-0.447-1-1s0.447-1,1-1H47c0.553,0,1.035,0.447,1.035,0.999
+c0,0.553-0.412,1-0.965,1v-1l-0.029,1L45.07,59z M41.07,59h-2c-0.553,0-1-0.447-1-1s0.447-1,1-1h2c0.553,0,1,0.447,1,1
+S41.623,59,41.07,59z M35.07,59h-2c-0.553,0-1-0.447-1-1s0.447-1,1-1h2c0.553,0,1,0.447,1,1S35.623,59,35.07,59z M29.07,59h-2
+c-0.553,0-1-0.447-1-1s0.447-1,1-1h2c0.553,0,1,0.447,1,1S29.623,59,29.07,59z M23.07,59h-2c-0.553,0-1-0.447-1-1s0.447-1,1-1h2
+c0.553,0,1,0.447,1,1S23.623,59,23.07,59z M17.07,59h-2c-0.553,0-1-0.447-1-1s0.447-1,1-1h2c0.553,0,1,0.447,1,1S17.623,59,17.07,59
+z M50.537,57.282c-0.216,0-0.434-0.07-0.617-0.214c-0.435-0.342-0.509-0.971-0.168-1.404c0.325-0.413,0.548-0.882,0.663-1.392
+c0.121-0.539,0.656-0.877,1.195-0.756s0.877,0.656,0.756,1.195c-0.178,0.792-0.538,1.549-1.042,2.188
+C51.127,57.151,50.834,57.282,50.537,57.282z M50.538,51.719c-0.297,0-0.59-0.131-0.787-0.382c-0.32-0.407-0.734-0.744-1.197-0.974
+c-0.494-0.246-0.696-0.846-0.45-1.341c0.246-0.494,0.844-0.697,1.341-0.45c0.727,0.361,1.376,0.89,1.879,1.528
+c0.341,0.434,0.267,1.063-0.168,1.404C50.973,51.648,50.754,51.719,50.538,51.719z M45.071,50h-2c-0.553,0-1-0.447-1-1s0.447-1,1-1
+h2c0.553,0,1,0.447,1,1S45.624,50,45.071,50z M39.071,50h-2c-0.553,0-1-0.447-1-1s0.447-1,1-1h2c0.553,0,1,0.447,1,1
+S39.624,50,39.071,50z M33.129,49.594c-0.139,0-0.28-0.029-0.415-0.091c-0.736-0.336-1.402-0.844-1.927-1.467
+c-0.355-0.423-0.301-1.054,0.122-1.409s1.053-0.301,1.409,0.122c0.334,0.397,0.759,0.721,1.228,0.936
+c0.502,0.229,0.723,0.822,0.493,1.325C33.871,49.377,33.509,49.594,33.129,49.594z M30.58,44.65c-0.063,0-0.126-0.006-0.189-0.018
+c-0.543-0.104-0.897-0.629-0.794-1.171c0.155-0.809,0.483-1.556,0.973-2.222c0.328-0.445,0.953-0.539,1.398-0.213
+c0.445,0.328,0.54,0.954,0.213,1.398c-0.313,0.424-0.521,0.899-0.619,1.413C31.469,44.317,31.05,44.65,30.58,44.65z M34.784,41.005
+c-0.533,0-0.977-0.421-0.998-0.959c-0.022-0.552,0.406-1.018,0.958-1.04C34.829,39.002,34.914,39,35,39h1.785c0.553,0,1,0.447,1,1
+s-0.447,1-1,1l-1.959,0.004C34.812,41.005,34.798,41.005,34.784,41.005z M53,41h-0.215c-0.553,0-1-0.447-1-1s0.447-1,1-1H53
+c0.469,0,0.923-0.091,1.352-0.271c0.505-0.215,1.095,0.025,1.309,0.535c0.214,0.509-0.025,1.095-0.535,1.309
+C54.451,40.856,53.736,41,53,41z M48.785,41h-2c-0.553,0-1-0.447-1-1s0.447-1,1-1h2c0.553,0,1,0.447,1,1S49.338,41,48.785,41z
+ M42.785,41h-2c-0.553,0-1-0.447-1-1s0.447-1,1-1h2c0.553,0,1,0.447,1,1S43.338,41,42.785,41z M57.318,37.77
+c-0.093,0-0.188-0.013-0.281-0.04c-0.53-0.155-0.834-0.711-0.679-1.241c0.094-0.32,0.142-0.652,0.142-0.988
+c0.002-0.192-0.014-0.374-0.042-0.552c-0.088-0.545,0.283-1.059,0.829-1.146c0.543-0.09,1.058,0.283,1.146,0.829
+c0.047,0.293,0.069,0.588,0.067,0.876c0,0.519-0.074,1.04-0.222,1.543C58.15,37.487,57.751,37.77,57.318,37.77z M55.25,32.604
+c-0.17,0-0.343-0.043-0.501-0.135c-0.453-0.263-0.947-0.417-1.47-0.458c-0.551-0.043-0.962-0.524-0.919-1.075
+c0.043-0.552,0.526-0.959,1.075-0.919c0.823,0.064,1.604,0.308,2.317,0.722c0.478,0.277,0.641,0.89,0.363,1.367
+C55.931,32.425,55.595,32.604,55.25,32.604z M49.357,32h-2c-0.553,0-1-0.447-1-1s0.447-1,1-1h2c0.553,0,1,0.447,1,1
+S49.91,32,49.357,32z M43.357,32h-2c-0.553,0-1-0.447-1-1s0.447-1,1-1h2c0.553,0,1,0.447,1,1S43.91,32,43.357,32z M37.357,32h-2
+c-0.553,0-1-0.447-1-1s0.447-1,1-1h2c0.553,0,1,0.447,1,1S37.91,32,37.357,32z M31.357,32H31c-0.678-0.001-1.337-0.123-1.963-0.361
+c-0.516-0.197-0.774-0.775-0.578-1.291c0.198-0.517,0.779-0.773,1.291-0.578c0.398,0.152,0.819,0.229,1.252,0.23h0.355
+c0.553,0,1,0.447,1,1S31.91,32,31.357,32z M26.724,28.905c-0.42,0-0.812-0.267-0.95-0.688c-0.182-0.552-0.273-1.13-0.273-1.718
+c0.001-0.238,0.016-0.469,0.044-0.694c0.068-0.546,0.552-0.931,1.117-0.867c0.548,0.068,0.937,0.569,0.867,1.117
+c-0.019,0.147-0.027,0.298-0.028,0.449c0,0.37,0.059,0.737,0.174,1.088c0.172,0.524-0.113,1.09-0.638,1.263
+C26.933,28.89,26.827,28.905,26.724,28.905z M28.628,23.676c-0.334,0-0.66-0.167-0.85-0.471c-0.292-0.469-0.149-1.086,0.319-1.378
+c0.7-0.437,1.472-0.703,2.294-0.794c0.553-0.057,1.043,0.336,1.104,0.885s-0.336,1.043-0.885,1.104
+c-0.521,0.058-1.011,0.227-1.454,0.503C28.991,23.627,28.809,23.676,28.628,23.676z M42.5,23h-2c-0.553,0-1-0.447-1-1s0.447-1,1-1h2
+c0.553,0,1,0.447,1,1S43.053,23,42.5,23z M36.5,23h-2c-0.553,0-1-0.447-1-1s0.447-1,1-1h2c0.553,0,1,0.447,1,1S37.053,23,36.5,23z"></path><path style="fill:#26B99A;" d="M53.47,2.669L53.47,2.669c-3.157-3.559-8.276-3.559-11.433,0v0c-3.157,3.559-3.157,9.328,0,12.887
+L47.753,22l5.716-6.444C56.627,11.998,56.627,6.228,53.47,2.669z M48,13c-2.485,0-4.5-2.015-4.5-4.5S45.515,4,48,4
+s4.5,2.015,4.5,4.5S50.485,13,48,13z"></path><path style="fill:#3083C9;" d="M19.278,28.64c-4.296-4.853-11.261-4.853-15.556,0h0c-4.296,4.853-4.296,12.721,0,17.573L11.5,55
+l7.778-8.787C23.574,41.36,23.574,33.492,19.278,28.64z M11.5,41c-2.761,0-5-2.239-5-5s2.239-5,5-5s5,2.239,5,5S14.261,41,11.5,41z"></path></svg></span><span class="u-icon u-icon-21"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 58 58" style=""><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-5d6e"></use></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" xml:space="preserve" class="u-svg-content" viewBox="0 0 58 58" x="0px" y="0px" id="svg-5d6e" style="enable-background:new 0 0 58 58;"><circle style="fill:#E7ECED;" cx="29" cy="29" r="29"></circle><path style="fill:#424A60;" d="M29,4c13.785,0,25,11.215,25,25S42.785,54,29,54S4,42.785,4,29S15.215,4,29,4 M29,0
 C12.984,0,0,12.984,0,29s12.984,29,29,29s29-12.984,29-29S45.016,0,29,0L29,0z"></path><g><path style="fill:#7383BF;" d="M29,5.879c-0.552,0-1,0.447-1,1v1c0,0.553,0.448,1,1,1s1-0.447,1-1v-1
   C30,6.326,29.552,5.879,29,5.879z"></path><path style="fill:#7383BF;" d="M29,48.879c-0.552,0-1,0.447-1,1v1c0,0.553,0.448,1,1,1s1-0.447,1-1v-1
   C30,49.326,29.552,48.879,29,48.879z"></path><path style="fill:#7383BF;" d="M51,27.879h-1c-0.552,0-1,0.447-1,1s0.448,1,1,1h1c0.552,0,1-0.447,1-1S51.552,27.879,51,27.879z"></path><path style="fill:#7383BF;" d="M8,27.879H7c-0.552,0-1,0.447-1,1s0.448,1,1,1h1c0.552,0,1-0.447,1-1S8.552,27.879,8,27.879z"></path><path style="fill:#7383BF;" d="M43.849,12.615l-0.707,0.707c-0.391,0.391-0.391,1.023,0,1.414c0.195,0.195,0.451,0.293,0.707,0.293
@@ -34,23 +79,23 @@ C12.984,0,0,12.984,0,29s12.984,29,29,29s29-12.984,29-29S45.016,0,29,0L29,0z"></p
   c0.195,0.195,0.451,0.293,0.707,0.293s0.512-0.098,0.707-0.293c0.391-0.391,0.391-1.023,0-1.414L44.556,43.021z"></path><path style="fill:#7383BF;" d="M14.151,12.615c-0.391-0.391-1.023-0.391-1.414,0s-0.391,1.023,0,1.414l0.707,0.707
   c0.195,0.195,0.451,0.293,0.707,0.293s0.512-0.098,0.707-0.293c0.391-0.391,0.391-1.023,0-1.414L14.151,12.615z"></path>
 </g><line style="fill:none;stroke:#424A60;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" x1="26" y1="28.879" x2="18" y2="28.879"></line><line style="fill:none;stroke:#424A60;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" x1="29" y1="25.879" x2="29" y2="14.879"></line><circle style="fill:none;stroke:#424A60;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" cx="29" cy="28.879" r="3"></circle></svg></span>
-              <h4 class="u-align-left-xl u-text u-text-6">Fecha y hora</h4><span class="u-file-icon u-icon u-icon-5"><img src="../../../../../assets/imagesFletesDis/2801850.png" alt=""></span>
-              <h4 class="u-align-left-xl u-text u-text-7">{{datos.cargamento}}</h4>
-              <h4 class="u-align-left-xl u-text u-text-8">{{datos.ayudantes}}</h4><span class="u-file-icon u-icon u-icon-6"><img src="../../../../../assets/imagesFletesDis/8452029.png" alt=""></span><span class="u-file-icon u-icon u-icon-7"><img src="../../../../../assets/imagesFletesDis/1679557.png" alt=""></span>
-              <h4 class="u-align-left-xl u-text u-text-9">{{datos.tipoVehiculo}}</h4>
-              <h4 class="u-align-center u-custom-font u-font-roboto-condensed u-hover-feature u-text u-text-10">Enviar precio</h4>
-              <input  type="text" class="form-control">
-              <!-- <p > Graphic Design</p> -->
+                  <h4 class="u-text u-text-22">{{datos.fecha}}</h4><span class="u-file-icon u-icon u-icon-22"><img src="../../../../../assets/imagesFletesDis/2801850.png" alt=""></span>
+                  <h4 class="u-text u-text-23">{{datos.cargamento}}</h4><span class="u-file-icon u-icon u-icon-23"><img src="../../../../../assets/imagesFletesDis/8452029.png" alt=""></span>
+                  <h4 class="u-text u-text-24">{{datos.ayudantes}}</h4><span class="u-file-icon u-icon u-icon-24"><img src="../../../../../assets/imagesFletesDis/1679557.png" alt=""></span>
+                  <h4 class="u-text u-text-25">Ayudantes</h4>
+                  <input [(ngModel)]="pasosFlete.precio" type="text" >
+                  <input  type="submit" value="submit" class="u-form-control-hidden">
+                </div>
+              </div>
+              <a (click)="enviar()"  class="u-border-2 u-border-grey-75 u-btn u-btn-round u-button-style u-custom-color-1 u-hover-custom-color-3 u-radius-50 u-btn-3">Botón</a>
             </div>
           </div>
-
         </div>
       </div>
-      <p class="u-align-center u-text u-text-body-alt-color u-text-39" data-animation-name="customAnimationIn" data-animation-duration="1500" data-animation-delay="500">Iniciar app&nbsp;<a href="https://www.freepik.com/" class="u-border-1 u-border-active-palette-2-base u-border-hover-palette-2-base u-border-no-left u-border-no-right u-border-no-top u-border-white u-bottom-left-radius-0 u-bottom-right-radius-0 u-btn u-button-link u-button-style u-none u-radius-0 u-text-body-alt-color u-top-left-radius-0 u-top-right-radius-0 u-btn-1" target="_blank">aquí<br>
-        </a>
-      </p>
+      <div class="u-list u-list-2">
+        <div class="u-repeater u-repeater-2"></div>
+      </div>
     </div>
   </section>
-  
 
 </ion-content>

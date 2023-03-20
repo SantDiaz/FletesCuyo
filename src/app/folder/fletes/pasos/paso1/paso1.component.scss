@@ -1,124 +1,114 @@
-
-.background2{
-	--ion-background-color: linear-gradient(90deg, rgba(183,181,226,1) 0%, rgba(41,174,228,1) 0%, rgba(12,49,62,1) 0%, rgba(6,102,80,1) 50%, rgba(12,49,62,1) 100%);
-	}.u-section-1 .u-sheet-1 {
-		min-height: 100vh;
-	  }
-	  
-	  .u-section-1 .u-group-1 {
-		width: 326px;
-		min-height: 460px;
-		height: auto;
-		margin: 69px auto 60px;
-	  }
-	  
-	  .u-section-1 .u-container-layout-1 {
-		padding: 0;
-	  }
-	  
-	  .u-section-1 .u-icon-1 {
-		width: 59px;
-		height: 59px;
-		margin: 0 auto;
-		padding: 0;
-	  }
-	  
-	  .u-section-1 .u-text-1 {
-		width: auto;
-		margin: 10px 0 0;
-	  }
-	  
-	  .u-section-1 .u-text-2 {
-		width: auto;
-		font-size: 1rem;
-		margin: 11px 0 0;
-	  }
-	  
-	  .u-section-1 .u-form-1 {
-		background-image: none;
-		--thumb-color: #478ac9;
-		--thumb-hover-color: #77aad9;
-		--track-color: #c0c0c0;
-		--track-active-color: #478ac9;
-		--number-width: 100px;
-		height: 635px;
-		width: 293px;
-		margin: 12px auto 0;
-	  }
-	  
-	  .u-section-1 .u-form-group-1 {
-		--progress: 0%;
-		margin-left: 0;
-	  }
-	  
-	  .u-section-1 .u-btn-1 {
-		background-image: none;
-	  }
-	  
-	  @media (max-width: 1199px) {
-		.u-section-1 .u-group-1 {
-		  height: auto;
-		}
-	  
-		.u-section-1 .u-form-1 {
-		  height: 186px;
-		  width: 301px;
-		  margin-top: 11px;
-		}
-	  }
-	  
-	  @media (max-width: 991px) {
-		.u-section-1 .u-form-1 {
-		  width: 284px;
-		  margin-top: 10px;
-		}
-	  }
-	  
-	  @media (max-width: 767px) {
-		.u-section-1 .u-icon-1 {
-		  margin-top: 6px;
-		}
-	  
-		.u-section-1 .u-text-1 {
-		  margin-top: 7px;
-		}
-	  
-		.u-section-1 .u-text-2 {
-		  margin-top: 15px;
-		}
-	  
-		.u-section-1 .u-form-1 {
-		  width: 288px;
-		  margin-top: 27px;
-		}
-	  }
-	  
-	  @media (max-width: 575px) {
-		.u-section-1 .u-sheet-1 {
-		  min-height: 566px;
-		}
-	  
-		.u-section-1 .u-group-1 {
-		  margin-top: 60px;
-		}
-	  
-		.u-section-1 .u-icon-1 {
-		  margin-top: 0;
-		}
-	  
-		.u-section-1 .u-text-1 {
-		  margin-top: 10px;
-		}
-	  
-		.u-section-1 .u-text-2 {
-		  margin-top: 11px;
-		}
-	  
-		.u-section-1 .u-form-1 {
-		  width: 293px;
-		  margin-top: 10px;
-		}
-	  }/*begin-commonstyles library*//*!
+.u-section-1 .u-sheet-1 {
+	min-height: 50vw;
+  }
+  
+  .u-section-1 .u-group-1 {
+	width: 454px;
+	height: auto;
+	min-height: 498px;
+	margin: 63px auto 60px;
+  }
+  
+  .u-section-1 .u-container-layout-1 {
+	padding: 0 0 24px;
+  }
+  
+  .u-section-1 .u-icon-1 {
+	width: 59px;
+	height: 59px;
+	margin: 0 auto;
+	padding: 0;
+  }
+  
+  .u-section-1 .u-text-1 {
+	width: auto;
+	margin: 10px 0 0;
+  }
+  
+  .u-section-1 .u-text-2 {
+	width: auto;
+	font-size: 1rem;
+	margin: 11px 0 0;
+  }
+  
+  .u-section-1 .u-form-1 {
+	--thumb-color: #478ac9;
+	--thumb-hover-color: #77aad9;
+	--track-color: #c0c0c0;
+	--track-active-color: #478ac9;
+	--number-width: 100px;
+	background-image: none;
+	height: 284px;
+	width: 328px;
+	margin: 11px auto 0;
+  }
+  
+  .u-section-1 .u-form-group-1 {
+	margin-left: 0;
+  }
+  
+  .u-section-1 .u-form-group-2 {
+	margin-left: 0;
+  }
+  
+  .u-section-1 .u-form-group-3 {
+	margin-left: 0;
+  }
+  
+  .u-section-1 .u-btn-1 {
+	background-image: none;
+  }
+  
+  @media (max-width: 1199px) {
+	.u-section-1 .u-group-1 {
+	  height: auto;
+	}
+  }
+  
+  @media (max-width: 767px) {
+	.u-section-1 .u-sheet-1 {
+	  min-height: 785px;
+	}
+  
+	.u-section-1 .u-group-1 {
+	  margin-top: 44px;
+	}
+  
+	.u-section-1 .u-form-1 {
+	  height: 279px;
+	  margin-top: -19px;
+	}
+  }
+  
+  @media (max-width: 575px) {
+	.u-section-1 .u-group-1 {
+	  width: 308px;
+	  min-height: 540px;
+	  margin-top: 15px;
+	}
+  
+	.u-section-1 .u-container-layout-1 {
+	  padding-bottom: 0;
+	}
+  
+	.u-section-1 .u-icon-1 {
+	  margin-top: 16px;
+	}
+  
+	.u-section-1 .u-text-1 {
+	  margin-top: 8px;
+	}
+  
+	.u-section-1 .u-text-2 {
+	  margin-top: 8px;
+	}
+  
+	.u-section-1 .u-form-1 {
+	  height: 374px;
+	  width: 256px;
+	  margin-top: 10px;
+	}
+  }/*begin-commonstyles library*//*!
  * froala_editor v4.0.6 (https://www.froala.com/wysiwyg-editor)
  * License https://froala.com/wysiwyg-editor/terms/
  * Copyright 2014-2021 Froala Labs

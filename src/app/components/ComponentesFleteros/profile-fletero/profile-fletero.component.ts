@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { datosVehiculo, UserF } from 'src/app/folder/models/models';
+import { datosVehiculo, tipoVehiculo, UserF } from 'src/app/folder/models/models';
 import { AuthService } from 'src/app/folder/services/auth.service';
 import { FirestoreService } from 'src/app/folder/services/firestore.service';
 
@@ -16,6 +16,7 @@ export class ProfileFleteroComponent implements OnInit {
   DatosF: UserF;
   DatosV: datosVehiculo;
 
+
   constructor(  private auth: AuthService,
                 private router: Router,
                 private db: FirestoreService,) { }  
@@ -27,6 +28,7 @@ export class ProfileFleteroComponent implements OnInit {
       if (res) {
         this.login = true;
         this.getDatosUser(res.uid);
+        this.getDatosVehicular(res.uid);
       } else {
         this.login = false;
          this.router.navigate(['/login'])
@@ -47,12 +49,29 @@ getDatosUser(uid: string) {
       this.DatosF = res;
       console.log('id personal -> ', uid);
       console.log('trae esto-->', res );
+      console.log('datos vehicular', this.DatosV );
       }
       else{
         console.log('Tiene errores -> ');
       }
   })
 }
+
+getDatosVehicular(uid: string) {
+  const path = 'DatosVehicular';
+  const id = uid;
+  
+  this.db.getDoc<datosVehiculo>(path, id).subscribe( res => {
+    if (res ) {
+      this.DatosV = res;
+      console.log('trae esto vehicular-->', res );
+      }
+      else{
+        console.log('Tiene errores -> ');
+      }
+  })
+}
+
 
 
 

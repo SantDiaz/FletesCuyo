@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { DatosFlete, datosVehiculo } from '../models/models';
-
 @Injectable({
   providedIn: 'root'
 })
@@ -76,5 +75,8 @@ export class FirestoreService {
       resolve('enlace')
 });
 }
+
+
+
 
 }

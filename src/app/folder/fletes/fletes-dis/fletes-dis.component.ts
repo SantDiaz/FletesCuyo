@@ -8,9 +8,8 @@ import { FirestoreService } from '../../services/firestore.service';
   styleUrls: ['./fletes-dis.component.scss'],
 })
 export class FletesDisComponent implements OnInit {
-
-  filter: string = "PedirFlete";
   fletes: DatosFlete[] = []
+
   constructor(
     private db: FirestoreService,
     ) { }
@@ -36,7 +35,7 @@ export class FletesDisComponent implements OnInit {
 
 
   getItems() {
-    const enlace = 'PedirFlete'; 
+    const enlace = 'PedirFlete3'; 
     this.db.getCollection<DatosFlete>(enlace).subscribe(res => {
       this.fletes = res;
     });
