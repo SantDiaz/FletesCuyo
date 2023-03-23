@@ -4,6 +4,7 @@ import { LoadingController, ToastController } from '@ionic/angular';
 import { DatosFlete, UserU } from 'src/app/folder/models/models';
 import { AuthService } from 'src/app/folder/services/auth.service';
 import { FirestoreService } from 'src/app/folder/services/firestore.service';
+import { NuevoService } from 'src/app/folder/services/nuevo.service';
 
 @Component({
   selector: 'app-card',
@@ -15,27 +16,14 @@ export class CardComponent implements OnInit {
   loading: any;
   login: boolean = false;
   filter: string = "filtro";
-  DatosU: UserU;
-  fletes: DatosFlete[] = []
+  DatosU: UserU[];
+  fletes: DatosFlete[] = [];
 
-  pasosFlete: DatosFlete={
-    fecha: null,
-    hora: null, 
-    minutos: null,
-    uDesde: '',
-    uHasta: '',
-    cargamento: '',
-    tipoVehiculo:  null,
-    ayudantes:  null ,
-    uid:  null ,
-    id: '',
-    precio: null,
-
-   };
 
   constructor(private db: FirestoreService,
               private auth: AuthService,
               private router: Router,
+              private database: NuevoService,
               public toastController: ToastController,
               private loadingCtrl: LoadingController, 
     ) { }
@@ -45,27 +33,29 @@ export class CardComponent implements OnInit {
     this.getItems();
     this.auth.stateUser<UserU>().subscribe( res  => {
       if (res) {
-        this.login = true;
+        console.log(res)
         this.getDatosUser(res.uid);
+        this.login = true;
       } else {
         this.login = false;
          this.router.navigate(['/login'])
         
       }   
  })
-    
+   
   }
 
   // trae el nombre del usuario
   getDatosUser(uid: string) {
-    const path = 'Usuarios';
-    const id = uid;
-    this.db.getCollection<DatosFlete>(path).subscribe(res => {
-      // this.fletes = res;
-      console.log('trae esto User-->', res );
-    });
-  }
-
+      const enlace = 'Usuarios'; 
+      this.db.getCollection2<UserU>(enlace, uid).subscribe(res => {
+        this.DatosU = res;
+        console.log('trae esto user-->', res );
+      });
+    }
+  
+  
+    
 
 
   // trae datos del flete

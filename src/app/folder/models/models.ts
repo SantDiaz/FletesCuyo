@@ -43,7 +43,7 @@ export interface UserU {
 
   export interface DatosFlete {
     fecha: number;
-    hora: '5 AM' | '6 AM' | '7 AM'|' 8 AM' | '9 AM' | '10 AM'|' 11 AM' | '12 AM' | '13 PM'|' 14 PM' | '15 PM' | '16 PM'|' 17 PM' | '18 PM' | '19 PM'|' 20 PM' | '21 PM' | '22 PM'|' 23 PM' ;
+    hora: '5 ' | '6 ' | '7 '|' 8 ' | '9 ' | '10 '|' 11 ' | '12 ' | '13 '|' 14 ' | '15 ' | '16 '|' 17 ' | '18 ' | '19 '|' 20 ' | '21 ' | '22 '|' 23 ' ;
     minutos: '00' | '15'|' 30' | '45';
     uDesde: string;
     uHasta: string;
@@ -54,10 +54,10 @@ export interface UserU {
     id: string
     precio: number
   }
-  export const hora = ['5 AM' , '6 AM' , '7 AM',' 8 AM' , '9 AM' , '10 AM',' 11 AM' , '12 AM' , '13 PM',' 14 PM' , '15 PM' , '16 PM',' 17 PM' ,'18 PM' , '19 PM',' 20 PM' , '21 PM' , '22 PM',' 23 PM'];
+  export const hora = ['5 ' , '6 ' , '7 ',' 8 ' , '9 ' , '10 ',' 11 ' , '12 ' , '13 ',' 14 ' , '15 ' , '16 ',' 17 ' ,'18 ' , '19 ',' 20 ' , '21 ' , '22 ',' 23 '];
   export const minutos = ['00' , '15' , '30', '45'];
   export const tipoVehiculo = ['Camioneta' , 'Camion' , 'Utilitario'];
-  export const ayudantes = ['Sin ayudantes' , '+1' , '+2'];
+  export const ayudantes = ['Sin ayudantes' , '+1' , '+2',  '+3 '];
 export const datosVehiculo =  []
 
 

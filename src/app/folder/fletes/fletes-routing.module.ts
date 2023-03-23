@@ -91,8 +91,8 @@ const routes: Routes = [
     component: RegisterComponent,
   },
   {
-    path: 'home2',
-    component: HomeLogComponent,
+    path: 'chat',
+    component: ChatComponent,
   },
   {
     path: 'formF1',

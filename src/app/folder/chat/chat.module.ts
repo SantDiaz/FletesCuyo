@@ -4,6 +4,7 @@ import { ChatComponent } from './chat.component';
 import { IonicModule } from '@ionic/angular';
 import { HomePageModule } from '../home/home.module';
 import { HomePageRoutingModule } from '../home/home-routing.module';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -15,6 +16,7 @@ import { HomePageRoutingModule } from '../home/home-routing.module';
     CommonModule,
     IonicModule,
     HomePageRoutingModule,
+    FormsModule
   ],
   exports: [
     ChatComponent,
