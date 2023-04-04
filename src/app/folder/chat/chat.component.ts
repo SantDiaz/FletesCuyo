@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild  } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoadingController, ToastController } from '@ionic/angular';
-import { DatosFlete, datosVehiculo, UserU } from '../models/models';
+import { DatosFlete, datosVehiculo, respuesta, UserF, UserU } from '../models/models';
 import { AuthService } from '../services/auth.service';
 import { FirestoreService } from '../services/firestore.service';
 import { InteractionService } from '../services/interaction.service';
 import { NuevoService } from '../services/nuevo.service';
+import { IonModal } from '@ionic/angular';
+import { OverlayEventDetail } from '@ionic/core/components';
 
 @Component({
   selector: 'app-chat',
@@ -13,16 +15,28 @@ import { NuevoService } from '../services/nuevo.service';
   styleUrls: ['./chat.component.scss'],
 })
 export class ChatComponent implements OnInit {
-  
+  @ViewChild(IonModal) modal: IonModal;
+
+  name: string;
+  message = "putoss"
   loading: any;
+  // datosF: Estado;
   fletes = [];
-  // DatosU: UserU[];
   DatosV: datosVehiculo;
-  // DatosU: DatosFlete;
   pasosFlete: DatosFlete[]  = [] 
   nuevoDato: DatosFlete;
-  pasosFlete2: DatosFlete={
+  rta: respuesta={ 
+    id: '',
+    idFletero: '',
+    nombre: '',
+    apellido: '',
+    precio: null, 
+    mensaje: '',
+  };
 
+
+  pasosFlete2: DatosFlete={
+    
     fecha: null,
     hora: null,
     minutos: null,
@@ -33,6 +47,7 @@ export class ChatComponent implements OnInit {
     ayudantes:  null ,
     uid:  "" ,
     id: '',
+    // respuesta: null,
     precio: null,
    };
 
@@ -58,15 +73,45 @@ export class ChatComponent implements OnInit {
           let pasosFlete = pasosRef.payload.doc.data();
           pasosFlete['id'] = pasosRef.payload.doc.id;
           return pasosFlete;
+          
         })
           console.log(this.fletes);
       })
     })
   }
 
+  
 
+
+
+
+alta(id){
+  this.auth.stateUser<UserF>().subscribe( res  => {
+if (res) {
   
+  this.interacion.presentLoading;
+  const data = this.rta;
+  data.id = id;
+  data.idFletero = res.uid;
+  console.log('id recibido', id)
   
+  console.log('idpoersona', res.uid)
+const enlace = "Respuesta"
+this.db.createDoc<respuesta>(data, enlace, data.id).then((_) =>{
+  this.interacion.closeLoading;
+  this.rta={
+    id: data.id,
+    idFletero: res.uid,
+    nombre: '',
+    apellido: '',
+    precio: null, 
+    mensaje: '',
+   };
+} );
+}   
+}) 
+} 
+
   obtenerbyId(id){
     this.database.getById('PedirFlete3', id).then(res =>{
       res.subscribe(docRef=>{
@@ -77,21 +122,9 @@ export class ChatComponent implements OnInit {
     })
   }
   
-  modificar(id){
-    this.database.update('PedirFlete3', id, this.pasosFlete2).then(res =>{
-      alert("se modifico");
-      console.log('modificas esto', res);
-      
-    }).catch (err =>{
-      console.log('error al modificar', err);
-    })
-  }
   
   
-  
-  
-  // }
-  
+  // Guarda el precio
   async  editUser(DatosFletes: DatosFlete){
     console.log('fuuncio', DatosFletes);
     const res = await this.interacion.presentAlert('Alerta', '¿Seguro que deseas editar?');
@@ -127,52 +160,21 @@ export class ChatComponent implements OnInit {
   
   
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-    alta(){
-      this.database.create('PedirFlete3', this.fletes).then(res =>{
-        console.log("ress", res);
-      }).catch (err =>{
-        console.log('errar', err);
-        
-      })
+
+
+    cancel() {
+      this.modal.dismiss(null, 'cancel');
     }
-
-
-
-
-
-
-    
-
-  async presentToast(mensaje: string, tiempo: number) {
-    const toast = await this.toastController.create({
-      message: mensaje,
-      duration: tiempo,
-      position: 'middle'
-    });
-    await toast.present();
-  }
-
-  async presentLoading() {
-    this.loading = await this.loadingCtrl.create({
-      message: 'Guardando',
-    });
-
-   await this.loading.present();
-  }
+  
+    confirm() {
+      this.modal.dismiss(this.name, 'confirm');
+    }
+  
+    onWillDismiss(event: Event) {
+      const ev = event as CustomEvent<OverlayEventDetail<string>>;
+      if (ev.detail.role === 'confirm') {
+        this.message = `Hello, ${ev.detail.data}!`;
+      }
+    }
 
 }

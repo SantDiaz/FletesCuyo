@@ -46,6 +46,10 @@ export class NuevoService {
     }
 
 
+    deleteDoc(path: string, id: string){
+      return this.firestore.collection(path).doc(id).delete();
+    }
+
     async update(collection, id, dato){
       try{
         return await this.firestore.collection(collection).doc(id).set(dato);

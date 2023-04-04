@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoadingController, ToastController } from '@ionic/angular';
-import { DatosFlete, hora, minutos, Pasos, UserU } from 'src/app/folder/models/models';
+import { DatosFlete, hora, minutos, UserU } from 'src/app/folder/models/models';
 import { AuthService } from 'src/app/folder/services/auth.service';
 import { FirestoreService } from 'src/app/folder/services/firestore.service';
 
@@ -20,7 +20,7 @@ horas = hora
 minuto = minutos
 
 pasosFlete: DatosFlete={
-
+  // rta: null,
   fecha: null,
   hora: null,
   minutos: null,
@@ -95,6 +95,7 @@ constructor(private routes: Router,
         this.loading.dismiss();
         this.routes.navigate(['/paso2']);
         this.pasosFlete={
+          // rta: null,
           fecha: null,
           hora: null,
           minutos: null,
@@ -106,6 +107,7 @@ constructor(private routes: Router,
           uid:  null ,
           id: res.uid,
           precio: null,
+          // rta: null,
          };
     } );
   }   

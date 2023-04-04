@@ -12,7 +12,6 @@ import { FirestoreService } from 'src/app/folder/services/firestore.service';
 export class Paso3Component implements OnInit {
 
   
-  filter: string = "filtro";
   login: boolean = false;
   DatosU: DatosFlete[] = [];
 
@@ -23,30 +22,9 @@ export class Paso3Component implements OnInit {
   ngOnInit(
     
   ) {     
-    this.auth.stateUser<UserU>().subscribe( res  => {
-      if (res) {
-        this.login = true;
-        this.loadComprobante(res.uid);
-      } else {
-        this.login = false;
-         this.router.navigate(['/login'])
-        
-      }   
- })
+
 }
 
 
-
-loadComprobante(uid : string){
-  const path = "PedirFlete3"
-  this.db.getCollection2<DatosFlete>(path, uid).subscribe(res =>{
-
-    if(res){
-      console.log("esto", res);
-      this.DatosU = res;
-    }
-
-  })
-}
 
 }

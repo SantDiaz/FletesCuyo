@@ -1,4 +1,4 @@
-import { Timestamp } from "rxjs/internal/operators/timestamp";
+
 
 export interface UserU {
     uid: string;
@@ -11,7 +11,7 @@ export interface UserU {
     image: string; 
     email: string;
     password: string;
-    perfil: 'Usuario' | 'Admin',
+    perfil: 'Usuario' | 'Admin';
     // | 'Fletero'| 'Admin' 
   }
 
@@ -26,7 +26,7 @@ export interface UserU {
     image: string; 
     email: string;
     password: string;
-    perfil:  'Fletero',
+    perfil:  'Fletero';
     datosVehiculos: datosVehiculo;
   }
   
@@ -42,6 +42,7 @@ export interface UserU {
 
 
   export interface DatosFlete {
+    id: string;
     fecha: number;
     hora: '5 ' | '6 ' | '7 '|' 8 ' | '9 ' | '10 '|' 11 ' | '12 ' | '13 '|' 14 ' | '15 ' | '16 '|' 17 ' | '18 ' | '19 '|' 20 ' | '21 ' | '22 '|' 23 ' ;
     minutos: '00' | '15'|' 30' | '45';
@@ -51,9 +52,28 @@ export interface UserU {
     tipoVehiculo: 'Camioneta' | 'Camion' | 'Utilitario' ;
     ayudantes:  'Sin ayudantes' | '+1 Ayudantes' | '+2 Ayudantes'  | '+3 Ayudantes' ;
     uid: string;
-    id: string
-    precio: number
+    precio: {
+      id: string;
+      idFletero: string;
+      nombre: string;
+      apellido: string;
+      precio: number; 
+      mensaje: string;
+    };
+    }
+
+  export interface respuesta {
+    id: string;
+    idFletero: string;
+    nombre: string;
+    apellido: string;
+    precio: number; 
+    mensaje: string;
   }
+
+
+
+
   export const hora = ['5 ' , '6 ' , '7 ',' 8 ' , '9 ' , '10 ',' 11 ' , '12 ' , '13 ',' 14 ' , '15 ' , '16 ',' 17 ' ,'18 ' , '19 ',' 20 ' , '21 ' , '22 ',' 23 '];
   export const minutos = ['00' , '15' , '30', '45'];
   export const tipoVehiculo = ['Camioneta' , 'Camion' , 'Utilitario'];
@@ -61,10 +81,3 @@ export interface UserU {
 export const datosVehiculo =  []
 
 
-export interface Pasos {
-  id: string;
-  nombre: string;
-  dni: string;
-  direccion: string;
-  telefono: number;
-}

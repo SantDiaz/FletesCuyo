@@ -1,37 +1,34 @@
-<ion-content class="background">
 
-
-
-  <section  class="u-clearfix u-section-1" id="sec-ecfb">
-    <div class="u-clearfix u-sheet u-sheet-1">
-      <h1 class="u-align-center u-text u-text-1">Ultimos fletes disponibles</h1>
-      <div  class="u-list u-list-1">
-        <div class="u-repeater u-repeater-1">
-        
-          <div *ngFor="let datos of fletes" class="u-container-style u-list-item u-palette-1-light-3 u-repeater-item u-list-item-3">
-            <div class="u-container-layout u-similar-container u-valign-top-md u-valign-top-sm u-valign-top-xs u-container-layout-5">
-              <div class="u-container-style u-custom-color-2 u-group u-group-3">
-                <div class="u-container-layout u-container-layout-6"><span class="u-icon u-icon-17"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 53 53" style=""><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-9239"></use></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" xml:space="preserve" class="u-svg-content" viewBox="0 0 53 53" x="0px" y="0px" id="svg-9239" style="enable-background:new 0 0 53 53;"><path style="fill:#E7ECED;" d="M18.613,41.552l-7.907,4.313c-0.464,0.253-0.881,0.564-1.269,0.903C14.047,50.655,19.998,53,26.5,53
+<section  class="u-clearfix u-section-1" id="sec-ecfb">
+  <div class="u-clearfix u-sheet u-sheet-1">
+    <h1 class="u-align-center u-text u-text-1">Ultimos fletes disponibles</h1>
+    <div  class="u-list u-list-1">
+      <div class="u-repeater u-repeater-1">
+      
+        <div *ngFor="let datos of fletes"  (click)="eliminar" class="u-container-style u-list-item u-palette-1-light-3 u-repeater-item u-list-item-3">
+          <div class="u-container-layout u-similar-container u-valign-top-md u-valign-top-sm u-valign-top-xs u-container-layout-5">
+            <div class="u-container-style u-custom-color-2 u-group u-group-3">
+              <div class="u-container-layout u-container-layout-6"><span class="u-icon u-icon-17"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 53 53" style=""><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-9239"></use></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" xml:space="preserve" class="u-svg-content" viewBox="0 0 53 53" x="0px" y="0px" id="svg-9239" style="enable-background:new 0 0 53 53;"><path style="fill:#E7ECED;" d="M18.613,41.552l-7.907,4.313c-0.464,0.253-0.881,0.564-1.269,0.903C14.047,50.655,19.998,53,26.5,53
 c6.454,0,12.367-2.31,16.964-6.144c-0.424-0.358-0.884-0.68-1.394-0.934l-8.467-4.233c-1.094-0.547-1.785-1.665-1.785-2.888v-3.322
 c0.238-0.271,0.51-0.619,0.801-1.03c1.154-1.63,2.027-3.423,2.632-5.304c1.086-0.335,1.886-1.338,1.886-2.53v-3.546
 c0-0.78-0.347-1.477-0.886-1.965v-5.126c0,0,1.053-7.977-9.75-7.977s-9.75,7.977-9.75,7.977v5.126
 c-0.54,0.488-0.886,1.185-0.886,1.965v3.546c0,0.934,0.491,1.756,1.226,2.231c0.886,3.857,3.206,6.633,3.206,6.633v3.24
 C20.296,39.899,19.65,40.986,18.613,41.552z"></path><g><path style="fill:#556080;" d="M26.953,0.004C12.32-0.246,0.254,11.414,0.004,26.047C-0.138,34.344,3.56,41.801,9.448,46.76
-  c0.385-0.336,0.798-0.644,1.257-0.894l7.907-4.313c1.037-0.566,1.683-1.653,1.683-2.835v-3.24c0,0-2.321-2.776-3.206-6.633
-  c-0.734-0.475-1.226-1.296-1.226-2.231v-3.546c0-0.78,0.347-1.477,0.886-1.965v-5.126c0,0-1.053-7.977,9.75-7.977
-  s9.75,7.977,9.75,7.977v5.126c0.54,0.488,0.886,1.185,0.886,1.965v3.546c0,1.192-0.8,2.195-1.886,2.53
-  c-0.605,1.881-1.478,3.674-2.632,5.304c-0.291,0.411-0.563,0.759-0.801,1.03V38.8c0,1.223,0.691,2.342,1.785,2.888l8.467,4.233
-  c0.508,0.254,0.967,0.575,1.39,0.932c5.71-4.762,9.399-11.882,9.536-19.9C53.246,12.32,41.587,0.254,26.953,0.004z"></path>
+c0.385-0.336,0.798-0.644,1.257-0.894l7.907-4.313c1.037-0.566,1.683-1.653,1.683-2.835v-3.24c0,0-2.321-2.776-3.206-6.633
+c-0.734-0.475-1.226-1.296-1.226-2.231v-3.546c0-0.78,0.347-1.477,0.886-1.965v-5.126c0,0-1.053-7.977,9.75-7.977
+s9.75,7.977,9.75,7.977v5.126c0.54,0.488,0.886,1.185,0.886,1.965v3.546c0,1.192-0.8,2.195-1.886,2.53
+c-0.605,1.881-1.478,3.674-2.632,5.304c-0.291,0.411-0.563,0.759-0.801,1.03V38.8c0,1.223,0.691,2.342,1.785,2.888l8.467,4.233
+c0.508,0.254,0.967,0.575,1.39,0.932c5.71-4.762,9.399-11.882,9.536-19.9C53.246,12.32,41.587,0.254,26.953,0.004z"></path>
 </g></svg></span>
 <!-- {{DatosU.nombre}} {{DatosU.apellido}} -->
-                  <h4 *ngIf="DatosU" class="u-text u-text-18">{{DatosU.nombre}} {{ DatosU.apellido}}</h4><span class="u-icon u-icon-18"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 52 52" style=""><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-7f39"></use></svg><svg class="u-svg-content" viewBox="0 0 52 52" x="0px" y="0px" id="svg-7f39" style="enable-background:new 0 0 52 52;"><path style="fill:currentColor;" d="M38.853,5.324L38.853,5.324c-7.098-7.098-18.607-7.098-25.706,0h0
+                <h4 *ngIf="DatosU" class="u-text u-text-18">{{DatosU.nombre}} {{ DatosU.apellido}}</h4><span class="u-icon u-icon-18"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 52 52" style=""><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-7f39"></use></svg><svg class="u-svg-content" viewBox="0 0 52 52" x="0px" y="0px" id="svg-7f39" style="enable-background:new 0 0 52 52;"><path style="fill:currentColor;" d="M38.853,5.324L38.853,5.324c-7.098-7.098-18.607-7.098-25.706,0h0
 C6.751,11.72,6.031,23.763,11.459,31L26,52l14.541-21C45.969,23.763,45.249,11.72,38.853,5.324z M26.177,24c-3.314,0-6-2.686-6-6
 s2.686-6,6-6s6,2.686,6,6S29.491,24,26.177,24z"></path></svg></span>
-                  <h4 class="u-text u-text-19">{{datos.uDesde}}</h4><span class="u-icon u-text-palette-2-base u-icon-19"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 52 52" style=""><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-2fca"></use></svg><svg class="u-svg-content" viewBox="0 0 52 52" x="0px" y="0px" id="svg-2fca" style="enable-background:new 0 0 52 52;"><path style="fill:currentColor;" d="M38.853,5.324L38.853,5.324c-7.098-7.098-18.607-7.098-25.706,0h0
+                <h4 class="u-text u-text-19">{{datos.uDesde}}</h4><span class="u-icon u-text-palette-2-base u-icon-19"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 52 52" style=""><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-2fca"></use></svg><svg class="u-svg-content" viewBox="0 0 52 52" x="0px" y="0px" id="svg-2fca" style="enable-background:new 0 0 52 52;"><path style="fill:currentColor;" d="M38.853,5.324L38.853,5.324c-7.098-7.098-18.607-7.098-25.706,0h0
 C6.751,11.72,6.031,23.763,11.459,31L26,52l14.541-21C45.969,23.763,45.249,11.72,38.853,5.324z M26.177,24c-3.314,0-6-2.686-6-6
 s2.686-6,6-6s6,2.686,6,6S29.491,24,26.177,24z"></path></svg></span>
-                  <h4 class="u-text u-text-20">{{datos.uHasta}}</h4>
-                  <h4 class="u-text u-text-21">Cantidad de km</h4><span class="u-icon u-icon-20"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 59 59" style=""><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-831b"></use></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" xml:space="preserve" class="u-svg-content" viewBox="0 0 59 59" x="0px" y="0px" id="svg-831b" style="enable-background:new 0 0 59 59;"><path style="fill:#ED8A19;" d="M45.07,59c-0.553,0-1-0.447-1-1s0.447-1,1-1H47c0.553,0,1.035,0.447,1.035,0.999
+                <h4 class="u-text u-text-20">{{datos.uHasta}}</h4>
+                <h4 class="u-text u-text-21">{{datos.hora}}:{{datos.minutos}} </h4><span class="u-icon u-icon-20"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 59 59" style=""><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-831b"></use></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" xml:space="preserve" class="u-svg-content" viewBox="0 0 59 59" x="0px" y="0px" id="svg-831b" style="enable-background:new 0 0 59 59;"><path style="fill:#ED8A19;" d="M45.07,59c-0.553,0-1-0.447-1-1s0.447-1,1-1H47c0.553,0,1.035,0.447,1.035,0.999
 c0,0.553-0.412,1-0.965,1v-1l-0.029,1L45.07,59z M41.07,59h-2c-0.553,0-1-0.447-1-1s0.447-1,1-1h2c0.553,0,1,0.447,1,1
 S41.623,59,41.07,59z M35.07,59h-2c-0.553,0-1-0.447-1-1s0.447-1,1-1h2c0.553,0,1,0.447,1,1S35.623,59,35.07,59z M29.07,59h-2
 c-0.553,0-1-0.447-1-1s0.447-1,1-1h2c0.553,0,1,0.447,1,1S29.623,59,29.07,59z M23.07,59h-2c-0.553,0-1-0.447-1-1s0.447-1,1-1h2
@@ -51,7 +48,7 @@ c-0.533,0-0.977-0.421-0.998-0.959c-0.022-0.552,0.406-1.018,0.958-1.04C34.829,39.
 s-0.447,1-1,1l-1.959,0.004C34.812,41.005,34.798,41.005,34.784,41.005z M53,41h-0.215c-0.553,0-1-0.447-1-1s0.447-1,1-1H53
 c0.469,0,0.923-0.091,1.352-0.271c0.505-0.215,1.095,0.025,1.309,0.535c0.214,0.509-0.025,1.095-0.535,1.309
 C54.451,40.856,53.736,41,53,41z M48.785,41h-2c-0.553,0-1-0.447-1-1s0.447-1,1-1h2c0.553,0,1,0.447,1,1S49.338,41,48.785,41z
- M42.785,41h-2c-0.553,0-1-0.447-1-1s0.447-1,1-1h2c0.553,0,1,0.447,1,1S43.338,41,42.785,41z M57.318,37.77
+M42.785,41h-2c-0.553,0-1-0.447-1-1s0.447-1,1-1h2c0.553,0,1,0.447,1,1S43.338,41,42.785,41z M57.318,37.77
 c-0.093,0-0.188-0.013-0.281-0.04c-0.53-0.155-0.834-0.711-0.679-1.241c0.094-0.32,0.142-0.652,0.142-0.988
 c0.002-0.192-0.014-0.374-0.042-0.552c-0.088-0.545,0.283-1.059,0.829-1.146c0.543-0.09,1.058,0.283,1.146,0.829
 c0.047,0.293,0.069,0.588,0.067,0.876c0,0.519-0.074,1.04-0.222,1.543C58.15,37.487,57.751,37.77,57.318,37.77z M55.25,32.604
@@ -72,29 +69,32 @@ L47.753,22l5.716-6.444C56.627,11.998,56.627,6.228,53.47,2.669z M48,13c-2.485,0-4
 s4.5,2.015,4.5,4.5S50.485,13,48,13z"></path><path style="fill:#3083C9;" d="M19.278,28.64c-4.296-4.853-11.261-4.853-15.556,0h0c-4.296,4.853-4.296,12.721,0,17.573L11.5,55
 l7.778-8.787C23.574,41.36,23.574,33.492,19.278,28.64z M11.5,41c-2.761,0-5-2.239-5-5s2.239-5,5-5s5,2.239,5,5S14.261,41,11.5,41z"></path></svg></span><span class="u-icon u-icon-21"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 58 58" style=""><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-5d6e"></use></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" xml:space="preserve" class="u-svg-content" viewBox="0 0 58 58" x="0px" y="0px" id="svg-5d6e" style="enable-background:new 0 0 58 58;"><circle style="fill:#E7ECED;" cx="29" cy="29" r="29"></circle><path style="fill:#424A60;" d="M29,4c13.785,0,25,11.215,25,25S42.785,54,29,54S4,42.785,4,29S15.215,4,29,4 M29,0
 C12.984,0,0,12.984,0,29s12.984,29,29,29s29-12.984,29-29S45.016,0,29,0L29,0z"></path><g><path style="fill:#7383BF;" d="M29,5.879c-0.552,0-1,0.447-1,1v1c0,0.553,0.448,1,1,1s1-0.447,1-1v-1
-  C30,6.326,29.552,5.879,29,5.879z"></path><path style="fill:#7383BF;" d="M29,48.879c-0.552,0-1,0.447-1,1v1c0,0.553,0.448,1,1,1s1-0.447,1-1v-1
-  C30,49.326,29.552,48.879,29,48.879z"></path><path style="fill:#7383BF;" d="M51,27.879h-1c-0.552,0-1,0.447-1,1s0.448,1,1,1h1c0.552,0,1-0.447,1-1S51.552,27.879,51,27.879z"></path><path style="fill:#7383BF;" d="M8,27.879H7c-0.552,0-1,0.447-1,1s0.448,1,1,1h1c0.552,0,1-0.447,1-1S8.552,27.879,8,27.879z"></path><path style="fill:#7383BF;" d="M43.849,12.615l-0.707,0.707c-0.391,0.391-0.391,1.023,0,1.414c0.195,0.195,0.451,0.293,0.707,0.293
-  s0.512-0.098,0.707-0.293l0.707-0.707c0.391-0.391,0.391-1.023,0-1.414S44.24,12.224,43.849,12.615z"></path><path style="fill:#7383BF;" d="M13.444,43.021l-0.707,0.707c-0.391,0.391-0.391,1.023,0,1.414c0.195,0.195,0.451,0.293,0.707,0.293
-  s0.512-0.098,0.707-0.293l0.707-0.707c0.391-0.391,0.391-1.023,0-1.414S13.834,42.631,13.444,43.021z"></path><path style="fill:#7383BF;" d="M44.556,43.021c-0.391-0.391-1.023-0.391-1.414,0s-0.391,1.023,0,1.414l0.707,0.707
-  c0.195,0.195,0.451,0.293,0.707,0.293s0.512-0.098,0.707-0.293c0.391-0.391,0.391-1.023,0-1.414L44.556,43.021z"></path><path style="fill:#7383BF;" d="M14.151,12.615c-0.391-0.391-1.023-0.391-1.414,0s-0.391,1.023,0,1.414l0.707,0.707
-  c0.195,0.195,0.451,0.293,0.707,0.293s0.512-0.098,0.707-0.293c0.391-0.391,0.391-1.023,0-1.414L14.151,12.615z"></path>
+C30,6.326,29.552,5.879,29,5.879z"></path><path style="fill:#7383BF;" d="M29,48.879c-0.552,0-1,0.447-1,1v1c0,0.553,0.448,1,1,1s1-0.447,1-1v-1
+C30,49.326,29.552,48.879,29,48.879z"></path><path style="fill:#7383BF;" d="M51,27.879h-1c-0.552,0-1,0.447-1,1s0.448,1,1,1h1c0.552,0,1-0.447,1-1S51.552,27.879,51,27.879z"></path><path style="fill:#7383BF;" d="M8,27.879H7c-0.552,0-1,0.447-1,1s0.448,1,1,1h1c0.552,0,1-0.447,1-1S8.552,27.879,8,27.879z"></path><path style="fill:#7383BF;" d="M43.849,12.615l-0.707,0.707c-0.391,0.391-0.391,1.023,0,1.414c0.195,0.195,0.451,0.293,0.707,0.293
+s0.512-0.098,0.707-0.293l0.707-0.707c0.391-0.391,0.391-1.023,0-1.414S44.24,12.224,43.849,12.615z"></path><path style="fill:#7383BF;" d="M13.444,43.021l-0.707,0.707c-0.391,0.391-0.391,1.023,0,1.414c0.195,0.195,0.451,0.293,0.707,0.293
+s0.512-0.098,0.707-0.293l0.707-0.707c0.391-0.391,0.391-1.023,0-1.414S13.834,42.631,13.444,43.021z"></path><path style="fill:#7383BF;" d="M44.556,43.021c-0.391-0.391-1.023-0.391-1.414,0s-0.391,1.023,0,1.414l0.707,0.707
+c0.195,0.195,0.451,0.293,0.707,0.293s0.512-0.098,0.707-0.293c0.391-0.391,0.391-1.023,0-1.414L44.556,43.021z"></path><path style="fill:#7383BF;" d="M14.151,12.615c-0.391-0.391-1.023-0.391-1.414,0s-0.391,1.023,0,1.414l0.707,0.707
+c0.195,0.195,0.451,0.293,0.707,0.293s0.512-0.098,0.707-0.293c0.391-0.391,0.391-1.023,0-1.414L14.151,12.615z"></path>
 </g><line style="fill:none;stroke:#424A60;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" x1="26" y1="28.879" x2="18" y2="28.879"></line><line style="fill:none;stroke:#424A60;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" x1="29" y1="25.879" x2="29" y2="14.879"></line><circle style="fill:none;stroke:#424A60;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" cx="29" cy="28.879" r="3"></circle></svg></span>
-                  <h4 class="u-text u-text-22">{{datos.fecha}}</h4><span class="u-file-icon u-icon u-icon-22"><img src="../../../../../assets/imagesFletesDis/2801850.png" alt=""></span>
-                  <h4 class="u-text u-text-23">{{datos.cargamento}}</h4><span class="u-file-icon u-icon u-icon-23"><img src="../../../../../assets/imagesFletesDis/8452029.png" alt=""></span>
-                  <h4 class="u-text u-text-24">{{datos.ayudantes}}</h4><span class="u-file-icon u-icon u-icon-24"><img src="../../../../../assets/imagesFletesDis/1679557.png" alt=""></span>
-                  <h4 class="u-text u-text-25">Ayudantes</h4>
-                  <input  type="submit" value="submit" class="u-form-control-hidden">
-                </div>
+                <h4 class="u-text u-text-22">{{datos.fecha}}</h4><span class="u-file-icon u-icon u-icon-22"><img src="../../../../../assets/imagesFletesDis/2801850.png" alt=""></span>
+                <h4 class="u-text u-text-23">{{datos.cargamento}}</h4><span class="u-file-icon u-icon u-icon-23"><img src="../../../../../assets/imagesFletesDis/8452029.png" alt=""></span>
+                <h4 class="u-text u-text-24">{{datos.ayudantes}}</h4><span class="u-file-icon u-icon u-icon-24"><img src="../../../../../assets/imagesFletesDis/1679557.png" alt=""></span>
+                <h4 class="u-text u-text-25"  >{{datos.tipoVehiculo}}</h4>
+                <!-- (click)="editUser(datos)" -->
+                <br>
+                
+                <input [(ngModel)]="rta.precio"  style="width: 50%; margin-left: 25%;" type="text" class="form-control" placeholder="Precio">
+                <!-- <a (click)="editUser(datos)" class="u-border-2 u-border-grey-75 u-btn u-btn-round u-button-style u-custom-color-1 u-hover-custom-color-3 u-radius-50 u-btn-3">editar</a> -->
               </div>
-              <a (click)="enviar()"  class="u-border-2 u-border-grey-75 u-btn u-btn-round u-button-style u-custom-color-1 u-hover-custom-color-3 u-radius-50 u-btn-3">Botón</a>
             </div>
+            <a (click)="editUser(datos)" class="u-border-2 u-border-grey-75 u-btn u-btn-round u-button-style u-custom-color-1 u-hover-custom-color-3 u-radius-50 u-btn-3">Enviar</a>
           </div>
         </div>
       </div>
-      <div class="u-list u-list-2">
-        <div class="u-repeater u-repeater-2"></div>
-      </div>
     </div>
-  </section>
-
-</ion-content>
+    <div class="u-list u-list-2">
+      <div class="u-repeater u-repeater-2"></div>
+    </div>
+  </div>
+</section>
+  

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoadingController, ToastController } from '@ionic/angular';
-import { ayudantes, DatosFlete, hora, minutos, Pasos, tipoVehiculo, UserU } from 'src/app/folder/models/models';
+import { ayudantes, DatosFlete, hora, minutos, tipoVehiculo, UserU } from 'src/app/folder/models/models';
 import { AuthService } from 'src/app/folder/services/auth.service';
 import { FirestoreService } from 'src/app/folder/services/firestore.service';
 
@@ -30,9 +30,9 @@ export class Paso2Component implements OnInit {
     tipoVehiculo:  null,
     ayudantes:  null ,
     uid:  null ,
+    // respuesta: null,
     id: '',
     precio: null,
-
    };
 
   
@@ -75,6 +75,7 @@ this.db.createDoc<DatosFlete>(data, enlace, data.uid).then((_) =>{
       ayudantes:  null ,
       uid:  null ,
       precio: null,
+      // respuesta: null,
       id: res.uid,
      };
 } );

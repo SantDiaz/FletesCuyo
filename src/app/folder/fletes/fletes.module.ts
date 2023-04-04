@@ -11,6 +11,7 @@ import { ComponentsModule } from 'src/app/components/components.module';
 import { PasosModule } from './pasos/pasos.module';
 import { MapsModule } from '../maps/maps.module';
 import { RegisterModule } from '../register/register.module';
+import { ChatModule } from '../chat/chat.module';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import { RegisterModule } from '../register/register.module';
     PasosModule,
     MapsModule,
     RegisterModule,
+    ChatModule,
     
   ],
   declarations: [FletesPage],

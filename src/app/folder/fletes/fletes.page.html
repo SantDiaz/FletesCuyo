@@ -1,7 +1,10 @@
 <app-header></app-header>
 
 <ion-content class="background2">
-<app-paso2></app-paso2>
+    
+<app-card  *ngIf="login == true && rol == 'Fletero'"> </app-card>
+
+<app-paso2 *ngIf="login == true && rol == 'Usuario'"></app-paso2>
 </ion-content>
 
 
