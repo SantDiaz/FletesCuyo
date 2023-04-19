@@ -47,27 +47,27 @@ getDatosUser(uid: string) {
   this.db.getDoc<UserF>(path, id).subscribe( res => {
     if (res ) {
       this.DatosF = res;
-      console.log('id personal -> ', uid);
-      console.log('trae esto-->', res );
-      console.log('datos vehicular', this.DatosV );
+      // console.log('id personal -> ', uid);
+      // console.log('trae esto-->', res );
+      // console.log('datos vehicular', this.DatosV );
       }
       else{
-        console.log('Tiene errores -> ');
+        // console.log('Tiene errores -> ');
       }
   })
 }
 
 getDatosVehicular(uid: string) {
-  const path = 'DatosVehicular';
+  const path = `Fleteros/${uid}/DatosVehicular`;
   const id = uid;
   
   this.db.getDoc<datosVehiculo>(path, id).subscribe( res => {
     if (res ) {
       this.DatosV = res;
-      console.log('trae esto vehicular-->', res );
+      // console.log('trae esto vehicular-->', res );
       }
       else{
-        console.log('Tiene errores -> ');
+        // console.log('Tiene errores -> ');
       }
   })
 }

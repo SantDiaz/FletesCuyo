@@ -52,14 +52,7 @@ export interface UserU {
     tipoVehiculo: 'Camioneta' | 'Camion' | 'Utilitario' ;
     ayudantes:  'Sin ayudantes' | '+1 Ayudantes' | '+2 Ayudantes'  | '+3 Ayudantes' ;
     uid: string;
-    precio: {
-      id: string;
-      idFletero: string;
-      nombre: string;
-      apellido: string;
-      precio: number; 
-      mensaje: string;
-    };
+    precio: number;
     }
 
   export interface respuesta {
@@ -73,11 +66,13 @@ export interface UserU {
 
 
 
+export const provincias = [ 'Buenos Aires', 'Catamarca', 'Chaco', 'Chubut', 'Córdoba', 'Corrientes', 'Entre Ríos', 'Formosa', 'Jujuy',
+ 'La Pampa', 'La Rioja', 'Mendoza', 'Mendoza', 'Misiones', 'Neuquén', 'Río Negro', 'Salta', 'San Juan', 'Santa Cruz', 'Santa Fe',
+  'Santiago del Estero', 'Tierra del Fuego', 'Tucumán'];
 
   export const hora = ['5 ' , '6 ' , '7 ',' 8 ' , '9 ' , '10 ',' 11 ' , '12 ' , '13 ',' 14 ' , '15 ' , '16 ',' 17 ' ,'18 ' , '19 ',' 20 ' , '21 ' , '22 ',' 23 '];
   export const minutos = ['00' , '15' , '30', '45'];
   export const tipoVehiculo = ['Camioneta' , 'Camion' , 'Utilitario'];
   export const ayudantes = ['Sin ayudantes' , '+1' , '+2',  '+3 '];
 export const datosVehiculo =  []
-
 

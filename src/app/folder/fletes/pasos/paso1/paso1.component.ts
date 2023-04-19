@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoadingController, ToastController } from '@ionic/angular';
-import { DatosFlete, hora, minutos, UserU } from 'src/app/folder/models/models';
+import { ayudantes, DatosFlete, hora, minutos, provincias, tipoVehiculo, UserU } from 'src/app/folder/models/models';
 import { AuthService } from 'src/app/folder/services/auth.service';
 import { FirestoreService } from 'src/app/folder/services/firestore.service';
+import { InteractionService } from 'src/app/folder/services/interaction.service';
 
 @Component({
   selector: 'app-paso1',
@@ -15,7 +16,9 @@ export class Paso1Component implements OnInit {
 registerU: UserU; 
 loading: any;
 data:any;
-
+provincia = provincias;
+vehiculos = tipoVehiculo;
+ayudante = ayudantes;
 horas = hora
 minuto = minutos
 
@@ -40,6 +43,7 @@ pasosFlete: DatosFlete={
 
 constructor(private routes: Router,
   private db: FirestoreService,
+  private interaction: InteractionService,
   private authS: AuthService, 
   public toastController: ToastController,
   private loadingCtrl: LoadingController, ) { }
@@ -47,53 +51,71 @@ constructor(private routes: Router,
   ngOnInit() {}
 
 
+  enviar2(){
 
-//   enviar(){
-//     this.authS.stateUser<UserU>().subscribe( res  => {
-//       if (res) {
-//         this.presentLoading();
-        
-//         const data = this.pasosFlete;
-//         const enlace = '/PedirFlete3';
-//         data.uid = this.db.createId();
-//         this.db.createDoc<DatosFlete>(data, enlace, data.id).then((_) =>{
-//             this.presentToast('Guardado con exito', 2000);
-//             this.loading.dismiss();
-//                 this.pasosFlete={
-//                     fecha: null,
-//                     hora: null,
-//                     uDesde: '',
-//                     uHasta: '',
-//                     minutos: null,
-//                     cargamento: '',
-//                     tipoVehiculo:  null,
-//                     ayudantes:  null ,
-//                     uid:  null ,
-//                     id: res.uid,
-//                   };
-//              this.routes.navigate(['/paso2'])
-//         } );
 
-//       } else {
-//          this.routes.navigate(['/login'])
-//       }   
-//   }) 
-// }   
+
+    this.authS.stateUser<UserU>().subscribe( res  => {
+  if (res) {
+    const path = 'Usuarios';
+    this.db.getDoc<UserU>(path, res.uid ).subscribe( res2 => {
+      console.log('datos', res2);
+    
+    this.interaction.presentLoading;
+    const data = this.pasosFlete;
+    data.uid = this.db.createId();
+    data.id = res.uid;
+    console.log("estos:", data.uid);
+    console.log("estos:", data.id);
+
+// const enlace = `Usuarios/${res.uid}/Pedidos`;
+const enlace = `PedirFlete3`;
+
+this.db.createDoc<DatosFlete>(data, enlace, data.uid).then((_) =>{
+    this.interaction.presentToast('Enviado con exito');
+    this.interaction.closeLoading;
+    this.routes.navigate(['/home']);
+    this.pasosFlete={
+      // rta: null,
+      fecha: null,
+      hora: null,
+      minutos: null,
+      uDesde: '',
+      uHasta: '',
+      cargamento: '',
+      tipoVehiculo:  null,
+      ayudantes:  null ,
+      uid:  null ,
+      id: res.uid,
+      precio: null,
+      // rta: null,
+     };
+} );
+})
+}   
+}) 
+} 
 
 
   enviar(){
         this.authS.stateUser<UserU>().subscribe( res  => {
       if (res) {
         
-        this.presentLoading();
+        
+        this.interaction.presentLoading;
         const data = this.pasosFlete;
         data.uid = this.db.createId();
         data.id = res.uid;
-    const enlace = "PedirFlete3"
+        console.log("estos:", data.uid);
+        console.log("estos:", data.id);
+
+    // const enlace = `Usuarios/${res.uid}/Pedidos`;
+    const enlace = `PedirFlete3`;
+    
     this.db.createDoc<DatosFlete>(data, enlace, data.uid).then((_) =>{
-        this.presentToast('Guardado con exito', 2000);
-        this.loading.dismiss();
-        this.routes.navigate(['/paso2']);
+        this.interaction.presentToast('Enviado con exito');
+        this.interaction.closeLoading;
+        this.routes.navigate(['/home']);
         this.pasosFlete={
           // rta: null,
           fecha: null,

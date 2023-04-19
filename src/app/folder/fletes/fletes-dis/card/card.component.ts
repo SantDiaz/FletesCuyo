@@ -16,6 +16,7 @@ export class CardComponent implements OnInit {
 
   loading: any;
   fletes = [];
+  datoss : UserU;
   DatosV: datosVehiculo;
   pasosFlete: DatosFlete[]  = [] 
   nuevoDato: DatosFlete;
@@ -49,36 +50,46 @@ export class CardComponent implements OnInit {
   constructor(
     private auth: AuthService,
     private router: Router,
-    private interacion : InteractionService,
+    private interaction : InteractionService,
     private db: FirestoreService,
     private database: NuevoService,
     public toastController: ToastController,
     private loadingCtrl: LoadingController, 
   ) {   }
 
+  // const path = 'Fleteros';
+  // this.db.getDoc<UserF>(path, res.uid).subscribe( res2 => {
+  //   console.log("res", res);
+    
+  // }
 
 
-  ngOnInit() {
-
-// parte 2
-    this.database.getAll('PedirFlete3').then(res =>{
-      res.subscribe(resRef=>{
+    ngOnInit() {
+      // const data = this.datoss;
+      // console.log(data.uid)
+      // const path = 'Usuarios';
+      // this.db.getDoc<UserU>(path, data.uid).subscribe( res2 => {
+      //   console.log('datos', res2);
   
+    this.database.getAll(`PedirFlete3`).then(res =>{
+      res.subscribe(resRef=>{
+         
         this.fletes = resRef.map(pasosRef =>{
           let pasosFlete = pasosRef.payload.doc.data();
           pasosFlete['id'] = pasosRef.payload.doc.id;
           return pasosFlete;
         })
-          console.log(this.fletes);
+        console.log(this.fletes);
       })
-    })
-  }
-
-
+    // })
+  }) 
+  
+      }
 
   
   
-  async  editUser(DatosFletes: DatosFlete, rta: respuesta){
+  async  editUser(DatosFletes: DatosFlete){
+    this.interaction.presentLoading;
     this.auth.stateUser().subscribe( res => {
 
       if (res) {
@@ -89,7 +100,7 @@ export class CardComponent implements OnInit {
           const rta22 = this.rta; 
           // console.log('id Fletero:', res.uid)
           // console.log('id Usuario: ', nuevoDato.id);
-          // console.log('rta: ', rta22);
+          console.log('rta: ', rta22);
         const enlace = `PedirFlete3/${nuevoDato.id}/Respuesta`;
         rta22.nombre = res2.nombre;
         rta22.apellido = res2.apellido;
@@ -97,17 +108,16 @@ export class CardComponent implements OnInit {
         rta22.idFletero = res.uid;
       
       this.db.createDoc<respuesta>(rta22, enlace,  res.uid ).then((_) =>{
-        this.presentToast('Guardado con exito', 2000);
-        // this.loading.dismiss();
+        this.interaction.presentToast('Enviado con exito');
+        this.interaction.closeLoading;
             this.rta={
               id: nuevoDato.id,
               idFletero: res.uid,
               nombre:  null, 
               apellido:  null, 
-              precio: null, 
+              precio: rta22.precio, 
               mensaje: '',
         };
-         return rta;
         } );
       });
     } 
@@ -116,41 +126,15 @@ export class CardComponent implements OnInit {
 
 
 
-// El VERDADERO
-// async  editUser(DatosFletes: DatosFlete, rta: respuesta){
-//     this.auth.stateUser().subscribe( res => {
-//       if (res) {
-//           const nuevoDato = DatosFletes;
-//           console.log('id Fletero:', res.uid)
-//           console.log('id Usuario: ', nuevoDato.id);
-//           const rta22 = this.rta;
-      
-//           console.log('rta: ', rta22);
-//           const enlace = `PedirFlete3/${nuevoDato.id}/Respuesta`;
-      
-//           this.db.createDoc<respuesta>(rta22, enlace,  res.uid ).then((_) =>{
-//               this.presentToast('Guardado con exito', 2000);
-//               // this.loading.dismiss();
-//               this.rta={
-//                   id: nuevoDato.id,
-//                   idFletero: res.uid,
-//                   nombre: '',
-//                   apellido: '', 
-//                   precio: null, 
-//                   mensaje: '',
-//                  };
-//                  return rta;
-//             } );
-//             } 
-// })
-// }
-
-
-
-
-
-
-
+  
+async  deleteUser(DatosFletes: DatosFlete){
+  const res = await this.interaction.presentAlert('Alerta', '¿Seguro que deseas eliminar?');
+  if (res){
+    const path = 'PedirFlete3';
+    await this.db.deleteDoc(path, DatosFletes.uid);
+    this.interaction.presentToast('Eliminado con exito');
+  }
+}
 
 
 

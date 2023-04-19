@@ -31,6 +31,7 @@ import { HomeUserComponent } from 'src/app/components/ComponentesUsuario/home-us
 import { FletesDisComponent } from './fletes-dis/fletes-dis.component';
 import { CardComponent } from './fletes-dis/card/card.component';
 import { ProfileUsuarioComponent } from 'src/app/components/ComponentesUsuario/profile-usuario/profile-usuario.component';
+import { PreciosComponent } from './pasos/precios/precios.component';
 
 
 
@@ -54,14 +55,14 @@ const routes: Routes = [
     path: 'paso1',
     component: Paso1Component
   },
-  {
-    path: 'paso2',
-    component: Paso2Component
-  },
-  {
-    path: 'paso3',
-    component: Paso3Component
-  },
+  // {
+  //   path: 'paso2',
+  //   component: Paso2Component
+  // },
+  // {
+  //   path: 'paso3',
+  //   component: Paso3Component
+  // },
   {
     path: 'maps',
     component: MapScreenComponent
@@ -145,6 +146,10 @@ const routes: Routes = [
   {
     path: 'card',
     component: CardComponent, canActivate: [AngularFireAuthGuard]
+  },
+  {
+    path: 'precios',
+    component: PreciosComponent, canActivate: [AngularFireAuthGuard]
   },
   
   

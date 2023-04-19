@@ -48,7 +48,7 @@ vehiculo = tipoVehiculo;
         // console.log('la respuesta es:', res);
         this.presentLoading();
         const data = this.Datovehicular;
-        const enlace = '/DatosVehicular';
+        const enlace = `/Fleteros/${res.uid}/DatosVehicular`;
         const id = res.uid;
         // console.log('id es:', id);
         this.db.createDoc<datosVehiculo>(data, enlace, id).then((_) =>{

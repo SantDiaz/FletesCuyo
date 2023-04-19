@@ -21,6 +21,13 @@ export class NuevoService {
       }
     }
     
+    async getAll2<tipo>(collection){
+      try{
+        return await this.firestore.collection(collection).snapshotChanges();
+      }catch(err) {
+        console.log("error", err);
+      }
+    }
     async getAll(collection){
       try{
         return await this.firestore.collection(collection).snapshotChanges();

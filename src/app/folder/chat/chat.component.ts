@@ -111,7 +111,7 @@ this.db.createDoc<respuesta>(data, enlace, data.id).then((_) =>{
 }   
 }) 
 } 
-
+z
   obtenerbyId(id){
     this.database.getById('PedirFlete3', id).then(res =>{
       res.subscribe(docRef=>{
