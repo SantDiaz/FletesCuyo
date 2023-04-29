@@ -24,6 +24,8 @@ export class Paso2Component implements OnInit {
   
 
   pasosFlete: DatosFlete={
+    nombre: '',
+    apellido: '',
     fecha: null,
     hora: null,
     minutos: null,
@@ -72,6 +74,8 @@ this.nuevo.update( enlace, data.uid, data).then((_) =>{
     this.interaction.closeLoading();
     this.routes.navigate(['/home']);
     this.pasosFlete={
+      nombre: '',
+      apellido: '',
       fecha: null,
       hora: null,
       minutos: null,

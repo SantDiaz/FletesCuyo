@@ -13,13 +13,16 @@ import { NuevoService } from 'src/app/folder/services/nuevo.service';
   styleUrls: ['./precios.component.scss'],
 })
 export class PreciosComponent implements OnInit {
-  
+
+  login: boolean = false;
+  rol: 'Usuario' | 'Fletero'| 'Admin' = null;
   precios = []
+  precios2 = []
   DatosF: UserF
   datosFl: DatosFlete
   datos: respuesta;
   rta2: respuesta;
-
+  isModalOpen = false;
 
   constructor(
           private auth: AuthService,
@@ -33,14 +36,16 @@ export class PreciosComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    let datosFl: DatosFlete      
+
+    
+
+  
     this.auth.stateUser<UserU>().subscribe( res  => {
 
       if (res) {
-       
-        this.database.getAll(`PedirFlete3`).then(res =>{
+        this.login = true;
+        this.database.getAll(`PedirFlete3/${res.uid}/Respuesta`).then(res =>{
           res.subscribe(resRef=>{
-             
             this.precios = resRef.map(pasosRef =>{
               let pasosFlete = pasosRef.payload.doc.data();
               pasosFlete['id'] = pasosRef.payload.doc.id;
@@ -51,7 +56,7 @@ export class PreciosComponent implements OnInit {
       }) 
       
       } else {
-        // this.login = false;
+        this.login = false;
          this.router.navigate(['/login'])
         
       }   
@@ -63,19 +68,32 @@ export class PreciosComponent implements OnInit {
 
 
 
+async verPedidos(isOpen: boolean, precios2:DatosFlete){
+ 
+  this.isModalOpen = isOpen;
+  this.auth.stateUser<UserU>().subscribe( res  => {
+    const path = `PedirFlete3`
+    if (res) {
+      this.db.getDoc<DatosFlete>(path, res.uid).subscribe(res2 => { 
+        // res2 = DatosFletes;
+        precios2 = res2
+        console.log('pedido:', res2);
+      })
+    } 
+  })
+      
+}   
 
 
-
-  async getDatosFlete(DatosFletes: DatosFlete, rta: respuesta, user: UserF) {
+  async getDatosFlete(DatosFletes: DatosFlete) {
     const nuevoDato = DatosFletes;
-    const rtaa = rta;
-    const users = user; 
+
     
     console.log(' resuid -> ',nuevoDato.id);
     // console.log(' useruid -> ',users.uid);
     
     
-    const path = `PedirFlete3/${nuevoDato.id}/Respuesta`;
+    const path = `PedirFlete3/`;
     this.db.getCollection<respuesta>(path).subscribe( res => {
       if (res ) {
         //  res = this.precios ;
@@ -104,15 +122,9 @@ export class PreciosComponent implements OnInit {
   }
 
 
-
-
-
-
-
-
-
-
+  cerrar(isOpen: boolean) {
+    this.isModalOpen = isOpen;
+  }
 
 }
-
 

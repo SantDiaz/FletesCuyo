@@ -14,6 +14,8 @@ import { NuevoService } from 'src/app/folder/services/nuevo.service';
 })
 export class CardComponent implements OnInit {
 
+  login: boolean = false;
+  rol: 'Usuario' | 'Fletero'| 'Admin' = null;
   loading: any;
   fletes = [];
   datoss : UserU;
@@ -21,6 +23,8 @@ export class CardComponent implements OnInit {
   pasosFlete: DatosFlete[]  = [] 
   nuevoDato: DatosFlete;
   pasosFlete2: DatosFlete={
+    nombre: '',
+    apellido: '',
     fecha: null,
     hora: null,
     minutos: null,
@@ -65,12 +69,9 @@ export class CardComponent implements OnInit {
 
 
     ngOnInit() {
-      // const data = this.datoss;
-      // console.log(data.uid)
-      // const path = 'Usuarios';
-      // this.db.getDoc<UserU>(path, data.uid).subscribe( res2 => {
-      //   console.log('datos', res2);
-  
+
+      this.auth.stateUser<UserU>().subscribe( res => {
+        this.login = true;
     this.database.getAll(`PedirFlete3`).then(res =>{
       res.subscribe(resRef=>{
          
@@ -81,7 +82,7 @@ export class CardComponent implements OnInit {
         })
         console.log(this.fletes);
       })
-    // })
+    })
   }) 
   
       }
@@ -92,7 +93,7 @@ export class CardComponent implements OnInit {
     this.interaction.presentLoading;
     this.auth.stateUser().subscribe( res => {
 
-      if (res) {
+      if (res && this.login==true) {
         const path = 'Fleteros';
         this.db.getDoc<UserF>(path, res.uid).subscribe( res2 => {
 
@@ -113,9 +114,10 @@ export class CardComponent implements OnInit {
             this.rta={
               id: nuevoDato.id,
               idFletero: res.uid,
-              nombre:  null, 
-              apellido:  null, 
+              nombre:  '', 
+              apellido:  '', 
               precio: rta22.precio, 
+              // precio: null,
               mensaje: '',
         };
         } );

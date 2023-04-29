@@ -36,7 +36,8 @@ export class ChatComponent implements OnInit {
 
 
   pasosFlete2: DatosFlete={
-    
+    nombre: '',
+    apellido: '',
     fecha: null,
     hora: null,
     minutos: null,

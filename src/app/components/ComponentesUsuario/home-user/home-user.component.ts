@@ -14,6 +14,9 @@ export class HomeUserComponent implements OnInit {
   
     ngOnInit() {}
   
+    verRespuestas(){
+      this.router.navigate(['/precios']);
+    }
   
     pedirF(){
         this.router.navigate(['/paso1']);
