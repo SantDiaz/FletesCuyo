@@ -66,6 +66,14 @@ export interface UserU {
     mensaje: string;
   }
 
+  export interface Opiniones{
+    id: string;
+    nombre: string
+    apellido: string
+    mensaje: string
+    perfil: 'Usuario' | 'Fletero';
+  }
+
 
 
 export const provincias = [ 'Buenos Aires', 'Catamarca', 'Chaco', 'Chubut', 'Córdoba', 'Corrientes', 'Entre Ríos', 'Formosa', 'Jujuy',

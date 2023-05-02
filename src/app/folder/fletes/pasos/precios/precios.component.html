@@ -9,7 +9,7 @@
             <div class="u-container-layout u-similar-container u-valign-top-sm u-valign-top-xs u-container-layout-1">
               <div  class="u-container-style u-custom-color-2 u-group u-group-1">
                 <div class="u-container-layout u-container-layout-2">
-                  <h4 class="u-text u-text-1">{{datos.nombre}} {{ datos.apellido}}</h4><span class="u-icon u-icon-1"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 53 53" style=""><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-4d64"></use></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" xml:space="preserve" class="u-svg-content" viewBox="0 0 53 53" x="0px" y="0px" id="svg-4d64" style="enable-background:new 0 0 53 53;"><path style="fill:#E7ECED;" d="M18.613,41.552l-7.907,4.313c-0.464,0.253-0.881,0.564-1.269,0.903C14.047,50.655,19.998,53,26.5,53
+                  <h4 class="u-text u-text-1">{{datos.nombre}} {{datos.apellido}}</h4><span class="u-icon u-icon-1"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 53 53" style=""><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-4d64"></use></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" xml:space="preserve" class="u-svg-content" viewBox="0 0 53 53" x="0px" y="0px" id="svg-4d64" style="enable-background:new 0 0 53 53;"><path style="fill:#E7ECED;" d="M18.613,41.552l-7.907,4.313c-0.464,0.253-0.881,0.564-1.269,0.903C14.047,50.655,19.998,53,26.5,53
 c6.454,0,12.367-2.31,16.964-6.144c-0.424-0.358-0.884-0.68-1.394-0.934l-8.467-4.233c-1.094-0.547-1.785-1.665-1.785-2.888v-3.322
 c0.238-0.271,0.51-0.619,0.801-1.03c1.154-1.63,2.027-3.423,2.632-5.304c1.086-0.335,1.886-1.338,1.886-2.53v-3.546
 c0-0.78-0.347-1.477-0.886-1.965v-5.126c0,0,1.053-7.977-9.75-7.977s-9.75,7.977-9.75,7.977v5.126
@@ -28,20 +28,27 @@ C20.296,39.899,19.65,40.986,18.613,41.552z"></path><g><path style="fill:#556080;
 <!-- VerPedido -->
 
                   <ion-button  expand="block" (click)="verPedidos(true)" class="u-active-none u-border-2 u-border-active-palette-2-dark-1 u-border-hover-palette-2-base u-border-no-left u-border-no-right u-border-no-top u-border-palette-1-base u-btn u-button-style u-hover-none u-none u-text-hover-palette-2-base u-text-palette-1-base u-btn-1">Ver Pedido</ion-button>
-                  <ion-modal [isOpen]="isModalOpen">
-                    <ng-template>
+                  <ion-modal  [isOpen]="isModalOpen">
+                    <ng-template >
                       <ion-header>
                         <ion-toolbar>
-                          <ion-title>Modal</ion-title>
+                          <ion-title>Comprobante</ion-title>
                           <ion-buttons slot="end">
-                            <ion-button (click)="setOpen(false)">Close</ion-button>
+                            <ion-button (click)="cerrar(false)">Cerrar</ion-button>
                           </ion-buttons>
                         </ion-toolbar>
                       </ion-header>
-                      <ion-content *ngFor="let datos of precios2" class="ion-padding">
+                      <ion-content style="background-color: antiquewhite;" *ngIf="datos2" class="ion-padding">
                         <p>
-                          {{datos.nombre}} {{datos.apellido}}
+                          {{datos2.nombre}} {{datos2.apellido}}
                         </p>
+                        <p>Desde: {{datos2.uDesde}}</p>
+                        <p>Hasta: {{datos2.uHasta}}</p>
+                        <p>Fecha: {{datos2.fecha}}</p>
+                        <p>Hora: {{datos2.hora}}:{{datos2.minutos}}</p>
+                        <p>Cargamento: {{datos2.cargamento}}</p>
+                        <p>Tipo de Vehiculo: {{datos2.tipoVehiculo}}</p>
+                        <p>¿Ayudantes?: {{datos2.ayudantes}}</p>
                       </ion-content>
                     </ng-template>
                   </ion-modal>

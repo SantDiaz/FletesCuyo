@@ -20,6 +20,7 @@ export class PreciosComponent implements OnInit {
   precios2 = []
   DatosF: UserF
   datosFl: DatosFlete
+  datos2: DatosFlete
   datos: respuesta;
   rta2: respuesta;
   isModalOpen = false;
@@ -43,6 +44,7 @@ export class PreciosComponent implements OnInit {
     this.auth.stateUser<UserU>().subscribe( res  => {
 
       if (res) {
+        // this.verPedidos(res.uid, this.isModalOpen)
         this.login = true;
         this.database.getAll(`PedirFlete3/${res.uid}/Respuesta`).then(res =>{
           res.subscribe(resRef=>{
@@ -50,6 +52,7 @@ export class PreciosComponent implements OnInit {
               let pasosFlete = pasosRef.payload.doc.data();
               pasosFlete['id'] = pasosRef.payload.doc.id;
               return pasosFlete;
+              // this.verPedidos(false, this.precios);
             })
             console.log(this.precios);
           })
@@ -68,21 +71,38 @@ export class PreciosComponent implements OnInit {
 
 
 
-async verPedidos(isOpen: boolean, precios2:DatosFlete){
+ verPedidos(isOpen: boolean, precios2){
  
   this.isModalOpen = isOpen;
   this.auth.stateUser<UserU>().subscribe( res  => {
     const path = `PedirFlete3`
     if (res) {
       this.db.getDoc<DatosFlete>(path, res.uid).subscribe(res2 => { 
-        // res2 = DatosFletes;
-        precios2 = res2
+        this.datos2 = res2
         console.log('pedido:', res2);
       })
     } 
   })
       
 }   
+
+
+// verPedidos(uid: string, isOpen: boolean) {
+//   this.isModalOpen = isOpen;
+//   const path = 'PedirFlete3';
+//   const id = uid;
+  
+//   this.db.getDoc<DatosFlete>(path, id).subscribe( res => {
+//     if (res ) {
+//       this.datos2 = res;
+//       console.log('id personal -> ', uid);
+//       console.log('trae esto-->', res );
+//       }
+//       else{
+//         console.log('Tiene errores -> ');
+//       }
+//   })
+// }
 
 
   async getDatosFlete(DatosFletes: DatosFlete) {
