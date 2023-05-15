@@ -32,6 +32,7 @@ import { FletesDisComponent } from './fletes-dis/fletes-dis.component';
 import { CardComponent } from './fletes-dis/card/card.component';
 import { ProfileUsuarioComponent } from 'src/app/components/ComponentesUsuario/profile-usuario/profile-usuario.component';
 import { PreciosComponent } from './pasos/precios/precios.component';
+import { RegistrarsePage } from '../registrarse/registrarse.page';
 
 
 
@@ -92,6 +93,10 @@ const routes: Routes = [
     component: RegisterComponent,
   },
   {
+    path: 'regi',
+    component: RegistrarsePage,
+  },
+  {
     path: 'chat',
     component: ChatComponent,
   },
@@ -101,11 +106,11 @@ const routes: Routes = [
   },
   {
     path: 'formF2',
-    component: Form2Component, canActivate: [AngularFireAuthGuard]
+    component: Form2Component, 
   },
   {
     path: 'formF3',
-    component: Form3Component, canActivate: [AngularFireAuthGuard]
+    component: Form3Component, 
   },
   {
     path: 'formUser1',
@@ -113,11 +118,11 @@ const routes: Routes = [
   },
   {
     path: 'formUser2',
-    component: FormUser2Component,canActivate: [AngularFireAuthGuard]
+    component: FormUser2Component,
   },
   {
     path: 'formUser3',
-    component: FormUser3Component,canActivate: [AngularFireAuthGuard]
+    component: FormUser3Component,
   },
   {
     path: 'chat',

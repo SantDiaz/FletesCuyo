@@ -24,6 +24,9 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AdminModule } from './folder/admin/admin.module';
 import { ProfileModule } from './folder/profile/profile.module';
 import { FletesDisComponent } from './folder/fletes/fletes-dis/fletes-dis.component';
+import { RegistrarsePageModule } from './folder/registrarse/registrarse.module';
+import { FletesPageModule } from './folder/fletes/fletes.module';
+import { UserModule } from './folder/registrarse/user/user.module';
 
 
 
@@ -48,9 +51,9 @@ import { FletesDisComponent } from './folder/fletes/fletes-dis/fletes-dis.compon
       AngularFireModule.initializeApp(environment2.firebaseConfig),
       AngularFireAuthModule,
       AngularFirestoreModule,
-
- 
-      
+      RegistrarsePageModule,
+      // FletesPageModule,
+      // UserModule
     ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

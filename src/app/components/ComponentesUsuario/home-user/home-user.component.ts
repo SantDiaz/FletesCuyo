@@ -34,7 +34,7 @@ op: Opiniones = {
     }
   
     pedirF(){
-        this.router.navigate(['/paso1']);
+        this.router.navigate(['/fletes']);
     }
   
     ChatV(){

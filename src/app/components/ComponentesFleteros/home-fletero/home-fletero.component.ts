@@ -39,6 +39,9 @@ export class HomeFleteroComponent implements OnInit {
       this.router.navigate(['/chat']);
     }
 
+    VerFletes(){
+      this.router.navigate(['/fletes']);
+    }
 
     
 

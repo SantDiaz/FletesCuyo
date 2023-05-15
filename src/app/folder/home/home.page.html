@@ -1,9 +1,9 @@
 <app-header></app-header>
 
 <ion-content  class="background2">
-  <!-- <app-precios *ngIf="login == true && rol == 'Usuario'"></app-precios> -->
   <!-- <app-profile  ></app-profile> -->
   <app-home-fletero *ngIf="login == true && rol == 'Fletero'"></app-home-fletero>
+  <!-- <app-precios *ngIf="login == true && rol == 'Usuario'"></app-precios> -->
   <app-home-user *ngIf="login == true && rol == 'Usuario'"></app-home-user>
   <!-- <app-anuncios></app-anuncios> -->
   <!-- <ion-title *ngIf="login == true && rol == 'Fletero'">Hola Fletero</ion-title> -->

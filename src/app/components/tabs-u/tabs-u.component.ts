@@ -53,6 +53,10 @@ Home(){
   this.router.navigate(['/home']);
 }
 
+loginn(){
+  this.router.navigate(['/login'])
+}
+
   logout(){
       this.auth.logout();
   }

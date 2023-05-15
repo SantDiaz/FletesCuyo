@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
   }
   
   redi(){
-    this.router.navigate(['/register']);
+    this.router.navigate(['/registrarse']);
   }
 
   async login(){

@@ -1,24 +1,17 @@
 <ion-header class="header">
   <ion-toolbar>
+
+    <ion-buttons *ngIf="login == true" slot="start">
+      <ion-back-button default-href="/home"></ion-back-button>
+    </ion-buttons>
+
     <ion-buttons slot="start">
       <ion-menu-button>
         <img src="../../../assets/menu_bar.svg" />
       </ion-menu-button>
     </ion-buttons>
-    <!-- <div class="searcho">
-      <div class="search ">
-        <ion-item lines="none">
-          <ion-input placeholder="Buscar productos..."></ion-input>
-          <ion-icon name="search-outline" slot="start"></ion-icon>
-        </ion-item>
-      </div>
-    </div> -->
-    <ion-buttons slot="end">  
 
-      
-      <ion-button class="filter">
-        <ion-icon name="person-circle-outline"></ion-icon>
-      </ion-button>
-    </ion-buttons>
+
+
   </ion-toolbar>
 </ion-header>

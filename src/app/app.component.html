@@ -2,10 +2,10 @@
   <ion-menu contentId="main-content" type="overlay">
     <ion-header>
       <ion-toolbar color="light">
-          <img class="logo" slot="start"  routerLink="/home" src="../assets/icon/favicon.png" width="260" height="130" />
+          <img class="logo" slot="start"  routerLink="/home" src="../assets/icon/favicon.png" width="310" height="auto" />
       </ion-toolbar>
     </ion-header>
-    <ion-content>
+    <ion-content class="background2">
      
       <ion-list class="back-menu" >
        
@@ -70,34 +70,50 @@
  </ion-list >
 
 
-      <ion-list class="back-menu" id="labels-list">
-        <ion-menu-toggle   >
-          
-          <ion-item *ngIf="login == false" [routerLink]="['/login']" color="light"  >
-            <ion-label >
-            Iniciar Sesion
-            </ion-label>
-            <ion-icon slot="start" name="person-outline"></ion-icon>
-          </ion-item>
+ <ion-list class="back-menu" id="labels-list">
+  <ion-menu-toggle   >
+    
+    <ion-item *ngIf="login == false" [routerLink]="['/login']" color="light"  >
+      <ion-label >
+      Iniciar Sesion
+      </ion-label>
+      <ion-icon slot="start" name="person-outline"></ion-icon>
+    </ion-item>
 
-          <ion-item  *ngIf="login" (click)="logout()" color="light" >
-            <ion-label>
-            Cerrar Sesion 
-            </ion-label>
-            <ion-icon slot="start" name="log-out-outline"></ion-icon>
-          </ion-item>
-          
-          <ion-item *ngIf="login == false" color="light" >
-            <ion-label [routerLink]="['/register']">
-            Registrarse
-            </ion-label>
-            <ion-icon slot="start" name="add"></ion-icon>
-          </ion-item>
-        </ion-menu-toggle>
-      </ion-list>
+    <ion-item  *ngIf="login" (click)="logout()" color="light" >
+      <ion-label>
+      Cerrar Sesion 
+      </ion-label>
+      <ion-icon slot="start" name="log-out-outline"></ion-icon>
+    </ion-item>
+    <!-- *ngIf="login == false"  -->
+    <ion-item  [routerLink]="['/registrarse']"color="light" >
+      <ion-label >
+      Registrarse
+      </ion-label>
+      <ion-icon slot="start" name="add"></ion-icon>
+    </ion-item>
+  </ion-menu-toggle>
+</ion-list>
+
+
 
       
     </ion-content>
+
+    <footer class="u-align-center u-clearfix u-footer u-grey-80 u-footer" id="sec-516d"><div class="u-clearfix u-sheet u-sheet-1"></div></footer>
+    <section class="u-backlink u-clearfix u-grey-80">
+      <H2  target="_blank">
+        <span>FletesYa</span>
+      </H2>
+      <p class="u-"text>
+        <span>Todos los derechos reservados.</span>
+      </p>
+      <a class="u-link" href="https://wa.link/r5b8g2" target="_blank">
+        <span>Contactanos via Whatsapp</span>
+      </a>. 
+    </section>
+
   </ion-menu>
   <ion-router-outlet id="main-content"></ion-router-outlet>
 </ion-app>

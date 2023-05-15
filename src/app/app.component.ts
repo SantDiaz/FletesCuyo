@@ -19,7 +19,8 @@ export class AppComponent {
                private interaction: InteractionService,
                private firestore: FirestoreService,
                
-    ) {      this.auth.stateUser().subscribe( res => {
+    ) {      
+      this.auth.stateUser().subscribe( res => {
       if (res) {
            console.log('está logeado');
            this.login = true;
@@ -28,10 +29,11 @@ export class AppComponent {
       } else {
         console.log('no está logeado');
         this.login = false;
-       this.router.navigate(['/login'])
+      //  this.router.navigate(['/login'])
         
       }   
- })}
+ })
+}
 
   logout(){
       this.auth.logout();

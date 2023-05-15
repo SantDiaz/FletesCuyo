@@ -11,7 +11,7 @@ export interface UserU {
     image: string; 
     email: string;
     password: string;
-    perfil: 'Usuario' | 'Admin';
+    perfil: 'Usuario' ;
     // | 'Fletero'| 'Admin' 
   }
 

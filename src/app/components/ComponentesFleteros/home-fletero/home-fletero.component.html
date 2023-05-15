@@ -2,13 +2,13 @@
   <div class="u-clearfix u-sheet u-sheet-1">
     <div class="u-clearfix u-expanded-width u-gutter-26 u-layout-wrap u-layout-wrap-1">
       <div class="u-layout" style="">
-        <div class="u-layout-row" style="">
+        <div class="u-layout-row">
           <div class="u-align-center u-container-style u-custom-color-6 u-layout-cell u-left-cell u-size-30 u-size-xs-60 u-layout-cell-1" src="">
             <div class="u-container-layout u-container-layout-1">
               <h2 class="u-text u-text-custom-color-1 u-text-1">Flete​s​Ya </h2>
               <p class="u-text u-text-custom-color-3 u-text-2">Encuentra fletes disponibles cerca de tu ubicacion</p>
-              <a href="https://nicepage.com/joomla-page-builder" class="u-active-custom-color-3 u-border-2 u-border-custom-color-3 u-border-hover-custom-color-3 u-btn u-btn-round u-button-style u-custom-color-2 u-hover-custom-color-1 u-radius-50 u-btn-1">Fletes Disponibles</a>
-              <a href="https://nicepage.com/joomla-page-builder" class="u-border-2 u-border-custom-color-3 u-border-hover-custom-color-3 u-btn u-btn-round u-button-style u-custom-color-2 u-hover-custom-color-1 u-radius-50 u-btn-2">Iniciar app</a>
+              <a (click)="VerFletes()" class="u-active-custom-color-3 u-border-2 u-border-custom-color-3 u-border-hover-custom-color-3 u-btn u-btn-round u-button-style u-custom-color-2 u-hover-custom-color-1 u-radius-50 u-btn-1">Fletes Disponibles</a>
+              <a  class="u-border-2 u-border-custom-color-3 u-border-hover-custom-color-3 u-btn u-btn-round u-button-style u-custom-color-2 u-hover-custom-color-1 u-radius-50 u-btn-2">Iniciar app</a>
             </div>
           </div>
           <div class="u-align-center u-container-style u-image u-layout-cell u-right-cell u-size-30 u-size-xs-60 u-image-1" src="" data-image-width="1280" data-image-height="960">
@@ -32,10 +32,10 @@
                 <form action="https://forms.nicepagesrv.com/Form/Process" class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" source="email" name="form" style="padding: 0px;">
                   <div class="u-form-email u-form-group u-label-none">
                     <label for="email-5b2e" class="u-label">Email</label>
-                    <input type="email" placeholder="Deje su reclamo aqui..." id="email-5b2e" name="email" class="u-grey-10 u-input u-input-rectangle u-radius-50 u-input-1" required="">
+                    <input  [(ngModel)]="op.mensaje"  type="text" placeholder="Deje su reclamo aqui..." id="email-5b2e" name="email" class="u-grey-10 u-input u-input-rectangle u-radius-50 u-input-1" required="">
                   </div>
-                  <div class="u-align-center u-form-group u-form-submit u-label-none">
-                    <a href="#" class="u-active-custom-color-10 u-border-none u-btn u-btn-round u-btn-submit u-button-style u-custom-color-8 u-hover-custom-color-1 u-radius-50 u-btn-1">Enviar</a>
+                  <div (click)="enviarOpinion()" class="u-align-center u-form-group u-form-submit u-label-none">
+                    <a class="u-active-custom-color-10 u-border-none u-btn u-btn-round u-btn-submit u-button-style u-custom-color-8 u-hover-custom-color-1 u-radius-50 u-btn-1">Enviar</a>
                     <input type="submit" value="submit" class="u-form-control-hidden">
                   </div>
                   <div class="u-form-send-message u-form-send-success"> Thank you! Your message has been sent. </div>
@@ -51,14 +51,14 @@
               
               <h4 class="u-align-center u-text u-text-3"> Soporte vía Whatsapp </h4>
               <p class="u-align-center u-text u-text-4">Resolvemos tus dudas al instante</p>
-              <a href="tel:+12-345-678-89089" class="u-active-custom-color-10 u-align-center u-border-active-palette-2-light-2 u-border-hover-palette-2-light-2 u-border-none u-btn u-btn-round u-button-style u-color-scheme-summer-time u-color-style-multicolor-1 u-custom u-custom-color-8 u-hover-custom-color-1 u-radius-50 u-text-active-white u-text-hover-white u-btn-2" data-animation-name="" data-animation-duration="0" data-animation-delay="0" data-animation-direction="">ir a whatsapp</a>
+              <a href="https://wa.link/r5b8g2" class="u-active-custom-color-10 u-align-center u-border-active-palette-2-light-2 u-border-hover-palette-2-light-2 u-border-none u-btn u-btn-round u-button-style u-color-scheme-summer-time u-color-style-multicolor-1 u-custom u-custom-color-8 u-hover-custom-color-1 u-radius-50 u-text-active-white u-text-hover-white u-btn-2" data-animation-name="" data-animation-duration="0" data-animation-delay="0" data-animation-direction="">ir a whatsapp</a>
             </div>
           </div>
           <div class="cell-temp-clone u-container-align-center u-container-style u-layout-cell u-size-20-lg u-size-20-xl u-size-60-md u-size-60-sm u-size-60-xs u-layout-cell-3" data-animation-name="" data-animation-duration="0" data-animation-delay="0" data-animation-direction="">
               <div class="u-container-layout u-valign-top u-container-layout-4"><span class="u-align-center u-file-icon u-icon u-icon-1"><img src="../../../../assets/imagesFleteros//684849-9e33152a.png" alt=""></span>
               <h4 class="u-align-center u-text u-text-5">Soporte via Chat</h4>
               <p class="u-align-center u-text u-text-6">Envia un mensaje via chat</p>
-              <a href="https://wa.link/r5b8g2" class="u-active-custom-color-10 u-align-center u-border-active-palette-2-light-2 u-border-hover-palette-2-light-2 u-border-none u-btn u-btn-round u-button-style u-color-scheme-summer-time u-color-style-multicolor-1 u-custom u-custom-color-9 u-hover-custom-color-1 u-radius-50 u-text-active-white u-text-hover-white u-btn-3" data-animation-name="" data-animation-duration="0" data-animation-delay="0" data-animation-direction="">ir al chat</a>
+              <a  class="u-active-custom-color-10 u-align-center u-border-active-palette-2-light-2 u-border-hover-palette-2-light-2 u-border-none u-btn u-btn-round u-button-style u-color-scheme-summer-time u-color-style-multicolor-1 u-custom u-custom-color-9 u-hover-custom-color-1 u-radius-50 u-text-active-white u-text-hover-white u-btn-3" data-animation-name="" data-animation-duration="0" data-animation-delay="0" data-animation-direction="">ir al chat</a>
             </div>
           </div>
         </div>

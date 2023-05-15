@@ -38,9 +38,6 @@ export class PreciosComponent implements OnInit {
 
   ngOnInit() {
 
-    
-
-  
     this.auth.stateUser<UserU>().subscribe( res  => {
 
       if (res) {
@@ -64,8 +61,6 @@ export class PreciosComponent implements OnInit {
         
       }   
  })
-
-        
 
   }
 

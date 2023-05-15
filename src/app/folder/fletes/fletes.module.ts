@@ -23,7 +23,7 @@ import { ChatModule } from '../chat/chat.module';
     ComponentsModule,
     PasosModule,
     MapsModule,
-    RegisterModule,
+    // RegisterModule,
     ChatModule,
     
   ],
