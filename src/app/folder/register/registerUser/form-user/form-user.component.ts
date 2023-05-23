@@ -57,9 +57,10 @@ export class FormUserComponent implements OnInit {
       await this.firestore.createDoc(this.registerU, path, id);
       this.interaction.closeLoading();
       await this.interaction.presentToast('registrado con exito');
-    this.routes.navigate(['/formUser2']);
+    this.routes.navigate(['/paso2U']);
     }
   }
+  
   
 
 }

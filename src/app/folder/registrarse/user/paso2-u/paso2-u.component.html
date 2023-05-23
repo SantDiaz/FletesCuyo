@@ -1,67 +1,88 @@
 <app-header></app-header>
 <ion-content class="background2">
 
-<section class="u-clearfix u-section-1" >
-  <div class="u-clearfix u-sheet u-sheet-1">
-    <h1 class="u-align-center u-text u-text-1">Complete el formulario</h1>
-    <h4 class="u-align-center u-text u-text-2">Debes completar todos los pasos </h4>
-    <div class="u-tab-links-align-justify u-tabs u-tabs-1">
-      <ul class="u-spacing-30 u-tab-list u-unstyled" role="tablist">
-        <li class="u-tab-item" role="presentation">
-          <a class="active u-active-custom-color-1 u-button-style u-tab-link u-tab-link-1" id="link-tab-081f" href="/paso1U" role="tab" aria-controls="tab-081f" aria-selected="true">Personales</a>
-        </li>
-        <li class="u-tab-item" role="presentation">
-          <a class=" active u-active-custom-color-1 u-button-style u-tab-link u-tab-link-2" id="link-tab-3a42" href="/paso2U" role="tab" aria-controls="tab-3a42" aria-selected="false">Direccion</a>
-        </li>
-        <li class="u-tab-item u-tab-item-3" role="presentation">
-          <a class="u-active-custom-color-1 u-button-style u-tab-link u-tab-link-3" id="tab-d7e7" href="/paso3U" role="tab" aria-controls="link-tab-d7e7" aria-selected="false">Email</a>
-        </li>
-        <li class="u-tab-item u-tab-item-4" role="presentation">
-          <a class="u-active-custom-color-1 u-button-style u-tab-link u-tab-link-4" id="tab-6219" href="/paso4U" role="tab" aria-controls="link-tab-6219" aria-selected="false">Imagen</a>
-        </li>
-      </ul>
-      <div class="u-tab-content">
-       
-        <div class="u-container-style u-tab-pane" id="tab-3a42" role="tabpanel" aria-labelledby="link-tab-3a42">
-          <div class="u-container-layout u-container-layout-2">
-            <h4 class="u-text u-text-default u-text-4">Provincia y domicilio</h4>
-            <div class="u-border-3 u-border-grey-dark-1 u-line u-line-horizontal u-line-2"></div>
-            <div class="u-form u-form-2">
-              <form action="https://forms.nicepagesrv.com/Form/Process" class="u-clearfix u-form-spacing-15 u-form-vertical u-inner-form" style="padding: 15px;" source="email" name="form">
-                <div class="u-form-group u-form-select u-label-none u-form-group-6">
-                  <label for="select-cd15" class="u-label">Provincia</label>
-                  <div class="u-form-select-wrapper">
-                    <select id="select-cd15" name="select" class="u-border-1 u-border-grey-30 u-input u-input-rectangle">
-                      <option value="San Juan">San Juan</option>
-                      <option value="Mendoza">Mendoza</option>
-                      <option value="San Luis">San Luis</option>
-                    </select>
-                    <svg class="u-caret u-caret-svg" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="16px" height="16px" viewBox="0 0 16 16" style="fill:currentColor;" xml:space="preserve"><polygon class="st0" points="8,12 2,4 14,4 "></polygon></svg>
+
+  <section class="u-clearfix u-section-1" id="sec-b6f0">
+    <div class="u-clearfix u-sheet u-sheet-1">
+      <div class="u-border-2 u-border-grey-75 u-container-style u-custom-color-7 u-expanded-width-xs u-group u-radius-24 u-shape-round u-group-1">
+        <div class="u-container-layout u-container-layout-1">
+          <div class="u-form u-palette-1-light-3 u-radius-14 u-form-1">
+            <form action="https://forms.nicepagesrv.com/Form/Process" class="u-clearfix u-form-spacing-15 u-form-vertical u-inner-form" style="padding: 15px;" source="email" name="form">
+              <div class="u-form-date u-form-group u-label-top u-form-group-1">
+                <label for="date-e295" class="u-label">Email</label>
+                <input type="text" readonly="readonly" placeholder="Ingrese su correo electronico" id="date-e295" name="date" class="u-border-1 u-border-grey-60 u-input u-input-rectangle" required="" data-date-format="mm/dd/yyyy">
+              </div>
+              <div class="u-form-group u-form-name u-label-top u-form-group-2">
+                <label for="name-ae7a" class="u-label">Contraseña</label>
+                <input type="text" placeholder="Ingrese su contraseña" id="name-ae7a" name="name-3" class="u-border-1 u-border-grey-60 u-input u-input-rectangle" required="">
+              </div>
+              <div class="u-align-center u-form-group u-form-submit u-label-top">
+                <a href="#" class="u-border-none u-btn u-btn-round u-btn-submit u-button-style u-custom-color-1 u-radius-13 u-btn-1">Enviar<br>
+                </a>
+                <input type="submit" value="submit" class="u-form-control-hidden">
+              </div>
+              <div class="u-form-send-message u-form-send-success">Thank you! Your message has been sent.</div>
+              <div class="u-form-send-error u-form-send-message">Unable to send your message. Please fix errors then try again.</div>
+              <input type="hidden" value="" name="recaptchaResponse">
+              <input type="hidden" name="formServices" value="d9280f9b08b1809d357e7ca9476e0a23">
+            </form>
+          </div>
+        </div>
+      </div >
+      <a (click)="signInWithGoogle()" class="u-border-2 u-border-grey-75 u-btn u-btn-round u-button-style u-hover-custom-color-6 u-palette-1-light-2 u-radius-50 u-btn-2"><span class="u-file-icon u-icon u-icon-1"><img src="../../.././../../assets/imagesLogin/300221.png" alt=""></span>&nbsp; &nbsp; Ingresar con google
+      </a>
+    </div>
+  </section>
+  
+  
+
+  <!-- <ion-button id="open-modal" expand="block">Open</ion-button>
+  <ion-modal trigger="open-modal" (willDismiss)="onWillDismiss($event)">
+    <ng-template >
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="end">
+            <ion-button (click)="cancel()">Cancel</ion-button>
+          </ion-buttons>
+          <ion-title>Ingrese sus datos</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="background2">
+        <section class="u-clearfix u-section-1" id="sec-1cd6">
+        <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
+          <div class="u-border-2 u-border-grey-75 u-container-style u-custom-color-7 u-group u-radius-24 u-shape-round u-group-1">
+            <div class="u-container-layout u-valign-middle u-container-layout-1">
+              <div class="u-form u-palette-1-light-3 u-radius-14 u-form-1">
+                <form action="https://forms.nicepagesrv.com/Form/Process" class="u-clearfix u-form-spacing-15 u-form-vertical u-inner-form" style="padding: 15px;" source="email" name="form">
+         
+                  <div class="u-form-group u-form-name u-form-partition-factor-2 u-label-top">
+                    <label for="name-7c2c" class="u-label"> Nombre </label>
+                    <input [(ngModel)]="registerU.email" type="email" placeholder="Introduzca su email" id="name-7c2c" name="name" class="u-border-1 u-border-grey-60 u-input u-input-rectangle" required="">
                   </div>
-                </div>
-                <div class="u-form-group u-form-name u-label-none u-form-group-7">
-                  <label for="name-c891" class="u-label">Nombre</label>
-                  <input type="text" placeholder="Introduzca su Domicilio" id="name-c891" name="name" class="u-border-1 u-border-grey-30 u-input u-input-rectangle" required="">
-                </div>
-                <div class="u-form-group u-form-name u-label-none u-form-group-8">
-                  <label for="name-daea" class="u-label">Nombre</label>
-                  <input type="text" placeholder="Localidad de" id="name-daea" name="text" class="u-border-1 u-border-grey-30 u-input u-input-rectangle" required="">
-                </div>
-                <div class="u-align-center u-form-group u-form-submit u-form-group-9">
-                  <a href="#" class="u-border-none u-btn u-btn-round u-btn-submit u-button-style u-custom-color-1 u-radius-13 u-btn-2">Siguiente</a>
-                  <input type="submit" value="submit" class="u-form-control-hidden">
-                </div>
-                <div class="u-form-send-message u-form-send-success">Thank you! Your message has been sent.</div>
-                <div class="u-form-send-error u-form-send-message">Unable to send your message. Please fix errors then try again.</div>
-                <input type="hidden" value="" name="recaptchaResponse">
-                <input type="hidden" name="formServices" value="d9280f9b08b1809d357e7ca9476e0a23">
-              </form>
+                  <div class="u-form-group u-form-name u-form-partition-factor-2 u-label-top u-form-group-2">
+                    <label for="name-04dd" class="u-label">Apellido</label>
+                    <input [(ngModel)]="registerU.password" type="password" placeholder="Introduzca su contraseña" id="name-04dd" name="name-2" class="u-border-1 u-border-grey-60 u-input u-input-rectangle" required="">
+                  </div>
+                  <a style="margin: 50%;" href="https://nicepage.com/website-design" class="u-active-none u-border-2 u-border-grey-75 u-btn u-button-style u-grey-50 u-hover-none u-text-custom-color-10 u-text-hover-black u-btn-2"><span class="u-file-icon u-icon u-icon-1"><img src="../../.././../../assets/imagesLogin/300221.png" alt=""></span>Registrarse con google
+                  </a>
+                 
+                  <div (click)="enviar2()" class="u-align-center u-form-group u-form-submit u-label-top">
+                    <a  class="u-border-none u-btn u-btn-round u-btn-submit u-button-style u-custom-color-1 u-radius-13 u-btn-1">Siguiente<br>
+                    </a>
+                    <input type="submit" value="submit" class="u-form-control-hidden">
+                  </div>
+                  <div class="u-form-send-message u-form-send-success">Thank you! Your message has been sent.</div>
+                  <div class="u-form-send-error u-form-send-message">Unable to send your message. Please fix errors then try again.</div>
+                  <input type="hidden" value="" name="recaptchaResponse">
+                  <input type="hidden" name="formServices" value="d9280f9b08b1809d357e7ca9476e0a23">
+                </form>
+              </div>
             </div>
           </div>
         </div>
-
-      </div>
-    </div>
-  </div>
-</section>
+      </section>  
+      </ion-content>
+    </ng-template>
+  </ion-modal>  -->
 </ion-content>
+  

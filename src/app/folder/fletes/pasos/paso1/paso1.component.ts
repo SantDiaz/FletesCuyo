@@ -80,7 +80,8 @@ constructor(private routes: Router,
     this.db.createDoc<DatosFlete>(data, enlace, data.uid).then((_) =>{
         this.interaction.presentToast('Enviado con exito');
         this.interaction.closeLoading;
-        this.routes.navigate(['/home']);
+        this.valueSelected === "2";
+        // this.routes.navigate(['/home']);
         this.pasosFlete={
           nombre: '',
           apellido: '',

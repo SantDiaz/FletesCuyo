@@ -92,22 +92,17 @@ export class CardComponent implements OnInit {
   async  editUser(DatosFletes: DatosFlete){
     this.interaction.presentLoading;
     this.auth.stateUser().subscribe( res => {
-
       if (res && this.login==true) {
         const path = 'Fleteros';
         this.db.getDoc<UserF>(path, res.uid).subscribe( res2 => {
-
           const nuevoDato = DatosFletes;
           const rta22 = this.rta; 
-          // console.log('id Fletero:', res.uid)
-          // console.log('id Usuario: ', nuevoDato.id);
           console.log('rta: ', rta22);
         const enlace = `PedirFlete3/${nuevoDato.id}/Respuesta`;
-        rta22.nombre = res2.nombre;
-        rta22.apellido = res2.apellido;
-        rta22.id = nuevoDato.uid
-        rta22.idFletero = res.uid;
-      
+              rta22.nombre = res2.nombre;
+              rta22.apellido = res2.apellido;
+              rta22.id = nuevoDato.uid
+              rta22.idFletero = res.uid;
       this.db.createDoc<respuesta>(rta22, enlace,  res.uid ).then((_) =>{
         this.interaction.presentToast('Enviado con exito');
         this.interaction.closeLoading;
@@ -117,7 +112,6 @@ export class CardComponent implements OnInit {
               nombre:  '', 
               apellido:  '', 
               precio: rta22.precio, 
-              // precio: null,
               mensaje: '',
         };
         } );
