@@ -28,6 +28,7 @@ export interface UserU {
     password: string;
     perfil:  'Fletero';
     datosVehiculos: datosVehiculo;
+    // provincia: provincias
   }
   
   export interface datosVehiculo {

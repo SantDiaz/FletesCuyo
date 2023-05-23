@@ -1,17 +1,17 @@
 
     <ion-tab-bar slot="bottom">
       
-      <ion-tab-button *ngIf="login == true && rol == 'Fletero'"  (click)="FleteDisplonibles()" [routerLink]="['/fletes']" tab="map">
+      <ion-tab-button *ngIf="login == true && rol == 'Fletero'"   [routerLink]="['/fletes']" tab="map">
         <ion-icon name="car-outline"></ion-icon>
         <ion-label>Fletes Disponibles</ion-label>
       </ion-tab-button>
 
-      <ion-tab-button  *ngIf="login == true && rol == 'Usuario'" (click)="PedirFlete()" tab="Flete">
+      <ion-tab-button  *ngIf="login == true && rol == 'Usuario'" [routerLink]="['/fletes']"  tab="Flete">
         <ion-icon name="car-outline"></ion-icon>
         <ion-label>Pedir Flete</ion-label>
       </ion-tab-button>
   
-      <ion-tab-button  *ngIf="login == true" (click)="Home()" tab="Inicio">
+      <ion-tab-button  *ngIf="login == true"  [routerLink]="['/home']" tab="Inicio">
         <ion-icon name="home-outline"></ion-icon>
         <ion-label>Inicio</ion-label>
       </ion-tab-button>
@@ -22,7 +22,7 @@
       </ion-tab-button>
        -->
       
-      <ion-tab-button *ngIf="login == true"  (click)="Profile()" tab="profile">
+      <ion-tab-button *ngIf="login == true"  [routerLink]="['/profile']"  tab="profile">
         <ion-icon name="person-circle"></ion-icon>
         <ion-label>Perfil</ion-label>
       </ion-tab-button>

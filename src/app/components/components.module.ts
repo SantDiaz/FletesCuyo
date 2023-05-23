@@ -10,6 +10,7 @@ import { AnunciosComponent } from './ComponentesUsuario/anuncios/anuncios.compon
 import { HomeFleteroComponent } from './ComponentesFleteros/home-fletero/home-fletero.component';
 import { ProfileUsuarioComponent } from './ComponentesUsuario/profile-usuario/profile-usuario.component';
 import { ProfileFleteroComponent } from './ComponentesFleteros/profile-fletero/profile-fletero.component';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -26,6 +27,7 @@ import { ProfileFleteroComponent } from './ComponentesFleteros/profile-fletero/p
   imports: [
     CommonModule,
     FormsModule,
+    RouterModule,
     IonicModule,
   ],
   exports: [

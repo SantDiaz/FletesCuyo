@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,  } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoadingController, ToastController } from '@ionic/angular';
 import { ayudantes, DatosFlete, hora, minutos, provincias, tipoVehiculo, UserF, UserU } from 'src/app/folder/models/models';
@@ -21,6 +21,10 @@ vehiculos = tipoVehiculo;
 ayudante = ayudantes;
 horas = hora
 minuto = minutos
+
+
+items = [];
+valueSelected:string = "1";
 
 pasosFlete: DatosFlete={
   // rta: null,
@@ -98,21 +102,74 @@ constructor(private routes: Router,
 }) 
   } 
 
-  async presentToast(mensaje: string, tiempo: number) {
-    const toast = await this.toastController.create({
-      message: mensaje,
-      duration: tiempo,
-      position: 'middle'
-    });
-    await toast.present();
-  }
 
-  async presentLoading() {
-    this.loading = await this.loadingCtrl.create({
-      message: 'Guardando',
-    });
+  async  enviar2(){
+    this.interaction.presentLoading;
+    this.authS.stateUser().subscribe( res => {
 
-   await this.loading.present();
-  }
+      if (res ) {
+        const path = 'PedirFlete3';
+        this.db.getDoc<DatosFlete>(path, res.uid).subscribe( res2 => {
+
+          const rta22 = this.pasosFlete; 
+          // console.log('id Fletero:', res.uid)
+          // console.log('id Usuario: ', nuevoDato.id);
+          console.log('rta: ', rta22);
+        const enlace = `PedirFlete3`;
+        rta22.fecha = res2.fecha;
+        rta22.hora = res2.hora;
+        rta22.minutos = res2.minutos;
+       rta22.nombre = res2.nombre
+       rta22.apellido = res2.apellido
+      
+      this.db.createDoc<DatosFlete>(rta22, enlace,  res.uid ).then((_) =>{
+        this.interaction.presentToast('Enviado con exito');
+        this.interaction.closeLoading;
+        this.pasosFlete={
+          nombre: '',
+          apellido: '',
+          fecha: rta22.fecha,
+          hora: rta22.hora,
+          minutos: rta22.minutos,
+          uDesde: rta22.uDesde,
+          uHasta: rta22.uHasta,
+          cargamento: rta22.cargamento,
+          tipoVehiculo:  rta22.tipoVehiculo,
+          ayudantes:  rta22.ayudantes,
+          uid:  res.uid ,
+          id: rta22.id,
+          precio: null,
+         };
+        } );
+      });
+    } 
+  })
+}
+
+
+
+
+
+async presentToast(mensaje: string, tiempo: number) {
+  const toast = await this.toastController.create({
+    message: mensaje,
+    duration: tiempo,
+    position: 'middle'
+  });
+  await toast.present();
+}
+
+async presentLoading() {
+  this.loading = await this.loadingCtrl.create({
+    message: 'Guardando',
+  });
+
+ await this.loading.present();
+}
+
+segmentChanged(event: CustomEvent){
+  this.valueSelected = event.detail.value;
+  console.log(this.valueSelected);
+}
 
 }

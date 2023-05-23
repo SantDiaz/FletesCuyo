@@ -86,8 +86,8 @@
       </ion-label>
       <ion-icon slot="start" name="log-out-outline"></ion-icon>
     </ion-item>
-    <!-- *ngIf="login == false"  -->
-    <ion-item  [routerLink]="['/registrarse']"color="light" >
+    <!--   -->
+    <ion-item *ngIf="login == false" [routerLink]="['/registrarse']"color="light" >
       <ion-label >
       Registrarse
       </ion-label>

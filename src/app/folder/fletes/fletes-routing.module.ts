@@ -156,7 +156,10 @@ const routes: Routes = [
     path: 'precios',
     component: PreciosComponent, canActivate: [AngularFireAuthGuard]
   },
-  
+  {
+    path: 'home2',
+    component: HomeLogComponent, 
+  },
   
 ];
 
