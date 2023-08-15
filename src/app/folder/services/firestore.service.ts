@@ -29,11 +29,7 @@ export class FirestoreService {
 
   }
 
-  createDocc<tipo>(data: any, path: string, id: string, id2:string) {
-    const collection = this.firestore.collection(path);
-    return collection.doc(id).set(data);
 
-  }
 
   createDoc2<tipo>(data: any, path: string, uid: string) {
     const collection = this.firestore.collection(path);
@@ -70,6 +66,7 @@ export class FirestoreService {
   updateDoc(path: string, id: string, data: any) {
     return  this.firestore.collection(path).doc(id).update(data);
   }
+  
   deleteDoc(path: string, id: string){
     return this.firestore.collection(path).doc(id).delete();
   }

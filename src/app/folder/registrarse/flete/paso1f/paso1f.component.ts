@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { IonModal } from '@ionic/angular';
 import { UserF } from 'src/app/folder/models/models';
 import { AuthService } from 'src/app/folder/services/auth.service';
 import { FirestoreService } from 'src/app/folder/services/firestore.service';
 import { InteractionService } from 'src/app/folder/services/interaction.service';
+import { OverlayEventDetail } from '@ionic/core/components';
 
 @Component({
   selector: 'app-paso1f',
@@ -11,7 +13,10 @@ import { InteractionService } from 'src/app/folder/services/interaction.service'
   styleUrls: ['./paso1f.component.scss'],
 })
 export class Paso1fComponent implements OnInit {
+  @ViewChild(IonModal) modal: IonModal;
 
+  name: string;
+  message = "putoss"
 
   registerF: UserF = {
     uid: null,
@@ -29,36 +34,61 @@ export class Paso1fComponent implements OnInit {
   }
 
   constructor(private routes: Router,
-              private authS: AuthService,      
-              private interaction: InteractionService,    
-              private firestore : FirestoreService,    
-              ) { }
+    private authS: AuthService,      
+    private interaction: InteractionService,    
+    private firestore : FirestoreService,    
+    private router: Router,
+    ) { }
 
-  ngOnInit() {}
 
-  atras(){
-    this.routes.navigate(['/login']);
+  ngOnInit() {
+    // const ev = event as CustomEvent<OverlayEventDetail<string>>;
+    //   this.onWillDismiss(ev)
   }
 
-  async siguiente(){
-    this.interaction.presentLoading("Registrando...")
-    console.log(this.registerF);
-    const res = await this.authS.registerF(this.registerF).catch(error =>{
+  atras(){
+    this.routes.navigate(['/registrarse']);
+  }
+
+
+  next(){
+    this.routes.navigate(['/registrarse']);
+  }
+
+  async siguiente() {
+    await this.interaction.presentLoading("Registrando...");
+  
+    try {
+      await this.authS.registerF(this.registerF);
+      console.log("Registro exitoso");
+      this.interaction.closeLoading();
+      this.modal.dismiss(null, 'cancel');
+      this.router.navigate(['/paso2F']);
+      // Resto del código...
+    } catch (error) {
       console.log(error);
       this.interaction.closeLoading();
-      this.interaction.presentToast('error')
-    })
-    if (res) {
-      // console.log("funciona con exito");
-      const path = 'Fleteros'
-      const id = res.user.uid;
-      this.registerF.uid = id;
-      this.registerF.password = null;
-      await this.firestore.createDoc(this.registerF, path, id);
-      this.interaction.closeLoading();
-      await this.interaction.presentToast('Primer paso completado');
-      this.routes.navigate(['/formF2']);
+      this.interaction.presentToast('Error en el registro');
     }
   }
   
+  
+
+
+
+    cancel() {
+      this.modal.dismiss(null, 'cancel');
+    }
+  
+    confirm() {
+      this.modal.dismiss(this.name, 'confirm');
+    }
+  
+    onWillDismiss(event: Event) {
+      const ev = event as CustomEvent<OverlayEventDetail<string>>;
+      if (ev.detail.role === 'confirm') {
+        this.message = `Hello, ${ev.detail.data}!`;
+      }
+    }
+
 }

@@ -1,23 +1,44 @@
 <app-header></app-header>
 <ion-content class="background2">
-
-
+  <div style="text-align: center; padding: 50px;">
+    <h1>¡Estas a un paso de ser parte de nuestra comunidad!</h1>
+    <h4>Para continuar</h4>
+    <h5>Debe llenar este formulario</h5>
+    <button style="margin-right: 10px;" (click)="next()">id</button>
+    <button style="margin-right: 10px;" (click)="volver()">Volver</button>
+  </div>
   <section class="u-clearfix u-section-1" id="sec-b6f0">
     <div class="u-clearfix u-sheet u-sheet-1">
       <div class="u-border-2 u-border-grey-75 u-container-style u-custom-color-7 u-expanded-width-xs u-group u-radius-24 u-shape-round u-group-1">
         <div class="u-container-layout u-container-layout-1">
           <div class="u-form u-palette-1-light-3 u-radius-14 u-form-1">
-            <form action="https://forms.nicepagesrv.com/Form/Process" class="u-clearfix u-form-spacing-15 u-form-vertical u-inner-form" style="padding: 15px;" source="email" name="form">
-              <div class="u-form-date u-form-group u-label-top u-form-group-1">
-                <label for="date-e295" class="u-label">Email</label>
-                <input type="text" readonly="readonly" placeholder="Ingrese su correo electronico" id="date-e295" name="date" class="u-border-1 u-border-grey-60 u-input u-input-rectangle" required="" data-date-format="mm/dd/yyyy">
+            <form  class="u-clearfix u-form-spacing-15 u-form-vertical u-inner-form" style="padding: 15px;" source="email" name="form">
+              <div class="u-form-group u-form-name u-form-partition-factor-2 u-label-top">
+                <label for="name-7c2c" class="u-label"> Nombre </label>
+                <input [(ngModel)]="registerU.nombre" type="text" placeholder="Introduzca su nombre" id="name-7c2c" name="name" class="u-border-1 u-border-grey-60 u-input u-input-rectangle" required="">
               </div>
-              <div class="u-form-group u-form-name u-label-top u-form-group-2">
-                <label for="name-ae7a" class="u-label">Contraseña</label>
-                <input type="text" placeholder="Ingrese su contraseña" id="name-ae7a" name="name-3" class="u-border-1 u-border-grey-60 u-input u-input-rectangle" required="">
+              <div class="u-form-group u-form-name u-form-partition-factor-2 u-label-top u-form-group-2">
+                <label for="name-04dd" class="u-label">Apellido</label>
+                <input [(ngModel)]="registerU.apellido" type="text" placeholder="Introduzca su apellido" id="name-04dd" name="name-2" class="u-border-1 u-border-grey-60 u-input u-input-rectangle" required="">
               </div>
-              <div class="u-align-center u-form-group u-form-submit u-label-top">
-                <a href="#" class="u-border-none u-btn u-btn-round u-btn-submit u-button-style u-custom-color-1 u-radius-13 u-btn-1">Enviar<br>
+              <div class="u-form-group u-form-name u-form-partition-factor-2 u-label-top">
+                <label for="name-85e7" class="u-label">DNI</label>
+                <input [(ngModel)]="registerU.dni" type="text" placeholder="Introduzca su DNI sin &quot;.&quot; o &quot;,&quot; " id="name-85e7" name="name-1" class="u-border-1 u-border-grey-60 u-input u-input-rectangle" required="">
+              </div>
+              <div class="u-form-group u-form-name u-form-partition-factor-2 u-label-top u-form-group-4">
+                <label for="name-ae7a" class="u-label">Edad</label>
+                <input [(ngModel)]="registerU.edad" type="text" placeholder="Introduzca su edad" id="name-ae7a" name="name-3" class="u-border-1 u-border-grey-60 u-input u-input-rectangle" required="">
+              </div>
+              <div class="u-form-address u-form-group u-label-top">
+                <label for="address-ef4e" class="u-label">Dirección</label>
+              <input  [(ngModel)]="registerU.domicilio" type="text" placeholder="Ingrese su dirección" id="address-ef4e" name="address" class="u-border-1 u-border-grey-60 u-input u-input-rectangle" required="">
+            </div>
+            <div class="u-form-group u-form-phone u-label-top">
+              <label for="phone-e765" class="u-label">Teléfono</label>
+              <input [(ngModel)]="registerU.telefono" type="tel" pattern="\+?\d{0,3}[\s\(\-]?([0-9]{2,3})[\s\)\-]?([\s\-]?)([0-9]{3})[\s\-]?([0-9]{2})[\s\-]?([0-9]{2})" placeholder="Ingrese su numero de teléfono +54 " id="phone-e765" name="phone" class="u-border-1 u-border-grey-60 u-input u-input-rectangle" required="">
+            </div>
+              <div (click)="siguiente()" class="u-align-center u-form-group u-form-submit u-label-top">
+                <a  class="u-border-none u-btn u-btn-round u-btn-submit u-button-style u-custom-color-1 u-radius-13 u-btn-1">Enviar<br>
                 </a>
                 <input type="submit" value="submit" class="u-form-control-hidden">
               </div>
@@ -28,61 +49,12 @@
             </form>
           </div>
         </div>
-      </div >
-      <a (click)="signInWithGoogle()" class="u-border-2 u-border-grey-75 u-btn u-btn-round u-button-style u-hover-custom-color-6 u-palette-1-light-2 u-radius-50 u-btn-2"><span class="u-file-icon u-icon u-icon-1"><img src="../../.././../../assets/imagesLogin/300221.png" alt=""></span>&nbsp; &nbsp; Ingresar con google
-      </a>
+      </div>
+ 
     </div>
   </section>
   
   
-
-  <!-- <ion-button id="open-modal" expand="block">Open</ion-button>
-  <ion-modal trigger="open-modal" (willDismiss)="onWillDismiss($event)">
-    <ng-template >
-      <ion-header>
-        <ion-toolbar>
-          <ion-buttons slot="end">
-            <ion-button (click)="cancel()">Cancel</ion-button>
-          </ion-buttons>
-          <ion-title>Ingrese sus datos</ion-title>
-        </ion-toolbar>
-      </ion-header>
-      <ion-content class="background2">
-        <section class="u-clearfix u-section-1" id="sec-1cd6">
-        <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
-          <div class="u-border-2 u-border-grey-75 u-container-style u-custom-color-7 u-group u-radius-24 u-shape-round u-group-1">
-            <div class="u-container-layout u-valign-middle u-container-layout-1">
-              <div class="u-form u-palette-1-light-3 u-radius-14 u-form-1">
-                <form action="https://forms.nicepagesrv.com/Form/Process" class="u-clearfix u-form-spacing-15 u-form-vertical u-inner-form" style="padding: 15px;" source="email" name="form">
-         
-                  <div class="u-form-group u-form-name u-form-partition-factor-2 u-label-top">
-                    <label for="name-7c2c" class="u-label"> Nombre </label>
-                    <input [(ngModel)]="registerU.email" type="email" placeholder="Introduzca su email" id="name-7c2c" name="name" class="u-border-1 u-border-grey-60 u-input u-input-rectangle" required="">
-                  </div>
-                  <div class="u-form-group u-form-name u-form-partition-factor-2 u-label-top u-form-group-2">
-                    <label for="name-04dd" class="u-label">Apellido</label>
-                    <input [(ngModel)]="registerU.password" type="password" placeholder="Introduzca su contraseña" id="name-04dd" name="name-2" class="u-border-1 u-border-grey-60 u-input u-input-rectangle" required="">
-                  </div>
-                  <a style="margin: 50%;" href="https://nicepage.com/website-design" class="u-active-none u-border-2 u-border-grey-75 u-btn u-button-style u-grey-50 u-hover-none u-text-custom-color-10 u-text-hover-black u-btn-2"><span class="u-file-icon u-icon u-icon-1"><img src="../../.././../../assets/imagesLogin/300221.png" alt=""></span>Registrarse con google
-                  </a>
-                 
-                  <div (click)="enviar2()" class="u-align-center u-form-group u-form-submit u-label-top">
-                    <a  class="u-border-none u-btn u-btn-round u-btn-submit u-button-style u-custom-color-1 u-radius-13 u-btn-1">Siguiente<br>
-                    </a>
-                    <input type="submit" value="submit" class="u-form-control-hidden">
-                  </div>
-                  <div class="u-form-send-message u-form-send-success">Thank you! Your message has been sent.</div>
-                  <div class="u-form-send-error u-form-send-message">Unable to send your message. Please fix errors then try again.</div>
-                  <input type="hidden" value="" name="recaptchaResponse">
-                  <input type="hidden" name="formServices" value="d9280f9b08b1809d357e7ca9476e0a23">
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>  
-      </ion-content>
-    </ng-template>
-  </ion-modal>  -->
+  
 </ion-content>
   

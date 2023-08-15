@@ -62,7 +62,7 @@ loginn(){
   }
 
   getDatosUser(uid: string) {
-    const path = 'Usuarios';
+    const path = `Usuarios/${uid}/DatosPersonales`;
     const id = uid;
     this.firestore.getDoc<UserU>(path, id).subscribe( res => {
         if (res) {

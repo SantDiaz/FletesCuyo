@@ -39,26 +39,26 @@ export class Form1Component implements OnInit {
     this.routes.navigate(['/login']);
   }
 
-  async siguiente(){
-    this.interaction.presentLoading("Registrando...")
-    console.log(this.registerF);
-    const res = await this.authS.registerF(this.registerF).catch(error =>{
-      console.log(error);
-      this.interaction.closeLoading();
-      this.interaction.presentToast('error')
-    })
-    if (res) {
-      // console.log("funciona con exito");
-      const path = 'Fleteros'
-      const id = res.user.uid;
-      this.registerF.uid = id;
-      this.registerF.password = null;
-      await this.firestore.createDoc(this.registerF, path, id);
-      this.interaction.closeLoading();
-      await this.interaction.presentToast('Primer paso completado');
-      this.routes.navigate(['/formF2']);
-    }
-  }
+  // async siguiente(){
+  //   this.interaction.presentLoading("Registrando...")
+  //   console.log(this.registerF);
+  //   const res = await this.authS.registerF(this.registerF).catch(error =>{
+  //     console.log(error);
+  //     this.interaction.closeLoading();
+  //     this.interaction.presentToast('error')
+  //   })
+  //   if (res) {
+  //     // console.log("funciona con exito");
+  //     const path = 'Fleteros'
+  //     const id = res.user.uid;
+  //     this.registerF.uid = id;
+  //     this.registerF.password = null;
+  //     await this.firestore.createDoc(this.registerF, path, id);
+  //     this.interaction.closeLoading();
+  //     await this.interaction.presentToast('Primer paso completado');
+  //     this.routes.navigate(['/formF2']);
+  //   }
+  // }
   
 
 

@@ -42,36 +42,36 @@ vehiculo = tipoVehiculo;
 
 
 
-  enviar(){
-    this.authS.stateUser<UserF>().subscribe( res  => {
-      if (res) {
-        // console.log('la respuesta es:', res);
-        this.presentLoading();
-        const data = this.Datovehicular;
-        const enlace = `/Fleteros/${res.uid}/DatosVehicular`;
-        const id = res.uid;
-        // console.log('id es:', id);
-        this.db.createDoc<datosVehiculo>(data, enlace, id).then((_) =>{
-          // console.log('name,', id)
-            this.presentToast('Guardado con exito', 2000);
-            this.loading.dismiss();
-            this.Datovehicular={
-              uid: '',
-              tipoVehiculo: null,
-              marca: null,
-              modelo: null,
-              patente: null,
-             };
-             this.routes.navigate(['/home'])
-        } );
+  // enviar(){
+  //   this.authS.stateUser<UserF>().subscribe( res  => {
+  //     if (res) {
+  //       // console.log('la respuesta es:', res);
+  //       this.presentLoading();
+  //       const data = this.Datovehicular;
+  //       const enlace = `/Fleteros/${res.uid}/DatosVehicular`;
+  //       const id = res.uid;
+  //       // console.log('id es:', id);
+  //       this.db.createDoc<datosVehiculo>(data, enlace, id).then((_) =>{
+  //         // console.log('name,', id)
+  //           this.presentToast('Guardado con exito', 2000);
+  //           this.loading.dismiss();
+  //           this.Datovehicular={
+  //             uid: '',
+  //             tipoVehiculo: null,
+  //             marca: null,
+  //             modelo: null,
+  //             patente: null,
+  //            };
+  //            this.routes.navigate(['/home'])
+  //       } );
 
-      } else {
-         this.routes.navigate(['/login'])
-      }   
-  }) 
+  //     } else {
+  //        this.routes.navigate(['/login'])
+  //     }   
+  // }) 
   
   
-}
+// }
 
 
 

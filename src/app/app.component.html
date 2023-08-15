@@ -19,24 +19,24 @@
               <ion-icon slot="start" name="person-outline"></ion-icon>
             </ion-item>
             
-            <ion-item  *ngIf="login == true " [routerLink]="['/home2']" color="light"  >
+            <!-- <ion-item  *ngIf="login == true " [routerLink]="['/home2']" color="light"  >
               <ion-label >
                 Pruebas
               </ion-label>
               <ion-icon slot="start" name="home-outline"></ion-icon>
-            </ion-item>
+            </ion-item> -->
 
           
               <ion-item *ngIf="login == true "  [routerLink]="['/home']"  color="light"  >
                 <ion-label  > 
-                  Home
+                  Inicio
                 </ion-label>
                 <ion-icon slot="start" name="home-outline"></ion-icon>
               </ion-item>
 
               <ion-item *ngIf="rol === 'Usuario' && login == true " [routerLink]="['/precios']" color="light"  >
                 <ion-label  > 
-                  Maps
+                  Mis pedidos
                 </ion-label>
                 <ion-icon slot="start" name="home-outline"></ion-icon>
               </ion-item>
@@ -57,7 +57,7 @@
                 <ion-icon  slot="start" name="chatbubbles-outline"></ion-icon>
               </ion-item>
 
-              <ion-item *ngIf=" login == true " [routerLink]="['/admin']" color="light"  >
+              <ion-item *ngIf=" login == true && rol === 'Admin' " [routerLink]="['/admin']" color="light"  >
                 <ion-label >
                 Admin
                 </ion-label>

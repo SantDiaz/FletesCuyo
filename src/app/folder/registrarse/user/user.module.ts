@@ -27,7 +27,7 @@ import { Paso4UComponent } from './paso4-u/paso4-u.component';
         // MapsModule,
 
   ],
-  exports:[
+  exports:[ 
     Paso1UComponent,
     Paso2UComponent,
     Paso3UComponent,

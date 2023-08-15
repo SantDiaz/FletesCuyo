@@ -6,6 +6,8 @@ import { Paso1fComponent } from './flete/paso1f/paso1f.component';
 import { Paso2UComponent } from './user/paso2-u/paso2-u.component';
 import { Paso3UComponent } from './user/paso3-u/paso3-u.component';
 import { Paso4UComponent } from './user/paso4-u/paso4-u.component';
+import { Paso2FComponent } from './flete/paso2-f/paso2-f.component';
+import { Paso3fComponent } from './flete/paso3f/paso3f.component';
 
 const routes: Routes = [
   {
@@ -15,6 +17,14 @@ const routes: Routes = [
   {
     path: 'paso1F',
     component: Paso1fComponent
+  },
+  {
+    path: 'paso2F',
+    component: Paso2FComponent,
+  },
+  {
+    path: 'paso3F',
+    component: Paso3fComponent,
   },
   {
     path: 'paso1U',

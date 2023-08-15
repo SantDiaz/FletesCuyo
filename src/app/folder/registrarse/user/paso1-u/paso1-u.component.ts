@@ -6,6 +6,7 @@ import { AuthService } from 'src/app/folder/services/auth.service';
 import { FirestoreService } from 'src/app/folder/services/firestore.service';
 import { InteractionService } from 'src/app/folder/services/interaction.service';
 import { OverlayEventDetail } from '@ionic/core/components';
+import { getAuth, sendEmailVerification } from 'firebase/auth';
 
 
 @Component({
@@ -30,18 +31,21 @@ export class Paso1UComponent implements OnInit {
     image: null,
     email: null,
     password: null,
-    perfil:  'Usuario',
+    perfil: 'Usuario'  ,
+
   }
 
   constructor(private routes: Router,
     private authS: AuthService,      
     private interaction: InteractionService,    
     private firestore : FirestoreService,    
+    private router: Router,
     ) { }
 
 
   ngOnInit() {
-    // this.onWillDismiss();
+    // const ev = event as CustomEvent<OverlayEventDetail<string>>;
+    //   this.onWillDismiss(ev)
   }
 
   atras(){
@@ -52,27 +56,27 @@ export class Paso1UComponent implements OnInit {
   next(){
     this.routes.navigate(['/registrarse']);
   }
-  async siguiente(){
-    this.interaction.presentLoading("Registrando...")
-    console.log(this.registerU);
-    const res = await this.authS.registerU(this.registerU).catch(error =>{
+
+  async siguiente() {
+    await this.interaction.presentLoading("Registrando...");
+  
+    try {
+      await this.authS.registerU(this.registerU);
+      console.log("Registro exitoso");
+      this.interaction.closeLoading();
+      this.modal.dismiss(null, 'cancel');
+      this.router.navigate(['/paso2U']);
+      // Resto del código...
+    } catch (error) {
       console.log(error);
       this.interaction.closeLoading();
-      this.interaction.presentToast('error')
-    })
-    if (res) {
-      console.log("funciona con exito");
-      const path = 'Usuarios'
-      const id = res.user.uid;
-      this.registerU.uid = id;
-      this.registerU.password = null;
-      await this.firestore.createDoc(this.registerU, path, id);
-      this.interaction.closeLoading();
-      await this.interaction.presentToast('registrado con exito');
-    this.routes.navigate(['/paso2U']);
+      this.interaction.presentToast('Error en el registro');
     }
   }
   
+  
+
+
 
     cancel() {
       this.modal.dismiss(null, 'cancel');

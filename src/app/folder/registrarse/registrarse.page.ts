@@ -19,6 +19,7 @@ export class RegistrarsePage implements OnInit {
     this.router.navigate(['/paso1U']);
   }
 
+
   fletero(){
     this.router.navigate(['/paso1F']);
   }

@@ -14,6 +14,7 @@ export class ProfileUsuarioComponent implements OnInit {
   filter: string = "filtro";
   login: boolean = false;
   DatosU: UserU
+  DatosG: UserU
 
   constructor(  private auth: AuthService,
                 private router: Router,
@@ -26,6 +27,7 @@ export class ProfileUsuarioComponent implements OnInit {
       if (res) {
         this.login = true;
         this.getDatosUser(res.uid);
+        this.getDatosGmail(res.uid);
       } else {
         this.login = false;
          this.router.navigate(['/login'])
@@ -38,7 +40,7 @@ export class ProfileUsuarioComponent implements OnInit {
 
 
 getDatosUser(uid: string) {
-  const path = 'Usuarios';
+  const path = `Usuarios/${uid}/DatosPersonales`;
   const id = uid;
   
   this.db.getDoc<UserU>(path, id).subscribe( res => {
@@ -53,6 +55,21 @@ getDatosUser(uid: string) {
   })
 }
 
+getDatosGmail(uid: string) {
+  const path = `Usuarios`;
+  const id = uid;
+  
+  this.db.getDoc<UserU>(path, id).subscribe( res => {
+    if (res ) {
+      this.DatosG = res;
+      console.log('id personal -> ', uid);
+      console.log('trae esto-->', res );
+      }
+      else{
+        console.log('Tiene errores -> ');
+      }
+  })
+}
 
 
 

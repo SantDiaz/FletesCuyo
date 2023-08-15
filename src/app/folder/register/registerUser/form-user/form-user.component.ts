@@ -40,26 +40,26 @@ export class FormUserComponent implements OnInit {
   }
 
 
-  async siguiente(){
-    this.interaction.presentLoading("Registrando...")
-    console.log(this.registerU);
-    const res = await this.authS.registerU(this.registerU).catch(error =>{
-      console.log(error);
-      this.interaction.closeLoading();
-      this.interaction.presentToast('error')
-    })
-    if (res) {
-      console.log("funciona con exito");
-      const path = 'Usuarios'
-      const id = res.user.uid;
-      this.registerU.uid = id;
-      this.registerU.password = null;
-      await this.firestore.createDoc(this.registerU, path, id);
-      this.interaction.closeLoading();
-      await this.interaction.presentToast('registrado con exito');
-    this.routes.navigate(['/paso2U']);
-    }
-  }
+  // async siguiente(){
+  //   this.interaction.presentLoading("Registrando...")
+  //   console.log(this.registerU);
+  //   const res = await this.authS.registerU(this.registerU).catch(error =>{
+  //     console.log(error);
+  //     this.interaction.closeLoading();
+  //     this.interaction.presentToast('error')
+  //   })
+  //   if (res) {
+  //     console.log("funciona con exito");
+  //     const path = 'Usuarios'
+  //     const id = res.user.uid;
+  //     this.registerU.uid = id;
+  //     this.registerU.password = null;
+  //     await this.firestore.createDoc(this.registerU, path, id);
+  //     this.interaction.closeLoading();
+  //     await this.interaction.presentToast('registrado con exito');
+  //   this.routes.navigate(['/paso2U']);
+  //   }
+  // }
   
   
 

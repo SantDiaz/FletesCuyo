@@ -33,15 +33,20 @@ import { CardComponent } from './fletes-dis/card/card.component';
 import { ProfileUsuarioComponent } from 'src/app/components/ComponentesUsuario/profile-usuario/profile-usuario.component';
 import { PreciosComponent } from './pasos/precios/precios.component';
 import { RegistrarsePage } from '../registrarse/registrarse.page';
+// import { Paso1fComponent } from '../registrarse/flete/paso1f/paso1f.component';
+import { Paso1UComponent } from '../registrarse/user/paso1-u/paso1-u.component';
+import { Paso2UComponent } from '../registrarse/user/paso2-u/paso2-u.component';
+import { Paso3UComponent } from '../registrarse/user/paso3-u/paso3-u.component';
+import { Paso4UComponent } from '../registrarse/user/paso4-u/paso4-u.component';
 
 
 
-const uidAdmin = 'fsfPU1AMSwUBihOXISnw6ZBFeun1'; 
-const onlyAdmin = () => map((user: any) => !!user && user.uid  === uidAdmin); 
+// const uidAdmin = 'fsfPU1AMSwUBihOXISnw6ZBFeun1'; 
+// const onlyAdmin = () => map((user: any) => !!user && user.uid  === uidAdmin); 
 
 
-const User = 'Fletero'
-const onlyUser = () => map((user: any) => !!user && user.uid  === User); 
+// const User = 'Fletero'
+// const onlyUser = () => map((user: any) => !!user && user.uid  === User); 
 // const onlyUser = () => map((user: any) => !!user && uidUser  === User); 
 
 
@@ -56,6 +61,7 @@ const routes: Routes = [
     path: 'paso1',
     component: Paso1Component
   },
+
   // {
   //   path: 'paso2',
   //   component: Paso2Component
@@ -126,11 +132,12 @@ const routes: Routes = [
   },
   {
     path: 'chat',
-    component: ChatComponent, ...canActivate(onlyUser) 
+    component: ChatComponent, 
   },
   {
     path: 'admin',
-    component: AdminComponent, ...canActivate(onlyAdmin) 
+    component: AdminComponent, 
+    // ...canActivate(onlyAdmin) 
   },
   {
     path: 'profile',

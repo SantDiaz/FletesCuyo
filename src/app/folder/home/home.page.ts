@@ -40,7 +40,7 @@ export class HomePage implements OnInit {
   }
   
   getDatosUser(uid: string) {
-    const path = 'Usuarios';
+    const path = `Usuarios/${uid}/DatosPersonales`;
     const id = uid;
     this.firestore.getDoc<UserU>(path, id).subscribe( res => {
         // console.log('datos -> ', res);

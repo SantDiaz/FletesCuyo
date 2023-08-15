@@ -14,7 +14,7 @@ import { FleteModule } from './flete/flete.module';
 @NgModule({
   imports: [
     CommonModule,
-    // FormsModule,
+    FormsModule,
     IonicModule,
     RegistrarsePageRoutingModule,
     ComponentsModule,

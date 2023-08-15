@@ -7,17 +7,19 @@ import { AuthService } from 'src/app/folder/services/auth.service';
 import { FirestoreService } from 'src/app/folder/services/firestore.service';
 import { InteractionService } from 'src/app/folder/services/interaction.service';
 
+
 @Component({
-  selector: 'app-paso2-f',
-  templateUrl: './paso2-f.component.html',
-  styleUrls: ['./paso2-f.component.scss'],
+  selector: 'app-paso3f',
+  templateUrl: './paso3f.component.html',
+  styleUrls: ['./paso3f.component.scss'],
 })
-export class Paso2FComponent implements OnInit {
+export class Paso3fComponent implements OnInit {
+
   @ViewChild(IonModal) modal: IonModal;
 
   name: string;
   message = "putoss";
-
+  
   registerF: UserF = {
     uid: null,
     nombre: null,
@@ -31,7 +33,18 @@ export class Paso2FComponent implements OnInit {
     password: null,
     perfil:  'Fletero',
     datosVehiculos: null,
+  };
+
+  Datovehicular: datosVehiculo = {
+    uid: null,
+    tipoVehiculo: null,
+    marca: null,
+    modelo: null,
+    patente: null,
   }
+
+loading: any;
+vehiculo = tipoVehiculo;
 
   constructor(private routes: Router,
     private authS: AuthService,      
@@ -42,28 +55,25 @@ export class Paso2FComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // this.onWillDismiss();
   }
 
   async siguiente() {
-    await  this.interaction.presentLoading('Guardando datos personales...');
+    this.interaction.presentLoading('Guardando datos Vehiculares...');
     this.authS.stateUser<UserF>().subscribe( res  => {
       this.registerF.uid = res.uid;
       console.log("dad",res.uid)
       const path= `Fleteros`
       this.firestore.getDoc<UserF>(path, res.uid).subscribe( res2 => {
         this.interaction.closeLoading();
-
         if (res2){
           console.log("res", res2)
           const id = res.uid;
-          const path2 = `Fleteros/${res.uid}/DatosPersonales`
-          // aqui podemos usar dos maneras distintas 
-          // 1)_ createDoc para crear un documento con id
-          // 2)_ Createdocument para crear infinidad de documenteos
-          this.firestore.createDoc(this.registerF, path2, id);
-          this.router.navigate(['/paso3F']);
-
+            const path2 = `Fleteros/${res.uid}/DatosVehiculares`
+            // aqui podemos usar dos maneras distintas 
+            // 1)_ createDoc para crear un documento con id
+            // 2)_ Createdocument para crear infinidad de documenteos
+          this.firestore.createDoc(this.Datovehicular, path2, id);
+          this.router.navigate(['/home']);
         }
       })  
     })

@@ -14,6 +14,7 @@ export class ProfileFleteroComponent implements OnInit {
 
   login: boolean = false;
   DatosF: UserF;
+  DatosG: UserF;
   DatosV: datosVehiculo;
 
 
@@ -29,6 +30,7 @@ export class ProfileFleteroComponent implements OnInit {
         this.login = true;
         this.getDatosUser(res.uid);
         this.getDatosVehicular(res.uid);
+        this.getDatosG(res.uid)
       } else {
         this.login = false;
          this.router.navigate(['/login'])
@@ -38,10 +40,25 @@ export class ProfileFleteroComponent implements OnInit {
 }
 
 
-
+getDatosG(uid: string) {
+  const path = `Fleteros`;
+  const id = uid;
+  
+  this.db.getDoc<UserF>(path, id).subscribe( res => {
+    if (res ) {
+      this.DatosF = res;
+      // console.log('id personal -> ', uid);
+      // console.log('trae esto-->', res );
+      // console.log('datos vehicular', this.DatosV );
+      }
+      else{
+        // console.log('Tiene errores -> ');
+      }
+  })
+}
 
 getDatosUser(uid: string) {
-  const path = 'Fleteros';
+  const path = `Fleteros/${uid}/DatosPersonales`;
   const id = uid;
   
   this.db.getDoc<UserF>(path, id).subscribe( res => {
