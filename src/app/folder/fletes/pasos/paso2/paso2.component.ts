@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Route, Router } from '@angular/router';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import { LoadingController, ToastController } from '@ionic/angular';
 import { ayudantes, DatosFlete, hora, minutos, tipoVehiculo, UserU } from 'src/app/folder/models/models';
 import { AuthService } from 'src/app/folder/services/auth.service';
@@ -14,8 +15,8 @@ import { NuevoService } from 'src/app/folder/services/nuevo.service';
   styleUrls: ['./paso2.component.scss'],
 })
 export class Paso2Component implements OnInit {
-  
-  private enviado: boolean = false;
+  private pedidoId: string; // Agrega esta línea
+
   vehiculos = tipoVehiculo;
   ayudante = ayudantes;
   registerU: UserU; 
@@ -48,64 +49,98 @@ export class Paso2Component implements OnInit {
               private db: FirestoreService,
               private nuevo: NuevoService,
               private authS: AuthService, 
+              private firestore: AngularFirestore,
               private interaction : InteractionService,
               public toastController: ToastController,
               private loadingCtrl: LoadingController,
-              private router: Router ) { }
+              private router: Router,
+              private route: ActivatedRoute ) { }
 
   ngOnInit() {
+    this.pedidoId = this.route.snapshot.paramMap.get('pedidoId');
 
     
   }
 
-
-
-
+  async enviar2() {
+    console.log("este id trae",this.pedidoId);
+      await this.interaction.presentLoading("Enviando...");
   
- async enviar2() {
-    if (!this.enviado) { // Verificar si la función aún no se ha ejecutado
-      this.enviado = true; // Marcar la función como ejecutada
-    await  this.interaction.presentLoading("Enviando...");
       this.authS.stateUser<UserU>().subscribe(res => {
         if (res) {
-          const path = `PedirFlete`;
-          this.db.getDoc<DatosFlete>(path, res.uid).subscribe(res2 => {
+          const path = `Usuarios/${res.uid}/Pedidos/${this.pedidoId}`;
+  
+          this.db.getDoc<DatosFlete>(path, this.pedidoId).subscribe(res2 => {
+            console.log('obtiene', res2);
             const data = this.pasosFlete;
             data.nombre = res2.nombre;
             data.apellido = res2.apellido;
             data.fecha = res2.fecha;
             data.hora = res2.hora;
             data.minutos = res2.minutos;
-            data.uid = res.uid;
-  
-            const enlace = `PedirFlete`;
+            data.uid = res.uid; 
             
-            
-            // this.router.navigate(['/paso3']);
-            this.nuevo.update(enlace, data.uid, data).then(() => {
-              this.interaction.closeLoading(); // Cerrar la carga
-              // this.pasosFlete = {
-              //   nombre: res2.nombre,
-              //   apellido: res2.apellido,
-              //   fecha: res2.fecha,
-              //   hora: res2.hora,
-              //   minutos: res2.minutos,
-              //   uDesde: data.uDesde,
-              //   uHasta: data.uHasta,
-              //   cargamento: data.cargamento,
-              //   tipoVehiculo: data.tipoVehiculo,
-              //   ayudantes: data.ayudantes,
-              //   uid: res.uid,
-              //   id: data.id,
-              //   precio: null,
-              // };
+            const enlace = `Usuarios/${res.uid}/Pedidos/${this.pedidoId}`;
+            // this.db.createDoc3<DatosFlete>( enlace, data).then((_) =>{
+            this.nuevo.update(enlace, this.pedidoId, data).then(() => {
+            //   this.interaction.closeLoading();
             });
           });
         }
       });
     }
-  }
   
+
+
+
+    async enviar3() {
+      console.log("este id trae",this.pedidoId);
+      const idPrimer = this.pedidoId
+      // await  this.interaction.presentLoading("Enviando...");
+        this.authS.stateUser<UserU>().subscribe(res => {
+          if (res) {
+            console.log("respuestacomun", res.uid);
+            const path = `PedirFlete/${res.uid}/Pedidos/`;
+            // const path = `PedirFlete/${res.uid}/Pedidos/${idPrimer}`;
+            this.db.getDoc<DatosFlete>(path, idPrimer).subscribe(res2 => {
+              console.log("respuesta2", res2);
+              const data = this.pasosFlete;
+              data.nombre = res2.nombre;
+              data.apellido = res2.apellido;
+              data.fecha = res2.fecha;
+              data.hora = res2.hora;
+              data.minutos = res2.minutos;
+              data.uid = res.uid;
+  
+              const enlace = `PedirFlete/${res.uid}/Pedidos/${idPrimer}`;
+  
+                console.log('path', enlace);
+              // this.router.navigate(['/paso3']);
+            // this.db.createDoc3<DatosFlete>( enlace, data).then((_) =>{
+              this.db.updateDoc3(enlace, data).then(() => {
+                // this.interaction.closeLoading(); // Cerrar la carga
+                // this.pasosFlete = {
+                //   nombre: res2.nombre,
+                //   apellido: res2.apellido,
+                //   fecha: res2.fecha,
+                //   hora: res2.hora,
+                //   minutos: res2.minutos,
+                //   uDesde: data.uDesde,
+                //   uHasta: data.uHasta,
+                //   cargamento: data.cargamento,
+                //   tipoVehiculo: data.tipoVehiculo,
+                //   ayudantes: data.ayudantes,
+                //   uid: res.uid,
+                //   id: data.id,
+                //   precio: null,
+                // };
+              });
+            });
+          }
+        });
+      
+    }
+ 
 
  
 

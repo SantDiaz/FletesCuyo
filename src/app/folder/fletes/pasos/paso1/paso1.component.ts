@@ -14,7 +14,8 @@ import { InteractionService } from 'src/app/folder/services/interaction.service'
 export class Paso1Component implements OnInit {
   rol: 'Usuario' | 'Fletero'| 'Admin' = null;
 
-  private firstPedido = true;
+ 
+  
 registerU: UserU; 
 loading: any;
 data:any;
@@ -23,7 +24,6 @@ vehiculos = tipoVehiculo;
 ayudante = ayudantes;
 horas = hora
 minuto = minutos
-private enviado: boolean = false;
 
 items = [];
 valueSelected:string = "1";
@@ -59,53 +59,59 @@ constructor(private routes: Router,
 
   ngOnInit() {}
 
-
-
   async enviar(){
-    if (!this.enviado) { // Verificar si la función aún no se ha ejecutado
-      this.enviado = true; // Marcar la función como ejecutada
-      await  this.interaction.presentLoading("Enviando...");
-        this.authS.stateUser<UserU>().subscribe( res  => {
-          
-      if (res ) {
-        const path = `Usuarios/${res.uid}/DatosPersonales`
-        this.db.getDoc<UserU>(path, res.uid).subscribe( res2 => {
-        const data = this.pasosFlete;
-        // data.uid = this.db.createId();
-        data.uid = res.uid;
-        data.nombre = res2.nombre
-        data.apellido = res2.apellido
-        console.log("estos:", data.uid);
-        console.log("estos:", data.id);
 
-    const enlace = `PedirFlete`;
-    
-    this.interaction.closeLoading();
-    this.db.createDoc<DatosFlete>(data, enlace, data.uid).then((_) =>{
-        this.interaction.presentToast('Enviado con exito');
-        // this.pasosFlete={
-        //   nombre:  res2.nombre,
-        //   apellido:  res2.apellido,
-        //   fecha: data.fecha,
-        //   hora: data.hora,
-        //   minutos: data.minutos,
-        //   uDesde: data.uDesde,
-        //   uHasta: data.uHasta,
-        //   cargamento: data.cargamento,
-        //   tipoVehiculo:  data.tipoVehiculo,
-        //   ayudantes:  data.ayudantes,
-        //   uid:  res.uid ,
-        //   id: data.id,
-        //   precio: null,
-        // };
-        this.router.navigate(['/paso2']);
+    await  this.interaction.presentLoading("Enviando...");
+      this.authS.stateUser<UserU>().subscribe( res  => {
+
+    if (res ) {
+      const path = 'Usuarios'
+   this.db.getDoc<UserF>(path, res.uid).subscribe( res2 => {
+      this.interaction.presentLoading;
+      const path = `Usuarios/${res.uid}/DatosPersonales`
+   this.db.getDoc<UserU>(path, res.uid).subscribe( res2 => {
+     const data = this.pasosFlete;
+     data.uid = this.db.createId();
+     data.id = res.uid;
+     data.nombre = res2.nombre
+     data.apellido = res2.apellido
+     // data.id = res.uid;
+     console.log("estos:", data.uid);
+      console.log("estos:", data.id);
+      const enlace = `PedirFlete/${res.uid}/Pedidos`;
+      const pedidoId = data.uid
+      this.interaction.closeLoading();
+      this.db.createDocument<DatosFlete>( data, enlace, pedidoId).then((_) =>{
+      this.interaction.presentToast('Enviado con exito');
+      this.interaction.closeLoading;
+      this.valueSelected === "2";
+      // this.routes.navigate(['/home']);
+      this.pasosFlete={
+        nombre: '',
+        apellido: '',
+        fecha: data.fecha,
+        hora: data.hora,
+        minutos: data.minutos,
+        uDesde: data.uDesde,
+        uHasta: data.uHasta,
+        cargamento: data.cargamento,
+        tipoVehiculo:  data.tipoVehiculo,
+        ayudantes:  data.ayudantes,
+        uid:  res.uid ,
+        id: data.id,
+        precio: null,
+       };
       } );
+      this.router.navigate(['/paso2', { pedidoId: data.uid }]);
     } );
-  }   
+  } );
+}   
 }) 
-}
-  } 
-
+} 
+  
+  
+  
+  
 
 
 async presentToast(mensaje: string, tiempo: number) {

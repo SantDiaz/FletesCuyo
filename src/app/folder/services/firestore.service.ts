@@ -16,10 +16,11 @@ export class FirestoreService {
              ) { }
 
 // guarda datos sin idÇ
-  createDocument<tipo>(data: tipo, enlace: string) {
-    const ref = this.firestore.collection(enlace);  
-    return ref.add(data)
-            }
+createDocument<tipo>(data: tipo, enlace: string, id: string) {
+  const ref = this.firestore.doc(`${enlace}/${id}`);
+  return ref.set(data);
+}
+
 
 
 // guarda datos con id            
@@ -29,13 +30,35 @@ export class FirestoreService {
 
   }
 
+  async createDoc3<T>(collectionPath: string, data: T): Promise<string> {
+    const collectionRef = this.firestore.collection<T>(collectionPath);
+    const docRef = await collectionRef.add(data);
+    return docRef.id;
+  }
 
+  async createCollection(path: string): Promise<void> {
+    try {
+      await this.firestore.collection(path).add({}); // Agregar un documento vacío para crear la colección
+    } catch (error) {
+      console.error('Error creating collection:', error);
+      throw error;
+    }
+  }
+  async addDataToDocument(collectionPath: string, documentId: string, data: any): Promise<void> {
+    const documentRef = this.firestore.collection(collectionPath).doc(documentId);
+    await documentRef.set(data, { merge: true });
+  }
 
   createDoc2<tipo>(data: any, path: string, uid: string) {
     const collection = this.firestore.collection(path);
     return collection.doc(uid).set(data);
 
   }
+
+  updateDoc3(path: string, data: any): Promise<void> {
+    return this.firestore.doc(path).update(data);
+  }
+
 
 // crea un id unico 
   createId() {
@@ -71,17 +94,12 @@ export class FirestoreService {
     return this.firestore.collection(path).doc(id).delete();
   }
 
-  openImage(file: any, path: string, nombre: string): Promise<string>{
-    return new Promise( resolve =>{
-   
-      const filePath = path + '/' + nombre;
-      const ref = this.fireStorage.ref(filePath);
-      const task = ref.put(file)
-      resolve('enlace')
-});
-}
+  getCollectionRef(path: string): AngularFirestoreCollection<any> {
+    return this.firestore.collection(path);
+  }
 
-
-
+  createPedido(uid: string, paso: number, data: any) {
+    return this.firestore.collection('Usuarios').doc(uid).collection('Pedidos').doc(`Paso${paso}`).set(data);
+  }
 
 }

@@ -49,26 +49,27 @@
     }
 
     async siguiente() {
-      await this.interaction.presentLoading('Guardando datos personales...');
+      this.interaction.presentLoading('Guardando datos Vehiculares...');
       this.authS.stateUser<UserU>().subscribe( res  => {
         this.registerU.uid = res.uid;
         console.log("dad",res.uid)
         const path= `Usuarios`
         this.firestore.getDoc<UserU>(path, res.uid).subscribe( res2 => {
-
+          this.interaction.closeLoading();
           if (res2){
-            this.interaction.closeLoading();
             console.log("res", res2)
             const id = res.uid;
               const path2 = `Usuarios/${res.uid}/DatosPersonales`
+              // aqui podemos usar dos maneras distintas 
+              // 1)_ createDoc para crear un documento con id
+              // 2)_ Createdocument para crear infinidad de documenteos
             this.firestore.createDoc(this.registerU, path2, id);
-            this.routes.navigate(['/home']);
+            this.router.navigate(['/home']);
           }
         })  
       })
+  }
     
-
-    }
 
     
     
