@@ -62,14 +62,14 @@ const routes: Routes = [
     component: Paso1Component
   },
 
-  // {
-  //   path: 'paso2',
-  //   component: Paso2Component
-  // },
-  // {
-  //   path: 'paso3',
-  //   component: Paso3Component
-  // },
+  {
+    path: 'paso2',
+    component: Paso2Component
+  },
+  {
+    path: 'paso3',
+    component: Paso3Component
+  },
   {
     path: 'maps',
     component: MapScreenComponent

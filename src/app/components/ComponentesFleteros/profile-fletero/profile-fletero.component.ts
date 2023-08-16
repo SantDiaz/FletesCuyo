@@ -49,7 +49,7 @@ getDatosG(uid: string) {
       this.DatosF = res;
       // console.log('id personal -> ', uid);
       // console.log('trae esto-->', res );
-      // console.log('datos vehicular', this.DatosV );
+      // console.log('datos vehicular'  
       }
       else{
         // console.log('Tiene errores -> ');

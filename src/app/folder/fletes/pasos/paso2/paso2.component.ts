@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Route, Router } from '@angular/router';
 import { LoadingController, ToastController } from '@ionic/angular';
 import { ayudantes, DatosFlete, hora, minutos, tipoVehiculo, UserU } from 'src/app/folder/models/models';
 import { AuthService } from 'src/app/folder/services/auth.service';
@@ -14,15 +14,15 @@ import { NuevoService } from 'src/app/folder/services/nuevo.service';
   styleUrls: ['./paso2.component.scss'],
 })
 export class Paso2Component implements OnInit {
-
+  
+  private enviado: boolean = false;
   vehiculos = tipoVehiculo;
   ayudante = ayudantes;
   registerU: UserU; 
   loading: any;
   horas = hora
   minuto = minutos
-  
-
+  valueSelected:string = "2";
   pasosFlete: DatosFlete={
     nombre: '',
     apellido: '',
@@ -50,7 +50,8 @@ export class Paso2Component implements OnInit {
               private authS: AuthService, 
               private interaction : InteractionService,
               public toastController: ToastController,
-              private loadingCtrl: LoadingController, ) { }
+              private loadingCtrl: LoadingController,
+              private router: Router ) { }
 
   ngOnInit() {
 
@@ -58,66 +59,53 @@ export class Paso2Component implements OnInit {
   }
 
 
-  enviar(){
-    this.authS.stateUser<UserU>().subscribe( res  => {
-  if (res) {
-    
-    this.interaction.presentLoading;
-    const data = this.pasosFlete;
-    // data.uid = this.db.createId();
-    // data.id = res.uid;
-    console.log("este id:", data.uid)
-// const enlace = "PedirFlete3"
-const enlace = `PedirFlete4/${res.uid}/Pedidos/${data.uid}`;
-this.nuevo.update( enlace, data.uid, data).then((_) =>{
-    this.interaction.presentToast('Guardado con exito');
-    this.interaction.closeLoading();
-    this.routes.navigate(['/home']);
-    this.pasosFlete={
-      nombre: '',
-      apellido: '',
-      fecha: null,
-      hora: null,
-      minutos: null,
-      uDesde: '',
-      uHasta: '',
-      cargamento: '',
-      tipoVehiculo:  null,
-      ayudantes:  null ,
-      uid:  null ,
-      precio: null,
-      // respuesta: null,
-      id: res.uid,
-     };
-} );
-}   
-}) 
-} 
-
 
 
   
-  // enviar(){
-  //   this.presentLoading();
-  //   const data = this.DatosFlete;
-  //   data.id = this.db.createId();
-  //   const enlace = "PedirFlete"
-  //   this.db.createDoc<DatosFlete>(data, enlace, data.id).then((_) =>{
-  //       this.presentToast('Guardado con exito', 2000);
-  //       this.loading.dismiss();
-  //       this.routes.navigate(['/home']);
-  //       this.DatosFlete={
-  //         fecha: null,
-  //         hora: null,
-  //         uDesde: '',
-  //         uHasta: '',
-  //         cargamento: '',
-  //         tipoVehiculo:  null,
-  //         ayudantes:  null ,
-  //         id:  "" ,
-  //        };
-  //   } );
-
+ async enviar2() {
+    if (!this.enviado) { // Verificar si la función aún no se ha ejecutado
+      this.enviado = true; // Marcar la función como ejecutada
+    await  this.interaction.presentLoading("Enviando...");
+      this.authS.stateUser<UserU>().subscribe(res => {
+        if (res) {
+          const path = `PedirFlete`;
+          this.db.getDoc<DatosFlete>(path, res.uid).subscribe(res2 => {
+            const data = this.pasosFlete;
+            data.nombre = res2.nombre;
+            data.apellido = res2.apellido;
+            data.fecha = res2.fecha;
+            data.hora = res2.hora;
+            data.minutos = res2.minutos;
+            data.uid = res.uid;
+  
+            const enlace = `PedirFlete`;
+            
+            
+            // this.router.navigate(['/paso3']);
+            this.nuevo.update(enlace, data.uid, data).then(() => {
+              this.interaction.closeLoading(); // Cerrar la carga
+              // this.pasosFlete = {
+              //   nombre: res2.nombre,
+              //   apellido: res2.apellido,
+              //   fecha: res2.fecha,
+              //   hora: res2.hora,
+              //   minutos: res2.minutos,
+              //   uDesde: data.uDesde,
+              //   uHasta: data.uHasta,
+              //   cargamento: data.cargamento,
+              //   tipoVehiculo: data.tipoVehiculo,
+              //   ayudantes: data.ayudantes,
+              //   uid: res.uid,
+              //   id: data.id,
+              //   precio: null,
+              // };
+            });
+          });
+        }
+      });
+    }
+  }
+  
 
  
 
