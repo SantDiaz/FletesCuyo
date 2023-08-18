@@ -3,8 +3,8 @@
     <h1 class="u-align-center u-text u-text-1">Ultimos fletes disponibles</h1>
     <div  class="u-list u-list-1">
       <div class="u-repeater u-repeater-1">
-      
-        <div *ngFor="let datos of fletes"  class="u-container-style u-list-item u-palette-1-light-3 u-repeater-item u-list-item-3">
+        <div *ngFor="let datos of fletes; trackBy: trackByFn" class="u-container-style u-list-item u-palette-1-light-3 u-repeater-item u-list-item-3">
+        <!-- <div *ngFor="let datos of fletes  "  class="u-container-style u-list-item u-palette-1-light-3 u-repeater-item u-list-item-3"> -->
           <div class="u-container-layout u-similar-container u-valign-top-md u-valign-top-sm u-valign-top-xs u-container-layout-5">
             <div class="u-container-style u-custom-color-2 u-group u-group-3">
               <div class="u-container-layout u-container-layout-6"><span class="u-icon u-icon-17"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 53 53" style=""><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-9239"></use></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" xml:space="preserve" class="u-svg-content" viewBox="0 0 53 53" x="0px" y="0px" id="svg-9239" style="enable-background:new 0 0 53 53;"><path style="fill:#E7ECED;" d="M18.613,41.552l-7.907,4.313c-0.464,0.253-0.881,0.564-1.269,0.903C14.047,50.655,19.998,53,26.5,53
@@ -89,7 +89,7 @@ c0.195,0.195,0.451,0.293,0.707,0.293s0.512-0.098,0.707-0.293c0.391-0.391,0.391-1
             <!-- Este boton de abajo si funciona -->
             <!-- <a (click)="deleteUser(datos)" class="u-border-2 u-border-grey-75 u-btn u-btn-round u-button-style u-custom-color-1 u-hover-custom-color-3 u-radius-50 u-btn-3">pbtener</a> -->
 
-            <a (click)="editUser(datos)" class="u-border-2 u-border-grey-75 u-btn u-btn-round u-button-style u-custom-color-1 u-hover-custom-color-3 u-radius-50 u-btn-3">Enviar</a>
+            <a (click)="enviarPrecio(datos)" class="u-border-2 u-border-grey-75 u-btn u-btn-round u-button-style u-custom-color-1 u-hover-custom-color-3 u-radius-50 u-btn-3">Enviar</a>
           </div>
         </div>
       </div>

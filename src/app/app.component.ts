@@ -22,7 +22,7 @@ export class AppComponent {
     ) {      
       this.auth.stateUser().subscribe( res => {
       if (res) {
-           console.log('está logeado');
+          //  console.log('está logeado');
            this.login = true;
            this.getDatosUser(res.uid);
            this.getDatosFletero(res.uid);
@@ -54,7 +54,7 @@ export class AppComponent {
     const path = 'Fleteros';
     const id = uid;
     this.firestore.getDoc<UserF>(path, id).subscribe( res => {
-        console.log('datos -> ', res);
+        // console.log('datos -> ', res);
         if (res) {
           this.rol = res.perfil
         }
