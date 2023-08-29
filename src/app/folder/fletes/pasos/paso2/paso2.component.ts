@@ -16,7 +16,8 @@ import { NuevoService } from 'src/app/folder/services/nuevo.service';
 })
 export class Paso2Component implements OnInit {
   private pedidoId: string; // Agrega esta línea
-
+  public enviado = false;
+  
   vehiculos = tipoVehiculo;
   ayudante = ayudantes;
   registerU: UserU; 
@@ -57,90 +58,53 @@ export class Paso2Component implements OnInit {
               private route: ActivatedRoute ) { }
 
   ngOnInit() {
-    this.pedidoId = this.route.snapshot.paramMap.get('pedidoId');
 
-    
   }
+  
+  
 
-  async enviar2() {
+  
+  
+  async enviar3() {
+    if (this.enviado) {
+      return; // Ya se ha enviado, no hagas nada
+    }
+    this.pedidoId = this.route.snapshot.paramMap.get('pedidoId');
     console.log("este id trae",this.pedidoId);
-      await this.interaction.presentLoading("Enviando...");
-  
-      this.authS.stateUser<UserU>().subscribe(res => {
-        if (res) {
-          const path = `Usuarios/${res.uid}/Pedidos/${this.pedidoId}`;
-  
-          this.db.getDoc<DatosFlete>(path, this.pedidoId).subscribe(res2 => {
-            console.log('obtiene', res2);
-            const data = this.pasosFlete;
-            data.nombre = res2.nombre;
-            data.apellido = res2.apellido;
-            data.fecha = res2.fecha;
-            data.hora = res2.hora;
-            data.minutos = res2.minutos;
-            data.uid = res.uid; 
-            
-            const enlace = `Usuarios/${res.uid}/Pedidos/${this.pedidoId}`;
-            // this.db.createDoc3<DatosFlete>( enlace, data).then((_) =>{
-            this.nuevo.update(enlace, this.pedidoId, data).then(() => {
-            //   this.interaction.closeLoading();
+    const idPrimer = this.pedidoId;
+    this.authS.stateUser<UserU>().subscribe(res => {
+      if (res) {
+        console.log("respuestacomun", res.uid);
+        const path = `PedirFlete/${res.uid}/Pedidos/`;
+        this.db.getDoc<DatosFlete>(path, idPrimer).subscribe(res2 => {
+          console.log("respuesta2", res2);
+          const data = this.pasosFlete;
+          data.nombre = res2.nombre;
+          data.apellido = res2.apellido;
+          data.fecha = res2.fecha;
+          data.hora = res2.hora;
+          data.minutos = res2.minutos;
+          data.uid = res.uid;
+          console.log('id a editar', idPrimer);
+          
+          const enlace = `PedirFlete/${res.uid}/Pedidos`;
+          this.db.updateDoc(enlace, idPrimer, data)
+            .then(() => {
+              console.log('Actualización exitosa');
+              this.enviado = true;
+              setTimeout(() => {
+                // Tu código de redirección aquí
+                window.location.href = '/home';
+              }, 0);
+            })
+            .catch(error => {
+              console.error('Error al actualizar:', error);
             });
-          });
-        }
-      });
-    }
-  
-
-
-
-    async enviar3() {
-      console.log("este id trae",this.pedidoId);
-      const idPrimer = this.pedidoId
-      // await  this.interaction.presentLoading("Enviando...");
-        this.authS.stateUser<UserU>().subscribe(res => {
-          if (res) {
-            console.log("respuestacomun", res.uid);
-            const path = `PedirFlete/${res.uid}/Pedidos/`;
-            // const path = `PedirFlete/${res.uid}/Pedidos/${idPrimer}`;
-            this.db.getDoc<DatosFlete>(path, idPrimer).subscribe(res2 => {
-              console.log("respuesta2", res2);
-              const data = this.pasosFlete;
-              data.nombre = res2.nombre;
-              data.apellido = res2.apellido;
-              data.fecha = res2.fecha;
-              data.hora = res2.hora;
-              data.minutos = res2.minutos;
-              data.uid = res.uid;
-  
-              const enlace = `PedirFlete/${res.uid}/Pedidos/${idPrimer}`;
-  
-                console.log('path', enlace);
-              // this.router.navigate(['/paso3']);
-            // this.db.createDoc3<DatosFlete>( enlace, data).then((_) =>{
-              this.db.updateDoc3(enlace, data).then(() => {
-                // this.interaction.closeLoading(); // Cerrar la carga
-                // this.pasosFlete = {
-                //   nombre: res2.nombre,
-                //   apellido: res2.apellido,
-                //   fecha: res2.fecha,
-                //   hora: res2.hora,
-                //   minutos: res2.minutos,
-                //   uDesde: data.uDesde,
-                //   uHasta: data.uHasta,
-                //   cargamento: data.cargamento,
-                //   tipoVehiculo: data.tipoVehiculo,
-                //   ayudantes: data.ayudantes,
-                //   uid: res.uid,
-                //   id: data.id,
-                //   precio: null,
-                // };
-              });
-            });
-          }
         });
-      
-    }
- 
+      }
+    });
+  }
+  
 
  
 

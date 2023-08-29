@@ -8,6 +8,9 @@ import { DatosFlete, datosVehiculo } from '../models/models';
 
 
 export class FirestoreService {
+  private pedidoId: string;
+  
+
   
   fletes: DatosFlete[] = []
   
@@ -55,10 +58,19 @@ createDocument<tipo>(data: tipo, enlace: string, id: string) {
 
   }
 
+  // updateDoc3(path: string, data: any): Promise<void> {
+  //   return this.firestore.doc(path).update(data);
+  // }
   updateDoc3(path: string, data: any): Promise<void> {
-    return this.firestore.doc(path).update(data);
+    return this.firestore.doc(path).set(data, { merge: true });
   }
-
+  async update(collection, id, dato){
+    try{
+      return await this.firestore.collection(collection).doc(id).set(dato);
+    }catch(err) {
+      console.log("error", err);
+    }
+  }
 
 // crea un id unico 
   createId() {
@@ -100,6 +112,16 @@ createDocument<tipo>(data: tipo, enlace: string, id: string) {
 
   createPedido(uid: string, paso: number, data: any) {
     return this.firestore.collection('Usuarios').doc(uid).collection('Pedidos').doc(`Paso${paso}`).set(data);
+  }
+
+
+
+  setPedidoId(id: string) {
+    this.pedidoId = id;
+  }
+
+  getPedidoId() {
+    return this.pedidoId;
   }
 
 }

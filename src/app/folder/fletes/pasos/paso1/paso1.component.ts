@@ -13,9 +13,6 @@ import { InteractionService } from 'src/app/folder/services/interaction.service'
 })
 export class Paso1Component implements OnInit {
   rol: 'Usuario' | 'Fletero'| 'Admin' = null;
-
- 
-  
 registerU: UserU; 
 loading: any;
 data:any;
@@ -102,7 +99,8 @@ constructor(private routes: Router,
         precio: null,
        };
       } );
-      this.router.navigate(['/paso2', { pedidoId: data.uid }]);
+      // this.router.navigate(['/paso2', { pedidoId: data.uid }]);
+      this.router.navigate(['/paso2', { pedidoId: data.uid,}]);
     } );
   } );
 }   

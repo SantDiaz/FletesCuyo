@@ -67,16 +67,21 @@ export class CardComponent implements OnInit {
 
   ngOnInit() {
     this.pedidoId = this.route.snapshot.paramMap.get('pedidoId');
+    console.log('pedido')
     const usersCollectionPath = 'Usuarios';
+
+
     
     firebase.firestore().collection(usersCollectionPath).get()
       .then(querySnapshot => {
         const userIDs = querySnapshot.docs.map(doc => doc.id);
         console.log('userIDs: ', userIDs);
         
+        
         // Ahora puedes usar los IDs de los usuarios para acceder a sus pedidos
         userIDs.forEach(uid => {
-          const pedidosCollectionPath = `PedirFlete/${uid}/Pedidos/`;
+          // const pedidosCollectionPath = `PedirFlete/${uid}/Pedidos/`;
+          const pedidosCollectionPath = `PedirFlete3`;
           console.log('enlace', pedidosCollectionPath);
     
           this.database.getAll(pedidosCollectionPath).then(res =>{
@@ -85,20 +90,17 @@ export class CardComponent implements OnInit {
                 let pasosFlete = pasosRef.payload.doc.data();
                 pasosFlete['id'] = pasosRef.payload.doc.id;
                 return pasosFlete;
-
-              
+                
               })
+              
               this.cdr.detectChanges();
               console.log('Pedidos para el usuario con ID', uid, this.fletes);
             })
-
-         
-
+              })
+              .catch(error => {
+                console.error(`Error fetching pedidos for user with ID ${uid}:`, error);
+              });
             })
-            .catch(error => {
-              console.error(`Error fetching pedidos for user with ID ${uid}:`, error);
-            });
-        });
       })
       .catch(error => {
         console.error("Error fetching user IDs:", error);
