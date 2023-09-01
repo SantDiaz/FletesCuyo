@@ -16,15 +16,13 @@ import firebase from 'firebase/compat/app';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CardComponent implements OnInit {
-  private pedidoId: string; // Agrega esta línea
   login: boolean = false;
   rol: 'Usuario' | 'Fletero' | 'Admin' = null;
   loading: any;
   fletes : any = [] ;
-  pasosFlete: DatosFlete[] = []
+  // pasosFlete: DatosFlete[] = []
   datoss: UserU;
   DatosV: datosVehiculo;
-  nuevoDato: DatosFlete;
   pasosFlete2: DatosFlete = {
     nombre: '',
     apellido: '',
@@ -41,8 +39,7 @@ export class CardComponent implements OnInit {
     precio: null,
   };
 
-  rta2: respuesta;
-
+  
   rta: respuesta = {
     id: '',
     idFletero: '',
@@ -50,27 +47,30 @@ export class CardComponent implements OnInit {
     apellido: '',
     precio: null,
     mensaje: '',
+    precioEnviado: false, // Agrega esta propiedad
   };
+  pasosFlete: DatosFlete[] = [];
+  selectedSegment = 'seccion1'; // Segmento seleccionado por defecto
+  fletesRespondidos: DatosFlete[] = [];
 
   constructor(
-    private auth: AuthService,
-    private router: Router,
-    private interaction: InteractionService,
-    private db: FirestoreService,
-    private database: NuevoService,
-    public toastController: ToastController,
-    private loadingCtrl: LoadingController,
-    private cdr: ChangeDetectorRef,
-    private route: ActivatedRoute,
-  ) { }
+        private auth: AuthService,
+        private router: Router,
+        private interaction: InteractionService,
+        private db: FirestoreService,
+        private database: NuevoService,
+        public toastController: ToastController,
+        private loadingCtrl: LoadingController,
+        private cdr: ChangeDetectorRef,
+        private route: ActivatedRoute,
+  ) { 
+    this.pasosFlete = this.fletes.filter(flete => !flete.precioEnviado);
+    this.fletesRespondidos = this.fletes.filter(flete => flete.precioEnviado);
+  }
 
   ngOnInit() {
-    this.pedidoId = this.route.snapshot.paramMap.get('pedidoId');
-    console.log('pedido')
+    this.fletesRespondidos = [];
     const usersCollectionPath = 'Usuarios';
-
-
-    
     firebase.firestore().collection(usersCollectionPath).get()
       .then(querySnapshot => {
         const userIDs = querySnapshot.docs.map(doc => doc.id);
@@ -139,7 +139,13 @@ export class CardComponent implements OnInit {
               apellido: '',
               precio: rta22.precio,
               mensaje: '',
-            };
+               precioEnviado: true, // Agrega esta propiedad
+              };
+              const index = this.pasosFlete.findIndex(flete => flete.id === DatosFletes.id);
+              if (index !== -1) {
+                this.pasosFlete.splice(index, 1);
+                this.fletesRespondidos.push(DatosFletes);
+              }
           });
         });
       }

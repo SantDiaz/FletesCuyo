@@ -19,6 +19,7 @@ export class Form2Component implements OnInit {
     marca: null,
     modelo: null,
     patente: null,
+    imagePatente: null,
   }
 
 loading: any;

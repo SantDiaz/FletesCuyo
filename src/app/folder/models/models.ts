@@ -37,6 +37,7 @@ export interface UserU {
     marca: string;
     modelo: string;
     patente: number;
+    imagePatente: string; 
   }
 
 
@@ -55,6 +56,7 @@ export interface UserU {
     tipoVehiculo: 'Camioneta' | 'Camion' | 'Utilitario' ;
     ayudantes:  'Sin ayudantes' | '+1 Ayudantes' | '+2 Ayudantes'  | '+3 Ayudantes' ;
     uid: string;
+    
     precio: number;
     }
 
@@ -65,6 +67,8 @@ export interface UserU {
     apellido: string;
     precio: string; 
     mensaje: string;
+    precioEnviado: boolean; // Agrega esta propiedad
+
   }
 
   export interface Opiniones{

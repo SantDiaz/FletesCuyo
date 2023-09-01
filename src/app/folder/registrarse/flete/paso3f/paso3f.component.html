@@ -2,10 +2,7 @@
 <ion-content class="background2">
   <div style="text-align: center; padding: 50px;">
     <h1>¡Estas a un paso de ser parte de nuestra comunidad!</h1>
-    <h4>Para continuar</h4>
     <h5>Debe completar los datos del vehiculo que utilizara</h5>
-    <button style="margin-right: 10px;" (click)="next()">id</button>
-    <button style="margin-right: 10px;" (click)="volver()">Volver</button>
   </div>
   <section class="u-clearfix u-section-1" id="sec-b6f0">
     <div class="u-clearfix u-sheet u-sheet-1">
@@ -13,12 +10,14 @@
         <div class="u-container-layout u-container-layout-1">
           <div class="u-form u-palette-1-light-3 u-radius-14 u-form-1">
             <form  class="u-clearfix u-form-spacing-15 u-form-vertical u-inner-form" style="padding: 15px;" source="email" name="form">
-              <div class="u-form-select-wrapper">
-                <select [(ngModel)]="Datovehicular.tipoVehiculo"  id="select-9970" name="select" class="u-border-1 u-border-grey-60 u-input u-input-rectangle" required="required">
-                  <option  *ngFor="let tipoVehiculo  of vehiculo" [value]="tipoVehiculo">{{tipoVehiculo}}</option>
+              <div class="u-form-group u-form-name u-form-partition-factor-2 u-label-top">
+              <label for="name-85e7" class="u-label">Vehiculo</label>
+                <select [(ngModel)]="Datovehicular.tipoVehiculo" id="select-9970" name="select" class="u-border-1 u-border-grey-60 u-input u-input-rectangle" required="required">
+                  <option value="" disabled selected>Seleccione un tipo de vehículo</option>
+                  <option *ngFor="let tipoVehiculo of vehiculo" [value]="tipoVehiculo">{{ tipoVehiculo }}</option>
                 </select>
-                <svg class="u-caret u-caret-svg" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="16px" height="16px" viewBox="0 0 16 16" style="fill:currentColor;" xml:space="preserve"><polygon class="st0" points="8,12 2,4 14,4 "></polygon></svg>
               </div>
+              
             <div class="u-form-group u-form-name u-form-partition-factor-2 u-label-top">
               <label for="name-85e7" class="u-label">Marca del automotor</label>
               <input [(ngModel)]="Datovehicular.marca" type="text" placeholder="Ej: Ford" id="name-85e7" name="name-1" class="u-border-1 u-border-grey-60 u-input u-input-rectangle" required="">
@@ -31,6 +30,11 @@
               <label for="name-ae7a" class="u-label">Patente</label>
               <input [(ngModel)]="Datovehicular.patente" type="text" placeholder="Ingrese sus 6 valores" id="name-ae7a" name="name-3" class="u-border-1 u-border-grey-60 u-input u-input-rectangle" required="">
             </div>
+            <div class="u-form-group u-form-name u-label-top u-form-group-4">
+              <label for="name-ae7a" class="u-label">Carga una imagen de la patente</label>
+              <input (change)="onFileSelected($event)" type="file" id="patenteFile" accept="image/*">
+            </div>
+
               <div (click)="siguiente()" class="u-align-center u-form-group u-form-submit u-label-top">
                 <a  class="u-border-none u-btn u-btn-round u-btn-submit u-button-style u-custom-color-1 u-radius-13 u-btn-1">Enviar<br>
                 </a>

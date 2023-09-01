@@ -36,7 +36,7 @@
                   </div>
                   <div class="u-form-group u-form-name u-label-top u-form-group-4">
                     <label for="name-ae7a" class="u-label">Patente</label>
-                    <input [(ngModel)]="Datovehicular.patente" type="text" placeholder="Ingrese sus 6 valores" id="name-ae7a" name="name-3" class="u-border-1 u-border-grey-60 u-input u-input-rectangle" required="">
+                    <input [(ngModel)]="Datovehicular.patente" [ngModelOptions]="{standalone: true}" type="text" placeholder="Ingrese sus 6 valores" id="name-ae7a" name="name-6" class="u-border-1 u-border-grey-60 u-input u-input-rectangle" required="">
                   </div>
                   <div (click)="enviar()" class="u-align-center u-form-group u-form-submit u-label-top">
                     <a  class="u-border-none u-btn u-btn-submit u-button-style u-custom-color-8 u-btn-1">Enviar<br>
