@@ -113,40 +113,18 @@ export class CardComponent implements OnInit {
 
 
 
-
-async obtenerPedidosEnviados(uid: string) {
-  const path = `PedirFlete/${uid}/Pedidos`;
-  
-  try {
-    const querySnapshot = await this.db.getAll(path).toPromise();
-    
-    const pedidosEnviados = querySnapshot.map(doc => {
-      const pedido = doc.payload.doc.data() as DatosFlete;
-      pedido.id = doc.payload.doc.id;
-      return pedido;
-    });
-    
-    console.log('Pedidos enviados:', pedidosEnviados);
-    
-    return pedidosEnviados;
-  } catch (error) {
-    console.error('Error al obtener pedidos enviados:', error);
-    return [];
-  }
-}
-
   
 
   async enviarPrecio(DatosFletes: DatosFlete) {
     this.interaction.presentLoading;
     this.auth.stateUser().subscribe(res => {
-      if (res && this.login == true) {
+      if (res) {
         const path = 'Fleteros';
         this.db.getDoc<UserF>(path, res.uid).subscribe(res2 => {
           const nuevoDato = DatosFletes;
           const rta22 = this.rta;
           console.log('rta: ', rta22);
-          const enlace = `PedirFlete3/${nuevoDato.id}/Respuesta`;
+          const enlace = `PedirFlete/${DatosFletes.uid}/Pedidos/${DatosFletes.id}/Respuesta`;
           rta22.nombre = res2.nombre;
           rta22.apellido = res2.apellido;
           rta22.id = nuevoDato.uid

@@ -54,7 +54,7 @@ export class PreciosComponent implements OnInit {
 
       if (res) {
         this.login = true;
-        this.database.getAll(`PedirFlete3/${res.uid}/Respuesta`).then(res =>{
+        this.database.getAll(`PedirFlete/${res.uid}/Pedidos/`).then(res =>{
           res.subscribe(resRef=>{
             this.precios = resRef.map(pasosRef =>{
               let pasosFlete = pasosRef.payload.doc.data();
