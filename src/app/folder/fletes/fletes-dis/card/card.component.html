@@ -3,11 +3,12 @@
 <section  class="u-clearfix u-section-1" id="sec-ecfb">
   <div class="u-clearfix u-sheet u-sheet-1">
     <h1 class="u-align-center u-text u-text-1">Ultimos fletes disponibles</h1>
+    <a (click)="obtenerPedidosEnviados()" class="u-border-2 u-border-grey-75 u-btn u-btn-round u-button-style u-custom-color-1 u-hover-custom-color-3 u-radius-50 u-btn-3">obtener</a>
     <div  class="u-list u-list-1">
       <div class="u-repeater u-repeater-1">
         <div *ngFor="let datos of fletes; trackBy: trackByFn" class="u-container-style u-list-item u-palette-1-light-3 u-repeater-item u-list-item-3">
         <!-- <div *ngFor="let datos of fletes  "  class="u-container-style u-list-item u-palette-1-light-3 u-repeater-item u-list-item-3"> -->
-          <div class="u-container-layout u-similar-container u-valign-top-md u-valign-top-sm u-valign-top-xs u-container-layout-5">
+          <div class="u-container-layout u-similar-c  ontainer u-valign-top-md u-valign-top-sm u-valign-top-xs u-container-layout-5">
             <div class="u-container-style u-custom-color-2 u-group u-group-3">
               <div class="u-container-layout u-container-layout-6"><span class="u-icon u-icon-17"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 53 53" style=""><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-9239"></use></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" xml:space="preserve" class="u-svg-content" viewBox="0 0 53 53" x="0px" y="0px" id="svg-9239" style="enable-background:new 0 0 53 53;"><path style="fill:#E7ECED;" d="M18.613,41.552l-7.907,4.313c-0.464,0.253-0.881,0.564-1.269,0.903C14.047,50.655,19.998,53,26.5,53
 c6.454,0,12.367-2.31,16.964-6.144c-0.424-0.358-0.884-0.68-1.394-0.934l-8.467-4.233c-1.094-0.547-1.785-1.665-1.785-2.888v-3.322
@@ -85,7 +86,7 @@ c0.195,0.195,0.451,0.293,0.707,0.293s0.512-0.098,0.707-0.293c0.391-0.391,0.391-1
                 <br>
                 
                 <input [(ngModel)]="rta.precio"  style="width: 50%; margin-left: 25%;" type="text" class="form-control" placeholder="Precio">
-                <!-- <a (click)="editUser(datos)" class="u-border-2 u-border-grey-75 u-btn u-btn-round u-button-style u-custom-color-1 u-hover-custom-color-3 u-radius-50 u-btn-3">editar</a> -->
+                <a (click)="obtenerPedidosEnviados()" class="u-border-2 u-border-grey-75 u-btn u-btn-round u-button-style u-custom-color-1 u-hover-custom-color-3 u-radius-50 u-btn-3">obtener</a>
               </div>
             </div>
             <!-- Este boton de abajo si funciona -->

@@ -20,7 +20,7 @@ export class CardComponent implements OnInit {
   login: boolean = false;
   rol: 'Usuario' | 'Fletero' | 'Admin' = null;
   loading: any;
-  fletes : any[] = [] ;
+  fletes : any = [] ;
   pasosFlete: DatosFlete[] = []
   datoss: UserU;
   DatosV: datosVehiculo;
@@ -64,7 +64,6 @@ export class CardComponent implements OnInit {
     private route: ActivatedRoute,
   ) { }
 
-
   ngOnInit() {
     this.pedidoId = this.route.snapshot.paramMap.get('pedidoId');
     console.log('pedido')
@@ -77,44 +76,63 @@ export class CardComponent implements OnInit {
         const userIDs = querySnapshot.docs.map(doc => doc.id);
         console.log('userIDs: ', userIDs);
         
-        
+        const allFletes = []; // Arreglo que almacenará todos los pedidos de todos los usuarios
         // Ahora puedes usar los IDs de los usuarios para acceder a sus pedidos
         userIDs.forEach(uid => {
-          // const pedidosCollectionPath = `PedirFlete/${uid}/Pedidos/`;
-          const pedidosCollectionPath = `PedirFlete3`;
-          console.log('enlace', pedidosCollectionPath);
+          const pedidosCollectionPath = `PedirFlete/${uid}/Pedidos/`;
+          // const pedidosCollectionPath = `PedirFlete3`;
+          // console.log('enlace', pedidosCollectionPath);
     
           this.database.getAll(pedidosCollectionPath).then(res =>{
             res.subscribe(resRef=>{
-              this.fletes = resRef.map(pasosRef =>{
-                let pasosFlete = pasosRef.payload.doc.data();
+              const userFletes = resRef.map(pasosRef =>{
+                let pasosFlete = pasosRef.payload.doc.data() as DatosFlete;
                 pasosFlete['id'] = pasosRef.payload.doc.id;
                 return pasosFlete;
                 
               })
-              
+              allFletes.push(...userFletes); // Agregar los pedidos del usuario actual al arreglo total
               this.cdr.detectChanges();
-              console.log('Pedidos para el usuario con ID', uid, this.fletes);
+              console.log('Pedidos para el usuario con ID', uid,   userFletes);
             })
               })
               .catch(error => {
                 console.error(`Error fetching pedidos for user with ID ${uid}:`, error);
               });
+              this.fletes = allFletes; // Asignar todos los pedidos al arreglo fletes al final
             })
       })
       .catch(error => {
         console.error("Error fetching user IDs:", error);
       });
   }
-  
-  
-  
-  
-  
-  
-  
   trackByFn(index, item) {
   return item.id; // Suponiendo que cada elemento tiene un campo "id" único
+}
+
+
+
+
+
+async obtenerPedidosEnviados(uid: string) {
+  const path = `PedirFlete/${uid}/Pedidos`;
+  
+  try {
+    const querySnapshot = await this.db.getAll(path).toPromise();
+    
+    const pedidosEnviados = querySnapshot.map(doc => {
+      const pedido = doc.payload.doc.data() as DatosFlete;
+      pedido.id = doc.payload.doc.id;
+      return pedido;
+    });
+    
+    console.log('Pedidos enviados:', pedidosEnviados);
+    
+    return pedidosEnviados;
+  } catch (error) {
+    console.error('Error al obtener pedidos enviados:', error);
+    return [];
+  }
 }
 
   

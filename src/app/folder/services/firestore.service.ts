@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { DatosFlete, datosVehiculo } from '../models/models';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
@@ -11,7 +13,8 @@ export class FirestoreService {
   private pedidoId: string;
   
 
-  
+
+
   fletes: DatosFlete[] = []
   
   constructor(private firestore: AngularFirestore,
@@ -58,6 +61,9 @@ createDocument<tipo>(data: tipo, enlace: string, id: string) {
 
   }
 
+  getAllPedidos() {
+    return this.firestore.collectionGroup('Pedidos').valueChanges() as Observable<DatosFlete[]>;
+  }  
   // updateDoc3(path: string, data: any): Promise<void> {
   //   return this.firestore.doc(path).update(data);
   // }
@@ -123,5 +129,12 @@ createDocument<tipo>(data: tipo, enlace: string, id: string) {
   getPedidoId() {
     return this.pedidoId;
   }
+
+
+
+//card
+getAll(collection: string): Observable<any[]> {
+  return this.firestore.collection(collection).valueChanges();
+}
 
 }
