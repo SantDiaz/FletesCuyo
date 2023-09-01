@@ -27,6 +27,7 @@ export class Paso2FComponent implements OnInit {
     domicilio: null,
     telefono: null,
     image: null,
+    verificado: false,
     email: null,
     password: null,
     perfil:  'Fletero',

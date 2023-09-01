@@ -24,6 +24,7 @@
     "@ionic/angular": "^6.4.1",
     "firebase": "^9.22.1",
     "ionicons": "^6.0.3",
+    "luxon": "^3.4.2",
     "mapbox-gl": "^2.10.0",
     "ngx-moment": "^6.0.2",
     "rxjs": "~6.6.0",

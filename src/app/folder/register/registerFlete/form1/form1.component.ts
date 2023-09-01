@@ -22,6 +22,7 @@ export class Form1Component implements OnInit {
     telefono: null,
     image: null,
     email: null,
+    verificado: false,
     password: null,
     perfil:  'Fletero',
     datosVehiculos: null,
