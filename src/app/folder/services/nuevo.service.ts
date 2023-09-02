@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +12,19 @@ export class NuevoService {
   constructor(private firestore: AngularFirestore,
  ) { }
 
+ obtenerDatos(miColeccion: string): Observable<any[]> {
+  const collectionRef = this.firestore.collection(miColeccion);
+  return collectionRef.valueChanges();
+}
 
 
+ getCollection(collectionName: string): Observable<any[]> {
+  return this.firestore.collection(collectionName).valueChanges();
+}
+ updateDocument(documentPath: string, data: any): Promise<void> {
+  const documentRef = this.firestore.doc(documentPath);
+  return documentRef.update(data);
+}
 
     async create(collection, dato){
       try{

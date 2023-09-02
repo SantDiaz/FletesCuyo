@@ -17,9 +17,9 @@
           <div   class="u-list u-list-1">
             <div  *ngIf="selectedSegment === 'seccion1'" class="u-repeater u-repeater-1">
               <div *ngFor="let datos of fletes; trackBy: trackByFn" class="u-container-style u-list-item u-palette-1-light-3 u-repeater-item u-list-item-3">
-              <!-- <div *ngFor="let datos of fletes  "  class="u-container-style u-list-item u-palette-1-light-3 u-repeater-item u-list-item-3"> -->
-                <div class="u-container-layout u-similar-c  ontainer u-valign-top-md u-valign-top-sm u-valign-top-xs u-container-layout-5">
-                  <div class="u-container-style u-custom-color-2 u-group u-group-3">
+                <!-- <div *ngFor="let datos of fletes  "  class="u-container-style u-list-item u-palette-1-light-3 u-repeater-item u-list-item-3"> -->
+                  <div class="u-container-layout u-similar-c  ontainer u-valign-top-md u-valign-top-sm u-valign-top-xs u-container-layout-5">
+                    <div class="u-container-style u-custom-color-2 u-group u-group-3">
                     <div class="u-container-layout u-container-layout-6"><span class="u-icon u-icon-17"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 53 53" style=""><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-9239"></use></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" xml:space="preserve" class="u-svg-content" viewBox="0 0 53 53" x="0px" y="0px" id="svg-9239" style="enable-background:new 0 0 53 53;"><path style="fill:#E7ECED;" d="M18.613,41.552l-7.907,4.313c-0.464,0.253-0.881,0.564-1.269,0.903C14.047,50.655,19.998,53,26.5,53
       c6.454,0,12.367-2.31,16.964-6.144c-0.424-0.358-0.884-0.68-1.394-0.934l-8.467-4.233c-1.094-0.547-1.785-1.665-1.785-2.888v-3.322
       c0.238-0.271,0.51-0.619,0.801-1.03c1.154-1.63,2.027-3.423,2.632-5.304c1.086-0.335,1.886-1.338,1.886-2.53v-3.546
@@ -31,7 +31,7 @@
       s9.75,7.977,9.75,7.977v5.126c0.54,0.488,0.886,1.185,0.886,1.965v3.546c0,1.192-0.8,2.195-1.886,2.53
       c-0.605,1.881-1.478,3.674-2.632,5.304c-0.291,0.411-0.563,0.759-0.801,1.03V38.8c0,1.223,0.691,2.342,1.785,2.888l8.467,4.233
       c0.508,0.254,0.967,0.575,1.39,0.932c5.71-4.762,9.399-11.882,9.536-19.9C53.246,12.32,41.587,0.254,26.953,0.004z"></path>
-      </g></svg></span>
+    </g></svg></span>
       <!-- {{DatosU.nombre}} {{DatosU.apellido}} -->
                       <h4  class="u-text u-text-18">{{datos.nombre}} {{datos.apellido}}</h4><span class="u-icon u-icon-18"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 52 52" style=""><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-7f39"></use></svg><svg class="u-svg-content" viewBox="0 0 52 52" x="0px" y="0px" id="svg-7f39" style="enable-background:new 0 0 52 52;"><path style="fill:currentColor;" d="M38.853,5.324L38.853,5.324c-7.098-7.098-18.607-7.098-25.706,0h0
       C6.751,11.72,6.031,23.763,11.459,31L26,52l14.541-21C45.969,23.763,45.249,11.72,38.853,5.324z M26.177,24c-3.314,0-6-2.686-6-6
@@ -94,14 +94,16 @@
                       <h4 class="u-text u-text-25"  >{{datos.tipoVehiculo}}</h4>
                       <!-- (click)="editUser(datos)" -->
                       <br>
-                      
                       <input [(ngModel)]="rta.precio" style="width: 50%; margin-left: 25%;" type="text" class="form-control" placeholder="Precio">
+                      <br>
+                      <!-- <h6 class="u-text u-text-26"> {{ flete.tiempoTranscurrido | mostrarTiempo }}</h6> -->
+                      <h6 class="u-text u-text-26"> {{ mostrarTiempoTranscurrido(datos.tiempoTranscurrido) }}</h6>
                     </div>
                   </div>
                   <!-- Este boton de abajo si funciona -->
                   <!-- <a (click)="deleteUser(datos)" class="u-border-2 u-border-grey-75 u-btn u-btn-round u-button-style u-custom-color-1 u-hover-custom-color-3 u-radius-50 u-btn-3">pbtener</a> -->
       
-                  <a (click)="enviarPrecio(datos)" *ngIf="!rta.precioEnviado" class="u-border-2 u-border-grey-75 u-btn u-btn-round u-button-style u-custom-color-1 u-hover-custom-color-3 u-radius-50 u-btn-3">Enviar</a>
+                  <a (click)="enviarPrecio(datos)"  class="u-border-2 u-border-grey-75 u-btn u-btn-round u-button-style u-custom-color-1 u-hover-custom-color-3 u-radius-50 u-btn-3">Enviar</a>
                 </div>
               </div>
             </div>
@@ -122,8 +124,7 @@
           <div   class="u-list u-list-1">
             <div  *ngIf="selectedSegment === 'seccion2'" class="u-repeater u-repeater-1">
               <div *ngFor="let datos of fletesRespondidos; trackBy: trackByFn" class="u-container-style u-list-item u-palette-1-light-3 u-repeater-item u-list-item-3">
-              <!-- <div *ngFor="let datos of fletes  "  class="u-container-style u-list-item u-palette-1-light-3 u-repeater-item u-list-item-3"> -->
-                <div class="u-container-layout u-similar-c  ontainer u-valign-top-md u-valign-top-sm u-valign-top-xs u-container-layout-5">
+                <div  class="u-container-layout u-similar-c  ontainer u-valign-top-md u-valign-top-sm u-valign-top-xs u-container-layout-5">
                   <div class="u-container-style u-custom-color-2 u-group u-group-3">
                     <div class="u-container-layout u-container-layout-6"><span class="u-icon u-icon-17"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 53 53" style=""><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-9239"></use></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" xml:space="preserve" class="u-svg-content" viewBox="0 0 53 53" x="0px" y="0px" id="svg-9239" style="enable-background:new 0 0 53 53;"><path style="fill:#E7ECED;" d="M18.613,41.552l-7.907,4.313c-0.464,0.253-0.881,0.564-1.269,0.903C14.047,50.655,19.998,53,26.5,53
       c6.454,0,12.367-2.31,16.964-6.144c-0.424-0.358-0.884-0.68-1.394-0.934l-8.467-4.233c-1.094-0.547-1.785-1.665-1.785-2.888v-3.322
@@ -145,6 +146,7 @@
       C6.751,11.72,6.031,23.763,11.459,31L26,52l14.541-21C45.969,23.763,45.249,11.72,38.853,5.324z M26.177,24c-3.314,0-6-2.686-6-6
       s2.686-6,6-6s6,2.686,6,6S29.491,24,26.177,24z"></path></svg></span>
                       <h4 class="u-text u-text-20">{{datos.uHasta}}</h4>
+
                       <h4 class="u-text u-text-21">{{datos.hora}}:{{datos.minutos}} </h4><span class="u-icon u-icon-20"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 59 59" style=""><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-831b"></use></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" xml:space="preserve" class="u-svg-content" viewBox="0 0 59 59" x="0px" y="0px" id="svg-831b" style="enable-background:new 0 0 59 59;"><path style="fill:#ED8A19;" d="M45.07,59c-0.553,0-1-0.447-1-1s0.447-1,1-1H47c0.553,0,1.035,0.447,1.035,0.999
       c0,0.553-0.412,1-0.965,1v-1l-0.029,1L45.07,59z M41.07,59h-2c-0.553,0-1-0.447-1-1s0.447-1,1-1h2c0.553,0,1,0.447,1,1
       S41.623,59,41.07,59z M35.07,59h-2c-0.553,0-1-0.447-1-1s0.447-1,1-1h2c0.553,0,1,0.447,1,1S35.623,59,35.07,59z M29.07,59h-2

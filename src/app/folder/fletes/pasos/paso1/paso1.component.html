@@ -25,10 +25,11 @@
                   </div>
                   <div class="u-form-date u-form-group u-label-top u-form-group-1">
                     <ion-datetime [(ngModel)]="pasosFlete.fecha" [ngModelOptions]="{ standalone: true }" 
-                    displayFormat="HH:mm" pickerFormat="YYYY-MM-DDTHH:mm:ss.SSSZ">
-                  </ion-datetime>
+                    displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD">
+                   </ion-datetime>
                   
                                      </div>
+                                     <button (click)="updateTiempo()" class="btn btn-primary">Update </button>
                   <div (click)="enviar()" class="u-align-center u-form-group u-form-submit u-label-top">
                     <a class="u-border-none u-btn u-btn-round u-btn-submit u-button-style u-custom-color-1 u-radius-13 u-btn-1">Siguiente<br>
                     </a>

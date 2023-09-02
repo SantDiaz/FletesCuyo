@@ -59,7 +59,7 @@ export interface UserU {
     tipoVehiculo: 'Camioneta' | 'Camion' | 'Utilitario' ;
     ayudantes:  'Sin ayudantes' | '+1 Ayudantes' | '+2 Ayudantes'  | '+3 Ayudantes' ;
     uid: string;
-    
+    tiempoTranscurrido?: string;
     precio: number;
     }
 

@@ -38,7 +38,7 @@ export class CardComponent implements OnInit {
     id: '',
     precio: null,
   };
-
+  private updateInterval = 60000; // Actualizar cada 60 segundos (1 minuto)
   
   rta: respuesta = {
     id: '',
@@ -66,6 +66,9 @@ export class CardComponent implements OnInit {
   ) { 
     this.pasosFlete = this.fletes.filter(flete => !flete.precioEnviado);
     this.fletesRespondidos = this.fletes.filter(flete => flete.precioEnviado);
+    setInterval(() => {
+      this.actualizarTiempoTranscurridoEnColeccion();
+    }, this.updateInterval); 
   }
 
   ngOnInit() {
@@ -88,12 +91,24 @@ export class CardComponent implements OnInit {
               const userFletes = resRef.map(pasosRef =>{
                 let pasosFlete = pasosRef.payload.doc.data() as DatosFlete;
                 pasosFlete['id'] = pasosRef.payload.doc.id;
-                return pasosFlete;
+                this.actualizarPedidos();
+                      // Convierte la cadena de fecha en un objeto Date
+                      // const fechaEnMilisegundos = Date.parse(pasosFlete.fecha);
+                      // if (!isNaN(fechaEnMilisegundos)) {
+                      //   // Calcula el tiempo transcurrido en segundos
+                      //   const ahora = new Date().getTime();
+                      //   const tiempoTranscurrido = (ahora - fechaEnMilisegundos) / 1000;
+              
+                      //   // Convierte el tiempo transcurrido a cadena de texto
+                      //   pasosFlete['Enviado hace'] = tiempoTranscurrido.toString();
+                      // } else {
+                      //   pasosFlete['tiempoTranscurrido'] = ''; // Si la fecha no es válida, asigna una cadena vacía
+                      // }
+                      return pasosFlete;
                 
               })
               allFletes.push(...userFletes); // Agregar los pedidos del usuario actual al arreglo total
               this.cdr.detectChanges();
-              console.log('Pedidos para el usuario con ID', uid,   userFletes);
             })
               })
               .catch(error => {
@@ -110,6 +125,133 @@ export class CardComponent implements OnInit {
   return item.id; // Suponiendo que cada elemento tiene un campo "id" único
 }
 
+actualizarTiempoTranscurridoEnColeccion() {
+  // Obtén la referencia a la colección que contiene los pedidos
+  const pedidosCollectionPath = 'Pedidos';
+
+  // Consulta la colección de pedidos
+  this.database.getAll(pedidosCollectionPath).then(res => {
+    res.subscribe(resRef => {
+      resRef.forEach(pasosRef => {
+        const pasosFlete = pasosRef.payload.doc.data() as DatosFlete;
+
+        // Calcula el tiempo transcurrido como lo hacías en Paso1Component
+        const ahora = new Date().getTime();
+        const fechaEnMilisegundos = Date.parse(pasosFlete.fecha);
+
+        if (!isNaN(fechaEnMilisegundos)) {
+          const tiempoTranscurrido = (ahora - fechaEnMilisegundos) / 1000;
+          pasosFlete['tiempoTranscurrido'] = this.formatoTiempoTranscurrido(tiempoTranscurrido);
+        } else {
+          pasosFlete['tiempoTranscurrido'] = '';
+        }
+
+        // Actualiza el documento en Firestore con el nuevo tiempo transcurrido
+        const pedidoId = pasosRef.payload.doc.id;
+        const pedidoPath = `${pedidosCollectionPath}/${pedidoId}`;
+        this.database.updateDocument(pedidoPath, pasosFlete).then(_ => {
+          // Realiza las acciones necesarias después de actualizar
+        }).catch(error => {
+          console.error(`Error updating pedido ${pedidoId}:`, error);
+        });
+      });
+    });
+  }).catch(error => {
+    console.error("Error fetching pedidos:", error);
+  });
+}
+
+
+actualizarPedidos() {
+  const userIDs: string[] = ['user1', 'user2', 'user3']; // IDs de usuarios, obtén estos de tu base de datos
+
+  const allFletes: DatosFlete[] = [];
+
+  userIDs.forEach(uid => {
+    const pedidosCollectionPath = `PedirFlete/${uid}/Pedidos/`;
+
+    // Obtén los pedidos de cada usuario y suscríbete a cambios
+    this.db.getAll(pedidosCollectionPath).subscribe((res) => {
+      const userFletes: DatosFlete[] = res.map((pasosRef: any) => {
+        const pasosFlete: DatosFlete = pasosRef.payload.doc.data() as DatosFlete;
+        pasosFlete.id = pasosRef.payload.doc.id;
+
+        // Calcula el tiempo transcurrido para este pedido
+        this.calcularTiempoTranscurrido(pasosFlete);
+
+        return pasosFlete;
+      });
+
+      allFletes.push(...userFletes);
+
+      // Actualiza la lista de pedidos en el componente
+      this.pasosFlete = allFletes;
+
+      // Notifica a Angular sobre los cambios para actualizar la vista
+      this.cdr.detectChanges();
+    });
+  });
+}
+
+
+
+calcularTiempoTranscurrido(flete: DatosFlete) {
+  const fechaEnMilisegundos = Date.parse(flete.fecha);
+
+  if (!isNaN(fechaEnMilisegundos)) {
+    // Obtén la hora actual en milisegundos
+    const ahora = new Date().getTime();
+
+    // Calcula el tiempo transcurrido en segundos
+    const tiempoTranscurridoSegundos = Math.floor((ahora - fechaEnMilisegundos) / 1000);
+
+    // Actualiza la propiedad tiempoTranscurrido en el objeto DatosFlete
+    flete.tiempoTranscurrido = this.formatoTiempoTranscurrido(tiempoTranscurridoSegundos);
+  } else {
+    // Si la fecha no es válida, asigna una cadena vacía
+    flete.tiempoTranscurrido = '';
+  }
+}
+
+// Función para formatear el tiempo transcurrido en un formato legible
+// Función para formatear el tiempo transcurrido en un formato legible
+formatoTiempoTranscurrido(segundos: number): string {
+  if (segundos < 60) {
+    return `enviado hace ${segundos} segundo${segundos !== 1 ? 's' : ''}`;
+  } else if (segundos < 3600) {
+    const minutos = Math.floor(segundos / 60);
+    return `enviado hace ${minutos} minuto${minutos !== 1 ? 's' : ''}`;
+  } else if (segundos < 86400) {
+    const horas = Math.floor(segundos / 3600);
+    return `enviado hace ${horas} hora${horas !== 1 ? 's' : ''}`;
+  } else {
+    const dias = Math.floor(segundos / 86400);
+    return `enviado hace ${dias} día${dias !== 1 ? 's' : ''}`;
+  }
+}
+
+// card.component.ts
+// card.component.ts
+mostrarTiempoTranscurrido(tiempoTranscurrido: string) {
+  if (!tiempoTranscurrido) {
+    return 'Tiempo no disponible';
+  }
+
+  const segundos = parseInt(tiempoTranscurrido, 10);
+
+  if (segundos < 60) {
+    return `enviado hace ${segundos} segundos`;
+  } else if (segundos < 3600) {
+    const minutos = Math.floor(segundos / 60);
+    return `enviado hace ${minutos} minutos`;
+  } else if (segundos < 86400) {
+    const horas = Math.floor(segundos / 3600);
+    return `enviado hace ${horas} horas`;
+  } else {
+    const dias = Math.floor(segundos / 86400);
+    return `enviado hace ${dias} días`;
+  }
+}
 
 
 
