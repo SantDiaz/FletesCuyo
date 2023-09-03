@@ -6,6 +6,7 @@ import { UserF, datosVehiculo, tipoVehiculo } from 'src/app/folder/models/models
 import { AuthService } from 'src/app/folder/services/auth.service';
 import { FirestoreService } from 'src/app/folder/services/firestore.service';
 import { InteractionService } from 'src/app/folder/services/interaction.service';
+import { NuevoService } from 'src/app/folder/services/nuevo.service';
 
 @Component({
   selector: 'app-paso2-f',
@@ -38,6 +39,7 @@ export class Paso2FComponent implements OnInit {
     private authS: AuthService,      
     private interaction: InteractionService,    
     private firestore: FirestoreService,    
+    private db: NuevoService,    
     private afAuth: AngularFireAuth,
     private router: Router
   ) { }
@@ -57,16 +59,30 @@ export class Paso2FComponent implements OnInit {
 
         if (res2){
           console.log("res", res2)
-          const id = res.uid;
-          const path2 = `Fleteros/${res.uid}/DatosPersonales`
+          // const id = res.uid;
+          // const path2 = `Fleteros/${res.uid}/DatosPersonales`
           // aqui podemos usar dos maneras distintas 
           // 1)_ createDoc para crear un documento con id
           // 2)_ Createdocument para crear infinidad de documenteos
-          this.firestore.createDoc(this.registerF, path2, id);
-          this.router.navigate(['/paso3F']);
-
+          // this.firestore.createDoc(this.registerF, path2, id);
+          
         }
       })  
+      const datosPersonales = {
+        nombre: this.registerF.nombre,
+        apellido: this.registerF.apellido,
+        dni: this.registerF.dni,
+        edad: this.registerF.edad,
+        domicilio: this.registerF.domicilio,
+        telefono: this.registerF.telefono,
+      };
+      const path3 = `Fleteros/${res.uid}`;
+      this.db.updateDocument(path3, datosPersonales).then(_ => {
+        // Realiza las acciones necesarias después de actualizar
+      this.router.navigate(['/paso3F']);
+      }).catch(error => {
+        console.error(`Error updating pedido ${res.uid}:`, error);
+      });
     })
 }
 }

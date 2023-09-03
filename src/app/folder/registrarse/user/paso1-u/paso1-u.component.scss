@@ -39985,6 +39985,21 @@ a.u-link.u-text-hover-grey-90:hover {
  html { font-size: 16px; }
  /*end-variables base-font-size*/
 
+.button-container {
+  text-align: center;
+  padding: 50px;
+}
+
+.custom-button {
+  margin-right: 20px;
+  height: 80px;
+  color: #000;
+  border-radius: 5px;
+  font-size: 18px; /* Tamaño de fuente aumentado */
+  padding: 12px 24px; /* Ajusta el padding según tus preferencias */
+  width: 200px;
+}
+
 
 
 

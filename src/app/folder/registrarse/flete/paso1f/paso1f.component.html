@@ -1,15 +1,15 @@
 <app-header></app-header>
 <ion-content class="background2">
-  <div style="text-align: center; padding: 50px;">
+  <div class="button-container">
     <h1>¡Gracias por elegir FletesYa!</h1>
-    <h4>Si quieres registrarte como Fletero.</h4>
-    <h5>Debe llenar este formulario</h5>
-    <button style="margin-right: 10px;" (click)="volver()">Volver</button>
-    <ion-button id="open-modal" expand="block">Open</ion-button>
+  <h4>Si quieres registrarte para pedir un flete.</h4>
+  <h5>Debe llenar este formulario</h5>
+  <ion-button color="danger" class="custom-button" (click)="volver()">Volver</ion-button>
+  <ion-button color="success" class="custom-button" id="open-modal" >Abrir</ion-button>
     <ion-modal trigger="open-modal" (willDismiss)="onWillDismiss($event)">
       <ng-template>
       <ion-header>
-        <ion-toolbar>
+        <ion-toolbar color="dark">
           <ion-buttons slot="end">
             <ion-button (click)="cancel()">Cancel</ion-button>
           </ion-buttons>
@@ -28,16 +28,11 @@
              <div class="u-form-group u-form-name u-label-top u-form-group-2">
                <label for="name-ae7a" class="u-label">Email</label>
                <input [(ngModel)]="registerF.email" type="email" placeholder="Ingrese su Email" id="name-ae7a" name="name-3" class="u-border-1 u-border-grey-60 u-input u-input-rectangle" required="">
-               <!-- <div *ngIf="registroForm.controls['email'].errors?.required && registroForm.controls['email'].dirty" class="error-message">
-                 El correo electrónico es obligatorio.
-               </div>
-               <div *ngIf="registroForm.controls['email'].errors?.email && registroForm.controls['email'].dirty" class="error-message">
-                 Por favor, ingrese una dirección de correo electrónico válida.
-               </div> -->
+
              </div>
              <div class="u-form-group u-form-name u-label-top u-form-group-2">
                <label for="name-ae7a" class="u-label">Contraseña</label>
-               <input  [(ngModel)]="registerF.password"  type="text" placeholder="Ingrese su contraseña" id="name-ae7a" name="name-3" class="u-border-1 u-border-grey-60 u-input u-input-rectangle" required="">
+               <input  [(ngModel)]="registerF.password"  type="password" placeholder="Ingrese su contraseña" id="name-ae7a" name="name-3" class="u-border-1 u-border-grey-60 u-input u-input-rectangle" required="">
              </div>
              
              <div (click)="siguiente()" class="u-align-center u-form-group u-form-submit u-label-top">

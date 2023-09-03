@@ -3,16 +3,16 @@
 
 <app-header></app-header>
 <ion-content class="background2">
-  <div style="text-align: center; padding: 50px;">
+  <div class="button-container">
     <h1>¡Gracias por elegir FletesYa!</h1>
-    <h4>Si quieres registrarte para pedir un flete.</h4>
-    <h5>Debe llenar este formulario</h5>
-    <button style="margin-right: 10px;" (click)="volver()">Volver</button>
-    <ion-button id="open-modal" expand="block">Open</ion-button>
+  <h4>Si quieres registrarte para pedir un flete.</h4>
+  <h5>Debe llenar este formulario</h5>
+  <ion-button color="danger" class="custom-button" (click)="volver()">Volver</ion-button>
+  <ion-button color="success" class="custom-button" id="open-modal" >Abrir</ion-button>
     <ion-modal trigger="open-modal" (willDismiss)="onWillDismiss($event)">
       <ng-template>
       <ion-header>
-        <ion-toolbar>
+        <ion-toolbar color="dark">
           <ion-buttons slot="end">
             <ion-button (click)="cancel()">Cancel</ion-button>
           </ion-buttons>

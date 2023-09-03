@@ -48,7 +48,7 @@ export class Paso1UComponent implements OnInit {
     //   this.onWillDismiss(ev)
   }
 
-  atras(){
+  volver(){
     this.routes.navigate(['/registrarse']);
   }
 

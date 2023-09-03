@@ -32,33 +32,52 @@ C20.296,39.899,19.65,40.986,18.613,41.552z"></path><g><path style="fill:#556080;
                   <ion-modal class="background2"  [isOpen]="isModalOpen">
                     <ng-template >
                       <ion-header>
-                        <ion-toolbar>
-                          <ion-title>Comprobante</ion-title>
+                        <ion-toolbar color="dark">
+                          <ion-title >Comprobante</ion-title>
                           <ion-buttons slot="end">
                             <ion-button (click)="cerrar(false)">Cerrar</ion-button>
                           </ion-buttons>
                         </ion-toolbar>
                       </ion-header>
                       <ion-content  *ngIf="datos2" class="ion-padding ">
-                        <H4>
-                          {{datos2.nombre}} {{datos2.apellido}}
-                        </H4>
-                        <H4>Desde: {{datos2.uDesde}}</H4>
-                        <H4>Hasta: {{datos2.uHasta}}</H4>
-                        <H4>Fecha: {{datos2.fecha}}</H4>
-                        <H4>Hora: {{datos2.hora}}:{{datos2.minutos}}</H4>
-                        <H4>Cargamento: {{datos2.cargamento}}</H4>
-                        <H4>Tipo de Vehiculo: {{datos2.tipoVehiculo}}</H4>
-                        <H4>¿Ayudantes?: {{datos2.ayudantes}}</H4>
+                        <ion-card color="dark" class="informacion-card">
+                          <ion-card-header>
+                            <h3>{{ datos2.nombre }} {{ datos2.apellido }}</h3>
+                          </ion-card-header>
+                          <ion-card-content>
+                            <ul class="informacion-list">
+                              <li><strong>Desde:</strong> {{ datos2.uDesde }}</li>
+                              <li><strong>Hasta:</strong> {{ datos2.uHasta }}</li>
+                              <li><strong>Fecha:</strong> {{ datos2.fecha }}</li>
+                              <li><strong>Hora:</strong> {{ datos2.hora }}:{{ datos2.minutos }}</li>
+                              <li><strong>Cargamento:</strong> {{ datos2.cargamento }}</li>
+                              <li><strong>Tipo de Vehiculo:</strong> {{ datos2.tipoVehiculo }}</li>
+                              <li><strong>¿Ayudantes?:</strong> {{ datos2.ayudantes }}</li>
+                            </ul>
+                          </ion-card-content>
+                        </ion-card>
                       
-                        <div *ngIf="respuestas && respuestas.length > 0">
-                          <h4>Respuestas:</h4>
-                          <ul>
+                        <div *ngIf="respuestas && respuestas.length > 0" class="ion-text-center">
+                          <h4 color="ligth">Respuestas de Fleteros:</h4>
+                          <ul class="respuestas-list">
                             <li *ngFor="let respuesta of respuestas">
-                              {{respuesta.nombre}} {{respuesta.apellido}}: Precio ${{ respuesta.precio }} <button class="u-align-center u-form-group u-form-submit u-label-top" type="button"> Aceptar</button>
+                              <ion-card color="medium" class="ion-text-center informacion-card">
+                                <ion-card-header color="dark">
+                                  <h4 class="nombre-apellido">{{ respuesta.nombre }} {{ respuesta.apellido }}</h4>
+                                  <!-- <a (click)="openWhatsApp(respuesta)" class="ion-text-center u-btn u-btn-round u-button-style u-custom-color-1 u-hover-custom-color-3 u-radius-50 u-btn-2">Aceptar</a>                                </ion-card-header> -->
+                                </ion-card-header>
+                                <h4 class="precio">${{ respuesta.precio }}</h4>
+                                <button (click)="openWhatsApp(respuesta)" class="btn btn-success">Aceptar</button>
+                                <br>
+                                <br>
+
+                              </ion-card>
                             </li>
                           </ul>
                         </div>
+                        
+                        
+                        
                       </ion-content>
                       
                     </ng-template>

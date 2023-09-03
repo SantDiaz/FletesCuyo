@@ -47,7 +47,7 @@ export class Paso1fComponent implements OnInit {
     //   this.onWillDismiss(ev)
   }
 
-  atras(){
+  volver(){
     this.routes.navigate(['/registrarse']);
   }
 

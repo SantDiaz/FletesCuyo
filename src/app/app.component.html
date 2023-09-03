@@ -1,47 +1,40 @@
 <ion-app>
   <ion-menu contentId="main-content" type="overlay">
     <ion-header>
-      <ion-toolbar color="light">
+      <ion-toolbar color="dark">
           <img class="logo" slot="start"  routerLink="/home" src="../assets/icon/favicon.png" width="310" height="auto" />
       </ion-toolbar>
     </ion-header>
     <ion-content class="background2">
      
-      <ion-list class="back-menu" >
+      <ion-list  class="background2" >
        
           <!-- Lista de menu -->
-          <ion-menu-toggle   >
+          <ion-menu-toggle class="background2"   >
 
-            <ion-item  *ngIf="login == true " [routerLink]="['/profile']" color="light"  >
+            <ion-item  *ngIf="login == true " class="menu-item" [routerLink]="['/profile']" color="dark"  >
               <ion-label >
                 Perfil
               </ion-label>
               <ion-icon slot="start" name="person-outline"></ion-icon>
             </ion-item>
-            
-            <!-- <ion-item  *ngIf="login == true " [routerLink]="['/home2']" color="light"  >
-              <ion-label >
-                Pruebas
-              </ion-label>
-              <ion-icon slot="start" name="home-outline"></ion-icon>
-            </ion-item> -->
 
           
-              <ion-item *ngIf="login == true "  [routerLink]="['/home']"  color="light"  >
+              <ion-item *ngIf="login == true "  class="menu-item" [routerLink]="['/home']"  color="dark"  >
                 <ion-label  > 
                   Inicio
                 </ion-label>
                 <ion-icon slot="start" name="home-outline"></ion-icon>
               </ion-item>
 
-              <ion-item *ngIf="rol === 'Usuario' && login == true " [routerLink]="['/precios']" color="light"  >
+              <ion-item *ngIf="rol === 'Usuario' && login == true " class="menu-item" [routerLink]="['/precios']" color="dark"  >
                 <ion-label  > 
                   Mis pedidos
                 </ion-label>
                 <ion-icon slot="start" name="home-outline"></ion-icon>
               </ion-item>
 
-              <ion-item *ngIf="rol === 'Usuario' && login == true "  [routerLink]="['/fletes']" color="light"  >
+              <ion-item *ngIf="rol === 'Usuario' && login == true " class="menu-item"  [routerLink]="['/fletes']" color="dark"  >
                 <ion-label > 
                   Quiero pedir un flete
                 </ion-label>
@@ -50,14 +43,14 @@
               
               <!-- && rol === 'Usuario' -->
 
-              <ion-item *ngIf="login == true" [routerLink]="['/chat']" color="light"  >
+              <ion-item *ngIf="login == true"  class="menu-item" [routerLink]="['/chat']" color="dark"  >
                 <ion-label >
                 Chat
                 </ion-label>
                 <ion-icon  slot="start" name="chatbubbles-outline"></ion-icon>
               </ion-item>
 
-              <ion-item *ngIf=" login == true && rol === 'Admin' " [routerLink]="['/admin']" color="light"  >
+              <ion-item *ngIf=" login == true && rol === 'Admin' " class="menu-item" [routerLink]="['/admin']" color="dark"  >
                 <ion-label >
                 Admin
                 </ion-label>
@@ -70,24 +63,24 @@
  </ion-list >
 
 
- <ion-list class="back-menu" id="labels-list">
-  <ion-menu-toggle   >
+ <ion-list class="background2" id="labels-list">
+  <ion-menu-toggle    >
     
-    <ion-item *ngIf="login == false" [routerLink]="['/login']" color="light"  >
+    <ion-item *ngIf="login == false" [routerLink]="['/login']" color="dark"  >
       <ion-label >
       Iniciar Sesion
       </ion-label>
       <ion-icon slot="start" name="person-outline"></ion-icon>
     </ion-item>
 
-    <ion-item  *ngIf="login" (click)="logout()" color="light" >
+    <ion-item  *ngIf="login" (click)="logout()" color="dark" >
       <ion-label>
       Cerrar Sesion 
       </ion-label>
       <ion-icon slot="start" name="log-out-outline"></ion-icon>
     </ion-item>
     <!--   -->
-    <ion-item *ngIf="login == false" [routerLink]="['/registrarse']"color="light" >
+    <ion-item *ngIf="login == false" [routerLink]="['/registrarse']"color="dark" >
       <ion-label >
       Registrarse
       </ion-label>
