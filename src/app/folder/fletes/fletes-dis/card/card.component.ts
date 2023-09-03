@@ -77,7 +77,7 @@ export class CardComponent implements OnInit {
     firebase.firestore().collection(usersCollectionPath).get()
       .then(querySnapshot => {
         const userIDs = querySnapshot.docs.map(doc => doc.id);
-        console.log('userIDs: ', userIDs);
+        // console.log('userIDs: ', userIDs);
         
         const allFletes = []; // Arreglo que almacenará todos los pedidos de todos los usuarios
         // Ahora puedes usar los IDs de los usuarios para acceder a sus pedidos
@@ -265,7 +265,7 @@ mostrarTiempoTranscurrido(tiempoTranscurrido: string) {
         this.db.getDoc<UserF>(path, res.uid).subscribe(res2 => {
           const nuevoDato = DatosFletes;
           const rta22 = this.rta;
-          console.log('rta: ', rta22);
+          // console.log('rta: ', rta22);
           const enlace = `PedirFlete/${DatosFletes.uid}/Pedidos/${DatosFletes.id}/Respuesta`;
           rta22.nombre = res2.nombre;
           rta22.apellido = res2.apellido;

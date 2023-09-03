@@ -4,10 +4,6 @@ import { AdminComponent } from '../admin/admin.component';
 import { ChatComponent } from '../chat/chat.component';
 import { HomeLogComponent } from '../homeF/home-log.component';
 import { LoginComponent } from '../login/login.component';
-import { MapsGoogleComponent } from '../maps-google/maps-google.component';
-import { LoadingComponent } from '../maps/components/loading/loading.component';
-import { MapViewComponent } from '../maps/components/map-view/map-view.component';
-import { MapScreenComponent } from '../maps/screens/map-screen/map-screen.component';
 import { ProfileComponent } from '../profile/profile.component';
 import { RegisterComponent } from '../register/register.component';
 import { Form1Component } from '../register/registerFlete/form1/form1.component';
@@ -68,23 +64,6 @@ const routes: Routes = [
   {
     path: 'paso3',
     component: Paso3Component
-  },
-  {
-    path: 'maps',
-    component: MapScreenComponent
-  },
-  {
-    path: 'loading',
-    component: LoadingComponent
-  },
-  {
-    path: 'map-view',
-    component: MapViewComponent
-  },
-
-  {
-    path: 'mapsGoogle',
-    component: MapsGoogleComponent,
   },
   {
     path: 'login',

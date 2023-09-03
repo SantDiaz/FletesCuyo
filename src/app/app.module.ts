@@ -6,9 +6,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ComponentsModule } from './components/components.module';
 import { PasosModule } from './folder/fletes/pasos/pasos.module';
-import { MapsModule } from './folder/maps/maps.module';
 import { HttpClientModule } from '@angular/common/http';
-import { MapsGoogleModule } from './folder/maps-google/mapsGoogle.module';
 import { RegisterModule } from './folder/register/register.module';
 import { HomeLogModule } from './folder/homeF/home-log.module';
 import { ChatModule } from './folder/chat/chat.module';
@@ -16,7 +14,7 @@ import { LoginModule } from './folder/login/login.module';
 import { AngularFireModule } from '@angular/fire/compat';
 import {  environment2 } from 'src/environments/environment';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
-// import { AngularFirestoreModule } from '@angular/fire/firestore';
+// import { AngularFirestoreModule } from '@angular//firestore';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AdminModule } from './folder/admin/admin.module';
 import { ProfileModule } from './folder/profile/profile.module';
@@ -37,10 +35,8 @@ import { FleteModule } from './folder/registrarse/flete/flete.module';
       ComponentsModule,
       PasosModule,
       ProfileModule,
-      MapsModule,
       AdminModule,
       HttpClientModule,
-      MapsGoogleModule,
       LoginModule,
       RegisterModule,
       HomeLogModule,

@@ -38883,39 +38883,36 @@ a.u-link.u-text-hover-grey-90:hover {
 /*begin-variables sitestylecss*/
 
 .u-custom-color-1,
-        .u-body.u-custom-color-1,
-        section.u-custom-color-1:before,
-        .u-custom-color-1 > .u-container-layout:before,
-        .u-custom-color-1 > .u-inner-container-layout:before,
-        .u-custom-color-1.u-sidenav:before,
-        .u-container-layout.u-container-layout.u-custom-color-1:before,
-        .u-table-alt-custom-color-1 tr:nth-child(even)
-        {
-            color: #111111;
-            background-color: #ace7a5;
-        }
+.u-body.u-custom-color-1,
+section.u-custom-color-1:before,
+.u-custom-color-1 > .u-container-layout:before,
+.u-custom-color-1 > .u-inner-container-layout:before,
+.u-custom-color-1.u-sidenav:before,
+.u-container-layout.u-container-layout.u-custom-color-1:before,
+.u-table-alt-custom-color-1 tr:nth-child(even) {
+    color: #111111;
+    background-color: #4b8f63; /* Cambiar a un verde medio oscuro */
+}
 
-        .u-button-style.u-custom-color-1,
-        .u-button-style.u-custom-color-1[class*="u-border-"]
-        {
-            color: #111111 !important;
-            background-color: #ace7a5 !important;
-        }
+.u-button-style.u-custom-color-1,
+.u-button-style.u-custom-color-1[class*="u-border-"] {
+    color: #111111 !important;
+    background-color: #4b8f63 !important; /* Cambiar a un verde medio oscuro */
+}
 
-        .u-button-style.u-custom-color-1:hover,
-        .u-button-style.u-custom-color-1[class*="u-border-"]:hover,
-        .u-button-style.u-custom-color-1:focus,
-        .u-button-style.u-custom-color-1[class*="u-border-"]:focus,
-        .u-button-style.u-button-style.u-custom-color-1:active,
-        .u-button-style.u-button-style.u-custom-color-1[class*="u-border-"]:active,
-        .u-button-style.u-button-style.u-custom-color-1.active,
-        .u-button-style.u-button-style.u-custom-color-1[class*="u-border-"].active,
-        li.active > .u-button-style.u-button-style.u-custom-color-1,
-        li.active > .u-button-style.u-button-style.u-custom-color-1[class*="u-border-"]
-        {
-            color: #111111 !important;
-            background-color: #8fdf86 !important;
-        }
+.u-button-style.u-custom-color-1:hover,
+.u-button-style.u-custom-color-1[class*="u-border-"]:hover,
+.u-button-style.u-custom-color-1:focus,
+.u-button-style.u-custom-color-1[class*="u-border-"]:focus,
+.u-button-style.u-button-style.u-custom-color-1:active,
+.u-button-style.u-button-style.u-custom-color-1[class*="u-border-"]:active,
+.u-button-style.u-button-style.u-custom-color-1.active,
+.u-button-style.u-button-style.u-custom-color-1[class*="u-border-"].active,
+li.active > .u-button-style.u-button-style.u-custom-color-1,
+li.active > .u-button-style.u-button-style.u-custom-color-1[class*="u-border-"] {
+    color: #111111 !important;
+    background-color: #3e7c53 !important; /* Cambiar a un verde medio oscuro en hover y active */
+}
 
         .u-hover-custom-color-1:hover,
         .u-hover-custom-color-1[class*="u-border-"]:hover,

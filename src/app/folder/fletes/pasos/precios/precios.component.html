@@ -21,80 +21,69 @@ C20.296,39.899,19.65,40.986,18.613,41.552z"></path><g><path style="fill:#556080;
   s9.75,7.977,9.75,7.977v5.126c0.54,0.488,0.886,1.185,0.886,1.965v3.546c0,1.192-0.8,2.195-1.886,2.53
   c-0.605,1.881-1.478,3.674-2.632,5.304c-0.291,0.411-0.563,0.759-0.801,1.03V38.8c0,1.223,0.691,2.342,1.785,2.888l8.467,4.233
   c0.508,0.254,0.967,0.575,1.39,0.932c5.71-4.762,9.399-11.882,9.536-19.9C53.246,12.32,41.587,0.254,26.953,0.004z"></path>
-</g></svg></span><span class="u-file-icon u-icon u-icon-2"><img src="../../../../../assets/imagesLogin/1828666.png" alt=""></span>
-                  <h2 class="u-align-center u-text u-text-2">${{datos.precio}}</h2>
+</g></svg></span><span class="u-file-icon u-icon u-icon-2"></span>
+<br>
+<br>
+<h6><strong>Desde:</strong> {{ datos.uDesde }}</h6>
+<h6><strong>Hasta:</strong> {{ datos.uHasta }}</h6>
+<h6><strong>Fecha:</strong> {{ datos.fecha }}</h6>
+<h6><strong>Hora:</strong> {{ datos.hora }}:{{ datos.minutos }}</h6>
+<h6><strong>Cargamento:</strong> {{ datos.cargamento }}</h6>
+<h6><strong>Tipo de Vehiculo:</strong> {{ datos.tipoVehiculo }}</h6>
+<h6><strong>¿Ayudantes?:</strong> {{ datos.ayudantes }}</h6>
+      
 
 
 
 <!-- VerPedido -->
 
-                  <ion-button  expand="block" (click)="verPedidos(true, datos)" class="u-active-none u-border-2 u-border-active-palette-2-dark-1 u-border-hover-palette-2-base u-border-no-left u-border-no-right u-border-no-top u-border-palette-1-base u-btn u-button-style u-hover-none u-none u-text-hover-palette-2-base u-text-palette-1-base u-btn-1">Ver Pedido</ion-button>
-                  <ion-modal class="background2"  [isOpen]="isModalOpen">
-                    <ng-template >
-                      <ion-header>
-                        <ion-toolbar color="dark">
-                          <ion-title >Comprobante</ion-title>
-                          <ion-buttons slot="end">
-                            <ion-button (click)="cerrar(false)">Cerrar</ion-button>
-                          </ion-buttons>
-                        </ion-toolbar>
-                      </ion-header>
-                      <ion-content  *ngIf="datos2" class="ion-padding ">
-                        <ion-card color="dark" class="informacion-card">
-                          <ion-card-header>
-                            <h3>{{ datos2.nombre }} {{ datos2.apellido }}</h3>
-                          </ion-card-header>
-                          <ion-card-content>
-                            <ul class="informacion-list">
-                              <li><strong>Desde:</strong> {{ datos2.uDesde }}</li>
-                              <li><strong>Hasta:</strong> {{ datos2.uHasta }}</li>
-                              <li><strong>Fecha:</strong> {{ datos2.fecha }}</li>
-                              <li><strong>Hora:</strong> {{ datos2.hora }}:{{ datos2.minutos }}</li>
-                              <li><strong>Cargamento:</strong> {{ datos2.cargamento }}</li>
-                              <li><strong>Tipo de Vehiculo:</strong> {{ datos2.tipoVehiculo }}</li>
-                              <li><strong>¿Ayudantes?:</strong> {{ datos2.ayudantes }}</li>
-                            </ul>
-                          </ion-card-content>
-                        </ion-card>
-                      
-                        <div *ngIf="respuestas && respuestas.length > 0" class="ion-text-center">
-                          <h4 color="ligth">Respuestas de Fleteros:</h4>
-                          <ul class="respuestas-list">
-                            <li *ngFor="let respuesta of respuestas">
-                              <ion-card color="medium" class="ion-text-center informacion-card">
-                                <ion-card-header color="dark">
-                                  <h4 class="nombre-apellido">{{ respuesta.nombre }} {{ respuesta.apellido }}</h4>
-                                  <!-- <a (click)="openWhatsApp(respuesta)" class="ion-text-center u-btn u-btn-round u-button-style u-custom-color-1 u-hover-custom-color-3 u-radius-50 u-btn-2">Aceptar</a>                                </ion-card-header> -->
-                                </ion-card-header>
-                                <h4 class="precio">${{ respuesta.precio }}</h4>
-                                <button (click)="openWhatsApp(respuesta)" class="btn btn-success">Aceptar</button>
-                                <br>
-                                <br>
-
-                              </ion-card>
-                            </li>
-                          </ul>
-                        </div>
-                        
-                        
-                        
-                      </ion-content>
-                      
-                    </ng-template>
-                  </ion-modal>
 
 
 
 
-                  <!-- <a (click)="verPedidos()" class="u-active-none u-border-2 u-border-active-palette-2-dark-1 u-border-hover-palette-2-base u-border-no-left u-border-no-right u-border-no-top u-border-palette-1-base u-btn u-button-style u-hover-none u-none u-text-hover-palette-2-base u-text-palette-1-base u-btn-1">Ver pedido</a> -->
-                </div>
-              </div>
+<!-- <a (click)="verPedidos()" class="u-active-none u-border-2 u-border-active-palette-2-dark-1 u-border-hover-palette-2-base u-border-no-left u-border-no-right u-border-no-top u-border-palette-1-base u-btn u-button-style u-hover-none u-none u-text-hover-palette-2-base u-text-palette-1-base u-btn-1">Ver pedido</a> -->
+</div>
+</div>
+<button (click)="verPedidos(true, datos)" class="u-border-2 u-border-grey-75 u-btn u-btn-round u-button-style u-custom-color-1 u-hover-custom-color-3 u-radius-50 u-btn-2">Ver Respuestas</button>
+
+<!-- <ion-button   (click)="verPedidos(true, datos)"class="u-border-2 u-border-grey-75 u-btn u-btn-round u-button-style u-custom-color-1 u-hover-custom-color-3 u-radius-50 u-btn-2">Ver Respuestas</ion-button> -->
+<ion-modal class="background2"  [isOpen]="isModalOpen">
+  <ng-template >
+    <ion-header>
+      <ion-toolbar color="dark">
+        <ion-title >Respuestas de los Fleteros</ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="cerrar(false)">Cerrar</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content >
+      <div *ngIf="respuestas && respuestas.length > 0" class="ion-text-center">
+        <ul class="respuestas-list">
+          <li *ngFor="let respuesta of respuestas">
+            <ion-card color="medium" class="ion-text-center informacion-card">
+              <ion-card-header color="dark">
+                <h4 class="nombre-apellido">{{ respuesta.nombre }} {{ respuesta.apellido }}</h4>
+                <!-- <a (click)="openWhatsApp(respuesta)" class="ion-text-center u-btn u-btn-round u-button-style u-custom-color-1 u-hover-custom-color-3 u-radius-50 u-btn-2">Aceptar</a>                    
+                            </ion-card-header> -->
+              </ion-card-header>
+              <h4 class="precio">${{ respuesta.precio }}</h4>
+              <button (click)="openWhatsApp(respuesta)" class="btn btn-success">Aceptar</button>
+              <br>
+              <br>
+            </ion-card>
+          </li>
+        </ul>
+      </div>
+    </ion-content>
+  </ng-template>
+</ion-modal>
               <!-- <div *ngIf="DatosF" >
               <a  (click)="openWhatsApp(DatosF)"  class="u-border-2 u-border-grey-75 u-btn u-btn-round u-button-style u-custom-color-1 u-hover-custom-color-3 u-radius-50 u-btn-2">Aceptar&nbsp;</a>
               </div>
               <ul> -->
         
-              <a  (click)="getDatosFf(datos)"  class="u-border-2 u-border-grey-75 u-btn u-btn-round u-button-style u-custom-color-1 u-hover-custom-color-3 u-radius-50 u-btn-2">Aceptar&nbsp;</a>
+              <!-- <a  (click)="getDatosFf(datos)"  class="u-border-2 u-border-grey-75 u-btn u-btn-round u-button-style u-custom-color-1 u-hover-custom-color-3 u-radius-50 u-btn-2">Aceptar&nbsp;</a> -->
             </div>
           </div>
         </div>

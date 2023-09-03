@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { MapScreenComponent } from './folder/maps/screens/map-screen/map-screen.component';
 import { Form1Component } from './folder/register/registerFlete/form1/form1.component';
 
 const routes: Routes = [

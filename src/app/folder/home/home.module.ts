@@ -7,7 +7,6 @@ import { IonicModule } from '@ionic/angular';
 import { HomePageRoutingModule } from './home-routing.module';
 
 import { HomePage } from './home.page';
-import { MapsModule } from '../maps/maps.module';
 import { ComponentsModule } from 'src/app/components/components.module';
 import { PasosModule } from '../fletes/pasos/pasos.module';
 import { RegisterModule } from '../register/register.module';
@@ -21,7 +20,6 @@ import { ProfileModule } from '../profile/profile.module';
     IonicModule,
     ComponentsModule,
     HomePageRoutingModule,
-    MapsModule,
     PasosModule,
     RegisterModule,
     ChatModule,

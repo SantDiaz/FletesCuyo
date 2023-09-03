@@ -9,7 +9,6 @@ import { FletesPageRoutingModule } from './fletes-routing.module';
 import { FletesPage } from './fletes.page';
 import { ComponentsModule } from 'src/app/components/components.module';
 import { PasosModule } from './pasos/pasos.module';
-import { MapsModule } from '../maps/maps.module';
 import { RegisterModule } from '../register/register.module';
 import { ChatModule } from '../chat/chat.module';
 
@@ -22,7 +21,6 @@ import { ChatModule } from '../chat/chat.module';
     FletesPageRoutingModule,
     ComponentsModule,
     PasosModule,
-    MapsModule,
     // RegisterModule,
     ChatModule,
     

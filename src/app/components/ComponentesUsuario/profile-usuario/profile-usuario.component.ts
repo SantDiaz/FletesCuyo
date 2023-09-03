@@ -40,14 +40,14 @@ export class ProfileUsuarioComponent implements OnInit {
 
 
 getDatosUser(uid: string) {
-  const path = `Usuarios/${uid}/DatosPersonales`;
+  const path = `Usuarios`;
   const id = uid;
   
   this.db.getDoc<UserU>(path, id).subscribe( res => {
     if (res ) {
       this.DatosU = res;
-      console.log('id personal -> ', uid);
-      console.log('trae esto-->', res );
+      // console.log('id personal -> ', uid);
+      // console.log('trae esto-->', res );
       }
       else{
         console.log('Tiene errores -> ');
@@ -62,8 +62,8 @@ getDatosGmail(uid: string) {
   this.db.getDoc<UserU>(path, id).subscribe( res => {
     if (res ) {
       this.DatosG = res;
-      console.log('id personal -> ', uid);
-      console.log('trae esto-->', res );
+      // console.log('id personal -> ', uid);
+      // console.log('trae esto-->', res );
       }
       else{
         console.log('Tiene errores -> ');
