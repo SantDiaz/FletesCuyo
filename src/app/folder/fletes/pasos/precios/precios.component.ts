@@ -19,15 +19,15 @@ export class PreciosComponent implements OnInit {
   login: boolean = false;
   rol: 'Usuario' | 'Fletero'| 'Admin' = null;
   precios = []
-  precios2 = []
+  precios2: DatosFlete[] = [];
   DatosF: UserF
   datosFl: DatosFlete
   datos2: DatosFlete
   datos: respuesta;
   rta2: respuesta;
   isModalOpen = false;
-  // enlacesWhatsApp:string;
-  enlacesWhatsApp:string[];
+  respuestas: any[]; 
+    enlacesWhatsApp:string[];
   fleteros: UserF[];
   fleteroSeleccionadoId: string;
 
@@ -54,13 +54,30 @@ export class PreciosComponent implements OnInit {
 
       if (res) {
         this.login = true;
-        this.database.getAll(`PedirFlete3/${res.uid}/Respuesta`).then(res =>{
-          res.subscribe(resRef=>{
-            this.precios = resRef.map(pasosRef =>{
-              let pasosFlete = pasosRef.payload.doc.data();
-              pasosFlete['id'] = pasosRef.payload.doc.id;
-              return pasosFlete;
-            })
+        const path = `PedirFlete/${res.uid}/Pedidos`;
+        this.db.getAllPedidos().subscribe((pedidos: DatosFlete[]) => {
+          // Aquí puedes trabajar con los datos de pedidos
+          pedidos.forEach((pedido) => {
+            const pedidoID = pedido.id;
+            const rutaPedido = `PedirFlete/${res.uid}/Pedidos/${pedidoID}`;
+    
+            // Aquí puedes realizar acciones con la ruta del pedido
+            
+            //aqui quiero agregar las respuestas de los pedidos `PedirFlete/${res.uid}/Pedidos//${pedidoID}/Respuesta/${ID DEL USUARIO DEL FLETERO QUE QUIERO OBTENER}`
+            this.database.getAll(`PedirFlete/${res.uid}/Pedidos/${pedidoID}`).then((res) => {
+              if (res && res.subscribe) {
+                res.subscribe((resRef) => {
+                  this.precios = resRef.map((pasosRef) => {
+                    let pasosFlete = pasosRef.payload.doc.data();
+                    pasosFlete['id'] = pasosRef.payload.doc.id;
+                    return pasosFlete;
+                  });
+                });
+              } else {
+                console.log('La respuesta de this.database.getAll() no es un observable válido.');
+                // Manejar el caso en el que res no sea un observable válido
+              }
+            });
             console.log(this.precios);
           })
       }) 
@@ -71,6 +88,18 @@ export class PreciosComponent implements OnInit {
  })
   }
 
+
+  getDatos(rta: respuesta) {
+    const path = 'Fleteros';
+    const id = rta.idFletero;
+    this.db.getDoc<UserF>(path, id).subscribe( res => {
+      if (res ) {
+        this.DatosF = res;
+        const fleteroId = res.uid
+        this.openWhatsApp(fleteroId)
+        }
+    })
+  }
   
   getDatosFf(rta: respuesta) {
     const path = 'Fleteros';
@@ -116,67 +145,90 @@ export class PreciosComponent implements OnInit {
     });
   }
 
- generateWhatsAppLink(fleteros: UserF[], countryCode: string) {
-  const message = 'Hola, estoy interesado en solicitar un flete.'; // Mensaje predeterminado
+  generateWhatsAppLink(fleteros: UserF[], countryCode: string) {
+    const message = 'Hola, estoy interesado en solicitar un flete.'; // Mensaje predeterminado
+  
+    const formattedMessage = encodeURIComponent(message); // Codifica el mensaje para asegurar caracteres especiales
+  
+    const whatsappLinks = fleteros.map(fletero => {
+      const phoneNumber = fletero && fletero.telefono ? fletero.telefono.replace(/\s/g, '') : '';
+      if (phoneNumber) {
+        const phoneNumberWithPrefix = `${countryCode}${phoneNumber}`;
+        return `https://wa.me/${phoneNumberWithPrefix}?text=${formattedMessage}`;
+      }
+      return ''; // O puedes manejarlo de otra manera si no hay un número de teléfono válido.
+    });
+  
+    return whatsappLinks;
+  }
+  
 
-  const formattedMessage = encodeURIComponent(message); // Codifica el mensaje para asegurar caracteres especiales
 
-  const whatsappLinks = fleteros.map(fletero => {
-    const formattedPhoneNumber = fletero.telefono.replace(/\s/g, ''); // Elimina espacios en blanco del número de teléfono
-    const phoneNumberWithPrefix = `${countryCode}${formattedPhoneNumber}`;
-    return `https://wa.me/${phoneNumberWithPrefix}?text=${formattedMessage}`;
-  });
-
-  return whatsappLinks;
+verPedidos(isOpen: boolean, pedido: DatosFlete) {
+  this.isModalOpen = isOpen;
+  this.datos2 = pedido; // Asigna los detalles del pedido al campo datos2
+  this.cargarRespuestas(pedido.id, pedido.uid)
 }
 
 
-
-
-
-verPedidos(isOpen: boolean, precios2){
- 
-  this.isModalOpen = isOpen;
-  this.auth.stateUser<UserU>().subscribe( res  => {
-    const path = `PedirFlete3`
+cargarRespuestas(pedidoId: string, pedidoUser: string) {
+  this.auth.stateUser<UserU>().subscribe((res) => {
     if (res) {
-      this.db.getDoc<DatosFlete>(path, res.uid).subscribe(res2 => { 
-        this.datos2 = res2
-        console.log('pedido:', res2);
-      })
-    } 
-  })
-
-}   
-
-
-
-
-  async getDatosFlete(DatosFletes: DatosFlete) {
-    const nuevoDato = DatosFletes;
-    console.log(' resuid -> ',nuevoDato.id);
-    const path = `PedirFlete3/`;
-    this.db.getCollection<respuesta>(path).subscribe( res => {
-      if (res ) {
-        this.database.getAll(`PedirFlete3/${nuevoDato.id}/Respuesta/`).then(res2 =>{
-          res2.subscribe(resRef=>{
-                 console.log(' respnde2 -> ',res2);
-            this.precios = resRef.map(pasosRef =>{
-              let pasosFlete = pasosRef.payload.doc.data();
-              pasosFlete['id'] = pasosRef.payload.doc.id;
-              return pasosFlete;
-            })
-            console.log(this.precios);
-          })
-        // })
-      }) 
+      // Utiliza la función adecuada para obtener las respuestas desde tu base de datos
+      // Asegúrate de que las respuestas se almacenen en la variable respuestas.
+      // Por ejemplo:
+      this.database
+      .getAll(`PedirFlete/${pedidoUser}/Pedidos/${pedidoId}/Respuesta`)
+      .then((observablePromise) => {
+        if (observablePromise && observablePromise.subscribe) {
+          observablePromise.subscribe((resRef) => {
+            if (resRef) {
+              console.log('respuesta', resRef);
+              this.respuestas = resRef.map((respuestaRef) => {
+                return respuestaRef.payload.doc.data();
+              });
+            } else {
+              console.log('no responde nada');
+              // Manejar el caso en que resRef sea undefined o null
+            }
+          });
+        } else {
+          console.log('observablePromise es undefined o no tiene subscribe');
+          // Manejar el caso en que observablePromise sea undefined o no tenga subscribe
         }
-        else{
-          console.log('Tiene errores -> ');
-        }
-    })
-    return this.getDatosFlete;
-  }
+      });
+    }
+      });
+    
+    
+}
+
+
+  // async getDatosFlete(DatosFletes: DatosFlete) {
+  //   const nuevoDato = DatosFletes;
+  //   console.log(' resuid -> ',nuevoDato.id);
+  //   const path = `PedirFlete3/`;
+  //   this.db.getCollection<respuesta>(path).subscribe( res => {
+  //     if (res ) {
+  //       this.database.getAll(`PedirFlete3/${nuevoDato.id}/Respuesta/`).then(res2 =>{
+  //         res2.subscribe(resRef=>{
+  //                console.log(' respnde2 -> ',res2);
+  //           this.precios = resRef.map(pasosRef =>{
+  //             let pasosFlete = pasosRef.payload.doc.data();
+  //             pasosFlete['id'] = pasosRef.payload.doc.id;
+  //             return pasosFlete;
+  //           })
+  //           console.log(this.precios);
+  //         })
+  //       // })
+  //     }) 
+  //       }
+  //       else{
+  //         console.log('Tiene errores -> ');
+  //       }
+  //   })
+  //   return this.getDatosFlete;
+  // }
 
   cerrar(isOpen: boolean) {
     this.isModalOpen = isOpen;

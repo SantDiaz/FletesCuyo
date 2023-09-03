@@ -84,6 +84,7 @@ export class Paso2Component implements OnInit {
           data.fecha = res2.fecha;
           data.hora = res2.hora;
           data.minutos = res2.minutos;
+          data.id = res2.id
           data.uid = res.uid;
           console.log('id a editar', idPrimer);
           

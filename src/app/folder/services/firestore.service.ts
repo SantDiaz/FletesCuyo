@@ -1,9 +1,14 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
-import { DatosFlete, datosVehiculo } from '../models/models';
+import { DatosFlete, UserF, datosVehiculo } from '../models/models';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
+import 'firebase/firestore';
+import firebase from 'firebase/compat/app';
+import { AuthService } from './auth.service';
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -19,6 +24,7 @@ export class FirestoreService {
   
   constructor(private firestore: AngularFirestore,
               public fireStorage: AngularFireStorage,
+              public auths : AuthService
              ) { }
 
 // guarda datos sin idÇ
@@ -61,9 +67,32 @@ createDocument<tipo>(data: tipo, enlace: string, id: string) {
 
   }
 
+  getAllFletero(){
+    const pedidosCollectionPath = 'Fleteros'
+    return this.firestore.collection(pedidosCollectionPath).valueChanges() as Observable<UserF[]>;
+
+  }
+
   getAllPedidos() {
-    return this.firestore.collectionGroup('Pedidos').valueChanges() as Observable<DatosFlete[]>;
-  }  
+    return this.auths.stateUser().pipe(
+      switchMap((user) => {
+        if (user) {
+          // Obtén el UID del usuario autenticado
+          const uid = user.uid;
+          
+          // Construye la ruta a la colección de pedidos del usuario
+          const pedidosCollectionPath = `PedirFlete/${uid}/Pedidos`;
+  
+          // Devuelve un observable que obtiene los datos de la colección
+          return this.firestore.collection(pedidosCollectionPath).valueChanges() as Observable<DatosFlete[]>;
+        } else {
+          // Si el usuario no está autenticado, devuelva un observable vacío o maneje el caso según su lógica
+          // return of([]);
+        }
+      })
+    );
+  }
+  
   // updateDoc3(path: string, data: any): Promise<void> {
   //   return this.firestore.doc(path).update(data);
   // }

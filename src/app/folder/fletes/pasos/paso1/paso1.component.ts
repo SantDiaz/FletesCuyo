@@ -129,8 +129,8 @@ constructor(private routes: Router,
           const path = `Usuarios/${res.uid}/DatosPersonales`;
           this.db.getDoc<UserU>(path, res.uid).subscribe((res2) => {
             const data = this.pasosFlete;
-            data.uid = this.db.createId();
-            data.id = res.uid;
+            data.id = this.db.createId();
+            data.uid = res.uid;
             data.nombre = res2.nombre;
             data.apellido = res2.apellido;
 
@@ -143,7 +143,7 @@ constructor(private routes: Router,
             // Resto del código...
   
             const enlace = `PedirFlete/${res.uid}/Pedidos`;
-            const pedidoId = data.uid;
+            const pedidoId = data.id;
             this.interaction.closeLoading();
     
             this.db.createDocument<DatosFlete>(data, enlace, pedidoId).then((_) => {
@@ -151,7 +151,7 @@ constructor(private routes: Router,
               this.interaction.closeLoading();
               this.valueSelected === "2";
     
-              this.router.navigate(['/paso2', { pedidoId: data.uid }]);
+              this.router.navigate(['/paso2', { pedidoId: data.id }]);
             });
           });
         });
