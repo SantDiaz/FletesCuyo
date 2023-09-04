@@ -4,9 +4,9 @@
     <ion-segment-button value="seccion1">
       Sección 1
     </ion-segment-button>
-    <ion-segment-button value="seccion2">
+    <!-- <ion-segment-button value="seccion2">
       Sección 2
-    </ion-segment-button>
+    </ion-segment-button> -->
   </ion-segment>
 
   <div [ngSwitch]="selectedSegment">
@@ -120,8 +120,7 @@
       
     </ion-list>
 
-    <ion-list class="background2" *ngSwitchCase="'seccion2'">
-      <!-- Contenido de la Sección 2 -->
+    <!-- <ion-list class="background2" *ngSwitchCase="'seccion2'">
       <section  class="u-clearfix u-section-1" id="sec-ecfb">
         <div  class="u-clearfix u-sheet u-sheet-1">
           <h1 class="u-align-center u-text u-text-1">Ultimos fletes disponibles</h1>
@@ -142,7 +141,6 @@
       c-0.605,1.881-1.478,3.674-2.632,5.304c-0.291,0.411-0.563,0.759-0.801,1.03V38.8c0,1.223,0.691,2.342,1.785,2.888l8.467,4.233
       c0.508,0.254,0.967,0.575,1.39,0.932c5.71-4.762,9.399-11.882,9.536-19.9C53.246,12.32,41.587,0.254,26.953,0.004z"></path>
       </g></svg></span>
-      <!-- {{DatosU.nombre}} {{DatosU.apellido}} -->
                       <h4  class="u-text u-text-18">{{datos.nombre}} {{datos.apellido}}</h4><span class="u-icon u-icon-18"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 52 52" style=""><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-7f39"></use></svg><svg class="u-svg-content" viewBox="0 0 52 52" x="0px" y="0px" id="svg-7f39" style="enable-background:new 0 0 52 52;"><path style="fill:currentColor;" d="M38.853,5.324L38.853,5.324c-7.098-7.098-18.607-7.098-25.706,0h0
       C6.751,11.72,6.031,23.763,11.459,31L26,52l14.541-21C45.969,23.763,45.249,11.72,38.853,5.324z M26.177,24c-3.314,0-6-2.686-6-6
       s2.686-6,6-6s6,2.686,6,6S29.491,24,26.177,24z"></path></svg></span>
@@ -203,14 +201,11 @@
                       <h4 class="u-text u-text-23">{{datos.cargamento}}</h4><span class="u-file-icon u-icon u-icon-23"><img src="../../../../../assets/imagesFletesDis/8452029.png" alt=""></span>
                       <h4 class="u-text u-text-24">{{datos.ayudantes}}</h4><span class="u-file-icon u-icon u-icon-24"><img src="../../../../../assets/imagesFletesDis/1679557.png" alt=""></span>
                       <h4 class="u-text u-text-25"  >{{datos.tipoVehiculo}}</h4>
-                      <!-- (click)="editUser(datos)" -->
                       <br>
                       
                       <input [(ngModel)]="rta.precio" style="width: 50%; margin-left: 25%;" type="text" class="form-control" placeholder="Precio">
                     </div>
                   </div>
-                  <!-- Este boton de abajo si funciona -->
-                  <!-- <a (click)="deleteUser(datos)" class="u-border-2 u-border-grey-75 u-btn u-btn-round u-button-style u-custom-color-1 u-hover-custom-color-3 u-radius-50 u-btn-3">pbtener</a> -->
       
                   <a (click)="enviarPrecio(datos)" *ngIf="!rta.precioEnviado" class="u-border-2 u-border-grey-75 u-btn u-btn-round u-button-style u-custom-color-1 u-hover-custom-color-3 u-radius-50 u-btn-3">Enviar</a>
                 </div>
@@ -222,7 +217,7 @@
           </div>
         </div>
       </section>
-    </ion-list>
+    </ion-list> -->
   </div>
   
 </ion-content>
