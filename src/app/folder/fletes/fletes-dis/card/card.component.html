@@ -94,10 +94,14 @@
                       <h4 class="u-text u-text-25"  >{{datos.tipoVehiculo}}</h4>
                       <!-- (click)="editUser(datos)" -->
                       <br>
-                      <input [(ngModel)]="rta.precio" style="width: 50%; margin-left: 25%;" type="text" class="form-control" placeholder="Precio">
+                      <input [(ngModel)]="rta.precio" [value]="precioInput" (input)="precioInputChanged($event.target.value)" style="width: 50%; margin-left: 25%;" type="text" class="form-control" placeholder="Precio">
+
+                      <!-- <input [(ngModel)]="rta.precio" style="width: 50%; margin-left: 25%;" type="text" class="form-control" placeholder="Precio"> -->
                       <br>
+              
+                      
                       <!-- <h6 class="u-text u-text-26"> {{ flete.tiempoTranscurrido | mostrarTiempo }}</h6> -->
-                      <h6 class="u-text u-text-26"> {{ mostrarTiempoTranscurrido(datos.tiempoTranscurrido) }}</h6>
+                      <!-- <h6 class="u-text u-text-26"> {{ mostrarTiempoTranscurrido(datos.tiempoTranscurrido) }}</h6> -->
                     </div>
                   </div>
                   <!-- Este boton de abajo si funciona -->
@@ -116,7 +120,7 @@
       
     </ion-list>
 
-    <ion-list *ngSwitchCase="'seccion2'">
+    <ion-list class="background2" *ngSwitchCase="'seccion2'">
       <!-- Contenido de la Sección 2 -->
       <section  class="u-clearfix u-section-1" id="sec-ecfb">
         <div  class="u-clearfix u-sheet u-sheet-1">

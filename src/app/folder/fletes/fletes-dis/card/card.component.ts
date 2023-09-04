@@ -283,6 +283,7 @@ mostrarTiempoTranscurrido(tiempoTranscurrido: string) {
               mensaje: '',
                precioEnviado: true, // Agrega esta propiedad
               };
+
               const index = this.pasosFlete.findIndex(flete => flete.id === DatosFletes.id);
               if (index !== -1) {
                 this.pasosFlete.splice(index, 1);
