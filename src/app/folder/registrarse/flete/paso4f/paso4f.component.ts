@@ -164,7 +164,10 @@ vehiculo = tipoVehiculo;
   
           // Ahora, puedes guardar todo el objeto en la colección
           console.log('datosVehicularesConImagen', datosVehicularesConImagen);
-          this.router.navigate(['/home']);
+          setTimeout(() => {
+            // Tu código de redirección aquí
+            window.location.href = '/home';
+          }, 0);
         }
       });
     });

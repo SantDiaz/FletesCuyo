@@ -28,19 +28,6 @@
               <label for="name-ae7a" class="u-label">Patente</label>
               <input [(ngModel)]="Datovehicular.patente" type="text" placeholder="Ingrese sus 6 valores" id="name-ae7a" name="name-3" class="u-border-1 u-border-grey-60 u-input u-input-rectangle" required="">
             </div>
-            <div class="u-form-group u-form-name u-label-top u-form-group-4">
-              <label for="patenteFile" class="u-label">Carga una imagen de la patente</label>
-              <input class="u-border-1 u-border-grey-60 u-input u-input-rectangle" (change)="onPatenteSelected($event)" type="file" id="patenteFile"  accept="image/*">
-            </div>
-            <div class="u-form-group u-form-name u-label-top u-form-group-4">
-              <label for="dniFile" class="u-label">Carga tu DNI, ambas caras</label>
-              <input class="u-border-1 u-border-grey-60 u-input u-input-rectangle" (change)="onDniSelected($event)" type="file" id="dniFile" accept="image/*">
-            </div>
-            <div class="u-form-group u-form-name u-label-top u-form-group-4">
-              <label for="carnetFile" class="u-label">Carga imagen de tu carnet, ambas caras</label>
-              <input class="u-border-1 u-border-grey-60 u-input u-input-rectangle" (change)="onCarnetSelected($event)" type="file" id="carnetFile" accept="image/*">
-            </div>
-            
               <div (click)="siguiente()" class="u-align-center u-form-group u-form-submit u-label-top">
                 <a  class="u-border-none u-btn u-btn-round u-btn-submit u-button-style u-custom-color-1 u-radius-13 u-btn-1">Enviar<br>
                 </a>

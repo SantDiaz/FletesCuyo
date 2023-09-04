@@ -20,9 +20,6 @@ export class Paso3fComponent implements OnInit {
 
   name: string;
   message = "putoss";
-  selectedPatenteFile: File | null = null;
-  dniImage: File | null = null;
-  carnetImage: File | null = null;
   registerF: UserF = {
     uid: null,
     nombre: null,
@@ -69,55 +66,12 @@ vehiculo = tipoVehiculo;
   ngOnInit() {
   } 
 
-  onPatenteSelected(event: any): void {
-    this.uploadImageToStorage(event.target.files[0], 'patente');
-  }
-  
-  onDniSelected(event: any): void {
-    this.uploadImageToStorage(event.target.files[0], 'dni');
-  }
-  
-  onCarnetSelected(event: any): void {
-    this.uploadImageToStorage(event.target.files[0], 'carnet');
-  }
-  
+
  
 
 
 
-  async uploadImageToStorage(file: File | null, imageType: string) {
-    if (!file) {
-      return; // Asegúrate de manejar el caso en que el archivo sea nulo
-    }
-  
-    try {
-      const reader = new FileReader();
-      reader.onload = async (event) => {
-        const fileDataUrl: string = event.target.result as string;
-  
-        const timestamp = new Date().getTime().toString();
-        const imageName = `${timestamp}.jpg`;
-  
-        const storageRef = this.storage.ref(`images/${imageName}`);
-        const uploadTask = await storageRef.putString(fileDataUrl, 'data_url');
-        const downloadUrl = await uploadTask.ref.getDownloadURL();
-  
-        // Asigna la URL de descarga al campo correspondiente según el tipo de imagen
-        if (imageType === 'patente') {
-          this.Datovehicular.imagePatente = downloadUrl;
-        } else if (imageType === 'dni') {
-          this.Datovehicular.imageDni = downloadUrl;
-        } else if (imageType === 'carnet') {
-          this.Datovehicular.imageCarnet = downloadUrl;
-        }
-      };
-  
-      reader.readAsDataURL(file);
-    } catch (error) {
-      console.error('Error al subir la imagen a Firebase Storage:', error);
-      // Manejar el error según tus necesidades (por ejemplo, mostrar un mensaje al usuario)
-    }
-  }
+
   
   
   
@@ -137,8 +91,7 @@ vehiculo = tipoVehiculo;
           // Actualiza la propiedad patenteImage con la representación en base64
           const datosVehicularesConImagen = {
             ...this.Datovehicular,
-            patenteImage: this.Datovehicular.imagePatente,
-            dniImage: this.Datovehicular.imageDni,
+
           };
   
           // Ahora, puedes guardar todo el objeto en la colección
