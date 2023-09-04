@@ -1,8 +1,7 @@
 <app-header></app-header>
 <ion-content class="background2">
-  <div style="text-align: center; padding: 50px;">
-    <h1>¡Estas a un paso de ser parte de nuestra comunidad!</h1>
-    <h5>Debe completar los datos del vehiculo que utilizara</h5>
+  <div style="text-align: center;">
+    <h2>¡Estas a un paso de ser parte de nuestra comunidad!</h2>
   </div>
   <section class="u-clearfix u-section-1" id="sec-b6f0">
     <div class="u-clearfix u-sheet u-sheet-1">
@@ -17,7 +16,6 @@
                   <option *ngFor="let tipoVehiculo of vehiculo" [value]="tipoVehiculo">{{ tipoVehiculo }}</option>
                 </select>
               </div>
-              
             <div class="u-form-group u-form-name u-form-partition-factor-2 u-label-top">
               <label for="name-85e7" class="u-label">Marca del automotor</label>
               <input [(ngModel)]="Datovehicular.marca" type="text" placeholder="Ej: Ford" id="name-85e7" name="name-1" class="u-border-1 u-border-grey-60 u-input u-input-rectangle" required="">
@@ -31,10 +29,18 @@
               <input [(ngModel)]="Datovehicular.patente" type="text" placeholder="Ingrese sus 6 valores" id="name-ae7a" name="name-3" class="u-border-1 u-border-grey-60 u-input u-input-rectangle" required="">
             </div>
             <div class="u-form-group u-form-name u-label-top u-form-group-4">
-              <label for="name-ae7a" class="u-label">Carga una imagen de la patente</label>
-              <input (change)="onFileSelected($event)" type="file" id="patenteFile" accept="image/*">
+              <label for="patenteFile" class="u-label">Carga una imagen de la patente</label>
+              <input class="u-border-1 u-border-grey-60 u-input u-input-rectangle" (change)="onPatenteSelected($event)" type="file" id="patenteFile"  accept="image/*">
             </div>
-
+            <div class="u-form-group u-form-name u-label-top u-form-group-4">
+              <label for="dniFile" class="u-label">Carga tu DNI, ambas caras</label>
+              <input class="u-border-1 u-border-grey-60 u-input u-input-rectangle" (change)="onDniSelected($event)" type="file" id="dniFile" accept="image/*">
+            </div>
+            <div class="u-form-group u-form-name u-label-top u-form-group-4">
+              <label for="carnetFile" class="u-label">Carga imagen de tu carnet, ambas caras</label>
+              <input class="u-border-1 u-border-grey-60 u-input u-input-rectangle" (change)="onCarnetSelected($event)" type="file" id="carnetFile" accept="image/*">
+            </div>
+            
               <div (click)="siguiente()" class="u-align-center u-form-group u-form-submit u-label-top">
                 <a  class="u-border-none u-btn u-btn-round u-btn-submit u-button-style u-custom-color-1 u-radius-13 u-btn-1">Enviar<br>
                 </a>

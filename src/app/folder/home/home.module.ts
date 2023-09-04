@@ -9,7 +9,6 @@ import { HomePageRoutingModule } from './home-routing.module';
 import { HomePage } from './home.page';
 import { ComponentsModule } from 'src/app/components/components.module';
 import { PasosModule } from '../fletes/pasos/pasos.module';
-import { RegisterModule } from '../register/register.module';
 import { ChatModule } from '../chat/chat.module';
 import { ProfileModule } from '../profile/profile.module';
 
@@ -21,7 +20,6 @@ import { ProfileModule } from '../profile/profile.module';
     ComponentsModule,
     HomePageRoutingModule,
     PasosModule,
-    RegisterModule,
     ChatModule,
     ProfileModule
     

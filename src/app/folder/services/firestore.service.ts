@@ -99,6 +99,7 @@ createDocument<tipo>(data: tipo, enlace: string, id: string) {
   updateDoc3(path: string, data: any): Promise<void> {
     return this.firestore.doc(path).set(data, { merge: true });
   }
+  
   async update(collection, id, dato){
     try{
       return await this.firestore.collection(collection).doc(id).set(dato);

@@ -4,7 +4,6 @@ import { HomeLogComponent } from './home-log.component';
 import { ComponentsModule } from 'src/app/components/components.module';
 import { IonicModule } from '@ionic/angular';
 import { HomePageRoutingModule } from '../home/home-routing.module';
-import { RegisterModule } from '../register/register.module';
 import { ChatModule } from '../chat/chat.module';
 
 
@@ -18,7 +17,6 @@ import { ChatModule } from '../chat/chat.module';
     IonicModule,
     ComponentsModule,
     HomePageRoutingModule,
-    RegisterModule,
     ChatModule,
   ],
   exports: [

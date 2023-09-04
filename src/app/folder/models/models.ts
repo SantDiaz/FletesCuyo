@@ -29,6 +29,7 @@ export interface UserU {
     perfil:  'Fletero';
     datosVehiculos: datosVehiculo;
     verificado: boolean;
+    habilitado: boolean;
     // provincia: provincias
   }
   
@@ -39,6 +40,10 @@ export interface UserU {
     modelo: string;
     patente: number;
     imagePatente: string; 
+    imageDni: string; 
+    imageCarnet: string; 
+    imageDniDorzal: string;
+    imageCarnetDorzal: string;
   }
 
 

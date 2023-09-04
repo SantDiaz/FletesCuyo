@@ -5,13 +5,6 @@ import { ChatComponent } from '../chat/chat.component';
 import { HomeLogComponent } from '../homeF/home-log.component';
 import { LoginComponent } from '../login/login.component';
 import { ProfileComponent } from '../profile/profile.component';
-import { RegisterComponent } from '../register/register.component';
-import { Form1Component } from '../register/registerFlete/form1/form1.component';
-import { Form2Component } from '../register/registerFlete/form2/form2.component';
-import { Form3Component } from '../register/registerFlete/form3/form3.component';
-import { FormUserComponent } from '../register/registerUser/form-user/form-user.component';
-import { FormUser2Component } from '../register/registerUser/form-user2/form-user2.component';
-import { FormUser3Component } from '../register/registerUser/form-user3/form-user3.component';
 import { FletesPage } from './fletes.page';
 import { Paso1Component } from './pasos/paso1/paso1.component';
 import { Paso2Component } from './pasos/paso2/paso2.component';
@@ -69,10 +62,7 @@ const routes: Routes = [
     path: 'login',
     component: LoginComponent,
   },
-  {
-    path: 'register',
-    component: RegisterComponent,
-  },
+  
   {
     path: 'regi',
     component: RegistrarsePage,
@@ -80,30 +70,6 @@ const routes: Routes = [
   {
     path: 'chat',
     component: ChatComponent,
-  },
-  {
-    path: 'formF1',
-    component: Form1Component,
-  },
-  {
-    path: 'formF2',
-    component: Form2Component, 
-  },
-  {
-    path: 'formF3',
-    component: Form3Component, 
-  },
-  {
-    path: 'formUser1',
-    component: FormUserComponent,
-  },
-  {
-    path: 'formUser2',
-    component: FormUser2Component,
-  },
-  {
-    path: 'formUser3',
-    component: FormUser3Component,
   },
   {
     path: 'chat',

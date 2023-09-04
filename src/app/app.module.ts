@@ -7,7 +7,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { ComponentsModule } from './components/components.module';
 import { PasosModule } from './folder/fletes/pasos/pasos.module';
 import { HttpClientModule } from '@angular/common/http';
-import { RegisterModule } from './folder/register/register.module';
 import { HomeLogModule } from './folder/homeF/home-log.module';
 import { ChatModule } from './folder/chat/chat.module';
 import { LoginModule } from './folder/login/login.module';
@@ -38,7 +37,6 @@ import { FleteModule } from './folder/registrarse/flete/flete.module';
       AdminModule,
       HttpClientModule,
       LoginModule,
-      RegisterModule,
       HomeLogModule,
       ChatModule,
       FleteModule,

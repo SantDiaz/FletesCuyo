@@ -30,6 +30,7 @@ export class Paso1fComponent implements OnInit {
     email: null,
     password: null,
     verificado: false,
+    habilitado: false,
     perfil:  'Fletero',
     datosVehiculos: null,
   }

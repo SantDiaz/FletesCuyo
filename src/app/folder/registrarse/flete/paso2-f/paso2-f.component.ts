@@ -29,6 +29,7 @@ export class Paso2FComponent implements OnInit {
     telefono: null,
     image: null,
     verificado: false,
+    habilitado: false,
     email: null,
     password: null,
     perfil:  'Fletero',
@@ -75,6 +76,8 @@ export class Paso2FComponent implements OnInit {
         edad: this.registerF.edad,
         domicilio: this.registerF.domicilio,
         telefono: this.registerF.telefono,
+        verificado: false,
+        habilitado: false,
       };
       const path3 = `Fleteros/${res.uid}`;
       this.db.updateDocument(path3, datosPersonales).then(_ => {

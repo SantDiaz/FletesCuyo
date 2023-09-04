@@ -10,11 +10,11 @@ import { FirestoreService } from 'src/app/folder/services/firestore.service';
 import { InteractionService } from 'src/app/folder/services/interaction.service';
 
 @Component({
-  selector: 'app-paso3f',
-  templateUrl: './paso3f.component.html',
-  styleUrls: ['./paso3f.component.scss'],
+  selector: 'app-paso4f',
+  templateUrl: './paso4f.component.html',
+  styleUrls: ['./paso4f.component.scss'],
 })
-export class Paso3fComponent implements OnInit {
+export class Paso4fComponent implements OnInit {
 
   @ViewChild(IonModal) modal: IonModal;
 
@@ -76,10 +76,18 @@ vehiculo = tipoVehiculo;
   onDniSelected(event: any): void {
     this.uploadImageToStorage(event.target.files[0], 'dni');
   }
+
+  onDniDorzalSelected(event: any): void {
+    this.uploadImageToStorage(event.target.files[0], 'dniDorzal');
+  }
   
   onCarnetSelected(event: any): void {
     this.uploadImageToStorage(event.target.files[0], 'carnet');
   }
+  onCarnetDorzalSelected(event: any): void {
+    this.uploadImageToStorage(event.target.files[0], 'carnetDorzal');
+  }
+  
   
  
 
@@ -109,7 +117,12 @@ vehiculo = tipoVehiculo;
           this.Datovehicular.imageDni = downloadUrl;
         } else if (imageType === 'carnet') {
           this.Datovehicular.imageCarnet = downloadUrl;
+        } else if (imageType === 'dniDorzal') {
+          this.Datovehicular.imageDniDorzal = downloadUrl;
+        } else if (imageType === 'carnetDorzal') {
+          this.Datovehicular.imageCarnetDorzal = downloadUrl;
         }
+        
       };
   
       reader.readAsDataURL(file);
@@ -126,25 +139,32 @@ vehiculo = tipoVehiculo;
     this.authS.stateUser<UserF>().subscribe((res) => {
       this.registerF.uid = res.uid;
       console.log("dad", res.uid);
-      const path = `Fleteros`;
-      this.firestore.getDoc<UserF>(path, res.uid).subscribe((res2) => {
+      const path = `Fleteros/${res.uid}/DatosVehiculares`;
+      this.firestore.getDoc<datosVehiculo>(path, res.uid).subscribe((res2) => {
         // this.interaction.closeLoading();
         if (res2) {
           console.log("res", res2);
-          const id = res.uid;
-          const path2 = `Fleteros/${res.uid}/DatosVehiculares`;
-  
+          const path2 = `Fleteros/${res.uid}/DatosVehiculares/`;
+          
           // Actualiza la propiedad patenteImage con la representación en base64
           const datosVehicularesConImagen = {
-            ...this.Datovehicular,
-            patenteImage: this.Datovehicular.imagePatente,
-            dniImage: this.Datovehicular.imageDni,
-          };
+              uid: res2.uid,
+              tipoVehiculo: res2.tipoVehiculo,
+              marca: res2.marca,
+              modelo: res2.modelo,
+              patente: res2.patente,
+              imageDni: this.Datovehicular.imageDni,
+              imageCarnet: this.Datovehicular.imageCarnet,
+              imageDniDorzal: this.Datovehicular.imageDniDorzal,
+              imageCarnetDorzal: this.Datovehicular.imageCarnetDorzal,
+              patenteImage: this.Datovehicular.imagePatente,
+              //  dniImage: this.Datovehicular.imageDni,
+              };
+              this.firestore.update(path2, res.uid, datosVehicularesConImagen);
   
           // Ahora, puedes guardar todo el objeto en la colección
-          this.firestore.createDoc(datosVehicularesConImagen, path2, id);
-  
-          this.router.navigate(['/paso4F']);
+          console.log('datosVehicularesConImagen', datosVehicularesConImagen);
+          this.router.navigate(['/home']);
         }
       });
     });

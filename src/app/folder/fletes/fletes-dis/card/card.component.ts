@@ -139,10 +139,10 @@ export class CardComponent implements OnInit {
           const index = this.fletes.findIndex((flete) => flete.id === pedidoId);
           if (index !== -1) {
             this.fletes.splice(index, 1);
-            // Actualiza el precio en el objeto flete
-            this.fletes[index].precio = precioNumerico;
-            this.fletes[index].precioEnviado = true;
-    
+            if (this.fletes[index]) {
+              this.fletes[index].precio = precioNumerico;
+              this.fletes[index].precioEnviado = true;
+            }
             // Establece una cookie para registrar que este fletero ha enviado un precio para este pedido
             document.cookie = `pedido${pedidoId}=${this.miIdDeFletero}`;
             // Actualiza la propiedad precio de rta
