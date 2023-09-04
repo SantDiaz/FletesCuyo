@@ -11,6 +11,7 @@ import { HomeFleteroComponent } from './ComponentesFleteros/home-fletero/home-fl
 import { ProfileUsuarioComponent } from './ComponentesUsuario/profile-usuario/profile-usuario.component';
 import { ProfileFleteroComponent } from './ComponentesFleteros/profile-fletero/profile-fletero.component';
 import { RouterModule } from '@angular/router';
+import { IniciarAppComponent } from './ComponentesFleteros/iniciar-app/iniciar-app.component';
 
 
 
@@ -23,6 +24,7 @@ import { RouterModule } from '@angular/router';
     HomeFleteroComponent,
     ProfileFleteroComponent,
     ProfileUsuarioComponent,
+    IniciarAppComponent
   ],
   imports: [
     CommonModule,
@@ -38,6 +40,7 @@ import { RouterModule } from '@angular/router';
     HomeFleteroComponent,
     ProfileFleteroComponent,
     ProfileUsuarioComponent,
+    IniciarAppComponent
   ], 
 })
 export class ComponentsModule { }

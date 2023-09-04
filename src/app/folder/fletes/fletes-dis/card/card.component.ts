@@ -52,6 +52,7 @@ export class CardComponent implements OnInit {
     nombre: '',
     apellido: '',
     precio: null,
+    telefono: null,
     mensaje: '',
     precioEnviado: false, // Agrega esta propiedad
   };
@@ -154,6 +155,7 @@ export class CardComponent implements OnInit {
             const enlace = `PedirFlete/${DatosFletes.uid}/Pedidos/${DatosFletes.id}/Respuesta`;
             rta22.nombre = res2.nombre;
             rta22.apellido = res2.apellido;
+            rta22.telefono = res2.telefono;
             rta22.id = nuevoDato.uid;
             rta22.idFletero = this.miIdDeFletero;
             this.db.createDoc<respuesta>(rta22, enlace, this.miIdDeFletero).then((_) => {
@@ -164,6 +166,7 @@ export class CardComponent implements OnInit {
                 idFletero: this.miIdDeFletero,
                 nombre: '',
                 apellido: '',
+                telefono: rta22.telefono,
                 precio: DatosFletes.precio, //aqui quiero guardar el precio
                 mensaje: '',
                 precioEnviado: true, // Agrega esta propiedad

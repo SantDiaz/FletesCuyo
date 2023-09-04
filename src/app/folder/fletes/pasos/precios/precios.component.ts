@@ -112,30 +112,32 @@ export class PreciosComponent implements OnInit {
         }
     })
   }
-
-  openWhatsApp(fleteroId: string) {
-   
-    console.log('Fletero ID:', fleteroId);
-    const path = 'Fleteros'
-    this.db.getDoc<UserF>(path, fleteroId).subscribe( res => {
-      if (res ) {
-        // this.DatosF = res;
-        console.log("resultado", res)
-    if (fleteroId) {
-      const enlaceWhatsApp = this.enlacesWhatsApp.find(link => link.includes(res.telefono));
-      console.log('Enlace de WhatsApp encontrado:', enlaceWhatsApp);
-      
-      if (enlaceWhatsApp) {
-        window.open(enlaceWhatsApp, '_blank');
+  openWhatsApp(respuesta: any) {
+    if (respuesta && respuesta.telefono) {
+      // Remove any non-numeric characters and spaces from the phone number
+      const telefono = respuesta.telefono.replace(/[^0-9]/g, '');
+  
+      if (telefono.length > 0) {
+        // Assuming the country code is +54 (Argentina), you can customize this
+        const countryCode = '+54';
+        const message = 'Hola, estoy interesado en solicitar un flete.'; // You can customize the message
+  
+        // Create the WhatsApp link with the phone number and message
+        const whatsappLink = `https://wa.me/${countryCode}${telefono}?text=${encodeURIComponent(message)}`;
+  
+        // Log the WhatsApp link for debugging
+        console.log('WhatsApp Link:', whatsappLink);
+  
+        // Open WhatsApp in a new window or tab
+        window.open(whatsappLink, '_blank');
       } else {
-        console.log('El enlace de WhatsApp no está disponible para el fletero seleccionado.');
+        console.log('El número de teléfono no es válido.');
       }
     } else {
-      console.log('El objeto fletero es inválido o no tiene una propiedad uid definida.');
+      console.log('No se proporcionó un número de teléfono válido para abrir WhatsApp.');
     }
   }
-})
-  }
+  
   
   obtenerEnlaces() {
     this.fleteroService.getFleteros().subscribe((fleteros: UserF[]) => {
@@ -146,6 +148,7 @@ export class PreciosComponent implements OnInit {
   }
 
   generateWhatsAppLink(fleteros: UserF[], countryCode: string) {
+    console.log('fleteros:',fleteros);
     const message = 'Hola, estoy interesado en solicitar un flete.'; // Mensaje predeterminado
   
     const formattedMessage = encodeURIComponent(message); // Codifica el mensaje para asegurar caracteres especiales

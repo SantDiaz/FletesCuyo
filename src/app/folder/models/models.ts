@@ -7,6 +7,9 @@ export interface UserU {
     dni: string;
     edad: string;
     domicilio: string;
+    // provincia: 'Buenos Aires' | 'Catamarca'| 'Chaco'| 'Chubut'| 'Córdoba'| 'Corrientes'| 'Entre Ríos'| 'Formosa'| 'Jujuy'
+    // |'La Pampa' | 'La Rioja'| 'Mendoza'| 'Mendoza'| 'Misiones'| 'Neuquén'| 'Río Negro'| 'Salta'| 'San Juan'| 'Santa Cruz'| 'Santa Fe'| 'San
+    // |'Santiago del Estero'| 'Tierra del Fuego'| 'Tucumán';
     telefono: string;
     image: string; 
     email: string;
@@ -22,6 +25,9 @@ export interface UserU {
     dni: string;
     edad: string;
     domicilio: string;
+    // provincia: 'Buenos Aires' | 'Catamarca'| 'Chaco'| 'Chubut'| 'Córdoba'| 'Corrientes'| 'Entre Ríos'| 'Formosa'| 'Jujuy'
+    // |'La Pampa' | 'La Rioja'| 'Mendoza'| 'Mendoza'| 'Misiones'| 'Neuquén'| 'Río Negro'| 'Salta'| 'San Juan'| 'Santa Cruz'| 'Santa Fe'| 'San
+    // |'Santiago del Estero'| 'Tierra del Fuego'| 'Tucumán';
     telefono: string;
     image: string; 
     email: string;
@@ -75,6 +81,7 @@ export interface UserU {
     nombre: string;
     apellido: string;
     precio: number; 
+    telefono: string;
     mensaje: string;
     precioEnviado: boolean; // Agrega esta propiedad
 

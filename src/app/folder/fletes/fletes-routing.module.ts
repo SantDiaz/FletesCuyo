@@ -26,6 +26,7 @@ import { Paso1UComponent } from '../registrarse/user/paso1-u/paso1-u.component';
 import { Paso2UComponent } from '../registrarse/user/paso2-u/paso2-u.component';
 import { Paso3UComponent } from '../registrarse/user/paso3-u/paso3-u.component';
 import { Paso4UComponent } from '../registrarse/user/paso4-u/paso4-u.component';
+import { IniciarAppComponent } from 'src/app/components/ComponentesFleteros/iniciar-app/iniciar-app.component';
 
 
 
@@ -49,7 +50,11 @@ const routes: Routes = [
     path: 'paso1',
     component: Paso1Component
   },
-
+  {
+    path: 'iniciarApp',
+    component: IniciarAppComponent
+  },
+  
   {
     path: 'paso2',
     component: Paso2Component
