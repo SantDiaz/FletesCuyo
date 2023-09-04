@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef   } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, HostListener } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoadingController, ToastController } from '@ionic/angular';
 import { DatosFlete, datosVehiculo, respuesta, UserF, UserU } from 'src/app/folder/models/models';
@@ -7,7 +7,9 @@ import { FirestoreService } from 'src/app/folder/services/firestore.service';
 import { InteractionService } from 'src/app/folder/services/interaction.service';
 import { NuevoService } from 'src/app/folder/services/nuevo.service';
 import 'firebase/firestore';
+import { Inject } from '@angular/core';
 import firebase from 'firebase/compat/app';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'app-card',
@@ -16,11 +18,15 @@ import firebase from 'firebase/compat/app';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CardComponent implements OnInit {
+  @HostListener('window:DOMContentLoaded', ['$event'])
+  onDOMContentLoaded(event: Event): void {
+    this.checkHiddenOrders();
+  }
+  hiddenOrders: string[] = [];
   login: boolean = false;
   rol: 'Usuario' | 'Fletero' | 'Admin' = null;
   loading: any;
-  fletes : any = [] ;
-  // pasosFlete: DatosFlete[] = []
+  fletes: any = [];
   datoss: UserU;
   DatosV: datosVehiculo;
   pasosFlete2: DatosFlete = {
@@ -34,12 +40,12 @@ export class CardComponent implements OnInit {
     cargamento: '',
     tipoVehiculo: null,
     ayudantes: null,
-    uid: "",
+    uid: '',
     id: '',
     precio: null,
   };
-  private updateInterval = 60000; // Actualizar cada 60 segundos (1 minuto)
-  
+  private miIdDeFletero: string = ''; // Declara la variable para almacenar el ID del fletero actual
+
   rta: respuesta = {
     id: '',
     idFletero: '',
@@ -54,252 +60,189 @@ export class CardComponent implements OnInit {
   fletesRespondidos: DatosFlete[] = [];
 
   constructor(
-        private auth: AuthService,
-        private router: Router,
-        private interaction: InteractionService,
-        private db: FirestoreService,
-        private database: NuevoService,
-        public toastController: ToastController,
-        private loadingCtrl: LoadingController,
-        private cdr: ChangeDetectorRef,
-        private route: ActivatedRoute,
-  ) { 
-    this.pasosFlete = this.fletes.filter(flete => !flete.precioEnviado);
-    this.fletesRespondidos = this.fletes.filter(flete => flete.precioEnviado);
-    setInterval(() => {
-      this.actualizarTiempoTranscurridoEnColeccion();
-    }, this.updateInterval); 
-  }
-
-  ngOnInit() {
-    this.fletesRespondidos = [];
-    const usersCollectionPath = 'Usuarios';
-    firebase.firestore().collection(usersCollectionPath).get()
-      .then(querySnapshot => {
-        const userIDs = querySnapshot.docs.map(doc => doc.id);
-        // console.log('userIDs: ', userIDs);
-        
-        const allFletes = []; // Arreglo que almacenará todos los pedidos de todos los usuarios
-        // Ahora puedes usar los IDs de los usuarios para acceder a sus pedidos
-        userIDs.forEach(uid => {
-          const pedidosCollectionPath = `PedirFlete/${uid}/Pedidos/`;
-          // const pedidosCollectionPath = `PedirFlete3`;
-          // console.log('enlace', pedidosCollectionPath);
+    @Inject(DOCUMENT) private document: Document,
+    private auth: AuthService,
+    private router: Router,
+    private interaction: InteractionService,
+    private db: FirestoreService,
+    private database: NuevoService,
+    public toastController: ToastController,
+    private loadingCtrl: LoadingController,
+    private cdr: ChangeDetectorRef,
+    private route: ActivatedRoute,
+    ) {
+      // Suscríbete al estado del usuario para obtener el ID del fletero cuando inicie sesión
+      this.auth.stateUser().subscribe((res) => {
+        if (res) {
+          // Asigna el ID del fletero actual
+          this.miIdDeFletero = res.uid;
+        }
+      });
+    }
+    ngOnInit() {
+      this.fletesRespondidos = [];
+      this.checkHiddenOrders()
+      // Obtiene los pedidos ocultos desde localStorage
     
-          this.database.getAll(pedidosCollectionPath).then(res =>{
-            res.subscribe(resRef=>{
-              const userFletes = resRef.map(pasosRef =>{
-                let pasosFlete = pasosRef.payload.doc.data() as DatosFlete;
-                pasosFlete['id'] = pasosRef.payload.doc.id;
-                this.actualizarPedidos();
-                      // Convierte la cadena de fecha en un objeto Date
-                      // const fechaEnMilisegundos = Date.parse(pasosFlete.fecha);
-                      // if (!isNaN(fechaEnMilisegundos)) {
-                      //   // Calcula el tiempo transcurrido en segundos
-                      //   const ahora = new Date().getTime();
-                      //   const tiempoTranscurrido = (ahora - fechaEnMilisegundos) / 1000;
-              
-                      //   // Convierte el tiempo transcurrido a cadena de texto
-                      //   pasosFlete['Enviado hace'] = tiempoTranscurrido.toString();
-                      // } else {
-                      //   pasosFlete['tiempoTranscurrido'] = ''; // Si la fecha no es válida, asigna una cadena vacía
-                      // }
-                      return pasosFlete;
-                
+      const usersCollectionPath = 'Usuarios';
+      this.fletes = []; // Vacía el arreglo de pedidos antes de cargar los nuevos
+    
+      // Carga solo los pedidos que no están en la lista de ocultos
+      firebase
+        .firestore()
+        .collection(usersCollectionPath)
+        .get()
+        .then((querySnapshot) => {
+          const userIDs = querySnapshot.docs.map((doc) => doc.id);
+    
+          const allFletes = []; // Arreglo que almacenará todos los pedidos de todos los usuarios
+          userIDs.forEach((uid) => {
+            const pedidosCollectionPath = `PedirFlete/${uid}/Pedidos/`;
+            this.database
+              .getAll(pedidosCollectionPath)
+              .then((res) => {
+                res.subscribe((resRef) => {
+                  const userFletes = resRef.map((pasosRef) => {
+                    let pasosFlete = pasosRef.payload.doc.data() as DatosFlete;
+                    pasosFlete['id'] = pasosRef.payload.doc.id;
+    
+                    // Verifica si el pedido está en la lista de ocultos
+                      allFletes.push(pasosFlete); // Agregar el pedido si no está oculto
+                    return pasosFlete;
+                  });
+                  this.cdr.detectChanges(); // Actualiza la vista de Angular después de cargar los datos
+                });
               })
-              allFletes.push(...userFletes); // Agregar los pedidos del usuario actual al arreglo total
-              this.cdr.detectChanges();
-            })
-              })
-              .catch(error => {
+              .catch((error) => {
                 console.error(`Error fetching pedidos for user with ID ${uid}:`, error);
               });
-              this.fletes = allFletes; // Asignar todos los pedidos al arreglo fletes al final
-            })
-      })
-      .catch(error => {
-        console.error("Error fetching user IDs:", error);
-      });
-  }
-  trackByFn(index, item) {
-  return item.id; // Suponiendo que cada elemento tiene un campo "id" único
-}
-
-actualizarTiempoTranscurridoEnColeccion() {
-  // Obtén la referencia a la colección que contiene los pedidos
-  const pedidosCollectionPath = 'Pedidos';
-
-  // Consulta la colección de pedidos
-  this.database.getAll(pedidosCollectionPath).then(res => {
-    res.subscribe(resRef => {
-      resRef.forEach(pasosRef => {
-        const pasosFlete = pasosRef.payload.doc.data() as DatosFlete;
-
-        // Calcula el tiempo transcurrido como lo hacías en Paso1Component
-        const ahora = new Date().getTime();
-        const fechaEnMilisegundos = Date.parse(pasosFlete.fecha);
-
-        if (!isNaN(fechaEnMilisegundos)) {
-          const tiempoTranscurrido = (ahora - fechaEnMilisegundos) / 1000;
-          pasosFlete['tiempoTranscurrido'] = this.formatoTiempoTranscurrido(tiempoTranscurrido);
-        } else {
-          pasosFlete['tiempoTranscurrido'] = '';
-        }
-
-        // Actualiza el documento en Firestore con el nuevo tiempo transcurrido
-        const pedidoId = pasosRef.payload.doc.id;
-        const pedidoPath = `${pedidosCollectionPath}/${pedidoId}`;
-        this.database.updateDocument(pedidoPath, pasosFlete).then(_ => {
-          // Realiza las acciones necesarias después de actualizar
-        }).catch(error => {
-          console.error(`Error updating pedido ${pedidoId}:`, error);
+          });
+          this.fletes = allFletes; // Asignar todos los pedidos al arreglo fletes al final
+        })
+        .catch((error) => {
+          console.error('Error fetching user IDs:', error);
         });
+    }
+    
+    
+    
+    async precioInputChanged(pedidoId: string, precioEnviado: boolean, DatosFletes: DatosFlete) {
+      if (!precioEnviado) {
+        console.log('DatosFletes:', DatosFletes);
+        console.log('pedidoId:', pedidoId);
+        // Verifica si el pedido aún no tiene un precio enviado por el fletero actual
+        const precio = prompt('Ingrese el precio:');
+        if (precio !== null) {
+          // Convierte el precio a un número (si no está en formato numérico)
+          const precioNumerico = Number(precio);
+          document.cookie = `pedido${pedidoId}=${this.miIdDeFletero}; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+          const index = this.fletes.findIndex((flete) => flete.id === pedidoId);
+          if (index !== -1) {
+            this.fletes.splice(index, 1);
+            // Actualiza el precio en el objeto flete
+            this.fletes[index].precio = precioNumerico;
+            this.fletes[index].precioEnviado = true;
+    
+            // Establece una cookie para registrar que este fletero ha enviado un precio para este pedido
+            document.cookie = `pedido${pedidoId}=${this.miIdDeFletero}`;
+            // Actualiza la propiedad precio de rta
+            this.rta.precio = precioNumerico;
+          const path = 'Fleteros';
+          this.db.getDoc<UserF>(path, this.miIdDeFletero).subscribe((res2) => {
+            const nuevoDato = DatosFletes;
+            const rta22 = this.rta;
+            const enlace = `PedirFlete/${DatosFletes.uid}/Pedidos/${DatosFletes.id}/Respuesta`;
+            rta22.nombre = res2.nombre;
+            rta22.apellido = res2.apellido;
+            rta22.id = nuevoDato.uid;
+            rta22.idFletero = this.miIdDeFletero;
+            this.db.createDoc<respuesta>(rta22, enlace, this.miIdDeFletero).then((_) => {
+              this.interaction.presentToast('Enviado con éxito');
+              this.interaction.closeLoading;
+              this.rta = {
+                id: nuevoDato.id,
+                idFletero: this.miIdDeFletero,
+                nombre: '',
+                apellido: '',
+                precio: DatosFletes.precio, //aqui quiero guardar el precio
+                mensaje: '',
+                precioEnviado: true, // Agrega esta propiedad
+              };
       });
     });
-  }).catch(error => {
-    console.error("Error fetching pedidos:", error);
-  });
-}
+  
+          // Aquí puedes enviar la información actualizada a tu backend si es necesario
+  
+          // Oculta el pedido solo para el fletero actual
+          const fleteroActualIndex = this.fletes.findIndex((flete) => flete.id === pedidoId);
+          if (fleteroActualIndex !== -1) {
+            this.fletes.splice(fleteroActualIndex, 1);
+          }
+        }
+      }
+    }
+  }
+  
+  checkHiddenOrders() {
+    // Verifica si hay IDs de pedidos ocultos en localStorage
+    const hiddenOrdersString = localStorage.getItem('hiddenOrders');
+    if (hiddenOrdersString) {
+      const hiddenOrders = JSON.parse(hiddenOrdersString);
 
-
-actualizarPedidos() {
-  const userIDs: string[] = ['user1', 'user2', 'user3']; // IDs de usuarios, obtén estos de tu base de datos
-
-  const allFletes: DatosFlete[] = [];
-
-  userIDs.forEach(uid => {
-    const pedidosCollectionPath = `PedirFlete/${uid}/Pedidos/`;
-
-    // Obtén los pedidos de cada usuario y suscríbete a cambios
-    this.db.getAll(pedidosCollectionPath).subscribe((res) => {
-      const userFletes: DatosFlete[] = res.map((pasosRef: any) => {
-        const pasosFlete: DatosFlete = pasosRef.payload.doc.data() as DatosFlete;
-        pasosFlete.id = pasosRef.payload.doc.id;
-
-        // Calcula el tiempo transcurrido para este pedido
-        this.calcularTiempoTranscurrido(pasosFlete);
-
-        return pasosFlete;
+      // Recorre this.fletes y oculta los pedidos correspondientes
+      this.fletes.forEach((datos) => {
+        if (hiddenOrders.includes(datos.id)) {
+          datos.oculto = true;
+        } else {
+          datos.oculto = false;
+        }
       });
 
-      allFletes.push(...userFletes);
-
-      // Actualiza la lista de pedidos en el componente
-      this.pasosFlete = allFletes;
-
-      // Notifica a Angular sobre los cambios para actualizar la vista
+      // También puedes ocultar los elementos HTML según el estado de datos.oculto
       this.cdr.detectChanges();
-    });
-  });
-}
+    } else {
+      // Si no hay IDs de pedidos ocultos en localStorage, utiliza la lógica anterior basada en cookies
+      const cookies = document.cookie.split(';');
+      this.hiddenOrders = cookies
+        .filter((cookie) => cookie.trim().startsWith('pedido'))
+        .map((cookie) => {
+          console.log('Cookies:', document.cookie);
+          const [key, value] = cookie.trim().split('=');
+          return key.substring(6); // Obtiene el ID del pedido de la cookie
+        });
 
+      // Recorre this.fletes y oculta los pedidos correspondientes
+      this.fletes.forEach((datos) => {
+        if (this.hiddenOrders.includes(datos.id)) {
+          console.log('Pedidos ocultos:', this.hiddenOrders);
+          datos.oculto = true;
+        } else {
+          datos.oculto = false;
+        }
+      });
 
+      // Actualiza el localStorage con los pedidos ocultos
+      localStorage.setItem('hiddenOrders', JSON.stringify(this.hiddenOrders));
 
-calcularTiempoTranscurrido(flete: DatosFlete) {
-  const fechaEnMilisegundos = Date.parse(flete.fecha);
-
-  if (!isNaN(fechaEnMilisegundos)) {
-    // Obtén la hora actual en milisegundos
-    const ahora = new Date().getTime();
-
-    // Calcula el tiempo transcurrido en segundos
-    const tiempoTranscurridoSegundos = Math.floor((ahora - fechaEnMilisegundos) / 1000);
-
-    // Actualiza la propiedad tiempoTranscurrido en el objeto DatosFlete
-    flete.tiempoTranscurrido = this.formatoTiempoTranscurrido(tiempoTranscurridoSegundos);
-  } else {
-    // Si la fecha no es válida, asigna una cadena vacía
-    flete.tiempoTranscurrido = '';
+      // También puedes ocultar los elementos HTML según el estado de datos.oculto
+      this.cdr.detectChanges();
+    }
   }
-}
-
-// Función para formatear el tiempo transcurrido en un formato legible
-// Función para formatear el tiempo transcurrido en un formato legible
-formatoTiempoTranscurrido(segundos: number): string {
-  if (segundos < 60) {
-    return `enviado hace ${segundos} segundo${segundos !== 1 ? 's' : ''}`;
-  } else if (segundos < 3600) {
-    const minutos = Math.floor(segundos / 60);
-    return `enviado hace ${minutos} minuto${minutos !== 1 ? 's' : ''}`;
-  } else if (segundos < 86400) {
-    const horas = Math.floor(segundos / 3600);
-    return `enviado hace ${horas} hora${horas !== 1 ? 's' : ''}`;
-  } else {
-    const dias = Math.floor(segundos / 86400);
-    return `enviado hace ${dias} día${dias !== 1 ? 's' : ''}`;
-  }
-}
-
-// card.component.ts
-// card.component.ts
-mostrarTiempoTranscurrido(tiempoTranscurrido: string) {
-  if (!tiempoTranscurrido) {
-    return 'Tiempo no disponible';
-  }
-
-  const segundos = parseInt(tiempoTranscurrido, 10);
-
-  if (segundos < 60) {
-    return `enviado hace ${segundos} segundos`;
-  } else if (segundos < 3600) {
-    const minutos = Math.floor(segundos / 60);
-    return `enviado hace ${minutos} minutos`;
-  } else if (segundos < 86400) {
-    const horas = Math.floor(segundos / 3600);
-    return `enviado hace ${horas} horas`;
-  } else {
-    const dias = Math.floor(segundos / 86400);
-    return `enviado hace ${dias} días`;
-  }
-}
-
-
 
   
-
-  async enviarPrecio(DatosFletes: DatosFlete) {
-    this.interaction.presentLoading;
-    this.auth.stateUser().subscribe(res => {
-      if (res) {
-        const path = 'Fleteros';
-        this.db.getDoc<UserF>(path, res.uid).subscribe(res2 => {
-          const nuevoDato = DatosFletes;
-          const rta22 = this.rta;
-          // console.log('rta: ', rta22);
-          const enlace = `PedirFlete/${DatosFletes.uid}/Pedidos/${DatosFletes.id}/Respuesta`;
-          rta22.nombre = res2.nombre;
-          rta22.apellido = res2.apellido;
-          rta22.id = nuevoDato.uid
-          rta22.idFletero = res.uid;
-          this.db.createDoc<respuesta>(rta22, enlace, res.uid).then((_) => {
-            this.interaction.presentToast('Enviado con exito');
-            this.interaction.closeLoading;
-            this.rta = {
-              id: nuevoDato.id,
-              idFletero: res.uid,
-              nombre: '',
-              apellido: '',
-              precio: rta22.precio,
-              mensaje: '',
-               precioEnviado: true, // Agrega esta propiedad
-              };
-
-              const index = this.pasosFlete.findIndex(flete => flete.id === DatosFletes.id);
-              if (index !== -1) {
-                this.pasosFlete.splice(index, 1);
-                this.fletesRespondidos.push(DatosFletes);
-              }
-          });
-        });
-      }
-    })
-  }
+  
+  
+  
+  
+  
+  
+  
 
   async presentToast(mensaje: string, tiempo: number) {
     const toast = await this.toastController.create({
       message: mensaje,
       duration: tiempo,
-      position: 'middle'
+      position: 'middle',
     });
     await toast.present();
   }
@@ -312,3 +255,41 @@ mostrarTiempoTranscurrido(tiempoTranscurrido: string) {
     await this.loading.present();
   }
 }
+    
+      //   async enviarPrecio(DatosFletes: DatosFlete) {
+      //     this.interaction.presentLoading;
+      //   if (this.miIdDeFletero) {
+      //     const path = 'Fleteros';
+      //     this.db.getDoc<UserF>(path, this.miIdDeFletero).subscribe((res2) => {
+      //       const nuevoDato = DatosFletes;
+      //       const rta22 = this.rta;
+      //       const enlace = `PedirFlete/${DatosFletes.uid}/Pedidos/${DatosFletes.id}/Respuesta`;
+      //       rta22.nombre = res2.nombre;
+      //       rta22.apellido = res2.apellido;
+      //       rta22.id = nuevoDato.uid;
+      //       rta22.idFletero = this.miIdDeFletero;
+      //       this.db.createDoc<respuesta>(rta22, enlace, this.miIdDeFletero).then((_) => {
+      //         this.interaction.presentToast('Enviado con éxito');
+      //         this.interaction.closeLoading;
+      //         this.rta = {
+      //           id: nuevoDato.id,
+      //           idFletero: this.miIdDeFletero,
+      //           nombre: '',
+      //           apellido: '',
+      //           precio: rta22.precio,
+      //           mensaje: '',
+      //           precioEnviado: true, // Agrega esta propiedad
+      //         };
+      //         const index = this.pasosFlete.findIndex((flete) => flete.id === DatosFletes.id);
+      //         if (index !== -1) {
+      //           this.pasosFlete.splice(index, 1);
+      //           this.fletesRespondidos.push(DatosFletes);
+                
+      //         }
+    
+      //         // Ahora puedes usar this.miIdDeFletero donde sea necesario
+      //         console.log('ID del fletero actual:', this.miIdDeFletero);
+      //       });
+      //     });
+      //   }
+      // }

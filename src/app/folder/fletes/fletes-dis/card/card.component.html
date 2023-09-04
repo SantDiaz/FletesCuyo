@@ -1,7 +1,7 @@
 <ion-content>
 
   <ion-segment [(ngModel)]="selectedSegment">
-    <ion-segment-button value="seccion1">
+    <ion-segment-button value="Pedidos">
       Sección 1
     </ion-segment-button>
     <!-- <ion-segment-button value="seccion2">
@@ -92,23 +92,64 @@
                       <h4 class="u-text u-text-23">{{datos.cargamento}}</h4><span class="u-file-icon u-icon u-icon-23"><img src="../../../../../assets/imagesFletesDis/8452029.png" alt=""></span>
                       <h4 class="u-text u-text-24">{{datos.ayudantes}}</h4><span class="u-file-icon u-icon u-icon-24"><img src="../../../../../assets/imagesFletesDis/1679557.png" alt=""></span>
                       <h4 class="u-text u-text-25"  >{{datos.tipoVehiculo}}</h4>
-                      <!-- (click)="editUser(datos)" -->
                       <br>
-                      <input [(ngModel)]="rta.precio" [value]="precioInput" (input)="precioInputChanged($event.target.value)" style="width: 50%; margin-left: 25%;" type="text" class="form-control" placeholder="Precio">
-
-                      <!-- <input [(ngModel)]="rta.precio" style="width: 50%; margin-left: 25%;" type="text" class="form-control" placeholder="Precio"> -->
+                      <!-- <input [(ngModel)]="rta.precio" [value]="precioInput" (input)="precioInputChanged($event.target.value)" style="width: 50%; margin-left: 25%;" type="text" class="form-control" placeholder="Precio"> -->
                       <br>
-              
-                      
-                      <!-- <h6 class="u-text u-text-26"> {{ flete.tiempoTranscurrido | mostrarTiempo }}</h6> -->
-                      <!-- <h6 class="u-text u-text-26"> {{ mostrarTiempoTranscurrido(datos.tiempoTranscurrido) }}</h6> -->
                     </div>
                   </div>
-                  <!-- Este boton de abajo si funciona -->
-                  <!-- <a (click)="deleteUser(datos)" class="u-border-2 u-border-grey-75 u-btn u-btn-round u-button-style u-custom-color-1 u-hover-custom-color-3 u-radius-50 u-btn-3">pbtener</a> -->
-      
-                  <a (click)="enviarPrecio(datos)"  class="u-border-2 u-border-grey-75 u-btn u-btn-round u-button-style u-custom-color-1 u-hover-custom-color-3 u-radius-50 u-btn-3">Enviar</a>
+                  <button class="u-border-2 u-border-grey-75 u-btn u-btn-round u-button-style u-custom-color-1 u-hover-custom-color-3 u-radius-50 u-btn-3" ion-button (click)="precioInputChanged(datos.id, datos.precioEnviado, datos)">
+                    Enviar Precio
+                  </button>
+                  <br>
+                  
+                  <!-- <a (click)="enviarPrecio(datos)"  class="u-border-2 u-border-grey-75 u-btn u-btn-round u-button-style u-custom-color-1 u-hover-custom-color-3 u-radius-50 u-btn-3">Enviar</a> -->
+                  <script>
+                    // Supongamos que obtienes información del fletero desde tu backend.
+                    const miIdDeFletero = 'mi_id_de_fletero';
+                  
+                    // Agrega un manejador de eventos a los botones "Enviar Precio".
+                    const enviarPrecioBtns = document.querySelectorAll('.enviarPrecio');
+                  
+                    enviarPrecioBtns.forEach(btn => {
+                      btn.addEventListener('click', () => {
+                        // Pide el precio al usuario (esto es solo un ejemplo, puedes obtener el precio de la manera que desees).
+                        const precio = prompt('Ingrese el precio:');
+                  
+                        if (precio !== null) {
+                          // Actualiza el elemento de precio con el valor ingresado.
+                          const precioElement = btn.parentElement.querySelector('.precio');
+                          precioElement.textContent = precio;
+                  
+                          // Aquí deberías enviar la información a tu backend para actualizar la base de datos.
+                  
+                          // Luego, establece una cookie para registrar que este fletero ha enviado un precio para este pedido.
+                          document.cookie = `pedido${btn.dataset.id}=${miIdDeFletero}`;
+                  
+                          // Oculta el pedido si el fletero ha enviado su precio.
+                          btn.parentElement.style.display = 'none';
+                        }
+                      });
+                    });
+                  
+                    // Verifica las cookies para ocultar los pedidos del fletero actual.
+                    document.addEventListener('DOMContentLoaded', () => {
+                      const cookies = document.cookie.split(';');
+                      cookies.forEach(cookie => {
+                        const [key, value] = cookie.trim().split('=');
+                        if (key.startsWith('pedido') && value === miIdDeFletero) {
+                          const pedidoId = key.substring(6); // Obtiene el ID del pedido de la cookie
+                          const pedidoElement = document.querySelector(`[data-id="${pedidoId}"]`);
+                          if (pedidoElement) {
+                            pedidoElement.style.display = 'none';
+                          }
+                        }
+                      });
+                    });
+                  </script>
+                  
                 </div>
+
+                
               </div>
             </div>
           </div>

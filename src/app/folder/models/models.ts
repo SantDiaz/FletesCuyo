@@ -61,6 +61,7 @@ export interface UserU {
     uid: string;
     tiempoTranscurrido?: string;
     precio: number;
+     visible?: { [fleteroId: string]: boolean };
     }
 
   export interface respuesta {
@@ -68,7 +69,7 @@ export interface UserU {
     idFletero: string;
     nombre: string;
     apellido: string;
-    precio: string; 
+    precio: number; 
     mensaje: string;
     precioEnviado: boolean; // Agrega esta propiedad
 
