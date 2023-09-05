@@ -2,22 +2,9 @@
 <ion-content class="background2">
   <div class="button-container">
     <h1>¡Gracias por elegir FletesYa!</h1>
-  <h4>Si quieres registrarte para pedir un flete.</h4>
+  <h4>Si quieres registrarte para encontrar fletes disponibles.</h4>
   <h5>Debe llenar este formulario</h5>
   <ion-button color="danger" class="custom-button" (click)="volver()">Volver</ion-button>
-  <ion-button color="success" class="custom-button" id="open-modal" >Abrir</ion-button>
-    <ion-modal trigger="open-modal" (willDismiss)="onWillDismiss($event)">
-      <ng-template>
-      <ion-header>
-        <ion-toolbar color="dark">
-          <ion-buttons slot="end">
-            <ion-button (click)="cancel()">Cancel</ion-button>
-          </ion-buttons>
-          <ion-title>Ingrese sus datos</ion-title>
-        </ion-toolbar>
-      </ion-header>
-      <ion-content class="background2">
-        
         <section class="u-clearfix u-section-1" id="sec-b6f0">
         <div class="u-clearfix u-sheet u-sheet-1">
         <div class="u-border-2 u-border-grey-75 u-container-style u-custom-color-7 u-expanded-width-xs u-group u-radius-24 u-shape-round u-group-1">
@@ -28,12 +15,17 @@
              <div class="u-form-group u-form-name u-label-top u-form-group-2">
                <label for="name-ae7a" class="u-label">Email</label>
                <input [(ngModel)]="registerF.email" type="email" placeholder="Ingrese su Email" id="name-ae7a" name="name-3" class="u-border-1 u-border-grey-60 u-input u-input-rectangle" required="">
-
+               <div class="u-form-group u-form-name u-label-top u-form-group-2" *ngIf="registerF.email && customEmailValidator(registerF.email)">
+                El correo electrónico debe contener '@' y '.com' .
+              </div>
              </div>
              <div class="u-form-group u-form-name u-label-top u-form-group-2">
                <label for="name-ae7a" class="u-label">Contraseña</label>
-               <input  [(ngModel)]="registerF.password"  type="password" placeholder="Ingrese su contraseña" id="name-ae7a" name="name-3" class="u-border-1 u-border-grey-60 u-input u-input-rectangle" required="">
-             </div>
+               <input [(ngModel)]="registerF.password" type="password" placeholder="Ingrese su contraseña" id="name-ae7a" name="name-3" class="u-border-1 u-border-grey-60 u-input u-input-rectangle" required="">
+              </div>
+              <div class="u-form-group u-form-name u-label-top u-form-group-2" *ngIf="registerF.password && customPasswordValidator(registerF.password)">
+                La contraseña debe tener al menos 8 caracteres y contener al menos una mayúscula.
+              </div>
              
              <div (click)="siguiente()" class="u-align-center u-form-group u-form-submit u-label-top">
                <a  class="u-border-none u-btn u-btn-round u-btn-submit u-button-style u-custom-color-1 u-radius-13 u-btn-1">Enviar<br>
@@ -52,9 +44,6 @@
         </a>
         </div>
         </section>
-      </ion-content>
-    </ng-template>
-  </ion-modal>
   </div>
   
   

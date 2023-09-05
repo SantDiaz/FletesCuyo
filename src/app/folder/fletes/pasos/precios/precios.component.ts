@@ -64,7 +64,7 @@ export class PreciosComponent implements OnInit {
             // Aquí puedes realizar acciones con la ruta del pedido
             
             //aqui quiero agregar las respuestas de los pedidos `PedirFlete/${res.uid}/Pedidos//${pedidoID}/Respuesta/${ID DEL USUARIO DEL FLETERO QUE QUIERO OBTENER}`
-            this.database.getAll(`PedirFlete/${res.uid}/Pedidos/${pedidoID}`).then((res) => {
+            this.database.getAll(`PedirFlete/${res.uid}/Pedidos/`).then((res) => {
               if (res && res.subscribe) {
                 res.subscribe((resRef) => {
                   this.precios = resRef.map((pasosRef) => {
@@ -120,7 +120,12 @@ export class PreciosComponent implements OnInit {
       if (telefono.length > 0) {
         // Assuming the country code is +54 (Argentina), you can customize this
         const countryCode = '+54';
-        const message = 'Hola, estoy interesado en solicitar un flete.'; // You can customize the message
+        
+        // Obtén el mensaje del pedido desde la respuesta (ajusta esto según cómo estén estructurados tus datos)
+        const pedidoMensaje = respuesta.mensajePedido || 'Mensaje predeterminado si no hay mensaje de pedido';
+  
+        // Crea el mensaje completo para WhatsApp, incluyendo el mensaje del pedido
+        const message = `Hola, ha respondido a mi pedido. Mi pedido es el siguiente:\n\n${pedidoMensaje}`;
   
         // Create the WhatsApp link with the phone number and message
         const whatsappLink = `https://wa.me/${countryCode}${telefono}?text=${encodeURIComponent(message)}`;

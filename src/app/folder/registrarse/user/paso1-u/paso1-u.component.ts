@@ -40,7 +40,22 @@ export class Paso1UComponent implements OnInit {
     private interaction: InteractionService,    
     private firestore : FirestoreService,    
     private router: Router,
-    ) { }
+    ) {
+      this.registerU = {
+        uid: '',
+        nombre: '',
+        apellido: '',
+        dni: '',
+        edad: '',
+        domicilio: '',
+        telefono: '',
+        image: '',
+        perfil: 'Usuario'  ,
+        email: '',
+        password: '',
+      };
+    
+     }
 
 
   ngOnInit() {
@@ -57,14 +72,41 @@ export class Paso1UComponent implements OnInit {
     this.routes.navigate(['/registrarse']);
   }
 
+  customEmailValidator(value: string): { [key: string]: any } | null {
+    if (!value || !value.includes('@') || !value.includes('.com') && !value.includes('.')) {
+      return { customEmailError: true };
+    }
+    return null;
+  }
+
+  customPasswordValidator(value: string): { [key: string]: any } | null {
+    if (!value || value.length < 8 || !/[A-Z]/.test(value)) {
+      return { customPasswordError: true };
+    }
+    return null;
+  }
+
   async siguiente() {
     await this.interaction.presentLoading("Registrando...");
   
+    if (this.customEmailValidator(this.registerU.email)) {
+      this.interaction.closeLoading();
+      this.interaction.presentToast('El correo electrónico no es válido.');
+      return;
+    }
+  
+    // Validación de contraseña
+    if (this.customPasswordValidator(this.registerU.password)) {
+      this.interaction.closeLoading();
+      this.interaction.presentToast('La contraseña no cumple con los requisitos.');
+      return;
+    }
+  
+    // Si tanto el correo electrónico como la contraseña son válidos, continuar con el registro
     try {
       await this.authS.registerU(this.registerU);
       console.log("Registro exitoso");
       this.interaction.closeLoading();
-      this.modal.dismiss(null, 'cancel');
       this.router.navigate(['/paso2U']);
       // Resto del código...
     } catch (error) {

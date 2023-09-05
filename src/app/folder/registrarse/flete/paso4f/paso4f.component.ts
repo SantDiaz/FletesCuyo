@@ -8,6 +8,7 @@ import { UserF, datosVehiculo, tipoVehiculo } from 'src/app/folder/models/models
 import { AuthService } from 'src/app/folder/services/auth.service';
 import { FirestoreService } from 'src/app/folder/services/firestore.service';
 import { InteractionService } from 'src/app/folder/services/interaction.service';
+import { NuevoService } from 'src/app/folder/services/nuevo.service';
 
 @Component({
   selector: 'app-paso4f',
@@ -58,6 +59,7 @@ vehiculo = tipoVehiculo;
 
   constructor(private routes: Router,
     private authS: AuthService,      
+    private db: NuevoService,
     private interaction: InteractionService,    
     private firestore: FirestoreService,    
     private afAuth: AngularFireAuth,
@@ -160,17 +162,17 @@ vehiculo = tipoVehiculo;
               patenteImage: this.Datovehicular.imagePatente,
               //  dniImage: this.Datovehicular.imageDni,
               };
-              this.firestore.update(path2, res.uid, datosVehicularesConImagen);
-  
-          // Ahora, puedes guardar todo el objeto en la colección
-          console.log('datosVehicularesConImagen', datosVehicularesConImagen);
-          setTimeout(() => {
-            // Tu código de redirección aquí
-            window.location.href = '/home';
-          }, 0);
-        }
-      });
-    });
+
+              const path3 = `Fleteros/${res.uid}/DatosVehiculares/${res.uid}`;
+              this.db.updateDocument(path3, datosVehicularesConImagen).then(_ => {
+                // Realiza las acciones necesarias después de actualizar
+              this.router.navigate(['/home']);
+              }).catch(error => {
+                console.error(`Error updating pedido ${res.uid}:`, error);
+              });
+            }
+            })
+          });
   }
   
 

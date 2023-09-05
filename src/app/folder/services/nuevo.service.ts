@@ -8,9 +8,26 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class NuevoService {
-
+  
+  continueLoading: boolean = true;
   constructor(private firestore: AngularFirestore,
  ) { }
+
+ get shouldContinueLoading(): boolean {
+  return this.continueLoading;
+}
+
+set shouldContinueLoading(value: boolean) {
+  this.continueLoading = value;
+}
+stopLoading() {
+  this.continueLoading = false;
+}
+
+updateDoc(path: string, id: string, data: any) {
+  this.continueLoading = false;
+  return  this.firestore.collection(path).doc(id).update(data);
+}
 
  obtenerDatos(miColeccion: string): Observable<any[]> {
   const collectionRef = this.firestore.collection(miColeccion);
@@ -21,7 +38,8 @@ export class NuevoService {
  getCollection(collectionName: string): Observable<any[]> {
   return this.firestore.collection(collectionName).valueChanges();
 }
- updateDocument(documentPath: string, data: any): Promise<void> {
+ updateDocument(documentPath: string, data: any, ): Promise<void> {
+  this.continueLoading = false;
   const documentRef = this.firestore.doc(documentPath);
   return documentRef.update(data);
 }

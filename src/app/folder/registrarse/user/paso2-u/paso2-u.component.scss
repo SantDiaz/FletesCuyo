@@ -1,5 +1,15 @@
-
-
+.custom-button {
+  margin-right: 20px;
+  height: 60px;
+  color: #000;
+  border-radius: 5px;
+  font-size: 16px; /* Tamaño de fuente aumentado */
+  width: 100px;
+}
+.button-container {
+  text-align: center;
+  padding: 30px;
+}
 .background2{
 	--ion-background-color: linear-gradient(90deg, rgba(183,181,226,1) 0%, rgba(41,174,228,1) 0%, rgba(12,49,62,1) 0%, rgba(6,102,80,1) 50%, rgba(12,49,62,1) 100%);
 	}.u-section-1 .u-sheet-1 {
