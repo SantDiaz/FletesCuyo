@@ -29,7 +29,7 @@ export class AuthService {
   }
 
 
-  registerF(registerU: UserF): Promise<void> {
+  registerF(registerU: UserF, habilitado: boolean): Promise<void> {
     return new Promise<void>((resolve, reject) => {
       this.authS.createUserWithEmailAndPassword(registerU.email, registerU.password)
         .then((result) => {
@@ -39,6 +39,7 @@ export class AuthService {
           const collectionRef = this.firestore.collection('Fleteros');
           const docRef = collectionRef.doc(user.uid); // Utiliza el UID del usuario como ID del documento
           docRef.set({
+            habilitado: habilitado,
             email: registerU.email,
             password: registerU.password,
             perfil: 'Fletero'

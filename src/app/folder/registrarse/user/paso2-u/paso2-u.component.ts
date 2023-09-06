@@ -21,7 +21,11 @@
 
     name: string;
     message = "putoss";
-
+    prefijosTelefonicos = [
+      "11", "351", "3543", "379", "370", "221", "380", "261", "299", "343",
+      "376", "2804", "362", "2966", "387", "383", "264", "266", "381", "388",
+      "342", "2954", "385", "2920", "2901"
+    ];
     registerU: UserU = {
       uid: null,
       nombre: null,
@@ -49,14 +53,16 @@
     }
 
     async siguiente() {
-      this.interaction.presentLoading('Guardando datos Vehiculares...');
+      this.interaction.presentLoading('Guardando datos Personales...');
       this.authS.stateUser<UserU>().subscribe( res  => {
+        this.interaction.closeLoading();
         this.registerU.uid = res.uid;
         console.log("dad",res.uid)
         const path= `Usuarios`
         this.firestore.getDoc<UserU>(path, res.uid).subscribe( res2 => {
           this.interaction.closeLoading();
           if (res2){
+          this.interaction.closeLoading();
             console.log("res", res2)
             const id = res.uid;
               const path2 = `Usuarios/${res.uid}/DatosPersonales`
@@ -116,21 +122,77 @@
 
 
 
-    cancel() {
-      this.modal.dismiss(null, 'cancel');
-    }
-
-    confirm() {
-      this.modal.dismiss(this.name, 'confirm');
-    }
-
-    onWillDismiss(event: Event) {
-      const ev = event as CustomEvent<OverlayEventDetail<string>>;
-      if (ev.detail.role === 'confirm') {
-        this.message = `Hello, ${ev.detail.data}!`;
+    validateNombre() {
+      // Agrega tu lógica de validación personalizada aquí
+      // Por ejemplo, puedes verificar si el nombre tiene al menos 3 caracteres
+      if (this.registerU.nombre && this.registerU.nombre.length < 3) {
+        return true; // La validación falla
       }
+      return false; // La validación pasa
     }
-
+    validateApellido() {
+      // Agrega tu lógica de validación personalizada aquí
+      // Por ejemplo, puedes verificar si el apellido tiene al menos 3 caracteres
+      if (this.registerU.apellido && this.registerU.apellido.length < 3) {
+        return true; // La validación falla
+      }
+      return false; // La validación pasa
+    }
+    validateDNI() {
+      // Utiliza una expresión regular para validar el patrón del DNI
+      const dniPattern = /^[0-9]{8}$/;
+      if (!dniPattern.test(this.registerU.dni)) {
+        return true; // La validación falla
+      }
+      return false; // La validación pasa
+    }
+  
+    validateTelefono(telefono: string): boolean {
+      // Ensure that telefono is not undefined or empty
+      if (!telefono) {
+        return false; // Return false if telefono is undefined or empty
+      }
+    
+      // Eliminate spaces and hyphens, if any
+      const numeroLimpio = telefono.replace(/\s+/g, '').replace(/-/g, '');
+    
+      // Extract the prefix (first 3 or 4 digits)
+      const prefijo = numeroLimpio.substring(0, 3);
+      // Verifica si el prefijo está en el arreglo de prefijos
+      if (this.prefijosTelefonicos.includes(prefijo)) {
+        // Verifica si el número tiene entre 10 y 11 dígitos en total
+        if (numeroLimpio.length < 10 || numeroLimpio.length > 11) {
+          return false; // La validación falla
+        }
+  
+        // Verifica si todos los caracteres son dígitos numéricos
+        if (!/^\d+$/.test(numeroLimpio)) {
+          return false; // La validación falla
+        }
+  
+        // Si todas las validaciones pasan, consideramos el número válido
+        return true;
+      }
+  
+      return false; // La validación falla si el prefijo no está en el arreglo
+    }
+  
+    // Resto de tu código aquí...
+    
+    validateDomicilio() {
+      if (!this.registerU.domicilio) {
+        return true; // La validación falla si el campo está vacío
+      }
+      return false; // La validación pasa si el campo no está vacío
+    }
+    
+    validateEdad() {
+      const edad = this.registerU.edad;
+      if (edad < 18 || edad > 65) {
+        return true; // La validación falla
+      }
+      return false; // La validación pasa
+    }
 
 
     

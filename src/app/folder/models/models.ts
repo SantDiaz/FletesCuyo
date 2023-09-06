@@ -5,7 +5,7 @@ export interface UserU {
     nombre: string;
     apellido: string;
     dni: string;
-    edad: string;
+    edad: number;
     domicilio: string;
     // provincia: 'Buenos Aires' | 'Catamarca'| 'Chaco'| 'Chubut'| 'Córdoba'| 'Corrientes'| 'Entre Ríos'| 'Formosa'| 'Jujuy'
     // |'La Pampa' | 'La Rioja'| 'Mendoza'| 'Mendoza'| 'Misiones'| 'Neuquén'| 'Río Negro'| 'Salta'| 'San Juan'| 'Santa Cruz'| 'Santa Fe'| 'San
@@ -23,7 +23,7 @@ export interface UserU {
     nombre: string;
     apellido: string;
     dni: string;
-    edad: string;
+    edad: number;
     domicilio: string;
     // provincia: 'Buenos Aires' | 'Catamarca'| 'Chaco'| 'Chubut'| 'Córdoba'| 'Corrientes'| 'Entre Ríos'| 'Formosa'| 'Jujuy'
     // |'La Pampa' | 'La Rioja'| 'Mendoza'| 'Mendoza'| 'Misiones'| 'Neuquén'| 'Río Negro'| 'Salta'| 'San Juan'| 'Santa Cruz'| 'Santa Fe'| 'San
@@ -44,7 +44,7 @@ export interface UserU {
     tipoVehiculo:  'Camioneta' | 'Camion' | 'Utilitario';
     marca: string;
     modelo: string;
-    patente: number;
+    patente: string;
     imagePatente: string; 
     imageDni: string; 
     imageCarnet: string; 

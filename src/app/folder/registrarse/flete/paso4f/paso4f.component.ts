@@ -143,34 +143,28 @@ vehiculo = tipoVehiculo;
       console.log("dad", res.uid);
       const path = `Fleteros/${res.uid}/DatosVehiculares`;
       this.firestore.getDoc<datosVehiculo>(path, res.uid).subscribe((res2) => {
-        // this.interaction.closeLoading();
-        if (res2) {
-          console.log("res", res2);
-          const path2 = `Fleteros/${res.uid}/DatosVehiculares/`;
-          
-          // Actualiza la propiedad patenteImage con la representación en base64
-          const datosVehicularesConImagen = {
-              uid: res2.uid,
-              tipoVehiculo: res2.tipoVehiculo,
-              marca: res2.marca,
-              modelo: res2.modelo,
-              patente: res2.patente,
-              imageDni: this.Datovehicular.imageDni,
-              imageCarnet: this.Datovehicular.imageCarnet,
-              imageDniDorzal: this.Datovehicular.imageDniDorzal,
-              imageCarnetDorzal: this.Datovehicular.imageCarnetDorzal,
-              patenteImage: this.Datovehicular.imagePatente,
-              //  dniImage: this.Datovehicular.imageDni,
-              };
 
-              const path3 = `Fleteros/${res.uid}/DatosVehiculares/${res.uid}`;
-              this.db.updateDocument(path3, datosVehicularesConImagen).then(_ => {
-                // Realiza las acciones necesarias después de actualizar
-              this.router.navigate(['/home']);
-              }).catch(error => {
-                console.error(`Error updating pedido ${res.uid}:`, error);
-              });
-            }
+        const datosVehicularesConImagen = {
+            uid: res2.uid,
+            tipoVehiculo: res2.tipoVehiculo,
+            marca: res2.marca,
+            modelo: res2.modelo,
+            patente: res2.patente,
+            imageDni: this.Datovehicular.imageDni,
+            imageCarnet: this.Datovehicular.imageCarnet,
+            imageDniDorzal: this.Datovehicular.imageDniDorzal,
+            imageCarnetDorzal: this.Datovehicular.imageCarnetDorzal,
+            patenteImage: this.Datovehicular.imagePatente,
+            //  dniImage: this.Datovehicular.imageDni,
+            };
+
+            const path3 = `Fleteros/${res.uid}/DatosVehiculares/${res.uid}`;
+            this.db.updateDocument(path3, datosVehicularesConImagen).then(_ => {
+              // Realiza las acciones necesarias después de actualizar
+              setTimeout(() => {
+                this.router.navigate(['/home']);
+              }, 0); // Change the delay time as needed            }).catch(error => {
+            });
             })
           });
   }

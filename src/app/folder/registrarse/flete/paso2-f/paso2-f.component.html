@@ -11,29 +11,41 @@
           <div class="u-form u-palette-1-light-3 u-radius-14 u-form-1">
             <form  class="u-clearfix u-form-spacing-15 u-form-vertical u-inner-form" style="padding: 15px;" source="email" name="form">
               <div class="u-form-group u-form-name u-form-partition-factor-2 u-label-top">
-                <label for="name-7c2c" class="u-label"> Nombre </label>
-                <input [(ngModel)]="registerF.nombre" type="text" placeholder="Introduzca su nombre" id="name-7c2c" name="name" class="u-border-1 u-border-grey-60 u-input u-input-rectangle" required="">
+                <label for="name-7c2c" class="u-label">Nombre</label>
+                <input [(ngModel)]="registerF.nombre" type="text" placeholder="Introduzca su nombre" name="nombre" class="u-border-1 u-border-grey-60 u-input u-input-rectangle" required>
+                <div *ngIf="validateNombre()" class="error-message">El nombre debe tener al menos 3 caracteres</div>
               </div>
+              
               <div class="u-form-group u-form-name u-form-partition-factor-2 u-label-top u-form-group-2">
                 <label for="name-04dd" class="u-label">Apellido</label>
-                <input [(ngModel)]="registerF.apellido" type="text" placeholder="Introduzca su apellido" id="name-04dd" name="name-2" class="u-border-1 u-border-grey-60 u-input u-input-rectangle" required="">
+                <input [(ngModel)]="registerF.apellido" type="text" placeholder="Introduzca su apellido" id="name-04dd" name="name-2" class="u-border-1 u-border-grey-60 u-input u-input-rectangle" required>
+                <div *ngIf="validateApellido()" class="error-message">El apellido debe tener al menos 3 caracteres</div>
               </div>
+              
               <div class="u-form-group u-form-name u-form-partition-factor-2 u-label-top">
                 <label for="name-85e7" class="u-label">DNI</label>
-                <input [(ngModel)]="registerF.dni" type="text" placeholder="Introduzca su DNI sin &quot;.&quot; o &quot;,&quot; " id="name-85e7" name="name-1" class="u-border-1 u-border-grey-60 u-input u-input-rectangle" required="">
+                <input [(ngModel)]="registerF.dni" type="text" placeholder="Introduzca su DNI sin ' . ' o ' , '" name="dni" class="u-border-1 u-border-grey-60 u-input u-input-rectangle" pattern="[0-9]{8}" required>
+                <div *ngIf="validateDNI()" class="error-message">Debe contener exactamente 8 dígitos numéricos</div>
               </div>
+              
               <div class="u-form-group u-form-name u-form-partition-factor-2 u-label-top u-form-group-4">
                 <label for="name-ae7a" class="u-label">Edad</label>
-                <input [(ngModel)]="registerF.edad" type="text" placeholder="Introduzca su edad" id="name-ae7a" name="name-3" class="u-border-1 u-border-grey-60 u-input u-input-rectangle" required="">
+                <input [(ngModel)]="registerF.edad" type="number" placeholder="Introduzca su edad" name="edad" class="u-border-1 u-border-grey-60 u-input u-input-rectangle" min="18" max="65" required>
+                <div *ngIf="validateEdad()" class="error-message">La edad debe estar entre 18 y 65 años</div>
               </div>
+              
               <div class="u-form-address u-form-group u-label-top">
                 <label for="address-ef4e" class="u-label">Dirección</label>
-              <input  [(ngModel)]="registerF.domicilio" type="text" placeholder="Ingrese su dirección" id="address-ef4e" name="address" class="u-border-1 u-border-grey-60 u-input u-input-rectangle" required="">
-            </div>
+                <input [(ngModel)]="registerF.domicilio" type="text" placeholder="Ingrese su dirección" id="address-ef4e" name="address" class="u-border-1 u-border-grey-60 u-input u-input-rectangle" required>
+                <div *ngIf="validateDomicilio()" class="error-message">Ingrese su dirección</div>
+              </div>
+              
             <div class="u-form-group u-form-phone u-label-top">
               <label for="phone-e765" class="u-label">Teléfono</label>
-              <input [(ngModel)]="registerF.telefono" type="tel" pattern="\+?\d{0,3}[\s\(\-]?([0-9]{2,3})[\s\)\-]?([\s\-]?)([0-9]{3})[\s\-]?([0-9]{2})[\s\-]?([0-9]{2})" placeholder="Ingrese su numero de teléfono +54 " id="phone-e765" name="phone" class="u-border-1 u-border-grey-60 u-input u-input-rectangle" required="">
+              <input [(ngModel)]="registerF.telefono" type="tel" placeholder="Ingrese su número de teléfono +54" name="telefono" class="u-border-1 u-border-grey-60 u-input u-input-rectangle" pattern="(\+54\s?)?(\d{2,4}[-\s]?)(\d{3,4}[-\s]?)(\d{2}[-\s]?\d{2}[-\s]?\d{2})" required>
+              <div *ngIf="validateTelefono()" class="error-message">El número de teléfono no es válido</div>
             </div>
+            
               <div (click)="siguiente()" class="u-align-center u-form-group u-form-submit u-label-top">
                 <a  class="u-border-none u-btn u-btn-round u-btn-submit u-button-style u-custom-color-1 u-radius-13 u-btn-1">Enviar<br>
                 </a>

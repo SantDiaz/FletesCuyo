@@ -49,7 +49,7 @@ export class Paso1fComponent implements OnInit {
       nombre: '',
       apellido: '',
       dni: '',
-      edad: '',
+      edad: null,
       domicilio: '',
       telefono: '',
       image: '',
@@ -104,10 +104,13 @@ export class Paso1fComponent implements OnInit {
   
     // Si tanto el correo electrónico como la contraseña son válidos, continuar con el registro
     try {
-      await this.authS.registerF(this.registerF);
+      let habilitado = this.registerF.habilitado;
+      habilitado = false;
+      await this.authS.registerF(this.registerF, habilitado);
       console.log("Registro exitoso");
+      this.registerF.habilitado= false;
       this.interaction.closeLoading();
-      this.router.navigate(['/paso2U']);
+      this.router.navigate(['/paso2F']);
       // Resto del código...
     } catch (error) {
       console.log(error);

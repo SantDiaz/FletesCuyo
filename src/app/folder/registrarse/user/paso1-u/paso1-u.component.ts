@@ -46,7 +46,7 @@ export class Paso1UComponent implements OnInit {
         nombre: '',
         apellido: '',
         dni: '',
-        edad: '',
+        edad: null,
         domicilio: '',
         telefono: '',
         image: '',

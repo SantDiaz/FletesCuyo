@@ -8,26 +8,72 @@
       <div class="u-border-2 u-border-grey-75 u-container-style u-custom-color-7 u-expanded-width-xs u-group u-radius-24 u-shape-round u-group-1">
         <div class="u-container-layout u-container-layout-1">
           <div class="u-form u-palette-1-light-3 u-radius-14 u-form-1">
-            <form  class="u-clearfix u-form-spacing-15 u-form-vertical u-inner-form" style="padding: 15px;" source="email" name="form">
+            <form #vehicleForm="ngForm" class="u-clearfix u-form-spacing-15 u-form-vertical u-inner-form" style="padding: 15px;" source="email" name="form">
               <div class="u-form-group u-form-name u-form-partition-factor-2 u-label-top">
-              <label for="name-85e7" class="u-label">Vehiculo</label>
-                <select [(ngModel)]="Datovehicular.tipoVehiculo" id="select-9970" name="select" class="u-border-1 u-border-grey-60 u-input u-input-rectangle" required="required">
+                <label for="tipoVehiculo" class="u-label">Vehiculo</label>
+                <select
+                  [(ngModel)]="Datovehicular.tipoVehiculo"
+                  id="tipoVehiculo"
+                  name="tipoVehiculo"
+                  class="u-border-1 u-border-grey-60 u-input u-input-rectangle"
+                  required
+                >
                   <option value="" disabled selected>Seleccione un tipo de vehículo</option>
                   <option *ngFor="let tipoVehiculo of vehiculo" [value]="tipoVehiculo">{{ tipoVehiculo }}</option>
                 </select>
+                <div *ngIf="vehicleForm.controls.tipoVehiculo && vehicleForm.controls.tipoVehiculo.errors?.required">
+                  <p class="error-message">Seleccione un tipo de vehículo.</p>
+                </div>
               </div>
-            <div class="u-form-group u-form-name u-form-partition-factor-2 u-label-top">
-              <label for="name-85e7" class="u-label">Marca del automotor</label>
-              <input [(ngModel)]="Datovehicular.marca" type="text" placeholder="Ej: Ford" id="name-85e7" name="name-1" class="u-border-1 u-border-grey-60 u-input u-input-rectangle" required="">
-            </div>
-            <div class="u-form-group u-form-name u-form-partition-factor-2 u-label-top u-form-group-3">
-              <label for="name-5d22" class="u-label">Modelo del automotor</label>
-              <input [(ngModel)]="Datovehicular.modelo" type="text" placeholder="Ej: F100" id="name-5d22" name="name-4" class="u-border-1 u-border-grey-60 u-input u-input-rectangle" required="">
-            </div>
-            <div class="u-form-group u-form-name u-label-top u-form-group-4">
-              <label for="name-ae7a" class="u-label">Patente</label>
-              <input [(ngModel)]="Datovehicular.patente" type="text" placeholder="Ingrese sus 6 valores" id="name-ae7a" name="name-3" class="u-border-1 u-border-grey-60 u-input u-input-rectangle" required="">
-            </div>
+              <div class="u-form-group u-form-name u-form-partition-factor-2 u-label-top">
+                <label for="marca" class="u-label">Marca del automotor</label>
+                <input
+                  [(ngModel)]="Datovehicular.marca"
+                  type="text"
+                  placeholder="Ej: Ford"
+                  id="marca"
+                  name="marca"
+                  class="u-border-1 u-border-grey-60 u-input u-input-rectangle"
+                  required
+                >
+                <div *ngIf="vehicleForm.controls.marca && vehicleForm.controls.marca.errors?.required">
+                  <p class="error-message">Ingrese la marca del automotor.</p>
+                </div>
+              </div>
+              <div class="u-form-group u-form-name u-form-partition-factor-2 u-label-top u-form-group-3">
+                <label for="modelo" class="u-label">Modelo del automotor</label>
+                <input
+                  [(ngModel)]="Datovehicular.modelo"
+                  type="text"
+                  placeholder="Ej: F100"
+                  id="modelo"
+                  name="modelo"
+                  class="u-border-1 u-border-grey-60 u-input u-input-rectangle"
+                  required
+                >
+                <div *ngIf="vehicleForm.controls.modelo && vehicleForm.controls.modelo.errors?.required">
+                  <p class="error-message">Ingrese el modelo del automotor.</p>
+                </div>
+              </div>
+              <div class="u-form-group u-form-name u-label-top u-form-group-4">
+                <label for="patente" class="u-label">Patente</label>
+                <input
+                  [(ngModel)]="Datovehicular.patente"
+                  type="text"
+                  placeholder="Ingrese sus 6 valores"
+                  id="patente"
+                  name="patente"
+                  class="u-border-1 u-border-grey-60 u-input u-input-rectangle"
+                  required
+                >
+                <div *ngIf="vehicleForm.controls.patente && vehicleForm.controls.patente.errors?.required">
+                  <p class="error-message">Ingrese la patente del vehículo.</p>
+                </div>
+                <div *ngIf="vehicleForm.controls.patente && vehicleForm.controls.patente.errors?.pattern">
+                  <p class="error-message">La patente debe tener 6 caracteres alfanuméricos.</p>
+                </div>
+              </div>
+            
               <div (click)="siguiente()" class="u-align-center u-form-group u-form-submit u-label-top">
                 <a  class="u-border-none u-btn u-btn-round u-btn-submit u-button-style u-custom-color-1 u-radius-13 u-btn-1">Enviar<br>
                 </a>

@@ -1,12 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
-import { IonModal, LoadingController, ToastController } from '@ionic/angular';
+import { Subscription } from 'rxjs';
 import { UserF, datosVehiculo, tipoVehiculo } from 'src/app/folder/models/models';
 import { AuthService } from 'src/app/folder/services/auth.service';
 import { FirestoreService } from 'src/app/folder/services/firestore.service';
 import { InteractionService } from 'src/app/folder/services/interaction.service';
 import { NuevoService } from 'src/app/folder/services/nuevo.service';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-paso2-f',
@@ -14,10 +15,7 @@ import { NuevoService } from 'src/app/folder/services/nuevo.service';
   styleUrls: ['./paso2-f.component.scss'],
 })
 export class Paso2FComponent implements OnInit {
-  @ViewChild(IonModal) modal: IonModal;
 
-  name: string;
-  message = "putoss";
 
   registerF: UserF = {
     uid: null,
@@ -29,13 +27,18 @@ export class Paso2FComponent implements OnInit {
     telefono: null,
     image: null,
     verificado: false,
-    habilitado: false,
+    habilitado: true,
     email: null,
     password: null,
     perfil:  'Fletero',
     datosVehiculos: null,
   }
-
+  
+   prefijosTelefonicos = [
+    "11", "351", "3543", "379", "370", "221", "380", "261", "299", "343",
+    "376", "2804", "362", "2966", "387", "383", "264", "266", "381", "388",
+    "342", "2954", "385", "2920", "2901"
+  ];
   constructor(private routes: Router,
     private authS: AuthService,      
     private interaction: InteractionService,    
@@ -46,47 +49,165 @@ export class Paso2FComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // this.onWillDismiss();
+
   }
 
-  async siguiente() {
-    await  this.interaction.presentLoading('Guardando datos personales...');
-    this.authS.stateUser<UserF>().subscribe( res  => {
-      this.registerF.uid = res.uid;
-      console.log("dad",res.uid)
-      const path= `Fleteros`
-      this.firestore.getDoc<UserF>(path, res.uid).subscribe( res2 => {
-        this.interaction.closeLoading();
 
-        if (res2){
-          console.log("res", res2)
-          // const id = res.uid;
-          // const path2 = `Fleteros/${res.uid}/DatosPersonales`
-          // aqui podemos usar dos maneras distintas 
-          // 1)_ createDoc para crear un documento con id
-          // 2)_ Createdocument para crear infinidad de documenteos
-          // this.firestore.createDoc(this.registerF, path2, id);
-          
-        }
-      })  
-      const datosPersonales = {
-        nombre: this.registerF.nombre,
-        apellido: this.registerF.apellido,
-        dni: this.registerF.dni,
-        edad: this.registerF.edad,
-        domicilio: this.registerF.domicilio,
-        telefono: this.registerF.telefono,
-        verificado: false,
-        habilitado: false,
-      };
-      const path3 = `Fleteros/${res.uid}`;
-      this.db.updateDocument(path3, datosPersonales).then(_ => {
-        // Realiza las acciones necesarias después de actualizar
-      this.router.navigate(['/paso3F']);
-      }).catch(error => {
-        console.error(`Error updating pedido ${res.uid}:`, error);
+  validateNombre() {
+    // Agrega tu lógica de validación personalizada aquí
+    // Por ejemplo, puedes verificar si el nombre tiene al menos 3 caracteres
+    if (this.registerF.nombre && this.registerF.nombre.length < 3) {
+      return true; // La validación falla
+    }
+    return false; // La validación pasa
+  }
+  validateApellido() {
+    // Agrega tu lógica de validación personalizada aquí
+    // Por ejemplo, puedes verificar si el apellido tiene al menos 3 caracteres
+    if (this.registerF.apellido && this.registerF.apellido.length < 3) {
+      return true; // La validación falla
+    }
+    return false; // La validación pasa
+  }
+  validateDNI() {
+    // Utiliza una expresión regular para validar el patrón del DNI
+    const dniPattern = /^[0-9]{8}$/;
+    if (!dniPattern.test(this.registerF.dni)) {
+      return true; // La validación falla
+    }
+    return false; // La validación pasa
+  }
+
+  validateTelefono(telefono: string): boolean {
+    // Ensure that telefono is not undefined or empty
+    if (!telefono) {
+      return false; // Return false if telefono is undefined or empty
+    }
+  
+    // Eliminate spaces and hyphens, if any
+    const numeroLimpio = telefono.replace(/\s+/g, '').replace(/-/g, '');
+  
+    // Extract the prefix (first 3 or 4 digits)
+    const prefijo = numeroLimpio.substring(0, 3);
+    // Verifica si el prefijo está en el arreglo de prefijos
+    if (this.prefijosTelefonicos.includes(prefijo)) {
+      // Verifica si el número tiene entre 10 y 11 dígitos en total
+      if (numeroLimpio.length < 10 || numeroLimpio.length > 11) {
+        return false; // La validación falla
+      }
+
+      // Verifica si todos los caracteres son dígitos numéricos
+      if (!/^\d+$/.test(numeroLimpio)) {
+        return false; // La validación falla
+      }
+
+      // Si todas las validaciones pasan, consideramos el número válido
+      return true;
+    }
+
+    return false; // La validación falla si el prefijo no está en el arreglo
+  }
+
+  // Resto de tu código aquí...
+  
+  validateDomicilio() {
+    if (!this.registerF.domicilio) {
+      return true; // La validación falla si el campo está vacío
+    }
+    return false; // La validación pasa si el campo no está vacío
+  }
+  
+  validateEdad() {
+    const edad = this.registerF.edad;
+    if (edad < 18 || edad > 65) {
+      return true; // La validación falla
+    }
+    return false; // La validación pasa
+  }
+  async siguiente() {
+    // Validate the form before saving data
+    if (this.validateForm()) {
+      await this.interaction.presentLoading('Guardando datos personales...');
+      
+      // Get the currently authenticated user
+      this.authS.stateUser<UserF>()
+      .pipe(take(1))
+      .subscribe(res => {
+        this.db.stopLoading();
+        // Your code here
+        
+        const path = `Fleteros`;
+  
+        // Check if a document for this user already exists
+        this.firestore.getDoc<UserF>(path, res.uid).subscribe(res2 => {
+          const datosPersonales = {
+            nombre: this.registerF.nombre,
+            apellido: this.registerF.apellido,
+            dni: this.registerF.dni,
+            edad: this.registerF.edad,
+            domicilio: this.registerF.domicilio,
+            telefono: this.registerF.telefono,
+            email: res2.email,
+            password: res2.password,
+            perfil: res2.perfil,
+            verificado: false, // Remove this line or set it to the desired value
+            habilitado: false,
+          };
+
+          // Define the path for saving the personal data
+          const path3 = `Fleteros`;
+          // Update or create the document as needed
+          this.db.updateDoc(path3,res.uid, datosPersonales).then(_ => {
+            this.interaction.closeLoading();
+            this.router.navigate(['/paso3F']);
+          }).catch(error => {
+            this.interaction.closeLoading();
+            console.error(`Error al actualizar el documento ${path3}:`, error);
+          });
+        });
       });
-    })
-}
+    } else {
+      this.interaction.presentToast('Por favor, complete todos los campos correctamente.');
+    }
+  }
+  
+
+
+  validateForm(): boolean {
+    // Validación para el campo Nombre
+    if (!this.registerF.nombre || this.registerF.nombre.length < 3) {
+      return false; // Validación fallida para el campo Nombre
+    }
+  
+    // Validación para el campo Apellido
+    if (!this.registerF.apellido || this.registerF.apellido.length < 3) {
+      return false; // Validación fallida para el campo Apellido
+    }
+  
+    // Validación para el campo DNI
+    const dniPattern = /^[0-9]{8}$/;
+    if (!this.registerF.dni || !dniPattern.test(this.registerF.dni)) {
+      return false; // Validación fallida para el campo DNI
+    }
+  
+    // Validación para el campo Edad
+    if (!this.registerF.edad || this.registerF.edad < 18 || this.registerF.edad > 100) {
+      return false; // Validación fallida para el campo Edad
+    }
+  
+    // Validación para el campo Domicilio (verifica si está vacío)
+    if (!this.registerF.domicilio) {
+      return false; // Validación fallida para el campo Domicilio
+    }
+  
+    // Validación para el campo Teléfono utilizando la función validateTelefono
+    if (!this.registerF.telefono || !this.validateTelefono(this.registerF.telefono)) {
+      return false; // Validación fallida para el campo Teléfono
+    }
+    
+    return true; // Todos los campos son válidos
+  }
+  
+  
 }
   

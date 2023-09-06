@@ -8,7 +8,8 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class NuevoService {
-  
+  private editingInProgress = false; // Variable de control
+  private data: any[] = [];	
   continueLoading: boolean = true;
   constructor(private firestore: AngularFirestore,
  ) { }
@@ -21,12 +22,27 @@ set shouldContinueLoading(value: boolean) {
   this.continueLoading = value;
 }
 stopLoading() {
+  this.shouldContinueLoading = false;
   this.continueLoading = false;
 }
 
 updateDoc(path: string, id: string, data: any) {
-  this.continueLoading = false;
-  return  this.firestore.collection(path).doc(id).update(data);
+  if (!this.editingInProgress) { // Verifica si la edición ya está en progreso
+    this.editingInProgress = true; // Marca la edición como en progreso
+    return this.firestore.collection(path).doc(id).update(data)
+      .then(() => {
+        // La edición se completó con éxito
+        this.editingInProgress = false; // Restablece la variable de control
+      })
+      .catch(error => {
+        // Manejo de errores
+        this.editingInProgress = false; // Restablece la variable de control en caso de error
+        console.error('Error al editar el documento:', error);
+      });
+  } else {
+    // Si ya hay una edición en progreso, no hagas nada y devuelve una promesa vacía
+    return Promise.resolve();
+  }
 }
 
  obtenerDatos(miColeccion: string): Observable<any[]> {
@@ -38,6 +54,8 @@ updateDoc(path: string, id: string, data: any) {
  getCollection(collectionName: string): Observable<any[]> {
   return this.firestore.collection(collectionName).valueChanges();
 }
+
+
  updateDocument(documentPath: string, data: any, ): Promise<void> {
   this.continueLoading = false;
   const documentRef = this.firestore.doc(documentPath);
@@ -65,6 +83,15 @@ updateDoc(path: string, id: string, data: any) {
       }catch(err) {
         console.log("error", err);
       }
+    }
+
+    updateObjectById(id: string, newData: any): boolean {
+      const index = this.data.findIndex(item => item.id === id);
+      if (index !== -1) {
+        this.data[index] = { ...this.data[index], ...newData };
+        return true; // Indica que la actualización fue exitosa
+      }
+      return false; // Indica que el objeto con el ID especificado no se encontró
     }
 
     async getById(collection, id){
