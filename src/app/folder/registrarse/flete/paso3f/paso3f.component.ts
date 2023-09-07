@@ -123,11 +123,11 @@ vehiculo = tipoVehiculo;
     return !this.Datovehicular.modelo || this.Datovehicular.modelo.trim() === '';
   }
   
-  // validatePatente() {
-  //   // Convert patente to a string and then check if it matches the pattern
-  //   const patentePattern = /^[A-Z0-9]{6}$/; // Pattern for a 6-character alphanumeric patente
-  //   return !this.Datovehicular.patente.toString() || !patentePattern.test(this.Datovehicular.patente.toString());
-  // }
+  validatePatente() {
+    // Convert patente to a string and then check if it matches the pattern
+    const patentePattern = /^[A-Z0-9]{6,9}$/; // Pattern for a 6-character alphanumeric patente
+    return !this.Datovehicular.patente.toString() || !patentePattern.test(this.Datovehicular.patente.toString());
+  }
   
   
 
@@ -152,16 +152,16 @@ vehiculo = tipoVehiculo;
     }
   
     // Validación para el campo patente
-    // const patentePattern = /^[A-Z0-9]{6}$/; // Example pattern for a 6-character alphanumeric patente
-    // if (!this.Datovehicular.patente || !patentePattern.test(this.Datovehicular.patente)) {
-    //   return false; // Validación fallida para el campo patente
-    // }
+    const patentePattern = /^[A-Z0-9]{6,8}$/; // Example pattern for a 6-character alphanumeric patente
+    if (!this.Datovehicular.patente || !patentePattern.test(this.Datovehicular.patente)) {
+      return false; // Validación fallida para el campo patente
+    }
   
     return (
       !this.validateTipoVehiculo() &&
       !this.validateMarca() &&
       !this.validateModelo() 
-      // &&  !this.validatePatente()
+      &&  !this.validatePatente()
     );  }
   
 }

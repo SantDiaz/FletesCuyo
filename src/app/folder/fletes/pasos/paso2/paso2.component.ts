@@ -63,12 +63,97 @@ export class Paso2Component implements OnInit {
   
   
 
+  validateDesde() {
+    // Check if the marca field is empty or contains only whitespace
+    if (!this.pasosFlete.uDesde || this.pasosFlete.uDesde.length < 3) {
+    return !this.pasosFlete.uDesde || this.pasosFlete.uDesde.trim() === '';
+     }
+  }
+  validateHasta() {
+    // Check if the marca field is empty or contains only whitespace
+    if (!this.pasosFlete.uHasta || this.pasosFlete.uHasta.length < 3) {
+
+    return !this.pasosFlete.uHasta || this.pasosFlete.uHasta.trim() === '';
+  }
+}
+  validateCargamento() {
+    // Check if the marca field is empty or contains only whitespace
+    return !this.pasosFlete.cargamento || this.pasosFlete.cargamento.trim() === '';
+  }
+
+  validateTipoVehiculo() {
+    // Check if the tipoVehiculo field is not one of the allowed types
+    const allowedTypes: ('Camioneta' | 'Camion' | 'Utilitario')[] = ['Camioneta', 'Camion', 'Utilitario'];
+    return !this.pasosFlete.tipoVehiculo || !allowedTypes.includes(this.pasosFlete.tipoVehiculo);
+  }
+  validateAyudantes() {
+    // Check if the tipoVehiculo field is not one of the allowed types
+    const allowedTypes: ('Sin ayudantes' | '+1' | '+2'  | '+3')[] = ['Sin ayudantes' , '+1' , '+2'  , '+3'];
+    return !this.pasosFlete.ayudantes || !allowedTypes.includes(this.pasosFlete.ayudantes);
+  }
+
+  validateForm(): boolean {
   
+    // Validación para el campo tipoVehiculo
+    if (!this.pasosFlete.tipoVehiculo || 
+      (this.pasosFlete.tipoVehiculo !== 'Camioneta' &&
+       this.pasosFlete.tipoVehiculo !== 'Camion' &&
+       this.pasosFlete.tipoVehiculo !== 'Utilitario')) {
+    return false; // Validación fallida para el campo tipoVehiculo
+  }
+
+  if (!this.pasosFlete.ayudantes || 
+    (this.pasosFlete.ayudantes !== 'Sin ayudantes' &&
+     this.pasosFlete.ayudantes !== '+1' &&
+     this.pasosFlete.ayudantes !== '+2' &&  this.pasosFlete.ayudantes !== '+3')) {
+  return false; // Validación fallida para el campo tipoVehiculo
+}
   
-  async enviar3() {
-    if (this.enviado) {
-      return; // Ya se ha enviado, no hagas nada
+    // Validación para el campo marca
+    if (!this.pasosFlete.uDesde || this.pasosFlete.uDesde.trim() === '') {
+      return false; // Validación fallida para el campo marca
     }
+  
+    // Validación para el campo modelo
+    if (!this.pasosFlete.uHasta || this.pasosFlete.uHasta.trim() === '') {
+      return false; // Validación fallida para el campo modelo
+    }
+  
+    // Validación para el campo modelo
+    if (!this.pasosFlete.cargamento || this.pasosFlete.cargamento.trim() === '') {
+      return false; // Validación fallida para el campo modelo
+    }
+  
+  
+    return (
+      !this.validateDesde() &&
+      !this.validateHasta() &&
+      !this.validateCargamento()  && 
+      !this.validateTipoVehiculo()  &&
+      !this.validateAyudantes()
+    );  }
+
+  async enviar3() {
+  // Validar los campos antes de continuar
+  if (
+    !this.validateDesde() ||
+    !this.validateHasta() ||
+    !this.validateCargamento() ||
+    !this.validateTipoVehiculo() ||
+    !this.validateAyudantes()
+  ) {
+    // Si alguna validación falla, no hagas nada y muestra un mensaje de error
+    console.log("Formulario no válido. Por favor complete todos los campos correctamente.");
+    // Puedes mostrar un mensaje de error al usuario, por ejemplo:
+    this.presentToast("Por favor complete todos los campos correctamente.", 2000);
+    return;
+  }
+
+  // Continuar con el envío de datos si todas las validaciones son exitosas
+  // ... Código para enviar los datos aquí ...
+
+  // Esto solo se ejecutará si todas las validaciones son exitosas
+  console.log("Formulario válido. Procesando datos...");
     this.pedidoId = this.route.snapshot.paramMap.get('pedidoId');
     console.log("este id trae",this.pedidoId);
     const idPrimer = this.pedidoId;

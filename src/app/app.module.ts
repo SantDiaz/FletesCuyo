@@ -23,6 +23,7 @@ import { FletesPageModule } from './folder/fletes/fletes.module';
 import { UserModule } from './folder/registrarse/user/user.module';
 import { FleteModule } from './folder/registrarse/flete/flete.module';
 
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -40,6 +41,7 @@ import { FleteModule } from './folder/registrarse/flete/flete.module';
       HomeLogModule,
       ChatModule,
       FleteModule,
+      ReactiveFormsModule,
       AngularFireModule.initializeApp(environment2.firebaseConfig),
       AngularFireAuthModule,
       AngularFirestoreModule,
