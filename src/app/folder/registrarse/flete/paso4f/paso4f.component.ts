@@ -139,6 +139,10 @@ vehiculo = tipoVehiculo;
   async siguiente() {
     // this.interaction.presentLoading('Guardando datos Vehiculares...');
     this.authS.stateUser<UserF>().subscribe((res) => {
+      const path2 = `Fleteros`;
+      this.firestore.getDoc<UserF>(path2, res.uid).subscribe((res1) => {
+        
+
       this.registerF.uid = res.uid;
       console.log("dad", res.uid);
       const path = `Fleteros/${res.uid}/DatosVehiculares`;
@@ -155,6 +159,7 @@ vehiculo = tipoVehiculo;
             imageDniDorzal: this.Datovehicular.imageDniDorzal,
             imageCarnetDorzal: this.Datovehicular.imageCarnetDorzal,
             patenteImage: this.Datovehicular.imagePatente,
+            verificado: res1.verificado = true,
             //  dniImage: this.Datovehicular.imageDni,
             };
 
@@ -166,6 +171,7 @@ vehiculo = tipoVehiculo;
               }, 0); // Change the delay time as needed            }).catch(error => {
             });
             })
+      })
           });
   }
   

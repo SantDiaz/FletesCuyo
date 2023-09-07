@@ -38,8 +38,22 @@ export class TabsUComponent implements OnInit {
  ngOnInit() {}
   
  FleteDisplonibles(){
-  this.router.navigate(['/fletesDis']);
+  this.auth.stateUser<UserF>().subscribe(res => {
+    if (res) {
+      console.log("respuestacomun", res.uid);
+      const path = `Fleteros`;
+      this.firestore.getDoc<UserF>(path, res.uid).subscribe(res2 => {
+        if (res2.verificado === false) {
+          this.router.navigate(['/paso4F']);
+          console.log("No verificado");
+        } else {
+          this.router.navigate(['/fletes']);
+        }
+      });
+    }
+  });
 }
+
 
 PedirFlete(){
   this.router.navigate(['/fletes']);

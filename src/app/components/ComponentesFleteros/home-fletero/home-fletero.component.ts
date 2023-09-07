@@ -20,12 +20,12 @@ export class HomeFleteroComponent implements OnInit {
     perfil: 'Fletero',
     mensaje: '',
   }
-
+  verificado: boolean = false;
 
   constructor(  private router: Router,
                 private db: FirestoreService,
-                private interaction: InteractionService,
                 private authS: AuthService, 
+                private interaction: InteractionService,
                 ) { }
   
     ngOnInit() {}
@@ -39,10 +39,26 @@ export class HomeFleteroComponent implements OnInit {
       this.router.navigate(['/chat']);
     }
 
-    VerFletes(){
-      this.router.navigate(['/fletes']);
+    VerFletes() {
+      this.authS.stateUser<UserF>().subscribe(res => {
+        if (res) {
+          console.log("respuestacomun", res.uid);
+          const path = `Fleteros`;
+          this.db.getDoc<UserF>(path, res.uid).subscribe(res2 => {
+            if (res2.verificado === false) {
+              this.router.navigate(['/paso4F']);
+              console.log("No verificado");
+            } else {
+              this.router.navigate(['/fletes']);
+            }
+          });
+        }
+      });
     }
+    
 
+    
+    
     
 
     enviarOpinion(){
