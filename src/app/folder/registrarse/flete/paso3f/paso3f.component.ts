@@ -80,9 +80,7 @@ vehiculo = tipoVehiculo;
     if (this.validateForm()) {
       // If the form is valid, proceed with saving the data
       this.authS.stateUser<UserF>().subscribe((res) => {
-        const path = `Fleteros`;
-        this.firestore.getDoc<UserF>(path, res.uid).subscribe((res2) => {
-          // this.interaction.closeLoading();
+        this.interaction.closeLoading();
             const id = res.uid;
             const path2 = `Fleteros/${res.uid}/DatosVehiculares`;
   
@@ -94,13 +92,12 @@ vehiculo = tipoVehiculo;
             // Ahora, puedes guardar todo el objeto en la colección
             this.firestore.createDocument<datosVehiculo>(datosVehicularesConImagen, path2, id).then((_) => {
               this.interaction.presentToast('Enviado con éxito');
-              this.interaction.closeLoading();
               setTimeout(() => {
-                this.router.navigate(['/home']);
-              }, 0); // Change the delay time as needed            }).catch(error => {
+                // Tu código de redirección aquí
+                window.location.href = '/home';
+              }, 0);
             });
             });
-        });
     } else {
       // If the form is not valid, display an error message or take appropriate action
       console.log("Form validation failed. Please complete all fields correctly.");
