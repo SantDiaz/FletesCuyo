@@ -57,21 +57,25 @@ export class MapCustomService {
   }
   
   
+  loadCoords(coords): void {
+    console.log('coords -------->', coords);
   
-loadCoords(coords): void {
-  console.log('coords -------->', coords);
-  const url = [
-    `https://api.mapbox.com/directions/v5/mapbox/driving/`,
-    `${coords[0][0]}, ${coords[0][1]}; ${coords[1][0]}, ${coords[1][1]}`,
-    `?steps=true&geometries=geojson&access_token=${environment.apiKey}`, 
-  ].join('')
-  console.log('url:', url);
-
-  this.httpClient.get(url).subscribe((res: any) => {
+    // Limpia la fuente y la capa existentes si existen
+    this.clearRouteSourceAndLayer();
+  
+    const url = [
+      `https://api.mapbox.com/directions/v5/mapbox/driving/`,
+      `${coords[0][0]}, ${coords[0][1]}; ${coords[1][0]}, ${coords[1][1]}`,
+      `?steps=true&geometries=geojson&access_token=${environment.apiKey}`, 
+    ].join('');
+  
+    console.log('url:', url);
+  
+    this.httpClient.get(url).subscribe((res: any) => {
       const data = res.routes[0];
       const route = data.geometry.coordinates;
       console.log('route:', route);
-
+  
       const sourceConfig: mapboxgl.GeoJSONSourceRaw = {
         type: 'geojson',
         data: {
@@ -85,30 +89,27 @@ loadCoords(coords): void {
       };
   
       this.map.addSource('route', sourceConfig);
-        this.map.addLayer({
-          id:'route',
-          type: 'line',
-          source: 'route',
-          layout: { 
-            'line-join': 'round',
-            'line-cap': 'round', 
-          },
-          paint:{
-            'line-color': 'red',
-            'line-width': 5,
-          }
-  })
-
-    this.wayPoints = route;
-    this.map.fitBounds([route[0], route[route.length - 1]], {
-      padding: 100
+      this.map.addLayer({
+        id: 'route',
+        type: 'line',
+        source: 'route',
+        layout: {
+          'line-join': 'round',
+          'line-cap': 'round', 
+        },
+        paint: {
+          'line-color': 'red',
+          'line-width': 5,
+        }
+      });
+  
+      this.wayPoints = route;
+      this.map.fitBounds([route[0], route[route.length - 1]], {
+        padding: 100
+      });
     });
-    
-
-  })
-
-
-}
+  }
+  
 
 
 
@@ -124,6 +125,14 @@ addMarkerCustom(coords): void {
 
 
 
+clearRouteSourceAndLayer(): void {
+  if (this.map.getSource('route')) {
+    this.map.removeSource('route');
+  }
+  if (this.map.getLayer('route')) {
+    this.map.removeLayer('route');
+  }
+}
 
 
 }
