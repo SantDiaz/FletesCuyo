@@ -72,6 +72,7 @@ export class MapCustomService {
     console.log('url:', url);
   
     this.httpClient.get(url).subscribe((res: any) => {
+      console.log('Response:', res); // Agrega este mensaje de depuración
       const data = res.routes[0];
       const route = data.geometry.coordinates;
       console.log('route:', route);
@@ -110,6 +111,7 @@ export class MapCustomService {
     });
   }
   
+
 
 
 
