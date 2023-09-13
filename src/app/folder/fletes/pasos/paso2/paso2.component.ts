@@ -134,20 +134,7 @@ export class Paso2Component implements OnInit {
     );  }
 
   async enviar3() {
-  // Validar los campos antes de continuar
-  if (
-    !this.validateDesde() ||
-    !this.validateHasta() ||
-    !this.validateCargamento() ||
-    !this.validateTipoVehiculo() ||
-    !this.validateAyudantes()
-  ) {
-    // Si alguna validación falla, no hagas nada y muestra un mensaje de error
-    console.log("Formulario no válido. Por favor complete todos los campos correctamente.");
-    // Puedes mostrar un mensaje de error al usuario, por ejemplo:
-    this.presentToast("Por favor complete todos los campos correctamente.", 2000);
-    return;
-  }
+  this.validateForm();
 
   // Continuar con el envío de datos si todas las validaciones son exitosas
   // ... Código para enviar los datos aquí ...
