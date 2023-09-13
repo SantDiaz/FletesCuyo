@@ -1,33 +1,13 @@
 <ion-content class="background2">
-
-
-
   <div class="wrapper">
-    <div class="box-inputs">
-        <div >
-          <div id="geocoder"  #asGeocoder class="geocoder"> </div>
-        </div>
-
-        <div (click)="changeModel('start')" [ngClass]="{'active-way': modeInput === 'start'}">
-          <div class="mock-label">Inicio</div>
-          <div class="mock-inpunt"> {{wayPoints?.start?.place_name}} </div>
-        </div>
-        <br>
-        <div (click)="changeModel('end')" [ngClass]="{'active-way': modeInput === 'end'}">
-          <div class="mock-label">Final</div>
-          <div class="mock-inpunt">{{wayPoints?.end?.place_name}}</div>
-        </div>
-        
-    </div>
+    <div id="geocoder" #asGeocoder class="map-container" #map id="map"></div>
+    <!-- <div  class="geocoder"></div> -->
   </div>
   <div class="wrapper">
-    <button (click)="drawRoute()" class="btn-route"> Dibujar Ruta</button>
+    <button (click)="changeModel('start')" [ngClass]="{'active-way': modeInput === 'start'}">Seleccionar Inicio</button>
+    <button (click)="changeModel('end')" [ngClass]="{'active-way': modeInput === 'end'}">Seleccionar Final</button>
   </div>
   <div class="wrapper">
-    <button (click)="testMarker()" class="btn-route"> Marcador</button>
+    <button (click)="drawRoute()" class="btn-route">Dibujar Ruta</button>
   </div>
-  <div class="wrapper">
-    <div class="map-container" #map id="map"></div>
-  </div>
-  
 </ion-content>
