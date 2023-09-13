@@ -30,7 +30,7 @@ export class MapboxComponent implements OnInit {
   
         // Inicializar los marcadores en posiciones vacías
         this.startMarker = this.createMarker(new mapboxgl.LngLat(0, 0), 'start');
-        this.endMarker = this.createMarker(new mapboxgl.LngLat(0, 0), 'end');
+        this.endMarker = this.createMarker(new mapboxgl.LngLat(null, null), 'end');
   
         // Agregar clic en el mapa para actualizar los marcadores
         this.map.on('click', (event) => {
@@ -39,6 +39,7 @@ export class MapboxComponent implements OnInit {
             this.updateMarkerPosition(this.startMarker, coordinates);
           } else if (this.modeInput === 'end') {
             this.updateMarkerPosition(this.endMarker, coordinates);
+
           }
         });
   
@@ -62,6 +63,10 @@ export class MapboxComponent implements OnInit {
         // Dejar de arrastrar cuando se suelta el botón del mouse
         this.map.on('mouseup', () => {
           this.draggingMarker = null;
+          if (this.startMarker && this.endMarker) {
+            this.drawRoute();
+          }
+
         });
   
         // Centrar el mapa en la ubicación del usuario
