@@ -7,6 +7,8 @@ import { AuthService } from 'src/app/folder/services/auth.service';
 import { FirestoreService } from 'src/app/folder/services/firestore.service';
 import { InteractionService } from 'src/app/folder/services/interaction.service';
 import { NuevoService } from 'src/app/folder/services/nuevo.service';
+import { MapboxComponent } from '../../../mapbox/mapbox.component';
+import { ModalController } from '@ionic/angular';
 
 
 @Component({
@@ -55,7 +57,8 @@ export class Paso2Component implements OnInit {
               public toastController: ToastController,
               private loadingCtrl: LoadingController,
               private router: Router,
-              private route: ActivatedRoute ) { }
+              private route: ActivatedRoute,
+              private modal: ModalController ) { }
 
   ngOnInit() {
 
@@ -203,5 +206,43 @@ export class Paso2Component implements OnInit {
   rediBack(){
     this.routes.navigate(['/fletes']);
   }
+
+
+
+
+
+
+///MAPSSS
+
+
+
+async abrirMapa() {
+  const modal = await this.modal.create({
+    component: MapboxComponent,
+    componentProps: {
+      datos: 'Datos que quieras pasar al modal',
+      paso2ComponentRef: this, // Pasa una referencia al componente actual
+    },
+  });
+
+  modal.onDidDismiss().then((result) => {
+    if (result.role === 'ubicacionesSeleccionadas' && result.data) {
+      // Los datos de ubicaciones seleccionadas están disponibles en result.data
+      const ubicaciones = result.data;
+      // Llama al método confirmarUbicaciones para asignar las ubicaciones al formulario
+      this.confirmarUbicaciones(ubicaciones);
+      this.modal.dismiss();
+    }
+  });
+
+  await modal.present();
+}
+
+confirmarUbicaciones(ubicaciones: string[]) {
+  // Asigna las ubicaciones a los campos de entrada
+  this.pasosFlete.uDesde = ubicaciones[0];
+  this.pasosFlete.uHasta = ubicaciones[1];
+  // this.modal.dismiss();
+}
 
 }

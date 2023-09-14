@@ -1,7 +1,9 @@
-import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2, ViewChild, Input } from '@angular/core';
 import { MapCustomService } from '../mapbox/map-custom.service';
 import * as mapboxgl from 'mapbox-gl';
 import { GeolocateControl } from 'mapbox-gl';
+import { Paso2Component } from '../fletes/pasos/paso2/paso2.component';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-mapbox',
@@ -11,13 +13,15 @@ import { GeolocateControl } from 'mapbox-gl';
 export class MapboxComponent implements OnInit {
   @ViewChild('map') mapContainer: ElementRef;
   @ViewChild('asGeocoder') asGeocoder: ElementRef;
+  @Input() paso2ComponentRef: Paso2Component; // Recibe la referencia al componente Paso2Component
   map: mapboxgl.Map;
   modeInput = 'start';
   startMarker: mapboxgl.Marker | null = null;
   endMarker: mapboxgl.Marker | null = null;
   draggingMarker: mapboxgl.Marker | null = null;
 
-  constructor(private mapCustom: MapCustomService, private renderer2: Renderer2) {
+  constructor(private mapCustom: MapCustomService, private renderer2: Renderer2, private modalController: ModalController // Agrega el controlador de modal
+  ) {
     this.modeInput = 'start';
   }
 
@@ -138,6 +142,7 @@ export class MapboxComponent implements OnInit {
     
     const coords = [startCoordinates.toArray(), endCoordinates.toArray()];
     this.mapCustom.loadCoords(coords);
+    this.enviarDatos();
   }
   
 
@@ -145,4 +150,42 @@ export class MapboxComponent implements OnInit {
     this.modeInput = mode;
     console.log('modeInput:', this.modeInput);
   }
+
+
+
+
+
+
+
+
+
+
+enviarDatos(): void {
+  if (!this.startMarker || !this.endMarker) {
+    console.log('Selecciona puntos de inicio y final primero.');
+    return;
+  }
+
+  // Obtener las coordenadas de los marcadores de inicio y fin
+  const startCoordinates = this.startMarker.getLngLat();
+  const endCoordinates = this.endMarker.getLngLat();
+
+  // Utilizar el servicio de geocodificación de Mapbox para obtener el nombre de la calle
+  this.mapCustom.getStreetName(startCoordinates).subscribe((startStreetName) => {
+    this.mapCustom.getStreetName(endCoordinates).subscribe((endStreetName) => {
+      // Aquí tienes los nombres de las calles, puedes hacer lo que necesites con ellos
+      console.log('Nombre de la calle de inicio:', startStreetName);
+      console.log('Nombre de la calle de fin:', endStreetName);
+      this.paso2ComponentRef.confirmarUbicaciones([startStreetName, endStreetName]);
+      // this.modalController.dismiss([startStreetName, endStreetName], 'ubicacionesSeleccionadas');
+      // Resto del código para enviar los datos y guardarlos en Firebase
+    });
+  });
+}
+
+
+cerrarModal() {
+  this.modalController.dismiss(); // Cierra el modal cuando se hace clic en el botón de cierre
+}
+  
 }

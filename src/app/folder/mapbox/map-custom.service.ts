@@ -3,16 +3,20 @@ import * as mapboxgl from 'mapbox-gl';
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';  
+import { map } from 'rxjs/operators'; // Importa el operador map
 
 @Injectable({
   providedIn: 'root'
 })
 export class MapCustomService {
+  private mapboxGeocodingUrl = 'https://api.mapbox.com/geocoding/v5/mapbox.places';
   cbAdress: EventEmitter<any> = new EventEmitter<any>(); 
   mapbox = (mapboxgl as typeof mapboxgl);
   map: mapboxgl.Map 
   wayPoints: Array<any>= [];
   markerDriver: any;
+  streetNames: string[] = [];
   styles = 'mapbox://styles/mapbox/streets-v12'
   long = -0.1278; // Longitud de Londres, por ejemplo
   lat =  51.5074; // Latitud de Londres, por ejemplo
@@ -136,5 +140,29 @@ clearRouteSourceAndLayer(): void {
   }
 }
 
+
+
+
+
+getStreetName(coordinates: mapboxgl.LngLat): Observable<string> {
+  // Construye la URL de geocodificación de Mapbox con las coordenadas
+  const url = `${this.mapboxGeocodingUrl}/${coordinates.lng},${coordinates.lat}.json?access_token=${environment.apiKey}`;
+
+  // Realiza una solicitud HTTP GET a la API de geocodificación de Mapbox
+  return this.httpClient.get(url).pipe(
+    map((response: any) => {
+      // Extrae el nombre de la calle del resultado de geocodificación
+      if (response.features && response.features.length > 0) {
+        const streetName = response.features[0].text;
+        return streetName;
+      }
+      return 'Nombre de la calle no encontrado';
+    })
+  );
+}
+
+addStreetName(name: string) {
+  this.streetNames.push(name);
+}
 
 }
