@@ -32,3 +32,6 @@ npm-debug.log*
 /plugins
 /www
 .vercel
+
+# Local Netlify folder
+.netlify
