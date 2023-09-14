@@ -24,7 +24,6 @@ import { UserModule } from './folder/registrarse/user/user.module';
 import { FleteModule } from './folder/registrarse/flete/flete.module';
 
 import { ReactiveFormsModule } from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -49,7 +48,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
       RegistrarsePageModule,
       // FletesPageModule,
       UserModule,
-      BrowserAnimationsModule,
     ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
