@@ -1,9 +1,17 @@
-.background2{
-    --ion-background-color: rgb(115, 108, 255);
-    background: rgb(183,181,226);
-    background: linear-gradient(90deg, rgba(183,181,226,1) 0%, rgba(41,174,228,1) 0%, rgba(12,49,62,1) 0%, rgba(6,102,80,1) 50%, rgba(12,49,62,1) 100%);
-    }
+/* En tu archivo de estilos CSS */
+.background2 {
+  height: 100%; /* Ocupa el 100% de la altura de la pantalla */
+  width: 100%; /* Ocupa el 100% del ancho de la pantalla */
+  overflow: hidden; /* Evita desbordamiento */
+}
+
+#map {
+  height: 100%; /* Ocupa el 100% de la altura de su contenedor (ion-content) */
+  width: 100%; /* Ocupa el 100% del ancho de su contenedor (ion-content) */
+}
+
     .map-button {
+      background-color: rgb(50, 6, 6);
         position: absolute;
         font-size: 25px;
         color: red;
