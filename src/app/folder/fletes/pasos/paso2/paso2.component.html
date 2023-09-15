@@ -16,11 +16,8 @@
               <div class="u-container-layout u-valign-middle u-container-layout-1">
                 <div class="u-form u-palette-1-light-3 u-radius-14 u-form-1">
                   <form action="https://forms.nicepagesrv.com/Form/Process" class="u-clearfix u-form-spacing-15 u-form-vertical u-inner-form" style="padding: 15px;" source="email" name="form">
-                    <div class="u-form-group u-form-name u-form-partition-factor-2 u-label-top u-form-group-2">
-                      <button (click)="abrirMapa()">Seleccionar Puntos en el Mapa</button>
-                    </div>
 
-                    <div class="u-form-group u-form-name u-form-partition-factor-2 u-label-top u-form-group-2">
+                    <div (click)="abrirMapa()" class="u-form-group u-form-name u-form-partition-factor-2 u-label-top u-form-group-2">
                       <label for="name-ae7a" class="u-label">Desde</label>
                       <input [(ngModel)]="pasosFlete.uDesde" type="text" placeholder="Punto de partida" id="name-ae7a" name="name-3"
                         class="u-border-1 u-border-grey-60 u-input u-input-rectangle" required>
@@ -31,7 +28,7 @@
                     </div>
                     <!-- Repite el mismo patrón para otros campos -->
                     
-                    <div class="u-form-group u-form-name u-form-partition-factor-2 u-label-top u-form-group-3">
+                    <div (click)="abrirMapa()" class="u-form-group u-form-name u-form-partition-factor-2 u-label-top u-form-group-3">
                       <label for="name-6659" class="u-label">Hasta</label>
                       <input [(ngModel)]="pasosFlete.uHasta" type="text" placeholder="Punto de llegada" id="name-6659" name="name"
                         class="u-border-1 u-border-grey-60 u-input u-input-rectangle" required>
