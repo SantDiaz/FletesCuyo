@@ -148,7 +148,6 @@ export class Paso2FComponent implements OnInit {
             domicilio: this.registerF.domicilio,
             telefono: this.registerF.telefono,
             email: res2.email,
-            password: res2.password,
             perfil: res2.perfil,
             verificado: false, // Remove this line or set it to the desired value
             habilitado: false,

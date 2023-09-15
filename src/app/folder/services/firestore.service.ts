@@ -167,4 +167,11 @@ getAll(collection: string): Observable<any[]> {
   return this.firestore.collection(collection).valueChanges();
 }
 
+
+
+createDoc5(data: any, collectionPath: string, documentId: string): Promise<void> {
+  const docRef = this.firestore.collection(collectionPath).doc(documentId);
+  return docRef.set(data, { merge: true });
+}
+
 }

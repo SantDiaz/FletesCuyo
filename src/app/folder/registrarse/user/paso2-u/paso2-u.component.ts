@@ -53,28 +53,54 @@
     }
 
     async siguiente() {
-      this.interaction.presentLoading('Guardando datos Personales...');
-      this.authS.stateUser<UserU>().subscribe( res  => {
-        this.interaction.closeLoading();
+      // Validar los datos antes de continuar
+      if (this.validateNombre()) {
+        this.interaction.presentToast('El nombre no es válido.');
+        return;
+      }
+    
+      if (this.validateApellido()) {
+        this.interaction.presentToast('El apellido no es válido.');
+        return;
+      }
+    
+      if (this.validateDNI()) {
+        this.interaction.presentToast('El DNI no es válido.');
+        return;
+      }
+    
+      if (!this.validateTelefono(this.registerU.telefono)) {
+        this.interaction.presentToast('El teléfono no es válido.');
+        return;
+      }
+    
+      if (this.validateDomicilio()) {
+        this.interaction.presentToast('El domicilio no puede estar vacío.');
+        return;
+      }
+    
+      if (this.validateEdad()) {
+        this.interaction.presentToast('La edad no es válida.');
+        return;
+      }
+    
+      // Si todos los datos son válidos, continúa con el registro
+      this.authS.stateUser<UserU>().subscribe(res => {
         this.registerU.uid = res.uid;
-        console.log("dad",res.uid)
-        const path= `Usuarios`
-        this.firestore.getDoc<UserU>(path, res.uid).subscribe( res2 => {
-          this.interaction.closeLoading();
-          if (res2){
-          this.interaction.closeLoading();
+        console.log("dad", res.uid)
+        const path = `Usuarios`
+        this.firestore.getDoc<UserU>(path, res.uid).subscribe(res2 => {
+          if (res2) {
             console.log("res", res2)
             const id = res.uid;
-              const path2 = `Usuarios/${res.uid}/DatosPersonales`
-              // aqui podemos usar dos maneras distintas 
-              // 1)_ createDoc para crear un documento con id
-              // 2)_ Createdocument para crear infinidad de documenteos
+            const path2 = `Usuarios/${res.uid}/DatosPersonales`
             this.firestore.createDoc(this.registerU, path2, id);
             this.router.navigate(['/home']);
           }
-        })  
-      })
-  }
+        })
+      });
+    }
+    
     
 
     

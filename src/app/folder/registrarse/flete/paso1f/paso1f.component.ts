@@ -6,6 +6,8 @@ import { AuthService } from 'src/app/folder/services/auth.service';
 import { FirestoreService } from 'src/app/folder/services/firestore.service';
 import { InteractionService } from 'src/app/folder/services/interaction.service';
 import { OverlayEventDetail } from '@ionic/core/components';
+import { getAuth, signInWithPopup, GoogleAuthProvider, sendEmailVerification } from 'firebase/auth';
+
 
 @Component({
   selector: 'app-paso1f',
@@ -134,5 +136,31 @@ export class Paso1fComponent implements OnInit {
         this.message = `Hello, ${ev.detail.data}!`;
       }
     }
+
+
+    signInWithGoogle() {
+      const auth = getAuth();
+      const provider = new GoogleAuthProvider();
+    
+      signInWithPopup(auth, provider)
+        .then((result) => {
+          const email = result.user.email;
+          const path = "Fleteros";
+          const uid = result.user.uid;
+    
+          // Crear un objeto con el correo electrónico
+          const userData = { email: email, perfil:'Fletero' };
+    
+          this.firestore.createDoc(userData, path, uid).then((res) => {
+            this.router.navigate(['/paso2F']);
+            console.log('Usuario autenticado con Google:', result.user);
+          });
+        })
+        .catch((error) => {
+          console.error('Error al iniciar sesión con Google:', error);
+          this.interaction.presentToast('Error al iniciar sesión con Google');
+        });
+    }
+    
 
 }

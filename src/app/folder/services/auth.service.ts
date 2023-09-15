@@ -99,31 +99,24 @@ export class AuthService {
     return collection.valueChanges();
 
   }
-  async loginWithGoogle() {
-    const provider = new GoogleAuthProvider();
 
-    try {
-      const result = await this.authS.signInWithPopup(provider);
-      const user = result.user;
-      const email = user.email;
-      
-      // Guardar el correo electrónico en Firestore
-      this.saveEmailToFirestore(email);
-
-      // Puedes realizar otras acciones después de iniciar sesión exitosamente
-      // ...
-
-    } catch (error) {
-      console.log(error);
-      // Manejar el error de inicio de sesión
-    }
-  }
 
   private saveEmailToFirestore(email: string) {
-    // Guardar el correo electrónico en Firestore
-    const collectionRef = this.firestore.collection('users');
-    const docRef = collectionRef.doc(); // Puedes utilizar un ID de documento personalizado si lo deseas
-    docRef.set
-}
+    // Puedes ajustar el nombre de la colección y el ID del documento según tus necesidades
+    const collectionName = 'Usuarios';
+    const docId = email; // Usar el correo electrónico como ID del documento
+
+    this.firestore
+      .collection(collectionName)
+      .doc(docId)
+      .set({ email }, { merge: true }) // Usar { merge: true } para actualizar el documento sin sobrescribirlo si ya existe
+      .then(() => {
+        console.log('Correo electrónico guardado en Firestore');
+      })
+      .catch((error) => {
+        console.error('Error al guardar el correo electrónico en Firestore:', error);
+      });
+  }
+
 
 }

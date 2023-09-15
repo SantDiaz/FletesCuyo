@@ -92,7 +92,10 @@ vehiculo = tipoVehiculo;
             // Ahora, puedes guardar todo el objeto en la colección
             this.firestore.createDocument<datosVehiculo>(datosVehicularesConImagen, path2, id).then((_) => {
               this.interaction.presentToast('Enviado con éxito');
-              this.router.navigate(['/home']);
+              setTimeout(() => {
+                // Tu código de redirección aquí
+                window.location.href = '/home';
+              }, 0);
 
             });
             });
