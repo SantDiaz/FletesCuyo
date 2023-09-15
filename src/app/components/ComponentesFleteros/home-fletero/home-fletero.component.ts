@@ -46,7 +46,8 @@ export class HomeFleteroComponent implements OnInit {
           const path = `Fleteros`;
           this.db.getDoc<UserF>(path, res.uid).subscribe(res2 => {
             if (res2.verificado === false) {
-              this.router.navigate(['/paso4F']);
+              // this.router.navigate(['/paso4F']);
+              this.router.navigate(['/fletes']);
               console.log("No verificado");
             } else {
               this.router.navigate(['/fletes']);

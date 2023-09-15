@@ -21,7 +21,7 @@
                   <option value="" disabled selected>Seleccione un tipo de vehículo</option>
                   <option *ngFor="let tipoVehiculo of vehiculo" [value]="tipoVehiculo">{{ tipoVehiculo }}</option>
                 </select>
-                <div *ngIf="vehicleForm.controls.tipoVehiculo.touched && vehicleForm.controls.tipoVehiculo.errors?.required">
+                <div *ngIf="vehicleForm.controls.tipoVehiculo && vehicleForm.controls.tipoVehiculo.errors?.required">
                   <p class="error-message">Seleccione un tipo de vehículo.</p>
                 </div>
               </div>
@@ -36,7 +36,7 @@
                   class="u-border-1 u-border-grey-60 u-input u-input-rectangle"
                   required
                 >
-                <div *ngIf="vehicleForm.controls.marca.touched && vehicleForm.controls.marca.errors?.required">
+                <div *ngIf="vehicleForm.controls.marca && vehicleForm.controls.marca.errors?.required">
                   <p class="error-message">Ingrese la marca del automotor.</p>
                 </div>
               </div>
@@ -51,7 +51,7 @@
                   class="u-border-1 u-border-grey-60 u-input u-input-rectangle"
                   required
                 >
-                <div *ngIf="vehicleForm.controls.modelo.touched && vehicleForm.controls.modelo.errors?.required">
+                <div *ngIf="vehicleForm.controls.modelo && vehicleForm.controls.modelo.errors?.required">
                   <p class="error-message">Ingrese el modelo del automotor.</p>
                 </div>
               </div>
@@ -66,10 +66,10 @@
                   class="u-border-1 u-border-grey-60 u-input u-input-rectangle"
                   required
                 >
-                <div *ngIf="vehicleForm.controls.patente.touched && vehicleForm.controls.patente.errors?.required">
+                <div *ngIf="vehicleForm.controls.patente && vehicleForm.controls.patente.errors?.required">
                   <p class="error-message">Ingrese la patente del vehículo.</p>
                 </div>
-                <div *ngIf="vehicleForm.controls.patente.touched && vehicleForm.controls.patente.errors?.pattern">
+                <div *ngIf="vehicleForm.controls.patente && vehicleForm.controls.patente.errors?.pattern">
                   <p class="error-message">La patente debe tener 6 caracteres alfanuméricos.</p>
                 </div>
               </div>

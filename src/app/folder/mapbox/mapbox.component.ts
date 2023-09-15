@@ -73,9 +73,18 @@ export class MapboxComponent implements OnInit {
 
         });
   
+        const closeButton = document.getElementById('cerrarModalButton');
+        if (closeButton) {
+          closeButton.addEventListener('click', () => {
+            this.cerrarModal(); // Llama a la función para cerrar el modal
+          });
+        }
+        
         // Centrar el mapa en la ubicación del usuario
         this.centerToUserLocation();
       })
+
+      
       .catch((error) => {
         console.log('no Carga', error);
       });
@@ -160,7 +169,58 @@ export class MapboxComponent implements OnInit {
 
 
 
-enviarDatos(): void {
+  enviarDatos(): void {
+    if (!this.startMarker || !this.endMarker) {
+      console.log('Selecciona puntos de inicio y final primero.');
+      return;
+    }
+  
+    // Obtener las coordenadas de los marcadores de inicio y fin
+    const startCoordinates = this.startMarker.getLngLat();
+    const endCoordinates = this.endMarker.getLngLat();
+  
+    // Almacena las coordenadas en propiedades de Paso2Component
+    this.paso2ComponentRef.startCoordinates = {
+      latitude: startCoordinates.lat,
+      longitude: startCoordinates.lng
+    };
+  
+    this.paso2ComponentRef.endCoordinates = {
+      latitude: endCoordinates.lat,
+      longitude: endCoordinates.lng
+    };
+  
+    // Utilizar el servicio de geocodificación de Mapbox para obtener el nombre de la calle
+    this.mapCustom.getStreetName(startCoordinates).subscribe((startStreetName) => {
+      this.mapCustom.getStreetName(endCoordinates).subscribe((endStreetName) => {
+        // Aquí tienes los nombres de las calles, puedes hacer lo que necesites con ellos
+        console.log('Nombre de la calle de inicio:', startStreetName);
+        console.log('Nombre de la calle de fin:', endStreetName);
+        this.paso2ComponentRef.confirmarUbicaciones([startStreetName, endStreetName]);
+  
+        // Llama a receiveCoordinates para pasar las coordenadas a Paso2Component
+        const coordinatesData = {
+          start: {
+            latitude: startCoordinates.lat,
+            longitude: startCoordinates.lng,
+          },
+          end: {
+            latitude: endCoordinates.lat,
+            longitude: endCoordinates.lng,
+          },
+        };
+        this.paso2ComponentRef.receiveCoordinates(coordinatesData);
+      });
+    });
+  }
+  
+
+  cerrarModal(){
+    this.modalController.dismiss();
+
+  }
+
+sendCoordinatesToPaso2(): void {
   if (!this.startMarker || !this.endMarker) {
     console.log('Selecciona puntos de inicio y final primero.');
     return;
@@ -170,22 +230,47 @@ enviarDatos(): void {
   const startCoordinates = this.startMarker.getLngLat();
   const endCoordinates = this.endMarker.getLngLat();
 
-  // Utilizar el servicio de geocodificación de Mapbox para obtener el nombre de la calle
-  this.mapCustom.getStreetName(startCoordinates).subscribe((startStreetName) => {
-    this.mapCustom.getStreetName(endCoordinates).subscribe((endStreetName) => {
-      // Aquí tienes los nombres de las calles, puedes hacer lo que necesites con ellos
-      console.log('Nombre de la calle de inicio:', startStreetName);
-      console.log('Nombre de la calle de fin:', endStreetName);
-      this.paso2ComponentRef.confirmarUbicaciones([startStreetName, endStreetName]);
-      // this.modalController.dismiss([startStreetName, endStreetName], 'ubicacionesSeleccionadas');
-      // Resto del código para enviar los datos y guardarlos en Firebase
-    });
-  });
+  // Convierte las coordenadas a un formato adecuado para su envío al componente Paso2Component
+  const coordinatesData = {
+    start: {
+      latitude: startCoordinates.lat,
+      longitude: startCoordinates.lng,
+    },
+    end: {
+      latitude: endCoordinates.lat,
+      longitude: endCoordinates.lng,
+    },
+  };
+
+  // Llama al método del componente Paso2Component para pasar las coordenadas
+  this.paso2ComponentRef.receiveCoordinates(coordinatesData);
+
+  // Cierra el modal
+  this.modalController.dismiss();
 }
 
 
-cerrarModal() {
-  this.modalController.dismiss(); // Cierra el modal cuando se hace clic en el botón de cierre
-}
+
+
+//fletero
+mostrarRuta(startCoordinates: { latitude: number, longitude: number }, endCoordinates: { latitude: number, longitude: number }) {
   
+  // Código para mostrar la ruta en el mapa utilizando Mapbox GL JS
+  const mapboxAccessToken = 'TU_ACCESS_TOKEN'; // Reemplaza con tu token de Mapbox
+
+  // Configura el mapa
+  this.map = new mapboxgl.Map({
+    container: 'map', // ID del contenedor HTML donde se mostrará el mapa
+    style: 'mapbox://styles/mapbox/streets-v11', // Estilo del mapa (puedes personalizarlo)
+    center: [startCoordinates.longitude, startCoordinates.latitude], // Coordenadas iniciales del mapa
+    zoom: 10, // Nivel de zoom inicial
+  });
+
+  // Agrega marcadores para el inicio y el fin
+  new mapboxgl.Marker().setLngLat([startCoordinates.longitude, startCoordinates.latitude]).addTo(this.map);
+  new mapboxgl.Marker().setLngLat([endCoordinates.longitude, endCoordinates.latitude]).addTo(this.map);
+
+ this.drawRoute();
+}
+
 }

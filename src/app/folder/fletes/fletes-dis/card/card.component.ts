@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, HostListener } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, HostListener, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoadingController, ToastController } from '@ionic/angular';
 import { DatosFlete, datosVehiculo, respuesta, UserF, UserU } from 'src/app/folder/models/models';
@@ -10,6 +10,10 @@ import 'firebase/firestore';
 import { Inject } from '@angular/core';
 import firebase from 'firebase/compat/app';
 import { DOCUMENT } from '@angular/common';
+import { MapboxComponent } from '../../../mapbox/mapbox.component'; // Ajusta la ruta a tu ubicación real
+import { ModalController } from '@ionic/angular';
+import { VerRutaComponent } from 'src/app/folder/mapbox/ver-ruta/ver-ruta.component';
+
 
 @Component({
   selector: 'app-card',
@@ -19,9 +23,11 @@ import { DOCUMENT } from '@angular/common';
 })
 export class CardComponent implements OnInit {
   @HostListener('window:DOMContentLoaded', ['$event'])
+  @ViewChild(MapboxComponent, { static: false }) mapboxComponent: MapboxComponent; // Agrega esta línea
   onDOMContentLoaded(event: Event): void {
     this.checkHiddenOrders();
   }
+
   hiddenOrders: string[] = [];
   login: boolean = false;
   rol: 'Usuario' | 'Fletero' | 'Admin' = null;
@@ -43,6 +49,14 @@ export class CardComponent implements OnInit {
     uid: '',
     id: '',
     precio: null,
+    startCoordinates: {
+      latitude: null,
+      longitude: null,
+  },
+  endCoordinatesP: {
+    latitude: null,
+    longitude: null,
+}
   };
   private miIdDeFletero: string = ''; // Declara la variable para almacenar el ID del fletero actual
 
@@ -71,6 +85,7 @@ export class CardComponent implements OnInit {
     private loadingCtrl: LoadingController,
     private cdr: ChangeDetectorRef,
     private route: ActivatedRoute,
+    private modal: ModalController,
     ) {
       // Suscríbete al estado del usuario para obtener el ID del fletero cuando inicie sesión
       this.auth.stateUser().subscribe((res) => {
@@ -237,8 +252,46 @@ export class CardComponent implements OnInit {
   
   
   
+ async mostrarRuta(DatosFletes: DatosFlete) {
+
+
+    
+    if (DatosFletes.startCoordinates && DatosFletes.endCoordinatesP) {
+      const startCoordinates = DatosFletes.startCoordinates;
+      const endCoordinates = DatosFletes.endCoordinatesP;
   
+      const modal = await this.modal.create({
+        component: VerRutaComponent,
+        componentProps: {
+          datos: { startCoordinates, endCoordinates }, // Pasa las coordenadas al modal
+          cardComponentRef: this, // Pasa una referencia al componente actual
+        },
+      });
+    
+      // modal.onDidDismiss().then((result) => {
+      //   if (result.role === 'ubicacionesSeleccionadas' && result.data) {
+      //     // Los datos de ubicaciones seleccionadas están disponibles en result.data
+      //     const ubicaciones = result.data;
+      //     // Puedes manejar las ubicaciones como desees en este componente
+      //     console.log('Ubicaciones seleccionadas:', ubicaciones);
+      //   }
+      // });
+    
+      await modal.present();
+
+
+
+
+
+      // Ahora tienes las coordenadas de inicio y fin, puedes usarlas para mostrar la ruta
+      console.log('Coordenadas de inicio:', startCoordinates);
+      console.log('Coordenadas de fin:', endCoordinates);
   
+      // Aquí puedes llamar a tu lógica para mostrar la ruta, por ejemplo, utilizando Mapbox o cualquier otra biblioteca de mapas
+    } else {
+      console.error('Las coordenadas de inicio o fin no están disponibles en los datos del pedido.');
+    }
+  }
   
 
   async presentToast(mensaje: string, tiempo: number) {
@@ -257,6 +310,8 @@ export class CardComponent implements OnInit {
 
     await this.loading.present();
   }
+
+  
 }
     
       //   async enviarPrecio(DatosFletes: DatosFlete) {
@@ -296,3 +351,4 @@ export class CardComponent implements OnInit {
       //     });
       //   }
       // }
+

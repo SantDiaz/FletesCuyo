@@ -4,6 +4,7 @@ import { MapboxComponent } from './mapbox.component';
 import { MapCustomService } from './map-custom.service';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { VerRutaComponent } from './ver-ruta/ver-ruta.component';
 
 
 @NgModule({
@@ -11,10 +12,12 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [
     CommonModule,
     HttpClientModule,
+    VerRutaComponent,
   ],
   providers: [MapCustomService],
   exports: [
-    MapboxComponent
+    MapboxComponent,
+    VerRutaComponent
   ]
 })
 export class MapboxModule { }

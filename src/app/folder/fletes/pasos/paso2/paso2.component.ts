@@ -19,7 +19,8 @@ import { ModalController } from '@ionic/angular';
 export class Paso2Component implements OnInit {
   private pedidoId: string; // Agrega esta línea
   public enviado = false;
-  
+  startCoordinates: { latitude: number, longitude: number };
+  endCoordinates: { latitude: number, longitude: number };
   vehiculos = tipoVehiculo;
   ayudante = ayudantes;
   registerU: UserU; 
@@ -145,7 +146,8 @@ export class Paso2Component implements OnInit {
   // Esto solo se ejecutará si todas las validaciones son exitosas
   console.log("Formulario válido. Procesando datos...");
     this.pedidoId = this.route.snapshot.paramMap.get('pedidoId');
-    console.log("este id trae",this.pedidoId);
+    const startCoordinates = this.startCoordinates;
+  const endCoordinates = this.endCoordinates;
     const idPrimer = this.pedidoId;
     this.authS.stateUser<UserU>().subscribe(res => {
       if (res) {
@@ -161,6 +163,9 @@ export class Paso2Component implements OnInit {
           data.minutos = res2.minutos;
           data.id = res2.id
           data.uid = res.uid;
+          data.startCoordinates = startCoordinates;
+          data.endCoordinatesP = endCoordinates;
+  
           console.log('id a editar', idPrimer);
           
           const enlace = `PedirFlete/${res.uid}/Pedidos`;
@@ -229,20 +234,35 @@ async abrirMapa() {
     if (result.role === 'ubicacionesSeleccionadas' && result.data) {
       // Los datos de ubicaciones seleccionadas están disponibles en result.data
       const ubicaciones = result.data;
-      // Llama al método confirmarUbicaciones para asignar las ubicaciones al formulario
-      this.confirmarUbicaciones(ubicaciones);
-      this.modal.dismiss();
+      // Puedes manejar las ubicaciones como desees en este componente
+      console.log('Ubicaciones seleccionadas:', ubicaciones);
     }
   });
 
   await modal.present();
 }
 
+receiveCoordinates(coordinatesData: any) {
+  // Aquí puedes manejar las coordenadas como desees
+  console.log('Coordenadas recibidas:', coordinatesData);
+  // Puedes utilizar las coordenadas en tu lógica de negocio
+
+  // Verifica que las coordenadas de inicio y fin estén disponibles en coordinatesData y pásalas correctamente
+  const startCoordinates = coordinatesData.start;
+  const endCoordinates = coordinatesData.end;
+
+  // Luego, puedes asignarlas a las propiedades correspondientes en tu componente
+  this.startCoordinates = startCoordinates;
+  this.endCoordinates = endCoordinates;
+}
+
+
+// Método para confirmar las ubicaciones en tu formulario
 confirmarUbicaciones(ubicaciones: string[]) {
   // Asigna las ubicaciones a los campos de entrada
   this.pasosFlete.uDesde = ubicaciones[0];
   this.pasosFlete.uHasta = ubicaciones[1];
-  // this.modal.dismiss();
 }
+
 
 }

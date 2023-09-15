@@ -1,0 +1,13 @@
+.background2{
+    --ion-background-color: rgb(115, 108, 255);
+    background: rgb(183,181,226);
+    background: linear-gradient(90deg, rgba(183,181,226,1) 0%, rgba(41,174,228,1) 0%, rgba(12,49,62,1) 0%, rgba(6,102,80,1) 50%, rgba(12,49,62,1) 100%);
+    }
+    .map-button {
+        position: absolute;
+        font-size: 25px;
+        color: red;
+        top: 10px; /* Ajusta la posición vertical según tus necesidades */
+        left: 80%; /* Ajusta la posición horizontal según tus necesidades */
+        z-index: 1; /* Asegura que el botón esté por encima del mapa */
+      }

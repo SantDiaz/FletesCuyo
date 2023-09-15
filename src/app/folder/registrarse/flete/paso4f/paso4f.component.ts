@@ -166,6 +166,7 @@ vehiculo = tipoVehiculo;
             const path3 = `Fleteros/${res.uid}/DatosVehiculares/${res.uid}`;
             this.db.updateDocument(path3, datosVehicularesConImagen).then(_ => {
               // Realiza las acciones necesarias después de actualizar
+              
               setTimeout(() => {
                 this.router.navigate(['/home']);
               }, 0); // Change the delay time as needed            }).catch(error => {

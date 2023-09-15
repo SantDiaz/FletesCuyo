@@ -106,3 +106,11 @@ marker{
     background-color: #d32f2f; /* Cambia el color al pasar el mouse */
   }
   
+  .map-button2 {
+    position: absolute;
+    font-size: 25px;
+    color: red;
+    top: 10px; /* Ajusta la posición vertical según tus necesidades */
+    left: 80%; /* Ajusta la posición horizontal según tus necesidades */
+    z-index: 1; /* Asegura que el botón esté por encima del mapa */
+  }

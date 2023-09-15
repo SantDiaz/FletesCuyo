@@ -165,4 +165,54 @@ addStreetName(name: string) {
   this.streetNames.push(name);
 }
 
+
+drawRoute(startCoordinates: mapboxgl.LngLat, endCoordinates: mapboxgl.LngLat): void {
+  // Limpia la fuente y la capa existentes si existen
+  // this.clearRouteSourceAndLayer();
+
+  const url = [
+    `https://api.mapbox.com/directions/v5/mapbox/driving/`,
+    `${startCoordinates.lng},${startCoordinates.lat};${endCoordinates.lng},${endCoordinates.lat}`,
+    `?steps=true&geometries=geojson&access_token=${environment.apiKey}`,
+  ].join('');
+
+  this.httpClient.get(url).subscribe((res: any) => {
+    const data = res.routes[0];
+    const route = data.geometry.coordinates;
+
+    const sourceConfig: mapboxgl.GeoJSONSourceRaw = {
+      type: 'geojson',
+      data: {
+        type: 'Feature',
+        properties: {},
+        geometry: {
+          type: 'LineString',
+          coordinates: route,
+        },
+      },
+    };
+
+    this.map.addSource('route', sourceConfig);
+    this.map.addLayer({
+      id: 'route',
+      type: 'line',
+      source: 'route',
+      layout: {
+        'line-join': 'round',
+        'line-cap': 'round',
+      },
+      paint: {
+        'line-color': 'red',
+        'line-width': 5,
+      },
+    });
+
+    this.wayPoints = route;
+    this.map.fitBounds([route[0], route[route.length - 1]], {
+      padding: 100,
+    });
+  });
+}
+
+
 }
