@@ -2,8 +2,6 @@
 <ion-content class="background2">
   <div class="button-container">
     <h1><strong>Datos personales</strong></h1>
-  <h3>Debe llenar este formulario</h3>
-
   <section class="u-clearfix u-section-1" id="sec-b6f0">
     <div class="u-clearfix u-sheet u-sheet-1">
       <div class="u-border-2 u-border-grey-75 u-container-style u-custom-color-7 u-expanded-width-xs u-group u-radius-24 u-shape-round u-group-1">
@@ -42,7 +40,7 @@
               
             <div class="u-form-group u-form-phone u-label-top">
               <label for="phone-e765" class="u-label">Teléfono</label>
-              <input [(ngModel)]="registerF.telefono" type="tel" placeholder="Ingrese su número de teléfono +54" name="telefono" class="u-border-1 u-border-grey-60 u-input u-input-rectangle" pattern="(\+54\s?)?(\d{2,4}[-\s]?)(\d{3,4}[-\s]?)(\d{2}[-\s]?\d{2}[-\s]?\d{2})" required>
+              <input [(ngModel)]="registerF.telefono" type="tel" placeholder="Ingrese su número sin '0' " name="telefono" class="u-border-1 u-border-grey-60 u-input u-input-rectangle" pattern="(\+54\s?)?(\d{2,4}[-\s]?)(\d{3,4}[-\s]?)(\d{2}[-\s]?\d{2}[-\s]?\d{2})" required>
               <div *ngIf="validateTelefono()" class="error-message">El número de teléfono no es válido</div>
             </div>
             
