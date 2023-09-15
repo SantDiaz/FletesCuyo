@@ -25,6 +25,8 @@ export class VerRutaComponent implements AfterViewInit {
   constructor(private mapCustom: MapCustomService, private renderer2: Renderer2, private modalController: ModalController) {
     this.modeInput = 'start';
   }
+
+  
   ngAfterViewInit(): void {
     this.mapCustom.buildMap()
       .then(({ map, geocoder }) => {
@@ -48,6 +50,15 @@ export class VerRutaComponent implements AfterViewInit {
   
             // Ahora puedes usar startCoordinates y endCoordinates para dibujar la ruta
             this.mapCustom.drawRoute(startCoordinates, endCoordinates);
+  
+            // Crea marcadores para el punto de inicio y el punto final
+            this.startMarker = new mapboxgl.Marker({ color: 'blue' })
+              .setLngLat(startCoordinates)
+              .addTo(this.map);
+  
+            this.endMarker = new mapboxgl.Marker({ color: 'red' })
+              .setLngLat(endCoordinates)
+              .addTo(this.map);
           }
   
           // Agrega un botón personalizado al mapa
@@ -66,6 +77,7 @@ export class VerRutaComponent implements AfterViewInit {
         console.log('no Carga', error);
       });
   }
+  
   
 
   changeModel(mode: string): void {
