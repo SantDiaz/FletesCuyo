@@ -1,12 +1,8 @@
-<ion-content class="background2">
 
-  <div id="geocoder" #asGeocoder style="height: 100%; width: 100%;" #map id="map">
-  <!-- Agrega los otros botones dentro del contenedor del mapa -->
-  <button class="green-button" (click)="changeModel('start')" [ngClass]="{'active-way': modeInput === 'start'}">Punto de inicio</button>
-  <button class="red-button" (click)="changeModel('end')" [ngClass]="{'active-way': modeInput === 'end'}">Punto de final</button>
-  <button (click)="drawRoute()" class="dark-button">Dibujar Ruta</button>
-  <button id="cerrarModalButton"  class="map-button2">Volver</button>
+  <div id="geocoder" #asGeocoder #map id="map">
+    <button (click)="cerrarModal()"  class="btn btn-warning">Volver</button>
+  <button class="btn btn-success" (click)="changeModel('start')" [ngClass]="{'active-way': modeInput === 'start'}">Punto de inicio</button>
+  <button class="btn btn-danger" (click)="changeModel('end')" [ngClass]="{'active-way': modeInput === 'end'}">Punto final</button>
+  <!-- <button (click)="drawRoute()" class="dark-button">Enviar</button> -->
+  <button (click)="drawRoute()" type="button" class="btn btn-info">Enviar ubicaciones</button>
 </div>
-
-
-</ion-content>

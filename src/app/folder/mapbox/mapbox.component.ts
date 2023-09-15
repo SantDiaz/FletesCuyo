@@ -34,7 +34,7 @@ export class MapboxComponent implements OnInit {
   
         // Inicializar los marcadores en posiciones vacías
         this.startMarker = this.createMarker(new mapboxgl.LngLat(0, 0), 'start');
-        this.endMarker = this.createMarker(new mapboxgl.LngLat(null, null), 'end');
+        this.endMarker = this.createMarker(new mapboxgl.LngLat(0, 0), 'end');
   
         // Agregar clic en el mapa para actualizar los marcadores
         this.map.on('click', (event) => {
