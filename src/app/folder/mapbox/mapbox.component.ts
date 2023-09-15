@@ -79,6 +79,29 @@ export class MapboxComponent implements OnInit {
             this.cerrarModal(); // Llama a la función para cerrar el modal
           });
         }
+
+
+        const startButton = document.querySelector('.green-button');
+        const endButton = document.querySelector('.red-button');
+        const drawRouteButton = document.querySelector('.btn-route');
+        
+        if (startButton) {
+          startButton.addEventListener('click', () => {
+            this.changeModel('start'); // Llama a la función para cambiar el modo
+          });
+        }
+        
+        if (endButton) {
+          endButton.addEventListener('click', () => {
+            this.changeModel('end'); // Llama a la función para cambiar el modo
+          });
+        }
+  
+        if (drawRouteButton) {
+          drawRouteButton.addEventListener('click', () => {
+            this.drawRoute(); // Llama a la función para dibujar la ruta
+          });
+        }
         
         // Centrar el mapa en la ubicación del usuario
         this.centerToUserLocation();
