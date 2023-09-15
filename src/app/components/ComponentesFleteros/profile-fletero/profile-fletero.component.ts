@@ -75,7 +75,7 @@ getDatosUser(uid: string) {
 }
 
 getDatosVehicular(uid: string) {
-  const path = `Fleteros/${uid}/DatosVehicular`;
+  const path = `Fleteros/${uid}/DatosVehiculares`;
   const id = uid;
   
   this.db.getDoc<datosVehiculo>(path, id).subscribe( res => {
