@@ -148,7 +148,7 @@ export class Paso2Component implements OnInit {
         const idPrimer = this.pedidoId;
         this.authS.stateUser<UserU>().subscribe(res => {
           if (res) {
-            console.log("respuestacomun", res.uid);
+            this.interaction.presentLoading('Enviando pedido');
             const path = `PedirFlete/${res.uid}/Pedidos/`;
             this.db.getDoc<DatosFlete>(path, idPrimer).subscribe(res2 => {
               console.log("respuesta2", res2);
@@ -162,13 +162,14 @@ export class Paso2Component implements OnInit {
               data.uid = res.uid;
               data.startCoordinates = startCoordinates;
               data.endCoordinatesP = endCoordinates;
-      
+              
               console.log('id a editar', idPrimer);
               
               const enlace = `PedirFlete/${res.uid}/Pedidos`;
               this.db.updateDoc(enlace, idPrimer, data)
-                .then(() => {
-                  console.log('Actualización exitosa');
+              .then(() => {
+                this.interaction.closeLoading();
+                console.log('Actualización exitosa');
                   this.enviado = true;
                   setTimeout(() => {
                     // Tu código de redirección aquí
@@ -180,10 +181,16 @@ export class Paso2Component implements OnInit {
                 });
             });
     } else {
+      this.interaction.presentToast('Alert');
       // Aquí puedes mostrar un mensaje de error o realizar alguna acción cuando la validación falla.
     }
     });
       console.log("Formulario no válido. Por favor, corrige los errores.");
+    }
+    else {
+      this.interaction.presentToast('Debes terminar de hacer el pedido');
+
+      // Aquí puedes mostrar un mensaje de error o realizar alguna acción cuando la validación falla.
     }
   }
   
