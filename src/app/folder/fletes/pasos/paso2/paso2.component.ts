@@ -176,10 +176,12 @@ export class Paso2Component implements OnInit {
                 console.log('id a editar', idPrimer);
                 
                 const enlace = `PedirFlete/${res.uid}/Pedidos`;
-               
+                this.interaction.closeLoading();
+
               if (this.formularioEnviado === false) {
                 this.db.updateDoc(enlace, idPrimer, data)
                 this.interaction.closeLoading();
+                this.interaction.presentToast('Pedido Enviado')
                 console.log('Actualización exitosa');
                 this.formularioEnviado = true; // Establece la bandera en true
                 console.log('formularioEnviado', this.formularioEnviado);
@@ -187,6 +189,7 @@ export class Paso2Component implements OnInit {
                 return;
                 
               }
+              this.interaction.closeLoading();
                
                   // setTimeout(() => {
                     //   // Tu código de redirección aquí

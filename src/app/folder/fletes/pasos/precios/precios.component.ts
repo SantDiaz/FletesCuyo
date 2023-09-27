@@ -120,7 +120,7 @@ export class PreciosComponent implements OnInit {
       if (telefono.length > 0) {
         // Assuming the country code is +54 (Argentina), you can customize this
         const countryCode = '+54';
-        
+  
         // Obtén el mensaje del pedido desde la respuesta (ajusta esto según cómo estén estructurados tus datos)
         const pedidoMensaje = respuesta.mensajePedido || 'Mensaje predeterminado si no hay mensaje de pedido';
   
@@ -135,6 +135,14 @@ export class PreciosComponent implements OnInit {
   
         // Open WhatsApp in a new window or tab
         window.open(whatsappLink, '_blank');
+        if (respuesta.pedido && respuesta.uid) {
+          // Call the function when pedido and uid are defined
+        } else {
+          console.error('Pedido no válido o falta la propiedad uid.');
+        }
+        
+        // Move the pedido to PedidosHechos and delete it from the current collection
+        this.db.movePedidoToPedidosHechos(respuesta.pedido, respuesta.precio);
       } else {
         console.log('El número de teléfono no es válido.');
       }

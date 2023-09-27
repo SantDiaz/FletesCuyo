@@ -27,6 +27,23 @@ export class FirestoreService {
               public auths : AuthService
              ) { }
 
+//mueve el mpedido
+    async movePedidoToPedidosHechos(pedido: DatosFlete, precio: number) {
+    try {
+      // Agregar el pedido a la colección "pedidosHechos" con el precio proporcionado
+      const pedidoHecho = { ...pedido, precio };
+      await this.firestore.collection(`PedirFlete/${pedido.uid}/PedidosFinalizados`).add(pedidoHecho);
+
+      // Eliminar el pedido de la colección actual
+      await this.firestore.doc(`PedirFlete/${pedido.uid}/Pedidos/${pedido.id}`).delete();
+
+      return true; // Éxito
+    } catch (error) {
+      console.error('Error al mover el pedido:', error);
+      return false; // Error
+    }
+  }
+
 // guarda datos sin idÇ
 createDocument<tipo>(data: tipo, enlace: string, id: string) {
   const ref = this.firestore.doc(`${enlace}/${id}`);
