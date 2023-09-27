@@ -119,13 +119,13 @@ constructor(private routes: Router,
 
   async enviar() {
     await this.interaction.presentLoading("Enviando...");
-    
+  
     this.authS.stateUser<UserU>().subscribe((res) => {
       if (res) {
         const path = 'Usuarios';
         this.db.getDoc<UserF>(path, res.uid).subscribe((res2) => {
           this.interaction.presentLoading;
-    
+  
           const path = `Usuarios/${res.uid}/DatosPersonales`;
           this.db.getDoc<UserU>(path, res.uid).subscribe((res2) => {
             const data = this.pasosFlete;
@@ -133,33 +133,39 @@ constructor(private routes: Router,
             data.uid = res.uid;
             data.nombre = res2.nombre;
             data.apellido = res2.apellido;
-
-
-          const fechaBase = new Date(this.pasosFlete.fecha);
-          data.hora = fechaBase.getHours();
-          data.minutos = fechaBase.getMinutes();
-
+  
+            const fechaBase = new Date(this.pasosFlete.fecha);
+            data.hora = fechaBase.getHours();
+            data.minutos = fechaBase.getMinutes();
   
             // Resto del código...
   
             const enlace = `PedirFlete/${res.uid}/Pedidos`;
             const pedidoId = data.id;
             this.interaction.closeLoading();
-    
+  
             this.db.createDocument<DatosFlete>(data, enlace, pedidoId).then((_) => {
               this.interaction.presentToast('Enviado con éxito');
               this.interaction.closeLoading();
               this.valueSelected === "2";
-    
+  
               this.router.navigate(['/paso2', { pedidoId: data.id }]);
+  
+              // Agregar la lógica para programar el cambio de subcolección después de 1 minuto (para pruebas)
+              setTimeout(() => {
+             
+              }, 60000); // 60000 milisegundos = 1 minuto
             });
           });
         });
       }
     });
   }
+
   
 
+
+  
     
   updateTiempo(tiempo: number) {
     this.authS.stateUser<UserU>().subscribe((res) => {

@@ -4,6 +4,7 @@ import { UserF, UserU } from './folder/models/models';
 import { AuthService } from './folder/services/auth.service';
 import { FirestoreService } from './folder/services/firestore.service';
 import { InteractionService } from './folder/services/interaction.service';
+// import { AngularFireMessaging } from '@angular/fire/compat/messaging';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -18,6 +19,7 @@ export class AppComponent {
                private router: Router,
                private interaction: InteractionService,
                private firestore: FirestoreService,
+              //  private afMessaging: AngularFireMessaging,
                
     ) {      
       this.auth.stateUser().subscribe( res => {
@@ -33,6 +35,18 @@ export class AppComponent {
         
       }   
  })
+}
+
+ngOnInit() {
+  // this.afMessaging.requestToken.subscribe(
+  //   (token) => {
+  //     console.log('Token:', token);
+  //     // Envía este token a tu servidor o Firebase para registrar el dispositivo
+  //   },
+  //   (error) => {
+  //     console.error('Error al obtener el token:', error);
+  //   }
+  // );
 }
 
   logout(){

@@ -16,6 +16,7 @@ import { take } from 'rxjs/operators';
 })
 export class Paso2FComponent implements OnInit {
 
+  private formularioEnviado: boolean = false;
 
   registerF: UserF = {
     uid: null,
@@ -156,13 +157,15 @@ export class Paso2FComponent implements OnInit {
           // Define the path for saving the personal data
           const path3 = `Fleteros`;
           // Update or create the document as needed
-          this.db.updateDoc(path3,res.uid, datosPersonales).then(_ => {
-            this.interaction.closeLoading();
-            this.router.navigate(['/paso3F']);
-          }).catch(error => {
-            this.interaction.closeLoading();
-            console.error(`Error al actualizar el documento ${path3}:`, error);
-          });
+          if (this.formularioEnviado === false) {
+            this.db.updateDoc(path3,res.uid, datosPersonales)
+              this.interaction.closeLoading();
+              this.formularioEnviado = true; // Establece la bandera en true
+              this.router.navigate(['/paso3F']);
+            
+            return
+          }
+
         });
       });
     } else {

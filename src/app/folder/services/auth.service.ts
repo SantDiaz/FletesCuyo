@@ -119,4 +119,26 @@ export class AuthService {
   }
 
 
+
+  isLoggedIn() {
+    // Implementa lógica para verificar si el usuario está autenticado, por ejemplo, utilizando AngularFireAuth.
+    // Retorna true si el usuario está autenticado, de lo contrario, false.
+    return this.authS.authState !== null;
+  }
+
+ async getUserToken() {
+    // Implementa lógica para obtener el token del usuario autenticado, si es necesario.
+    // Esto dependerá de tu sistema de autenticación y de cómo almacenas y obtienes el token.
+    // Puedes retornar el token del usuario si está autenticado, o null si no lo está.
+    // Por ejemplo:
+    const user = await this.authS.currentUser;
+    if (user) {
+      const token = await user.getIdToken();
+      return token;
+    } else {
+      return null;
+    }
+  }
+
+
 }

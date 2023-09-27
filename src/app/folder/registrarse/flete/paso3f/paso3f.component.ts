@@ -15,6 +15,7 @@ import { InteractionService } from 'src/app/folder/services/interaction.service'
   styleUrls: ['./paso3f.component.scss'],
 })
 export class Paso3fComponent implements OnInit {
+  private formularioEnviado: boolean = false;
 
   @ViewChild(IonModal) modal: IonModal;
 
@@ -90,14 +91,15 @@ vehiculo = tipoVehiculo;
             };
   
             // Ahora, puedes guardar todo el objeto en la colección
-            this.firestore.createDocument<datosVehiculo>(datosVehicularesConImagen, path2, id).then((_) => {
-              this.interaction.presentToast('Enviado con éxito');
-              setTimeout(() => {
+            this.firestore.createDocument<datosVehiculo>(datosVehicularesConImagen, path2, id)
+              this.interaction.presentToast('Registrado con éxito');
+              if (this.formularioEnviado === false) {
                 // Tu código de redirección aquí
-                window.location.href = '/home';
-              }, 0);
+                this.formularioEnviado = true; // Establece la bandera en true
+                this.router.navigate(['/home']);
+                return
+              }
 
-            });
             });
     } else {
       // If the form is not valid, display an error message or take appropriate action

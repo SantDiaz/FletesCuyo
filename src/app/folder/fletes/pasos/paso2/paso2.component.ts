@@ -18,6 +18,7 @@ import { ModalController } from '@ionic/angular';
 })
 export class Paso2Component implements OnInit {
   private pedidoId: string; // Agrega esta línea
+  private formularioEnviado: boolean = false;
   public enviado = false;
   startCoordinates: { latitude: number, longitude: number };
   endCoordinates: { latitude: number, longitude: number };
@@ -138,60 +139,76 @@ export class Paso2Component implements OnInit {
     );  }
 
   async enviar3() {
-    if (this.validateForm()) {
-      // Continuar con el envío de datos si todas las validaciones son exitosas
-      // ... Tu código para enviar los datos aquí ...
-      console.log("Formulario válido. Procesando datos...");
-        this.pedidoId = this.route.snapshot.paramMap.get('pedidoId');
-        const startCoordinates = this.startCoordinates;
-      const endCoordinates = this.endCoordinates;
-        const idPrimer = this.pedidoId;
-        this.authS.stateUser<UserU>().subscribe(res => {
-          if (res) {
-            this.interaction.presentLoading('Enviando pedido');
-            const path = `PedirFlete/${res.uid}/Pedidos/`;
-            this.db.getDoc<DatosFlete>(path, idPrimer).subscribe(res2 => {
-              console.log("respuesta2", res2);
-              const data = this.pasosFlete;
-              data.nombre = res2.nombre;
-              data.apellido = res2.apellido;
-              data.fecha = res2.fecha;
-              data.hora = res2.hora;
-              data.minutos = res2.minutos;
-              data.id = res2.id
-              data.uid = res.uid;
-              data.startCoordinates = startCoordinates;
-              data.endCoordinatesP = endCoordinates;
-              
-              console.log('id a editar', idPrimer);
-              
-              const enlace = `PedirFlete/${res.uid}/Pedidos`;
-              this.db.updateDoc(enlace, idPrimer, data)
-              .then(() => {
+
+      
+      if (this.validateForm()) {
+        // Continuar con el envío de datos si todas las validaciones son exitosas
+        // ... Tu código para enviar los datos aquí ...
+        console.log("Formulario válido. Procesando datos...");
+          this.pedidoId = this.route.snapshot.paramMap.get('pedidoId');
+          const startCoordinates = this.startCoordinates;
+        const endCoordinates = this.endCoordinates;
+          const idPrimer = this.pedidoId;
+          this.authS.stateUser<UserU>().subscribe(res => {
+            if (res) {
+
+              // if (this.formularioEnviado === false) {
+              //   // Si el formulario ya se ha enviado, no ejecutes la función nuevamente
+              //   console.log('se envio')
+              //   return;
+           
+              // }
+              this.interaction.presentLoading('Enviando pedido');
+              const path = `PedirFlete/${res.uid}/Pedidos/`;
+              this.db.getDoc<DatosFlete>(path, idPrimer).subscribe(res2 => {
+                console.log("respuesta2", res2);
+                const data = this.pasosFlete;
+                data.nombre = res2.nombre;
+                data.apellido = res2.apellido;
+                data.fecha = res2.fecha;
+                data.hora = res2.hora;
+                data.minutos = res2.minutos;
+                data.id = res2.id
+                data.uid = res.uid;
+                data.startCoordinates = startCoordinates;
+                data.endCoordinatesP = endCoordinates;
+                
+                console.log('id a editar', idPrimer);
+                
+                const enlace = `PedirFlete/${res.uid}/Pedidos`;
+               
+              if (this.formularioEnviado === false) {
+                this.db.updateDoc(enlace, idPrimer, data)
                 this.interaction.closeLoading();
                 console.log('Actualización exitosa');
-                  this.enviado = true;
-                  setTimeout(() => {
-                    // Tu código de redirección aquí
-                    window.location.href = '/home';
-                  }, 0);
-                })
-                .catch(error => {
-                  console.error('Error al actualizar:', error);
-                });
+                this.formularioEnviado = true; // Establece la bandera en true
+                console.log('formularioEnviado', this.formularioEnviado);
+                this.router.navigate(['/home']);
+                return;
+                
+              }
+               
+                  // setTimeout(() => {
+                    //   // Tu código de redirección aquí
+                    //   window.location.href = '/home';
+                    // }, 0);
+                  })
+              } else {
+                this.interaction.presentToast('Alert');
+                // Aquí puedes mostrar un mensaje de error o realizar alguna acción cuando la validación falla.
+              }
             });
-    } else {
-      this.interaction.presentToast('Alert');
-      // Aquí puedes mostrar un mensaje de error o realizar alguna acción cuando la validación falla.
-    }
-    });
-      console.log("Formulario no válido. Por favor, corrige los errores.");
-    }
-    else {
-      this.interaction.presentToast('Debes terminar de hacer el pedido');
-
-      // Aquí puedes mostrar un mensaje de error o realizar alguna acción cuando la validación falla.
-    }
+            console.log("Formulario no válido. Por favor, corrige los errores.");
+          }
+          else {
+            this.interaction.presentToast('Debes terminar de hacer el pedido');
+            
+            // Aquí puedes mostrar un mensaje de error o realizar alguna acción cuando la validación falla.
+          }
+          
+          
+          
+   
   }
   
 
