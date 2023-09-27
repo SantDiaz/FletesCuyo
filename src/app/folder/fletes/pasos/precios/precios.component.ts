@@ -96,7 +96,7 @@ export class PreciosComponent implements OnInit {
       if (res ) {
         this.DatosF = res;
         const fleteroId = res.uid
-        this.openWhatsApp(fleteroId)
+        // this.openWhatsApp(fleteroId)
         }
     })
   }
@@ -108,11 +108,12 @@ export class PreciosComponent implements OnInit {
       if (res ) {
         this.DatosF = res;
         const fleteroId = res.uid
-        this.openWhatsApp(fleteroId)
+        
+        // this.openWhatsApp(fleteroId)
         }
     })
   }
-  openWhatsApp(respuesta: any) {
+  openWhatsApp(respuesta: any,) {
     if (respuesta && respuesta.telefono) {
       // Remove any non-numeric characters and spaces from the phone number
       const telefono = respuesta.telefono.replace(/[^0-9]/g, '');
@@ -133,16 +134,21 @@ export class PreciosComponent implements OnInit {
         // Log the WhatsApp link for debugging
         console.log('WhatsApp Link:', whatsappLink);
   
-        // Open WhatsApp in a new window or tab
-        window.open(whatsappLink, '_blank');
-        if (respuesta.pedido && respuesta.uid) {
-          // Call the function when pedido and uid are defined
-        } else {
-          console.error('Pedido no válido o falta la propiedad uid.');
-        }
+        // Muestra una alerta antes de abrir WhatsApp
+        this.interacion.presentAlert(
+          'Confirmar pedido',
+          '¿Estás seguro de aceptar este precio para tu pedido? '
+        ).then((aceptar) => {
+          if (aceptar) {
+
+
+            // Abre WhatsApp en una nueva ventana o pestaña
+            window.open(whatsappLink, '_blank');
+          } else {
+            // El usuario canceló la acción
+          }
+        });
         
-        // Move the pedido to PedidosHechos and delete it from the current collection
-        this.db.movePedidoToPedidosHechos(respuesta.pedido, respuesta.precio);
       } else {
         console.log('El número de teléfono no es válido.');
       }
@@ -150,6 +156,7 @@ export class PreciosComponent implements OnInit {
       console.log('No se proporcionó un número de teléfono válido para abrir WhatsApp.');
     }
   }
+  
   
   
   obtenerEnlaces() {

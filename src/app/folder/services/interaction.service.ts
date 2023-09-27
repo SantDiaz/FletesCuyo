@@ -47,7 +47,7 @@ export class InteractionService {
           cssClass: 'danger',
         },
         {
-          text: 'Okay',
+          text: 'Si',
           handler: ()=>{
             aceptar = true;
           }
