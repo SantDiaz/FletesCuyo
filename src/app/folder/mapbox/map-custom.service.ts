@@ -18,8 +18,8 @@ export class MapCustomService {
   markerDriver: any;
   streetNames: string[] = [];
   styles = 'mapbox://styles/mapbox/streets-v12'
-  long = -0.1278; // Longitud de Londres, por ejemplo
-  lat =  51.5074; // Latitud de Londres, por ejemplo
+  long = -68.5364; // Longitud de Londres, por ejemplo
+  lat =  -31.5375; // Latitud de Londres, por ejemplo
   zoom = 3;
   constructor(  private httpClient: HttpClient) {
     this.mapbox.accessToken = environment.apiKey; // Corrección de la asignación del token de acceso

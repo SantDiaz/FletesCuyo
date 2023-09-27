@@ -4,6 +4,7 @@ import * as mapboxgl from 'mapbox-gl';
 import { GeolocateControl } from 'mapbox-gl';
 import { Paso2Component } from '../fletes/pasos/paso2/paso2.component';
 import { ModalController } from '@ionic/angular';
+import { Popup } from 'mapbox-gl';
 
 @Component({
   selector: 'app-mapbox',
@@ -19,7 +20,7 @@ export class MapboxComponent implements OnInit {
   startMarker: mapboxgl.Marker | null = null;
   endMarker: mapboxgl.Marker | null = null;
   draggingMarker: mapboxgl.Marker | null = null;
-
+  popup: Popup;
   constructor(private mapCustom: MapCustomService, private renderer2: Renderer2, private modalController: ModalController // Agrega el controlador de modal
   ) {
     this.modeInput = 'start';
@@ -43,6 +44,7 @@ export class MapboxComponent implements OnInit {
             this.updateMarkerPosition(this.startMarker, coordinates);
           } else if (this.modeInput === 'end') {
             this.updateMarkerPosition(this.endMarker, coordinates);
+            this.popup.remove();
 
           }
         });
@@ -102,8 +104,9 @@ export class MapboxComponent implements OnInit {
             this.drawRoute(); // Llama a la función para dibujar la ruta
           });
         }
-        
-        // Centrar el mapa en la ubicación del usuario
+      const centerCoordinates = this.map.getCenter();
+
+
         this.centerToUserLocation();
       })
 
@@ -127,6 +130,15 @@ export class MapboxComponent implements OnInit {
           center: userLocation, // Ahora TypeScript sabe que es un arreglo válido
           zoom: 14, // Puedes ajustar el nivel de zoom según tus preferencias
         });
+  
+        // Configurar el contenido del popup
+        const popupContent = '<H1>Haz click en el mapa para seleccionar el punto de partida</H1>';
+  
+        // Crear el popup en la ubicación del usuario
+        this.popup = new mapboxgl.Popup({ closeButton: false })
+          .setLngLat(userLocation) // Usar las coordenadas del usuario
+          .setHTML(popupContent)
+          .addTo(this.map);
       }, (error) => {
         console.error('Error al obtener la ubicación del usuario', error);
         // Aquí puedes manejar errores si ocurren al obtener la ubicación del usuario
@@ -136,6 +148,7 @@ export class MapboxComponent implements OnInit {
       // Aquí puedes manejar el caso en el que la geolocalización no esté disponible en el navegador
     }
   }
+  
   
   
 
