@@ -102,7 +102,7 @@ vehiculo = tipoVehiculo;
 
             });
     } else {
-      // If the form is not valid, display an error message or take appropriate action
+      // If the form is not valid, display an error messagjjje or take appropriate action
       console.log("Form validation failed. Please complete all fields correctly.");
       // You can also display a toast or other error message to the user.
     }
