@@ -80,37 +80,7 @@ constructor(private routes: Router,
       precio: null,
       tiempoTranscurrido: '', // Inicializa el tiempo transcurrido como una cadena vacía
     };
-
-    // Crea un Observable para actualizar el tiempo transcurrido
-   this.tiempoTranscurrido$ = interval(1 * 60 * 1000).pipe(
-  map(() => {
-    const ahora = new Date();
-    const tiempoTranscurrido = ahora.getTime() - this.fechaBase.getTime();
-    
-    const minutosTranscurridos = Math.floor(tiempoTranscurrido / (1000 * 60));
-    const segundosTranscurridos = Math.floor((tiempoTranscurrido % (1000 * 60)) / 1000);
-    
-    let tiempoTranscurridoTexto = '';
-    
-    if (minutosTranscurridos > 0) {
-      tiempoTranscurridoTexto += `${minutosTranscurridos} minutos `;
-    }
-    
-    if (segundosTranscurridos > 0) {
-      tiempoTranscurridoTexto += `${segundosTranscurridos} segundos`;
-    }
-    
-    
-    this.updateTiempo(tiempoTranscurrido)
-    return tiempoTranscurridoTexto;
-  })
-  );
   
-  // Suscríbete al Observable para obtener el tiempo transcurrido en tiempo real
-  this.tiempoTranscurrido$.subscribe((tiempoTranscurridoTexto) => {
-    this.tiempoTranscurrido = tiempoTranscurridoTexto;
-    console.log('tiempoTranscurrido', this.tiempoTranscurrido)
-    });
   }
 
   ngOnInit() {
@@ -167,34 +137,7 @@ constructor(private routes: Router,
 
   
     
-  updateTiempo(tiempo: number) {
-    this.authS.stateUser<UserU>().subscribe((res) => {
-      if (res) {
-        const path = `PedirFlete/${res.uid}/Pedidos/`;
-  
-        // Crear un lote de escritura
-        const batch = firebase.firestore().batch();
-  
-        firebase.firestore().collection(path).get()
-          .then((querySnapshot) => {
-            querySnapshot.forEach((doc) => {
-              // Actualiza solo el campo tiempoTranscurrido en cada documento
-              const docRef = firebase.firestore().collection(path).doc(doc.id);
-              batch.update(docRef, { tiempoTranscurrido: tiempo });
-            });
-  
-            // Ejecuta el lote de escritura para actualizar todos los documentos
-            return batch.commit();
-          })
-          .then(() => {
-            console.log('Actualización exitosa');
-          })
-          .catch((error) => {
-            console.error('Error al actualizar los documentos:', error);
-          });
-      }
-    });
-  }
+ 
   
   
   

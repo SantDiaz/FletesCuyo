@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
-import { DatosFlete, UserF, datosVehiculo } from '../models/models';
+import { DatosFlete, UserF, datosVehiculo, respuesta } from '../models/models';
 import { Observable } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import 'firebase/firestore';
@@ -27,25 +27,37 @@ export class FirestoreService {
               public auths : AuthService
              ) { }
 
-//mueve el mpedido
-async movePedidoToPedidosHechos(pedido: DatosFlete, precio: number) {
-  try {
-    // Agregar el pedido a la colección "PedidosFinalizados" con el precio proporcionado
-    const pedidoHecho = { ...pedido, precio };
-    await this.firestore.collection(`PedirFlete/${pedido.uid}/PedidosFinalizados`).add(pedidoHecho);
+             async movePedidoToPedidosHechos(pedido: DatosFlete, respuesta: respuesta) {
+              try {
+                const precio = respuesta.precio;
+            
+                // Agregar el pedido a la colección "PedidosFinalizados" con el precio proporcionado
+                const pedidoHecho = { ...pedido, precio };
+                
+                // Obtener una referencia al documento en "PedidosFinalizados"
+                const pedidoFinalizadoRef = this.firestore.collection(`PedirFlete/${pedido.uid}/PedidosFinalizados`).doc(pedido.id);
+                
+                // Agregar el pedido y la respuesta al mismo documento en "PedidosFinalizados"
+                await pedidoFinalizadoRef.set({
+                  ...pedidoHecho,
+                  respuesta: respuesta // Esto agrega la respuesta como un campo dentro del documento
+                });
+            
+                // Eliminar el pedido de la colección actual
+                await this.firestore.doc(`PedirFlete/${pedido.uid}/Pedidos/${pedido.id}`).delete();
+                await this.firestore.doc(`PedirFlete/${pedido.uid}/Pedidos/${pedido.id}/Respuesta/${respuesta.idFletero}`).delete();
+                // Show a success message
+                return true; // Éxito
+              } catch (error) {
+                console.error('Error al mover el pedido:', error);
+                return false; // Error
+              }
+            }
+            
 
-    // Eliminar el pedido de la colección actual
-    await this.firestore.doc(`PedirFlete/${pedido.uid}/Pedidos/${pedido.id}`).delete();
 
-    // Show a success message
 
-    return true; // Éxito
-  } catch (error) {
-    console.error('Error al mover el pedido:', error);
 
-    return false; // Error
-  }
-}
 
 
 // guarda datos sin idÇ

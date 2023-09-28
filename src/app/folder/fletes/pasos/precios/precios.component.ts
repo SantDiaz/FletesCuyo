@@ -153,7 +153,7 @@ export class PreciosComponent implements OnInit {
     ).then((aceptar) => {
       if (aceptar) {
         try {
-          const exito = this.db.movePedidoToPedidosHechos(pedido, rta.precio);
+          const exito = this.db.movePedidoToPedidosHechos(pedido, rta);
           // Llama al método de tu servicio para mover el pedido
   
           if (exito) {
