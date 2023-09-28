@@ -33,7 +33,7 @@ export class InteractionService {
     await this.loading.dismiss();
   }
 
- async presentAlert(texto: string, subtitulo: string) {
+ async presentAlert(texto: string, subtitulo: string,) {
 
     let aceptar = false;
     const alert = await this.alerController.create({

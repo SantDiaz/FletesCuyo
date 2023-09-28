@@ -148,8 +148,8 @@ export class PreciosComponent implements OnInit {
   async moverPedidoAPedidosFinalizados(pedido: DatosFlete, rta: respuesta) {
     // Muestra una alerta antes de abrir WhatsApp
     this.interacion.presentAlert(
-      'Confirmar pedido',
-      '¿Estás seguro de aceptar este precio para tu pedido? '
+      '¿Estás seguro de aceptar este precio para tu pedido?',
+      'Tu pedido desaparecera para los fleteros',
     ).then((aceptar) => {
       if (aceptar) {
         try {

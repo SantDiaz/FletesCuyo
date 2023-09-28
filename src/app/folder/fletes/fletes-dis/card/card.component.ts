@@ -182,7 +182,7 @@ export class CardComponent implements OnInit {
                 nombre: '',
                 apellido: '',
                 telefono: rta22.telefono,
-                precio: DatosFletes.precio, //aqui quiero guardar el precio
+                precio: precioNumerico, //aqui quiero guardar el precio
                 mensaje: '',
                 precioEnviado: true, // Agrega esta propiedad
               };

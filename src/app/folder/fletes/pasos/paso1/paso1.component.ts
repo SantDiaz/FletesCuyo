@@ -20,6 +20,8 @@ import firebase from 'firebase/compat/app';
 export class Paso1Component implements OnInit {
   rol: 'Usuario' | 'Fletero'| 'Admin' = null;
   minDate: string; // Propiedad para almacenar la fecha mínima
+  private formularioEnviado: boolean = false;
+
 registerU: UserU; 
 loading: any;
 data:any;
@@ -113,19 +115,17 @@ constructor(private routes: Router,
             const enlace = `PedirFlete/${res.uid}/Pedidos`;
             const pedidoId = data.id;
             this.interaction.closeLoading();
-  
+            if (this.formularioEnviado === false) {
             this.db.createDocument<DatosFlete>(data, enlace, pedidoId).then((_) => {
               this.interaction.presentToast('Enviado con éxito');
               this.interaction.closeLoading();
               this.valueSelected === "2";
-  
+              this.formularioEnviado = true; // Establece la bandera en true
               this.router.navigate(['/paso2', { pedidoId: data.id }]);
-  
-              // Agregar la lógica para programar el cambio de subcolección después de 1 minuto (para pruebas)
-              setTimeout(() => {
-             
-              }, 60000); // 60000 milisegundos = 1 minuto
+              return;
+              
             });
+          }
           });
         });
       }
