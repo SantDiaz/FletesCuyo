@@ -30,6 +30,7 @@ export class PreciosComponent implements OnInit {
     enlacesWhatsApp:string[];
   fleteros: UserF[];
   fleteroSeleccionadoId: string;
+  isRespuestasModalOpen: boolean = false;
 
   constructor(
           private auth: AuthService,
@@ -47,7 +48,7 @@ export class PreciosComponent implements OnInit {
   ngOnInit() {
 
     this.fleteroService.getFleteros().subscribe((fleteros: UserF[]) => {
-      this.enlacesWhatsApp = this.generateWhatsAppLink(fleteros, '+54');
+      this.enlacesWhatsApp = this.generateWhatsAppLink2(fleteros, '+54');
       console.log('Enlaces de WhatsApp:', this.enlacesWhatsApp);
     });
     this.auth.stateUser<UserU>().subscribe( res  => {
@@ -134,21 +135,73 @@ export class PreciosComponent implements OnInit {
         // Log the WhatsApp link for debugging
         console.log('WhatsApp Link:', whatsappLink);
   
-        // Muestra una alerta antes de abrir WhatsApp
-        this.interacion.presentAlert(
-          'Confirmar pedido',
-          '¿Estás seguro de aceptar este precio para tu pedido? '
-        ).then((aceptar) => {
-          if (aceptar) {
+  
+        
+      } else {
+        console.log('El número de teléfono no es válido.');
+      }
+    } else {
+      console.log('No se proporcionó un número de teléfono válido para abrir WhatsApp.');
+    }
+  }
 
-
+  async moverPedidoAPedidosFinalizados(pedido: DatosFlete, rta: respuesta) {
+    // Muestra una alerta antes de abrir WhatsApp
+    this.interacion.presentAlert(
+      'Confirmar pedido',
+      '¿Estás seguro de aceptar este precio para tu pedido? '
+    ).then((aceptar) => {
+      if (aceptar) {
+        try {
+          const exito = this.db.movePedidoToPedidosHechos(pedido, rta.precio);
+          // Llama al método de tu servicio para mover el pedido
+  
+          if (exito) {
+            // Crea el enlace de WhatsApp aquí
+            const whatsappLink = this.generateWhatsAppLink(rta);
+            
             // Abre WhatsApp en una nueva ventana o pestaña
             window.open(whatsappLink, '_blank');
+  
+            // Cierra el modal de respuestas
+            this.cerrar(false);
+            this.router.navigate(['/home']);
+            // El pedido se movió con éxito, puedes mostrar un mensaje o realizar otras acciones si es necesario
+            console.log('Pedido movido a Pedidos Finalizados correctamente');
           } else {
-            // El usuario canceló la acción
+            // Maneja el caso en que ocurra un error al mover el pedido
+            console.error('Error al mover el pedido');
           }
-        });
-        
+        } catch (error) {
+          // Maneja cualquier error que pueda ocurrir al mover el pedido
+          console.error('Error al mover el pedido:', error);
+        }
+      } else {
+        // El usuario canceló la acción
+      }
+    });
+  }
+  
+  
+  generateWhatsAppLink(respuesta: any) {
+    if (respuesta && respuesta.telefono) {
+      // Remove any non-numeric characters and spaces from the phone number
+      const telefono = respuesta.telefono.replace(/[^0-9]/g, '');
+  
+      if (telefono.length > 0) {
+        // Assuming the country code is +54 (Argentina), you can customize this
+        const countryCode = '+54';
+  
+        // Obtén el mensaje del pedido desde la respuesta (ajusta esto según cómo estén estructurados tus datos)
+        const pedidoMensaje = respuesta.mensajePedido || 'Mensaje predeterminado si no hay mensaje de pedido';
+  
+        // Crea el mensaje completo para WhatsApp, incluyendo el mensaje del pedido
+        const message = `Hola, ha respondido a mi pedido. Mi pedido es el siguiente:\n\n${pedidoMensaje}`;
+  
+        // Crea el enlace de WhatsApp con el número de teléfono y el mensaje
+        const whatsappLink = `https://wa.me/${countryCode}${telefono}?text=${encodeURIComponent(message)}`;
+  
+        return whatsappLink;
       } else {
         console.log('El número de teléfono no es válido.');
       }
@@ -162,12 +215,12 @@ export class PreciosComponent implements OnInit {
   obtenerEnlaces() {
     this.fleteroService.getFleteros().subscribe((fleteros: UserF[]) => {
       // fleteros
-      this.enlacesWhatsApp = this.generateWhatsAppLink(fleteros, '+54');
+      this.enlacesWhatsApp = this.generateWhatsAppLink2(fleteros, '+54');
       console.log('Enlaces de WhatsApp:', this.enlacesWhatsApp);
     });
   }
 
-  generateWhatsAppLink(fleteros: UserF[], countryCode: string) {
+  generateWhatsAppLink2(fleteros: UserF[], countryCode: string) {
     console.log('fleteros:',fleteros);
     const message = 'Hola, estoy interesado en solicitar un flete.'; // Mensaje predeterminado
   
