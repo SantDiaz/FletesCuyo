@@ -1,10 +1,13 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'com.example.app',
-  appName: 'FletesCuyo',
-  webDir: 'www',
-  bundledWebRuntime: false
+  "appId": "com.example.app",
+  "appName": "FletesCuyo",
+  "webDir": "www",
+  "server": {
+    "androidScheme": "https"
+  }
+
 };
 
 export default config;
