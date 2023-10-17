@@ -40,7 +40,7 @@ export class ProfileUsuarioComponent implements OnInit {
 
 
 getDatosUser(uid: string) {
-  const path = `Usuarios`;
+  const path = `Usuarios/${uid}/DatosPersonales`;
   const id = uid;
   
   this.db.getDoc<UserU>(path, id).subscribe( res => {

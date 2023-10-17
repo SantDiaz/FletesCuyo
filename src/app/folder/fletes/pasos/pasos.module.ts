@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { CardComponent } from '../fletes-dis/card/card.component';
 import { IonicModule } from '@ionic/angular';
 import { PreciosComponent } from './precios/precios.component';
+import { PedidosFinalizadosComponent } from './precios/pedidos-finalizados/pedidos-finalizados.component';
 // import { MapsModule } from '../../maps/maps.module';
 
 
@@ -24,6 +25,7 @@ import { PreciosComponent } from './precios/precios.component';
     FletesDisComponent,
     CardComponent,
     PreciosComponent,
+    PedidosFinalizadosComponent
   ],
   imports: [
     CommonModule,
@@ -42,6 +44,7 @@ import { PreciosComponent } from './precios/precios.component';
     FletesDisComponent,
     CardComponent,
     PreciosComponent,
+    PedidosFinalizadosComponent
   ], 
 })
 export class PasosModule { }

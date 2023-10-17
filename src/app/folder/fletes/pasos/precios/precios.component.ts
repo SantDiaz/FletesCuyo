@@ -148,8 +148,8 @@ export class PreciosComponent implements OnInit {
   async moverPedidoAPedidosFinalizados(pedido: DatosFlete, rta: respuesta) {
     // Muestra una alerta antes de abrir WhatsApp
     this.interacion.presentAlert(
-      '¿Estás seguro de aceptar este precio para tu pedido?',
-      'Tu pedido desaparecera para los fleteros',
+      'Confirmar pedido',
+      'Tu pedido desaparecera para los fleteros ¿Deseas continuar?',
     ).then((aceptar) => {
       if (aceptar) {
         try {
@@ -238,7 +238,10 @@ export class PreciosComponent implements OnInit {
     return whatsappLinks;
   }
   
+  VerPedidoss(){
+    this.router.navigate(['/pedidosFinalizados']);
 
+  }
 
 verPedidos(isOpen: boolean, pedido: DatosFlete) {
   this.isModalOpen = isOpen;

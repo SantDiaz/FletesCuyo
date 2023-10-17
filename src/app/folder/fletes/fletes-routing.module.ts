@@ -28,6 +28,7 @@ import { Paso3UComponent } from '../registrarse/user/paso3-u/paso3-u.component';
 import { Paso4UComponent } from '../registrarse/user/paso4-u/paso4-u.component';
 import { IniciarAppComponent } from 'src/app/components/ComponentesFleteros/iniciar-app/iniciar-app.component';
 import { MapboxComponent } from '../mapbox/mapbox.component';
+import { PedidosFinalizadosComponent } from './pasos/precios/pedidos-finalizados/pedidos-finalizados.component';
 
 
 
@@ -111,8 +112,8 @@ const routes: Routes = [
     component: PreciosComponent, canActivate: [AngularFireAuthGuard]
   },
   {
-    path: 'mapbox',
-    component: MapboxComponent, 
+    path: 'pedidosFinalizados',
+    component: PedidosFinalizadosComponent, 
   },
   
 ];
