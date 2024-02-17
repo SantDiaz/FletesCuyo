@@ -11,6 +11,7 @@ import { GoogleAuthProvider } from 'firebase/auth';
   providedIn: 'root'
 })
 export class AuthService {
+  currentUserId: string; // Propiedad para almacenar el ID del usuario actual
 
   constructor( private authS: AngularFireAuth,
                private interaction: InteractionService, 
@@ -21,7 +22,9 @@ export class AuthService {
   login(email:string, password:string){
     return  this.authS.signInWithEmailAndPassword(email, password);
   }
-
+  updateCurrentUserId(userId: string) {
+    this.currentUserId = userId;
+  }
   logout(){
     this.authS.signOut();
     this.interaction.presentToast('Sesion finalizada...')

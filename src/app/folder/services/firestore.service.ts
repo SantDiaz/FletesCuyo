@@ -164,10 +164,16 @@ createDocument<tipo>(data: tipo, enlace: string, id: string) {
    return this.firestore.collection(path).doc<tipo>(id).valueChanges()
   }
   getDoc2<tipo>(path: string) {
-    return this.firestore.collection(path).doc<tipo>(path).valueChanges()
-   }
+    return this.firestore.doc<tipo>(path).valueChanges();
+}
+
 
   updateDoc(path: string, id: string, data: any) {
+    return  this.firestore.collection(path).doc(id).update(data);
+  }
+
+  //para recomendacion
+  updateDoc2(path: string, id: string, data: any) {
     return  this.firestore.collection(path).doc(id).update(data);
   }
   

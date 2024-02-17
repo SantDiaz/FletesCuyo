@@ -37,6 +37,8 @@ export interface UserU {
     verificado: boolean;
     habilitado: boolean;
     recomendacion: number;
+    usuariosRecomendados?: string[]; // Define la propiedad como un array de strings opcionales
+
     // provincia: provincias
   }
   

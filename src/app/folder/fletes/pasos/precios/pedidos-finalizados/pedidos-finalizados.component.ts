@@ -18,7 +18,9 @@ export class PedidosFinalizadosComponent implements OnInit {
   login: boolean = false;
   rol: 'Usuario' | 'Fletero'| 'Admin' = null;
   precios = []
-
+  private formularioEnviado: boolean = false;
+// Variable booleana para controlar la visibilidad del botón
+botonVisible: boolean = true;
   constructor(
           private auth: AuthService,
           private router: Router,
@@ -28,13 +30,21 @@ export class PedidosFinalizadosComponent implements OnInit {
           private database: NuevoService,
           public toastController: ToastController,
           private loadingCtrl: LoadingController, 
-          private fleteroService: FleteroServiceService
+          private fleteroService: FleteroServiceService,
+          private interaction : InteractionService,
+
 
 
   ) { }
 
   ngOnInit() {
-
+    
+    const botonVisibleString = localStorage.getItem('botonVisible');
+    if (botonVisibleString === 'false') {
+      this.botonVisible = false;
+    } else {
+      this.botonVisible = true; // Si no se encuentra la variable en el almacenamiento local, mantener visible el botón por defecto
+    }
 
     this.auth.stateUser<UserU>().subscribe( res  => {
 
@@ -65,29 +75,53 @@ export class PedidosFinalizadosComponent implements OnInit {
  })
   }
 
-
-  async recomendarFletero(fletero: UserF) {
-    if (fletero.recomendacion === 0) {
-      // Incrementar el contador de recomendación del fletero
-      fletero.recomendacion++;
-      try {
-        // Actualizar el fletero en la base de datos
-        await this.fleteroService.actualizarFletero(fletero);
-        // Mostrar un mensaje de éxito
-        this.presentToast('Fletero recomendado con éxito');
-      } catch (error) {
-        console.error('Error al recomendar el fletero:', error);
-        // Mostrar un mensaje de error si ocurre algún problema al actualizar el fletero
-        this.presentToast('Error al recomendar el fletero');
-      }
-    } else {
-      // Mostrar un mensaje de que el fletero ya ha sido recomendado
-      this.presentToast('Este fletero ya ha sido recomendado anteriormente');
+  
+  async recomendarFletero(idFletero: string) {
+    const path = `Fleteros`; // Ruta del documento del fletero
+    let recomendado = false; // Variable para controlar si ya se ha recomendado el fletero
+    // Verificar si el botón ya no está visible
+    if (!this.botonVisible) {
+      return; // Salir de la función si el botón ya no está visible
     }
+    this.db.getDoc<UserF>(path, idFletero).subscribe(res2 => {
+      if (res2 && !recomendado) { // Verificar si el fletero existe y aún no ha sido recomendado
+        // Verificar si el fletero ya ha sido recomendado
+        if (res2.recomendacion) {
+          if (this.formularioEnviado === false) {
+
+            console.log("Este fletero ya ha sido recomendado anteriormente");
+            // Actualizar el campo recomendacion sumando 1 al valor actual
+            const nuevasRecomendaciones = res2.recomendacion + 1;
+            this.db.updateDoc(path, idFletero, {recomendacion: nuevasRecomendaciones})
+            this.formularioEnviado = true; // Establece la bandera en true
+            this.botonVisible = false;
+            localStorage.setItem('botonVisible', 'false');
+            this.interaction.presentToast('Fletero recomendado exitosamente')
+
+          }
+            
+     
+        } else {
+// asi
+      if (this.formularioEnviado === false) {
+        this.db.updateDoc(path, idFletero, {recomendacion: 1})
+        this.botonVisible = false;
+        localStorage.setItem('botonVisible', 'false');
+        this.formularioEnviado = true; // Establece la bandera en true
+        this.interaction.presentToast('Fletero recomendado exitosamente')
+      }
+
+        }
+      } else {
+        this.interaction.presentToast('No se encontró el fletero en la base de datos o ya ha sido recomendado')
+      }
+    });
   }
   
-
-  async presentToast(message: string) {
+    
+    
+    
+    async presentToast(message: string) {
     const toast = await this.toastController.create({
       message: message,
       duration: 2000

@@ -194,3 +194,18 @@
   color: white;
   background: crimson;
 }
+
+
+
+.recommendation-box {
+  display: inline-block;
+  padding: 20px;
+  border: 2px solid #007bff; /* Cambia el color del borde según tus preferencias */
+  border-radius: 10px;
+}
+
+.recommendation-box i {
+  font-size: 36px; /* Tamaño del icono */
+  margin-bottom: 10px; /* Espacio entre el icono y el texto */
+  color: #007bff; /* Color del icono */
+}
