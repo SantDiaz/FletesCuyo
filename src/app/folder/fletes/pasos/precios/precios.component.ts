@@ -46,47 +46,53 @@ export class PreciosComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
     this.fleteroService.getFleteros().subscribe((fleteros: UserF[]) => {
       this.enlacesWhatsApp = this.generateWhatsAppLink2(fleteros, '+54');
       console.log('Enlaces de WhatsApp:', this.enlacesWhatsApp);
     });
-    this.auth.stateUser<UserU>().subscribe( res  => {
-
+  
+    this.auth.stateUser<UserU>().subscribe(res => {
       if (res) {
         this.login = true;
         const path = `PedirFlete/${res.uid}/Pedidos`;
+  
         this.db.getAllPedidos().subscribe((pedidos: DatosFlete[]) => {
-          // Aquí puedes trabajar con los datos de pedidos
           pedidos.forEach((pedido) => {
-            const pedidoID = pedido.id;
-            const rutaPedido = `PedirFlete/${res.uid}/Pedidos/${pedidoID}`;
-    
-            // Aquí puedes realizar acciones con la ruta del pedido
-            
-            //aqui quiero agregar las respuestas de los pedidos `PedirFlete/${res.uid}/Pedidos//${pedidoID}/Respuesta/${ID DEL USUARIO DEL FLETERO QUE QUIERO OBTENER}`
-            this.database.getAll(`PedirFlete/${res.uid}/Pedidos/`).then((res) => {
-              if (res && res.subscribe) {
-                res.subscribe((resRef) => {
-                  this.precios = resRef.map((pasosRef) => {
-                    let pasosFlete = pasosRef.payload.doc.data();
-                    pasosFlete['id'] = pasosRef.payload.doc.id;
-                    return pasosFlete;
+            // Validar si el cargamento está vacío y eliminar el pedido
+            if (!pedido.cargamento) {
+              this.db.deleteDoc(path, pedido.id);
+              console.log('Pedido Eliminado por no tener datos:', pedido.id);
+            } else {
+              const pedidoID = pedido.id;
+              const rutaPedido = `PedirFlete/${res.uid}/Pedidos/${pedidoID}`;
+  
+              // Resto del código relacionado con el pedido
+              // ...
+  
+              // Aquí puedes agregar las respuestas de los pedidos
+              this.database.getAll(rutaPedido).then((res) => {
+                if (res && res.subscribe) {
+                  res.subscribe((resRef) => {
+                    this.precios = resRef.map((pasosRef) => {
+                      let pasosFlete = pasosRef.payload.doc.data();
+                      pasosFlete['id'] = pasosRef.payload.doc.id;
+                      return pasosFlete;
+                    });
                   });
-                });
-              } else {
-                console.log('La respuesta de this.database.getAll() no es un observable válido.');
-                // Manejar el caso en el que res no sea un observable válido
-              }
-            });
-            console.log(this.precios);
-          })
-      }) 
+                } else {
+                  console.log('La respuesta de this.database.getAll() no es un observable válido.');
+                  // Manejar el caso en el que res no sea un observable válido
+                }
+              });
+              console.log(this.precios);
+            }
+          });
+        });
       } else {
         this.login = false;
-         this.router.navigate(['/login'])
-      }   
- })
+        this.router.navigate(['/login']);
+      }
+    });
   }
 
 

@@ -1,9 +1,65 @@
-<section *ngIf="DatosU" class="u-align-center-lg u-align-center-md u-align-center-xl u-align-center-xs u-align-left-sm u-clearfix u-section-1" id="carousel_4a3c">
-  <div class="u-clearfix u-sheet u-sheet-1">
+<section *ngIf="DatosU" >
+
+
+  <div class="card">
+    <div class="ds-top"></div>
+    <div class="avatar-holder">
+      <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1820405/profile/profile-512.jpg?1533058950" alt="Albert Einstein">
+    </div>
+    <div class="name">
+      <H2 href="https://codepen.io/AlbertFeynman/" target="_blank">{{DatosU.nombre}} {{DatosU.apellido}}</H2>
+      <H3 title="Followers"><i class="fas fa-users"></i> <span class="followers">Edad: {{DatosU.edad}} años</span></H3>
+      <H2>Domicilio: <i class="fa fa-code" aria-hidden="true"></i></H2>
+      <div class="skill html">
+        <H3><i class="fab fa-html5"></i> {{DatosU.domicilio}} </H3>
+      </div>
+      <H2>Correo Electronico: <i class="fa fa-code" aria-hidden="true"></i></H2>
+      <div class="skill html">
+        <H3><i class="fab fa-html5"></i> {{DatosU.email}} </H3>
+      </div>
+      <H2>Telefono: <i class="fa fa-code" aria-hidden="true"></i></H2>
+      <div class="skill html">
+        <H3><i class="fab fa-html5"></i> {{DatosU.telefono}} </H3>
+      </div>
+    </div>
+    <!-- <div class="button">
+      <a href="#" class="btn" onmousedown="follow();">Follow <i class="fas fa-user-plus"></i></a>
+    </div> -->
+    <!-- <div class="ds-info">
+      <div class="ds pens">
+        <h6 title="Number of pens created by the user">Pens <i class="fas fa-edit"></i></h6>
+        <p>29</p>
+      </div>
+      <div class="ds projects">
+        <h6 title="Number of projects created by the user">Projects <i class="fas fa-project-diagram"></i></h6>
+        <p>0</p>
+      </div>
+      <div class="ds posts">
+        <h6 title="Number of posts">Posts <i class="fas fa-comments"></i></h6>
+        <p>0</p>
+      </div>
+    </div> -->
+    <!-- <div class="ds-skill">
+      <H2>Domicilio <i class="fa fa-code" aria-hidden="true"></i></H2>
+      <div class="skill html">
+        <H3><i class="fab fa-html5"></i> {{DatosU.domicilio}} </H3>
+      </div>
+      <H2>Correo Electronico <i class="fa fa-code" aria-hidden="true"></i></H2>
+      <div class="skill html">
+        <H3><i class="fab fa-html5"></i> {{DatosU.email}} </H3>
+      </div>
+      <H2>Telefono <i class="fa fa-code" aria-hidden="true"></i></H2>
+      <div class="skill html">
+        <H3><i class="fab fa-html5"></i> {{DatosU.telefono}} </H3>
+      </div>
+    </div>
+  </div> -->
+  </div>
+  <!-- <div class="u-clearfix u-sheet u-sheet-1">
 
     <h2 class="u-align-center u-text u-text-2" data-lang-en="​My name is ​Nat ​Norton.
 <br>Digital Product Designer">{{DatosU.nombre}} {{DatosU.apellido}}</h2>
-    <!-- <div class="u-border-7 u-border-grey-10 u-image u-image-circle u-image-1" data-image-width="501" data-image-height="501" data-animation-name="customAnimationIn" data-animation-duration="1500" src="../../../../assets/images/608de8e8366816968870d5d178316f21eed80048d1c4926b629e0913455a06914ca84dc9eab3484836ee9e8bd4d579a0383f86283fde723ca93472_1280.jpg" data-animation-delay="500"></div> -->
+    <div class="u-border-7 u-border-grey-10 u-image u-image-circle u-image-1" data-image-width="501" data-image-height="501" data-animation-name="customAnimationIn" data-animation-duration="1500" src="../../../../assets/images/608de8e8366816968870d5d178316f21eed80048d1c4926b629e0913455a06914ca84dc9eab3484836ee9e8bd4d579a0383f86283fde723ca93472_1280.jpg" data-animation-delay="500"></div>
     <h5 class="u-align-center u-text u-text-3" data-animation-name="customAnimationIn" data-animation-duration="1500" data-animation-delay="500" data-lang-en="​Head of Design Studio">Usuario</h5>
     <div class="u-expanded-width u-list u-list-1">
       <div class="u-repeater u-repeater-1">
@@ -25,5 +81,5 @@
       </div>
     </div>
 
-  </div>
+  </div> -->
 </section>
