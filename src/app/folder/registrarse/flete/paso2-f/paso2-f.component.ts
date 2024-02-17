@@ -27,12 +27,13 @@ export class Paso2FComponent implements OnInit {
     domicilio: null,
     telefono: null,
     image: null,
-    verificado: false,
-    habilitado: true,
     email: null,
     password: null,
+    verificado: false,
+    habilitado: false,
     perfil:  'Fletero',
     datosVehiculos: null,
+    recomendacion: null,
   }
   
    prefijosTelefonicos = [

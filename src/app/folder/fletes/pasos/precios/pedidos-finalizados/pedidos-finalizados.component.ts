@@ -66,5 +66,33 @@ export class PedidosFinalizadosComponent implements OnInit {
   }
 
 
+  async recomendarFletero(fletero: UserF) {
+    if (fletero.recomendacion === 0) {
+      // Incrementar el contador de recomendación del fletero
+      fletero.recomendacion++;
+      try {
+        // Actualizar el fletero en la base de datos
+        await this.fleteroService.actualizarFletero(fletero);
+        // Mostrar un mensaje de éxito
+        this.presentToast('Fletero recomendado con éxito');
+      } catch (error) {
+        console.error('Error al recomendar el fletero:', error);
+        // Mostrar un mensaje de error si ocurre algún problema al actualizar el fletero
+        this.presentToast('Error al recomendar el fletero');
+      }
+    } else {
+      // Mostrar un mensaje de que el fletero ya ha sido recomendado
+      this.presentToast('Este fletero ya ha sido recomendado anteriormente');
+    }
+  }
+  
+
+  async presentToast(message: string) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 2000
+    });
+    toast.present();
+  }
 }
 

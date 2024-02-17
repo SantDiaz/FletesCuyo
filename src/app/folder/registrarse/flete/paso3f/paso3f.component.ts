@@ -31,12 +31,13 @@ export class Paso3fComponent implements OnInit {
     telefono: null,
     image: null,
     email: null,
+    password: null,
     verificado: false,
     habilitado: false,
-    password: null,
     perfil:  'Fletero',
     datosVehiculos: null,
-  };
+    recomendacion: null,
+  }
 
   Datovehicular: datosVehiculo = {
     uid: null,

@@ -64,7 +64,8 @@ export class PreciosComponent implements OnInit {
               console.log('Pedido Eliminado por no tener datos:', pedido.id);
             } else {
               const pedidoID = pedido.id;
-              const rutaPedido = `PedirFlete/${res.uid}/Pedidos/${pedidoID}`;
+              const rutaPedido = `PedirFlete/${res.uid}/Pedidos/`;
+              // const rutaPedido = `PedirFlete/${res.uid}/Pedidos/${pedidoID}`;
   
               // Resto del código relacionado con el pedido
               // ...

@@ -35,6 +35,7 @@ export class Paso1fComponent implements OnInit {
     habilitado: false,
     perfil:  'Fletero',
     datosVehiculos: null,
+    recomendacion: null,
   }
 
   constructor(private routes: Router,
@@ -61,6 +62,7 @@ export class Paso1fComponent implements OnInit {
       habilitado: false,
       verificado: false,
       datosVehiculos: null,
+      recomendacion: null
     };
   
   }

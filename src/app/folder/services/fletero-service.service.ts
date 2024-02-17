@@ -40,4 +40,16 @@ export class FleteroServiceService {
         })
       );
   }
+
+
+
+  async actualizarFletero(fletero: UserF): Promise<void> {
+    try {
+      const fleteroRef = this.firestore.collection('fleteros').doc(fletero.uid);
+      await fleteroRef.update(fletero);
+    } catch (error) {
+      console.error('Error al actualizar el fletero:', error);
+      throw error;
+    }
+  }
 }

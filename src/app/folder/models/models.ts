@@ -36,6 +36,7 @@ export interface UserU {
     datosVehiculos: datosVehiculo;
     verificado: boolean;
     habilitado: boolean;
+    recomendacion: number;
     // provincia: provincias
   }
   
