@@ -81,7 +81,6 @@ constructor(private routes: Router,
       uid: "",
       precio: null,
       tiempoTranscurrido: '', // Inicializa el tiempo transcurrido como una cadena vacía
-      image: '',
     };
   
   }
@@ -105,18 +104,18 @@ constructor(private routes: Router,
             data.id = this.db.createId();
             data.uid = res.uid;
             data.nombre = res2.nombre;
-            data.image = res2.image;
             data.apellido = res2.apellido;
             const fechaBase = new Date(this.pasosFlete.fecha);
             data.hora = fechaBase.getHours();
             data.minutos = fechaBase.getMinutes();
             // Resto del código...
-  
+            data.image = res2.image;
             const enlace = `PedirFlete/${res.uid}/Pedidos`;
             const pedidoId = data.id;
             this.interaction.closeLoading();
             if (this.formularioEnviado === false) {
             this.db.createDocument<DatosFlete>(data, enlace, pedidoId).then((_) => {
+              this.pasosFlete.image = this.pasosFlete.image; 
               this.interaction.presentToast('Enviado con éxito');
               this.interaction.closeLoading();
               this.valueSelected === "2";

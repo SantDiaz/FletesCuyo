@@ -8,7 +8,7 @@ import { FleteroServiceService } from 'src/app/folder/services/fletero-service.s
 import { InteractionService } from 'src/app/folder/services/interaction.service';
 import { NuevoService } from 'src/app/folder/services/nuevo.service';
 import { CLIENT_RENEG_LIMIT } from 'tls';
-import { ChangeDetectorRef } from '@angular/core';
+// import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-precios',
@@ -43,7 +43,7 @@ export class PreciosComponent implements OnInit {
           public toastController: ToastController,
           private loadingCtrl: LoadingController, 
           private fleteroService: FleteroServiceService,
-          private cdr: ChangeDetectorRef
+          // private cdr: ChangeDetectorRef
 
   ) { }
 
@@ -63,7 +63,7 @@ export class PreciosComponent implements OnInit {
           pedidos.forEach((pedido) => {
             // Validar si el cargamento está vacío y eliminar el pedido
             if (!pedido.cargamento) {
-              this.db.deleteDoc(path, pedido.id);
+              // this.db.deleteDoc(path, pedido.id);
               console.log('Pedido Eliminado por no tener datos:', pedido.id);
             } else {
               const pedidoID = pedido.id;
@@ -100,9 +100,9 @@ export class PreciosComponent implements OnInit {
   }
   
 // Llama a detectChanges() después de calcular el número de respuestas
-ngAfterViewInit() {
-  this.cdr.detectChanges();
-}
+// ngAfterViewInit() {
+//   this.cdr.detectChanges();
+// }
 
   getDatos(rta: respuesta) {
     const path = 'Fleteros';
@@ -299,8 +299,13 @@ cargarRespuestas(pedidoId: string, pedidoUser: string) {
 
 
 contarRespuestas(): number {
-  return this.respuestas.length;
+  if (this.respuestas) {
+    return this.respuestas.length;
+  } else {
+    return 0; // o cualquier otro valor por defecto según tu lógica
+  }
 }
+
   cerrar(isOpen: boolean) {
     this.isModalOpen = isOpen;
   }

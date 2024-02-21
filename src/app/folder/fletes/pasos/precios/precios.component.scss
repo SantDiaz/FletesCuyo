@@ -40297,3 +40297,20 @@ li.active > .u-button-style.u-button-style.u-custom-color-1[class*="u-border-"] 
  .tu-clase-de-borde {
   border: 2px solid #000; /* Cambia el grosor y el color del borde según tus preferencias */
 }
+
+.circle-container {
+  width: 50px; /* Ancho del círculo */
+  height: 50px; /* Altura del círculo */
+  border-radius: 50%; /* Hace que el contenedor sea un círculo */
+  overflow: hidden; /* Oculta el contenido que se sale del círculo */
+  position: relative; /* Asegura que el posicionamiento absoluto sea relativo a este contenedor */
+}
+
+.circle-container img {
+  width: 100%; /* Asegura que la imagen llene el contenedor */
+  height: 100%; /* Ajusta la altura de la imagen al 100% del contenedor */
+  object-fit: cover; /* Ajusta el tamaño y la relación de aspecto de la imagen para cubrir completamente el contenedor */
+  position: absolute; /* Permite que la imagen esté posicionada absolutamente dentro del contenedor */
+  top: 0; /* Alinea la imagen en la parte superior del contenedor */
+  left: 0; /* Alinea la imagen en la parte izquierda del contenedor */
+}

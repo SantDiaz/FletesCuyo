@@ -10,7 +10,10 @@
             <div class="u-container-layout u-similar-container u-valign-top-sm u-valign-top-xs u-container-layout-1">
               <div  class="u-container-style u-custom-color-2 u-group u-group-1">
                 <div class="u-container-layout u-container-layout-2">
-                  <h4 class="u-text u-text-1">{{datos.nombre}} {{datos.apellido}}</h4><span class="u-icon u-icon-1"> <img [src]="datos.image"></span><span class="u-file-icon u-icon u-icon-2"></span>
+                  <h4 class="u-text u-text-1">{{datos.nombre}} {{datos.apellido}}</h4><span class="u-icon u-icon-1">  
+                    <div class="circle-container">
+                    <img [src]="datos.image" >
+                  </div> </span><span class="u-file-icon u-icon u-icon-2"></span>
 <br>
 <br>
 <h6><strong>Desde:</strong> {{ datos.uDesde }}</h6>
