@@ -8,6 +8,7 @@ import { FleteroServiceService } from 'src/app/folder/services/fletero-service.s
 import { InteractionService } from 'src/app/folder/services/interaction.service';
 import { NuevoService } from 'src/app/folder/services/nuevo.service';
 import { CLIENT_RENEG_LIMIT } from 'tls';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-precios',
@@ -41,11 +42,13 @@ export class PreciosComponent implements OnInit {
           private database: NuevoService,
           public toastController: ToastController,
           private loadingCtrl: LoadingController, 
-          private fleteroService: FleteroServiceService
+          private fleteroService: FleteroServiceService,
+          private cdr: ChangeDetectorRef
 
   ) { }
 
   ngOnInit() {
+    // this.rta2.recomendado=false;
     this.fleteroService.getFleteros().subscribe((fleteros: UserF[]) => {
       this.enlacesWhatsApp = this.generateWhatsAppLink2(fleteros, '+54');
       console.log('Enlaces de WhatsApp:', this.enlacesWhatsApp);
@@ -95,7 +98,11 @@ export class PreciosComponent implements OnInit {
       }
     });
   }
-
+  
+// Llama a detectChanges() después de calcular el número de respuestas
+ngAfterViewInit() {
+  this.cdr.detectChanges();
+}
 
   getDatos(rta: respuesta) {
     const path = 'Fleteros';
@@ -153,6 +160,7 @@ export class PreciosComponent implements OnInit {
   }
 
   async moverPedidoAPedidosFinalizados(pedido: DatosFlete, rta: respuesta) {
+    rta.recomendado = false;
     // Muestra una alerta antes de abrir WhatsApp
     this.interacion.presentAlert(
       'Confirmar pedido',
@@ -290,32 +298,9 @@ cargarRespuestas(pedidoId: string, pedidoUser: string) {
 }
 
 
-  // async getDatosFlete(DatosFletes: DatosFlete) {
-  //   const nuevoDato = DatosFletes;
-  //   console.log(' resuid -> ',nuevoDato.id);
-  //   const path = `PedirFlete3/`;
-  //   this.db.getCollection<respuesta>(path).subscribe( res => {
-  //     if (res ) {
-  //       this.database.getAll(`PedirFlete3/${nuevoDato.id}/Respuesta/`).then(res2 =>{
-  //         res2.subscribe(resRef=>{
-  //                console.log(' respnde2 -> ',res2);
-  //           this.precios = resRef.map(pasosRef =>{
-  //             let pasosFlete = pasosRef.payload.doc.data();
-  //             pasosFlete['id'] = pasosRef.payload.doc.id;
-  //             return pasosFlete;
-  //           })
-  //           console.log(this.precios);
-  //         })
-  //       // })
-  //     }) 
-  //       }
-  //       else{
-  //         console.log('Tiene errores -> ');
-  //       }
-  //   })
-  //   return this.getDatosFlete;
-  // }
-
+contarRespuestas(): number {
+  return this.respuestas.length;
+}
   cerrar(isOpen: boolean) {
     this.isModalOpen = isOpen;
   }

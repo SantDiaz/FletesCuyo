@@ -16,6 +16,11 @@
             <label for="name-4c18" class="u-label">Contraseña</label>
             <input [(ngModel)]="credenciales.password" type="password" placeholder="Debe contener mas de 6 caracteres" id="name-4c18" name="name" class="u-border-2 u-border-grey-50 u-input u-input-rectangle u-palette-4-light-3 u-radius-10" required="">
           </div>
+          <div class="u-form-group u-form-name">
+            <label for="recordar-contrasena" >Recordar contraseña &nbsp;&nbsp; </label>
+            <input type="checkbox" id="recordar-contrasena" (change)="toggleRecordarContrasena($event.target.checked)" >
+          </div>
+          
           <div   (click)="login()" class="u-align-center u-form-group u-form-submit">
             <a  class="u-active-palette-4-dark-2 u-border-5 u-border-active-palette-4-light-1 u-border-hover-palette-4-dark-1 u-border-palette-4-dark-2 u-btn u-btn-round u-btn-submit u-button-style u-hover-palette-4-light-1 u-palette-4-light-1 u-radius-10 u-btn-1">Entrar<br>
             </a>

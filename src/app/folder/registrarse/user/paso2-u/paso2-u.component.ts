@@ -10,6 +10,7 @@
   import { AngularFireAuth } from '@angular/fire/compat/auth';
   import { getAuth, sendEmailVerification } from 'firebase/auth';
   import { NgForm } from '@angular/forms'; // Agrega esta importación
+  import { AngularFireStorage } from '@angular/fire/compat/storage';
 
   @Component({
     selector: 'app-paso2-u',
@@ -18,7 +19,7 @@
   })
   export class Paso2UComponent implements OnInit {
     @ViewChild(IonModal) modal: IonModal;
-
+    perfilImage: File | null = null;
     name: string;
     message = "putoss";
     prefijosTelefonicos = [
@@ -45,7 +46,9 @@
       private interaction: InteractionService,    
       private firestore: FirestoreService,    
       private afAuth: AngularFireAuth,
-      private router: Router
+      private router: Router,
+      private storage: AngularFireStorage
+
     ) { }
 
     ngOnInit() {
@@ -91,7 +94,7 @@
         const path = `Usuarios`
         this.firestore.getDoc<UserU>(path, res.uid).subscribe(res2 => {
           if (res2) {
-            console.log("res", res2)
+            this.registerU.image = this.registerU.image;
             const id = res.uid;
             const path2 = `Usuarios/${res.uid}/DatosPersonales`
             this.firestore.createDoc(this.registerU, path2, id);
@@ -124,6 +127,40 @@
     }
 
    
+  onImagePerfil(event: any): void {
+    this.uploadImageToStorage(event.target.files[0], 'image');
+  }
+
+  async uploadImageToStorage(file: File | null, imageType: string) {
+    if (!file) {
+      return; // Asegúrate de manejar el caso en que el archivo sea nulo
+    }
+  
+    try {
+      const reader = new FileReader();
+      reader.onload = async (event) => {
+        const fileDataUrl: string = event.target.result as string;
+  
+        const timestamp = new Date().getTime().toString();
+        const imageName = `${timestamp}.jpg`;
+  
+        const storageRef = this.storage.ref(`images/${imageName}`);
+        const uploadTask = await storageRef.putString(fileDataUrl, 'data_url');
+        const downloadUrl = await uploadTask.ref.getDownloadURL();
+  
+        // Asigna la URL de descarga al campo correspondiente según el tipo de imagen
+        if (imageType === 'image') {
+          this.registerU.image = downloadUrl;
+        } 
+      };
+  
+      reader.readAsDataURL(file);
+    } catch (error) {
+      console.error('Error al subir la imagen a Firebase Storage:', error);
+      // Manejar el error según tus necesidades (por ejemplo, mostrar un mensaje al usuario)
+    }
+  }
+  
 
     async signInWithGoogle() {
       const provider = new GoogleAuthProvider();

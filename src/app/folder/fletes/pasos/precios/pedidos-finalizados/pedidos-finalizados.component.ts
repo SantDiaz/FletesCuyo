@@ -34,17 +34,16 @@ botonVisible: boolean = true;
           private interaction : InteractionService,
 
 
-
   ) { }
 
   ngOnInit() {
-    
-    const botonVisibleString = localStorage.getItem('botonVisible');
-    if (botonVisibleString === 'false') {
-      this.botonVisible = false;
-    } else {
-      this.botonVisible = true; // Si no se encuentra la variable en el almacenamiento local, mantener visible el botón por defecto
-    }
+
+    // const botonVisibleString = localStorage.getItem('botonVisible');
+    // if (botonVisibleString === 'false') {
+    //   this.botonVisible = false;
+    // } else {
+    //   this.botonVisible = true; // Si no se encuentra la variable en el almacenamiento local, mantener visible el botón por defecto
+    // }
 
     this.auth.stateUser<UserU>().subscribe( res  => {
 
@@ -59,8 +58,10 @@ botonVisible: boolean = true;
                   this.precios = resRef.map((pasosRef) => {
                     let pasosFlete = pasosRef.payload.doc.data();
                     pasosFlete['id'] = pasosRef.payload.doc.id;
+                    pasosFlete['recomendado'] = false; // Agregar la propiedad recomendado a cada objeto datos
                     return pasosFlete;
                   });
+                  
                 });
               } else {
                 console.log('La respuesta de this.database.getAll() no es un observable válido.');
@@ -75,49 +76,38 @@ botonVisible: boolean = true;
  })
   }
 
-  
   async recomendarFletero(idFletero: string) {
     const path = `Fleteros`; // Ruta del documento del fletero
-    let recomendado = false; // Variable para controlar si ya se ha recomendado el fletero
-    // Verificar si el botón ya no está visible
-    if (!this.botonVisible) {
-      return; // Salir de la función si el botón ya no está visible
-    }
+
     this.db.getDoc<UserF>(path, idFletero).subscribe(res2 => {
-      if (res2 && !recomendado) { // Verificar si el fletero existe y aún no ha sido recomendado
-        // Verificar si el fletero ya ha sido recomendado
-        if (res2.recomendacion) {
-          if (this.formularioEnviado === false) {
-
-            console.log("Este fletero ya ha sido recomendado anteriormente");
-            // Actualizar el campo recomendacion sumando 1 al valor actual
-            const nuevasRecomendaciones = res2.recomendacion + 1;
-            this.db.updateDoc(path, idFletero, {recomendacion: nuevasRecomendaciones})
-            this.formularioEnviado = true; // Establece la bandera en true
-            this.botonVisible = false;
-            localStorage.setItem('botonVisible', 'false');
-            this.interaction.presentToast('Fletero recomendado exitosamente')
-
-          }
-            
-     
+        if (res2) {
+            // Verificar si el fletero ya ha sido recomendado
+            if (res2.recomendacion) {
+                if (!this.formularioEnviado) {
+                    console.log("Este fletero ya ha sido recomendado anteriormente");
+                    // Actualizar el campo recomendacion sumando 1 al valor actual
+                    const nuevasRecomendaciones = res2.recomendacion + 1;
+                    this.db.updateDoc(path, idFletero, {recomendacion: nuevasRecomendaciones})
+                    this.formularioEnviado = true; // Establece la bandera en true
+                    this.botonVisible = false; // Ocultar el botón después de recomendar
+                    localStorage.setItem('botonVisible', 'false');
+                    this.interaction.presentToast('Fletero recomendado exitosamente')
+                }
+            } else {
+                if (!this.formularioEnviado) {
+                    this.db.updateDoc(path, idFletero, {recomendacion: 1})
+                    this.botonVisible = false; // Ocultar el botón después de recomendar
+                    localStorage.setItem('botonVisible', 'false');
+                    this.formularioEnviado = true; // Establece la bandera en true
+                    this.interaction.presentToast('Fletero recomendado exitosamente')
+                }
+            }
         } else {
-// asi
-      if (this.formularioEnviado === false) {
-        this.db.updateDoc(path, idFletero, {recomendacion: 1})
-        this.botonVisible = false;
-        localStorage.setItem('botonVisible', 'false');
-        this.formularioEnviado = true; // Establece la bandera en true
-        this.interaction.presentToast('Fletero recomendado exitosamente')
-      }
-
+            this.interaction.presentToast('No se encontró el fletero en la base de datos')
         }
-      } else {
-        this.interaction.presentToast('No se encontró el fletero en la base de datos o ya ha sido recomendado')
-      }
     });
-  }
-  
+}
+
     
     
     
@@ -128,5 +118,6 @@ botonVisible: boolean = true;
     });
     toast.present();
   }
-}
 
+
+}

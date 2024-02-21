@@ -17,17 +17,15 @@
       <div class="skill html">
         <H3><i class="fab fa-html5"></i> {{DatosF.telefono}} </H3>
       </div>
+      <H3  class="u-text u-text-7">Datos Vehiculares:</H3>
       <div class="skill html">
-        <H3 *ngIf="DatosV" class="u-text u-text-7">{{ DatosV.marca }} {{ DatosV.modelo }}</H3>
-      </div>
-      <div class="skill html">
-        <H3 *ngIf="DatosV" class="u-text u-text-7">Patente:{{DatosV.patente}} </H3>
+        <H3 *ngIf="DatosV" class="u-text u-text-7">{{ DatosV.marca }} {{ DatosV.modelo }} // {{DatosV.patente}}</H3>
       </div>
       <div  class="container text-center mt-4">
         <div class="row">
           <div class="col">
             <div class="recommendation-box">
-              <i class="fas fa-thumbs-up"></i>
+              <!-- <i class="fas fa-thumbs-up"></i> -->
               <h2 class="mb-0">{{ DatosF.recomendacion }} Recomendaciones</h2>
             </div>
           </div>

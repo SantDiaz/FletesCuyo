@@ -44,8 +44,9 @@ C20.296,39.899,19.65,40.986,18.613,41.552z"></path><g><path style="fill:#556080;
 <!-- <a (click)="verPedidos()" class="u-active-none u-border-2 u-border-active-palette-2-dark-1 u-border-hover-palette-2-base u-border-no-left u-border-no-right u-border-no-top u-border-palette-1-base u-btn u-button-style u-hover-none u-none u-text-hover-palette-2-base u-text-palette-1-base u-btn-1">Ver pedido</a> -->
 </div>
 </div>
-<button (click)="verPedidos(true, datos)" class="u-border-2 u-border-grey-75 u-btn u-btn-round u-button-style u-custom-color-1 u-hover-custom-color-3 u-radius-50 u-btn-2">Ver Respuestas</button>
-
+<div (click)="verPedidos(true, datos)" class="u-border-2 u-border-grey-75 u-btn u-btn-round u-button-style u-custom-color-1 u-hover-custom-color-3 u-radius-50 u-btn-2">
+<a>Ver {{ contarRespuestas() }} Respuestas</a>
+</div >
 <!-- <ion-button   (click)="verPedidos(true, datos)"class="u-border-2 u-border-grey-75 u-btn u-btn-round u-button-style u-custom-color-1 u-hover-custom-color-3 u-radius-50 u-btn-2">Ver Respuestas</ion-button> -->
 <ion-modal class="background2"  [isOpen]="isModalOpen">
   <ng-template >
@@ -61,19 +62,11 @@ C20.296,39.899,19.65,40.986,18.613,41.552z"></path><g><path style="fill:#556080;
       <div *ngIf="respuestas && respuestas.length > 0" class="ion-text-center">
         <ul class="respuestas-list">
           <li *ngFor="let respuesta of respuestas">
-            <ion-card color="medium" class="ion-text-center informacion-card">
-              <ion-card-header color="dark">
-                <h4 class="nombre-apellido">{{ respuesta.nombre }} {{ respuesta.apellido }}</h4>
-                <!-- <a (click)="openWhatsApp(respuesta)" class="ion-text-center u-btn u-btn-round u-button-style u-custom-color-1 u-hover-custom-color-3 u-radius-50 u-btn-2">Aceptar</a>                    
-                            </ion-card-header> -->
-              </ion-card-header>
-              <h4 class="precio">${{ respuesta.precio }}</h4>
-              <!-- <button (click)="openWhatsApp(respuesta)" class="btn btn-success">Aceptar</button> -->
-              <button class="btn btn-success" (click)="cerrar(false)" (click)="moverPedidoAPedidosFinalizados(datos, respuesta)">Aceptar</button>
-
-              <br>
-              <br>
-            </ion-card>
+            <ion-item class="item-respuesta" >
+              <ion-label>{{ respuesta.nombre }} {{ respuesta.apellido }}</ion-label>
+              <ion-label>${{ respuesta.precio }}</ion-label>
+              <ion-button class="boton-aceptar" (click)="moverPedidoAPedidosFinalizados(datos, respuesta)">Aceptar</ion-button>
+            </ion-item>
           </li>
         </ul>
       </div>

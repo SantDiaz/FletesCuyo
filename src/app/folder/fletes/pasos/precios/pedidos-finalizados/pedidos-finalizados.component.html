@@ -47,10 +47,10 @@ C20.296,39.899,19.65,40.986,18.613,41.552z"></path><g><path style="fill:#556080;
 </div>
 </div>
 <button (click)="recomendarFletero(datos.respuesta.idFletero)" 
-        [disabled]="autenticandoUsuario" *ngIf="botonVisible"
+        [disabled]="autenticandoUsuario || !botonVisible"
         class="u-border-2 u-border-grey-75 u-btn u-btn-round u-button-style 
                u-custom-color-1 u-hover-custom-color-3 u-radius-50 u-btn-2">
-  {{ datos.respuesta.recomendacion === 0 ? 'Recomendado' : 'Recomendar' }}
+  {{ !botonVisible ? 'Recomendado' : 'Recomendar' }}
 </button>
 
 
@@ -71,16 +71,9 @@ C20.296,39.899,19.65,40.986,18.613,41.552z"></path><g><path style="fill:#556080;
           <li *ngFor="let respuesta of respuestas">
             <ion-card color="medium" class="ion-text-center informacion-card">
               <ion-card-header color="dark">
-                <h4 class="nombre-apellido">{{ respuesta.nombre }} {{ respuesta.apellido }}</h4>
-                <!-- <a (click)="openWhatsApp(respuesta)" class="ion-text-center u-btn u-btn-round u-button-style u-custom-color-1 u-hover-custom-color-3 u-radius-50 u-btn-2">Aceptar</a>                    
-                            </ion-card-header> -->
+                <h4>{{ respuesta.nombre }} {{ respuesta.apellido }}</h4>
               </ion-card-header>
               <h4 class="precio">${{ respuesta.precio }}</h4>
-              <!-- <button (click)="openWhatsApp(respuesta)" class="btn btn-success">Aceptar</button> -->
-
-              <!-- aca hay que obtener los datos personales del fletero -->
-              <!-- <button class="btn btn-success" (click)="cerrar(false)" (click)="moverPedidoAPedidosFinalizados(datos, respuesta)">Aceptar</button> -->
-
               <br>
               <br>
             </ion-card>
@@ -90,20 +83,9 @@ C20.296,39.899,19.65,40.986,18.613,41.552z"></path><g><path style="fill:#556080;
     </ion-content>
   </ng-template>
 </ion-modal>
-              <!-- <div *ngIf="DatosF" >
-              <a  (click)="openWhatsApp(DatosF)"  class="u-border-2 u-border-grey-75 u-btn u-btn-round u-button-style u-custom-color-1 u-hover-custom-color-3 u-radius-50 u-btn-2">Aceptar&nbsp;</a>
-              </div>
-              <ul> -->
-        
-              <!-- <a  (click)="getDatosFf(datos)"  class="u-border-2 u-border-grey-75 u-btn u-btn-round u-button-style u-custom-color-1 u-hover-custom-color-3 u-radius-50 u-btn-2">Aceptar&nbsp;</a> -->
             </div>
           </div>
-
-                  
                   <div class="u-container-style u-list-item  u-repeater-item u-list-item-1">
-
-
-
                     <div class="u-container-layout tu-clase-de-borde u-similar-container u-valign-top-sm u-valign-top-xs u-container-layout-1">
                       <div  class="u-container-style u-custom-color-2 u-group u-group-1">
                         <div class="u-container-layout u-container-layout-2">

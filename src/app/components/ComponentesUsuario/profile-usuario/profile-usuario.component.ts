@@ -71,6 +71,26 @@ getDatosGmail(uid: string) {
   })
 }
 
+openFileInput() {
+  const fileInput = document.getElementById('fileInput') as HTMLInputElement;
+  fileInput.click();
+}
 
+handleFileInput(event: Event) {
+  const file = (event.target as HTMLInputElement).files[0];
+  const reader = new FileReader();
+
+  reader.onload = () => {
+    const imageData = reader.result as string;
+    // Actualizar la imagen en la base de datos
+    this.DatosU.image = imageData;
+    const path = `Usuarios`
+    this.db.updateDoc(path, this.DatosU.uid, imageData)
+  };
+
+  if (file) {
+    reader.readAsDataURL(file);
+  }
+}
 
 }

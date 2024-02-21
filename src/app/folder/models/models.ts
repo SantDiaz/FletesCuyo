@@ -15,6 +15,7 @@ export interface UserU {
     email: string;
     password: string;
     perfil: 'Usuario' ;
+    codeVeri?: string;
     // | 'Fletero'| 'Admin' 
   }
 
@@ -38,7 +39,7 @@ export interface UserU {
     habilitado: boolean;
     recomendacion: number;
     usuariosRecomendados?: string[]; // Define la propiedad como un array de strings opcionales
-
+    codeVeri?: string;
     // provincia: provincias
   }
   
@@ -87,7 +88,7 @@ export interface UserU {
     telefono: string;
     mensaje: string;
     precioEnviado: boolean; // Agrega esta propiedad
-
+    recomendado?: boolean; // Agrega esta propiedad
   }
 
   export interface Opiniones{

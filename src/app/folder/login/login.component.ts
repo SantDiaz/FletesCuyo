@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit {
     email: null,
     password: null,
   }
+  recordarContrasena: boolean = false;
 
   constructor( private auth: AuthService,
                private interaction: InteractionService,        
@@ -34,23 +35,38 @@ export class LoginComponent implements OnInit {
     this.router.navigate(['/registrarse']);
   }
 
-  async login(){
+  async login() {
     await this.interaction.presentLoading("Ingresando...");
-    // console.log(this.credenciales);
-    const res = await this.auth.login(this.credenciales.email, this.credenciales.password).catch(error => {
-      console.log(error);
+    
+    try {
+      const res = await this.auth.login(this.credenciales.email, this.credenciales.password);
+      
+      if (res) {
+        this.interaction.closeLoading();
+        await this.interaction.presentToast("Ingresado con éxito");
+  
+        // Guardar la contraseña si la casilla está marcada
+        if (this.recordarContrasena) {
+          localStorage.setItem('email', this.credenciales.email);
+          localStorage.setItem('password', this.credenciales.password);
+        } else {
+          // Si la casilla no está marcada, elimina las credenciales almacenadas previamente
+          localStorage.removeItem('email');
+          localStorage.removeItem('password');
+        }
+  
+        this.router.navigate(['/home']);
+      }
+    } catch (error) {
+      console.error(error);
       this.interaction.closeLoading();
-      this.interaction.presentToast("Usuario o Contraseña invalidos");
-    })
-    if(res){
-      // console.log("res ==>",res);
-      this.interaction.closeLoading();
-      await this.interaction.presentToast("Ingresado con exito");
-      this.router.navigate(['/home']);
+      this.interaction.presentToast("Usuario o Contraseña inválidos");
     }
   }
-
-
+  
+  toggleRecordarContrasena(checked: boolean) {
+    this.recordarContrasena = checked;
+  }
 
 
 }
