@@ -81,6 +81,7 @@ constructor(private routes: Router,
       uid: "",
       precio: null,
       tiempoTranscurrido: '', // Inicializa el tiempo transcurrido como una cadena vacía
+      image: '',
     };
   
   }
@@ -104,12 +105,11 @@ constructor(private routes: Router,
             data.id = this.db.createId();
             data.uid = res.uid;
             data.nombre = res2.nombre;
+            data.image = res2.image;
             data.apellido = res2.apellido;
-  
             const fechaBase = new Date(this.pasosFlete.fecha);
             data.hora = fechaBase.getHours();
             data.minutos = fechaBase.getMinutes();
-  
             // Resto del código...
   
             const enlace = `PedirFlete/${res.uid}/Pedidos`;

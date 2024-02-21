@@ -77,6 +77,7 @@ export interface UserU {
     tiempoTranscurrido?: string;
     precio: number;
      visible?: { [fleteroId: string]: boolean };
+     image?: string
     }
 
   export interface respuesta {
