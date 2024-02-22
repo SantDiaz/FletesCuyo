@@ -9,6 +9,8 @@ import { InteractionService } from 'src/app/folder/services/interaction.service'
 import { NuevoService } from 'src/app/folder/services/nuevo.service';
 import { CLIENT_RENEG_LIMIT } from 'tls';
 // import { ChangeDetectorRef } from '@angular/core';
+import { interval } from 'rxjs';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-precios',
@@ -32,7 +34,7 @@ export class PreciosComponent implements OnInit {
   fleteros: UserF[];
   fleteroSeleccionadoId: string;
   isRespuestasModalOpen: boolean = false;
-
+  validacion : boolean = false
   constructor(
           private auth: AuthService,
           private router: Router,
@@ -48,6 +50,8 @@ export class PreciosComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.validacion  = true
+
     // this.rta2.recomendado=false;
     this.fleteroService.getFleteros().subscribe((fleteros: UserF[]) => {
       this.enlacesWhatsApp = this.generateWhatsAppLink2(fleteros, '+54');
@@ -63,8 +67,15 @@ export class PreciosComponent implements OnInit {
           pedidos.forEach((pedido) => {
             // Validar si el cargamento está vacío y eliminar el pedido
             if (!pedido.cargamento) {
-              // this.db.deleteDoc(path, pedido.id);
-              console.log('Pedido Eliminado por no tener datos:', pedido.id);
+              // Utiliza el operador take(1) para que la suscripción se complete después de emitir el primer valor
+              interval(120000).pipe(
+                take(3)
+              ).subscribe(() => {
+                this.db.deleteDoc(path, pedido.id);
+                this.interacion.presentToast("Su pedido se elimino por no contener datos.")
+                console.log('Pedido Eliminado por no tener datos:', pedido.id);
+                this.validacion = false;
+              });
             } else {
               const pedidoID = pedido.id;
               const rutaPedido = `PedirFlete/${res.uid}/Pedidos/`;

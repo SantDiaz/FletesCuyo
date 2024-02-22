@@ -42,10 +42,10 @@ export class MapboxComponent implements OnInit {
           const coordinates = event.lngLat;
           if (this.modeInput === 'start') {
             this.updateMarkerPosition(this.startMarker, coordinates);
+            this.modeInput = 'end'; // Cambia al modo de entrada de fin
           } else if (this.modeInput === 'end') {
             this.updateMarkerPosition(this.endMarker, coordinates);
-            this.popup.remove();
-
+            this.drawRoute(); // Dibuja la ruta cuando se coloca el marcador de fin
           }
         });
   
@@ -72,7 +72,6 @@ export class MapboxComponent implements OnInit {
           if (this.startMarker && this.endMarker) {
             this.drawRoute();
           }
-
         });
   
         const closeButton = document.getElementById('cerrarModalButton');
@@ -81,36 +80,19 @@ export class MapboxComponent implements OnInit {
             this.cerrarModal(); // Llama a la función para cerrar el modal
           });
         }
-
-
-        const startButton = document.querySelector('.green-button');
-        const endButton = document.querySelector('.red-button');
+  
         const drawRouteButton = document.querySelector('.btn-route');
-        
-        if (startButton) {
-          startButton.addEventListener('click', () => {
-            this.changeModel('start'); // Llama a la función para cambiar el modo
-          });
-        }
-        
-        if (endButton) {
-          endButton.addEventListener('click', () => {
-            this.changeModel('end'); // Llama a la función para cambiar el modo
-          });
-        }
   
         if (drawRouteButton) {
           drawRouteButton.addEventListener('click', () => {
             this.drawRoute(); // Llama a la función para dibujar la ruta
           });
         }
-      const centerCoordinates = this.map.getCenter();
-
-
+  
+        const centerCoordinates = this.map.getCenter();
+  
         this.centerToUserLocation();
       })
-
-      
       .catch((error) => {
         console.log('no Carga', error);
       });
@@ -132,7 +114,7 @@ export class MapboxComponent implements OnInit {
         });
   
         // Configurar el contenido del popup
-        const popupContent = '<H1>Haz click en el mapa para seleccionar el punto de partida</H1>';
+        const popupContent = '<H1>Haz click en la pantalla para seleccion punto de Inicio y Fin</H1>' ;
   
         // Crear el popup en la ubicación del usuario
         this.popup = new mapboxgl.Popup({ closeButton: false })
