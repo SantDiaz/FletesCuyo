@@ -14,8 +14,8 @@
         <H3><i class="fab fa-html5"></i> {{DatosU.domicilio}} </H3>
       </div>
       <H2>Correo Electronico: <i class="fa fa-code" aria-hidden="true"></i></H2>
-      <div class="skill html">
-        <H3><i class="fab fa-html5"></i> {{DatosU.email}} </H3>
+      <div *ngIf="DatosG" class="skill html">
+        <H3><i class="fab fa-html5"></i> {{DatosG.email}} </H3>
       </div>
       <H2>Telefono: <i class="fa fa-code" aria-hidden="true"></i></H2>
       <div class="skill html">

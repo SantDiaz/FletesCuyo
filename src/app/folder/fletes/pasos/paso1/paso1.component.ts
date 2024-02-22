@@ -65,7 +65,8 @@ constructor(private routes: Router,
     const horaActual = fechaActual.getHours();
     const minutosActuales = fechaActual.getMinutes();
     this.fechaBase = new Date();
-    this.minDate = formatDate(new Date(), 'yyyy-MM-dd', 'en-US');
+    const currentDate = new Date();
+    this.minDate = formatDate(currentDate, 'yyyy-MM-dd', 'en-US');
     this.pasosFlete = {
       id: '',
       nombre: '',
