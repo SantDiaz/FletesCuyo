@@ -183,15 +183,15 @@ export class PreciosComponent implements OnInit {
           // Llama al método de tu servicio para mover el pedido
   
           if (exito) {
+            // Cierra el modal de respuestas
+            this.cerrar(false);
             // Crea el enlace de WhatsApp aquí
             const whatsappLink = this.generateWhatsAppLink(rta);
             
             // Abre WhatsApp en una nueva ventana o pestaña
             window.open(whatsappLink, '_blank');
   
-            // Cierra el modal de respuestas
-            this.cerrar(false);
-            this.router.navigate(['/home']);
+            // this.router.navigate(['/home']);
             // El pedido se movió con éxito, puedes mostrar un mensaje o realizar otras acciones si es necesario
             console.log('Pedido movido a Pedidos Finalizados correctamente');
           } else {

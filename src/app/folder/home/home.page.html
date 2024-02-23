@@ -8,6 +8,94 @@
   <!-- <app-anuncios></app-anuncios> -->
   <!-- <ion-title *ngIf="login == true && rol == 'Fletero'">Hola Fletero</ion-title> -->
 
+
+
+
+
+  <!-- ADMIN -->
+  <div *ngIf="login == true && rol == 'Admin'">
+    <ion-toolbar>
+      <ion-segment (ionChange)="segmentChanged($event)" [value]="valueSelected">
+        <ion-segment-button (click)="getUser()" value="1">
+          <ion-label>Usuarios</ion-label>
+        </ion-segment-button>
+        <ion-segment-button (click)="getFletero()" value="2">
+          <ion-label>Fleteros</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+    </ion-toolbar>
+    <div *ngIf="valueSelected == 1">
+      <table class="fleteros-table">
+        <thead>
+          <tr>
+            <th>Nombre y Apellido</th>
+            <th>DNI</th>
+            <th>Domicilio</th>
+            <th>Teléfono</th>
+            <th>Edad</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let itemsUser of itemsU">
+            <td>{{ itemsUser.nombre }} {{ itemsUser.apellido }}</td>
+            <td>{{ itemsUser.dni }}</td>
+            <td>{{ itemsUser.domicilio }}</td>
+            <td>{{ itemsUser.telefono }}</td>
+            <td>{{ itemsUser.edad }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+      </ion-infinite-scroll>    </div>
+
+
+
+
+
+
+    <div *ngIf="valueSelected == 2">
+      <table class="fleteros-table">
+        <thead>
+          <tr>
+            <th>Nombre y Apellido</th>
+            <th>DNI</th>
+            <th>Domicilio</th>
+            <th>Teléfono</th>
+            <th>Edad</th>
+            <th>Verificado</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let itemFlete of itemsF">
+            <td>{{ itemFlete.nombre }} {{ itemFlete.apellido }}</td>
+            <td>{{ itemFlete.dni }}</td>
+            <td>{{ itemFlete.domicilio }}</td>
+            <td>{{ itemFlete.telefono }}</td>
+            <td>{{ itemFlete.edad }}</td>
+            <td>{{ itemFlete.verificado }}</td>
+            <td>
+              <div class="options-button" (click)="showOptionsMenu(itemFlete)">
+                <!-- Icono de tres puntos -->
+                <ion-icon name="ellipsis-vertical"></ion-icon>
+              </div>
+              <div class="menu" *ngIf="itemFlete.showOptions">
+                <button (click)="editar(itemFlete)">Editar</button>
+                <button (click)="eliminar(itemFlete)">Eliminar</button>
+                <button (click)="cambiarVerificacion(itemFlete)">Cambiar verificación</button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+    </div>
+  </div>
+  
+  
   <!-- <app-map-screen></app-map-screen> -->
 </ion-content>
 <app-tabs-u ></app-tabs-u>

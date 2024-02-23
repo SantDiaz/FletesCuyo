@@ -1,23 +1,45 @@
 
-
 export interface UserU {
-    uid: string;
-    nombre: string;
-    apellido: string;
-    dni: string;
-    edad: number;
-    domicilio: string;
-    // provincia: 'Buenos Aires' | 'Catamarca'| 'Chaco'| 'Chubut'| 'Córdoba'| 'Corrientes'| 'Entre Ríos'| 'Formosa'| 'Jujuy'
-    // |'La Pampa' | 'La Rioja'| 'Mendoza'| 'Mendoza'| 'Misiones'| 'Neuquén'| 'Río Negro'| 'Salta'| 'San Juan'| 'Santa Cruz'| 'Santa Fe'| 'San
-    // |'Santiago del Estero'| 'Tierra del Fuego'| 'Tucumán';
-    telefono: string;
-    image: string; 
-    email: string;
-    password: string;
-    perfil: 'Usuario' ;
-    codeVeri?: string;
-    // | 'Fletero'| 'Admin' 
-  }
+  uid: string;
+  nombre: string;
+  apellido: string;
+  dni: string;
+  edad: number;
+  domicilio: string;
+  // provincia: 'Buenos Aires' | 'Catamarca'| 'Chaco'| 'Chubut'| 'Córdoba'| 'Corrientes'| 'Entre Ríos'| 'Formosa'| 'Jujuy'
+  // |'La Pampa' | 'La Rioja'| 'Mendoza'| 'Mendoza'| 'Misiones'| 'Neuquén'| 'Río Negro'| 'Salta'| 'San Juan'| 'Santa Cruz'| 'Santa Fe'| 'San
+  // |'Santiago del Estero'| 'Tierra del Fuego'| 'Tucumán';
+  telefono: string;
+  image: string; 
+  email: string;
+  password: string;
+  perfil: 'Usuario' ;
+  codeVeri?: string;
+  // | 'Fletero'| 'Admin' 
+}
+export interface UserA {
+  uid: string;
+  nombre: string;
+  apellido: string;
+  dni: string;
+  edad: number;
+  domicilio: string;
+  // provincia: 'Buenos Aires' | 'Catamarca'| 'Chaco'| 'Chubut'| 'Córdoba'| 'Corrientes'| 'Entre Ríos'| 'Formosa'| 'Jujuy'
+  // |'La Pampa' | 'La Rioja'| 'Mendoza'| 'Mendoza'| 'Misiones'| 'Neuquén'| 'Río Negro'| 'Salta'| 'San Juan'| 'Santa Cruz'| 'Santa Fe'| 'San
+  // |'Santiago del Estero'| 'Tierra del Fuego'| 'Tucumán';
+  telefono: string;
+  image: string; 
+  email: string;
+  password: string;
+  perfil:  'Fletero'| 'Fletero'| 'Admin';
+  datosVehiculos: datosVehiculo;
+  verificado: boolean;
+  habilitado: boolean;
+  recomendacion: number;
+  usuariosRecomendados?: string[]; // Define la propiedad como un array de strings opcionales
+  codeVeri?: string;
+  // provincia: provincias
+}
 
   export interface UserF {
     uid: string;
