@@ -21,6 +21,7 @@ export class VerRutaComponent implements AfterViewInit {
   startMarker: mapboxgl.Marker | null = null;
   endMarker: mapboxgl.Marker | null = null;
   draggingMarker: mapboxgl.Marker | null = null;
+  routeDistance: string = ''; // Variable para almacenar la distancia entre los puntos como una cadena de texto
 
   constructor(private mapCustom: MapCustomService, private renderer2: Renderer2, private modalController: ModalController) {
     this.modeInput = 'start';
@@ -48,6 +49,15 @@ export class VerRutaComponent implements AfterViewInit {
               this.datos.endCoordinates.latitude
             );
   
+            // Calcula la distancia entre los dos puntos
+            const distanceInKm = startCoordinates.distanceTo(endCoordinates) / 1000; // Convertir a kilómetros
+
+            // Redondea la distancia al múltiplo más cercano de 0.5
+            const roundedDistance = Math.round(distanceInKm * 2) / 2;
+
+            // Convierte la distancia redondeada a una cadena de texto
+            this.routeDistance = roundedDistance.toFixed(1) + ' km';
+  
             // Ahora puedes usar startCoordinates y endCoordinates para dibujar la ruta
             this.mapCustom.drawRoute(startCoordinates, endCoordinates);
   
@@ -58,6 +68,12 @@ export class VerRutaComponent implements AfterViewInit {
   
             this.endMarker = new mapboxgl.Marker({ color: 'red' })
               .setLngLat(endCoordinates)
+              .addTo(this.map);
+
+            // Muestra la distancia en un popup en el mapa
+            new mapboxgl.Popup()
+              .setLngLat(endCoordinates)
+              .setHTML(`<p>Distancia: ${this.routeDistance}</p>`)
               .addTo(this.map);
           }
   

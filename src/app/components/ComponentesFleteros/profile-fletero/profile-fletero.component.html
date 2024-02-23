@@ -2,6 +2,13 @@
 <section *ngIf="DatosF">
     <div class="card">
     <div class="ds-top"></div>
+        <!-- Icono de lápiz para editar la foto de perfil -->
+        <div (click)="openFileInput()" class="edit-icon">
+          <ion-text>Cambiar Foto</ion-text>
+          <ion-icon name="create"></ion-icon>
+        </div>
+        <input #fileInput type="file" style="display: none" accept="image/jpeg, image/png, image/gif" (change)="handleFileInput($event)">
+        
     <div class="avatar-holder">
       <img [src]="DatosF.image">
     </div>

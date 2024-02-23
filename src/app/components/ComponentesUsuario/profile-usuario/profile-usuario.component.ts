@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserU } from 'src/app/folder/models/models';
 import { AuthService } from 'src/app/folder/services/auth.service';
@@ -10,6 +10,7 @@ import { FirestoreService } from 'src/app/folder/services/firestore.service';
   styleUrls: ['./profile-usuario.component.scss'],
 })
 export class ProfileUsuarioComponent implements OnInit {
+  @ViewChild('fileInput') fileInput: ElementRef<HTMLInputElement>;
 
   filter: string = "filtro";
   login: boolean = false;
@@ -71,12 +72,11 @@ getDatosGmail(uid: string) {
   })
 }
 
-openFileInput() {
-  const fileInput = document.getElementById('fileInput') as HTMLInputElement;
-  fileInput.click();
+openFileInput(): void {
+  this.fileInput.nativeElement.click();
 }
 
-handleFileInput(event: Event) {
+handleFileInput(event: Event): void {
   const file = (event.target as HTMLInputElement).files[0];
   const reader = new FileReader();
 
@@ -92,5 +92,29 @@ handleFileInput(event: Event) {
     reader.readAsDataURL(file);
   }
 }
+
+
+// cambiarFoto(){
+//   this.auth.stateUser<UserU>().subscribe( res  => {
+//     if (res) {
+//   const path = `Usuarios/${res.uid}/DatosPersonales`;
+//   const id = res.uid;
+  
+//   this.db.getDoc<UserU>(path, id).subscribe( res2 => {
+//     if (res ) {
+//       this.DatosU = res2;
+//       const data = res2.image;
+      
+//       const enlace = `Usuarios/DatosPersonales`;
+//       this.db.updateDoc(enlace, res.uid, data)
+
+//       }
+//       else{
+//         console.log('Tiene errores -> ');
+//       }
+//   })
+// }   
+// })
+// }
 
 }

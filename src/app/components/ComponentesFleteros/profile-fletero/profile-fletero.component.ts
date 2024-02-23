@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { datosVehiculo, tipoVehiculo, UserF } from 'src/app/folder/models/models';
 import { AuthService } from 'src/app/folder/services/auth.service';
 import { FirestoreService } from 'src/app/folder/services/firestore.service';
-
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 @Component({
   selector: 'app-profile-fletero',
   templateUrl: './profile-fletero.component.html',
   styleUrls: ['./profile-fletero.component.scss'],
 })
 export class ProfileFleteroComponent implements OnInit {
+@ViewChild('fileInput') fileInput: ElementRef<HTMLInputElement>;
 
 
   login: boolean = false;
@@ -89,6 +89,27 @@ getDatosVehicular(uid: string) {
   })
 }
 
+
+openFileInput(): void {
+  this.fileInput.nativeElement.click();
+}
+
+handleFileInput(event: Event): void {
+  const file = (event.target as HTMLInputElement).files[0];
+  const reader = new FileReader();
+
+  reader.onload = () => {
+    const imageData = reader.result as string;
+    // Actualizar la imagen en la base de datos
+    this.DatosF.image = imageData;
+    const path = `Usuarios`
+    this.db.updateDoc(path, this.DatosF.uid, imageData)
+  };
+
+  if (file) {
+    reader.readAsDataURL(file);
+  }
+}
 
 
 

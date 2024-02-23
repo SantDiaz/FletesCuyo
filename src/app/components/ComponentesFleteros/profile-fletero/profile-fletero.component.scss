@@ -209,3 +209,37 @@
   margin-bottom: 10px; /* Espacio entre el icono y el texto */
   color: #007bff; /* Color del icono */
 }
+
+
+
+
+
+
+
+
+
+
+.following {
+  color: white;
+  background: crimson;
+}
+.card {
+  position: relative; /* Cambiado a relativo */
+  width: 400px;
+  height: 650px;
+}
+
+.edit-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 999; /* Asegúrate de que el índice Z sea mayor que el de otros elementos */
+}
+
+.avatar-holder {
+  /* Estilos para el contenedor de la imagen */
+}
+
+.name {
+  /* Estilos para el nombre */
+}

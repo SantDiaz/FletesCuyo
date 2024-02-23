@@ -92,6 +92,7 @@ export interface UserA {
     endCoordinatesP?: { latitude: number; longitude: number };
     uDesde: string;
     uHasta: string;
+    km?: number;
     cargamento: string;
     tipoVehiculo: 'Camioneta' | 'Camion' | 'Utilitario' ;
     ayudantes:  'Sin ayudantes' | '+1' | '+2'  | '+3' ;
