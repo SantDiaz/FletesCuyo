@@ -10,7 +10,8 @@
         <input #fileInput type="file" style="display: none" accept="image/jpeg, image/png, image/gif" (change)="handleFileInput($event)">
         
     <div class="avatar-holder">
-      <img [src]="DatosF.image">
+      <img [src]="DatosF?.image" *ngIf="DatosF">
+
     </div>
     <div class="name">
       <H2 href="https://codepen.io/AlbertFeynman/" target="_blank">{{DatosF.nombre}} {{DatosF.apellido}}</H2>

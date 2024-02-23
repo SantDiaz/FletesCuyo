@@ -72,33 +72,92 @@ getDatosVehicular(uid: string) {
   })
 }
 
-
 handleFileInput(event: Event): void {
-  this.auth.stateUser<UserF>().subscribe( res  => {
+    this.auth.stateUser<UserF>().subscribe( res  => {
     if (res) {
   const file = (event.target as HTMLInputElement).files[0];
   const reader = new FileReader();
 
   reader.onload = () => {
     const imageData = reader.result as string;
-    // Actualizar solo el campo 'image' en el documento del fletero
-    const path = `Fleteros`;
-    const dataToUpdate = { image: imageData };
-    this.db.updateDoc(path, res.uid, dataToUpdate)
-      .then(() => {
-        console.log('Imagen actualizada correctamente para el fletero');
-      })
-      .catch(error => {
-        console.error('Error al actualizar la imagen para el fletero:', error);
-      });
+    // Redimensionar imagen
+    this.resizeImage(imageData, 800, 600, (resizedImage) => {
+      // Actualizar solo el campo 'image' en el documento
+      const path = `Fleteros`;
+      const dataToUpdate = { image: resizedImage };
+      this.db.updateDoc(path, res.uid, dataToUpdate)
+        .then(() => {
+          console.log('Imagen actualizada correctamente');
+          // Actualizar la URL de la imagen en la vista
+          this.DatosF.image = resizedImage;
+        })
+        .catch(error => {
+          console.error('Error al actualizar la imagen:', error);
+        });
+    });
   };
 
   if (file) {
     reader.readAsDataURL(file);
   }
-}   
+   }   
 })
 }
+
+resizeImage(imageData: string, maxWidth: number, maxHeight: number, callback: (resizedImage: string) => void): void {
+  const img = new Image();
+  img.src = imageData;
+  img.onload = () => {
+    let width = img.width;
+    let height = img.height;
+
+    if (width > height) {
+      if (width > maxWidth) {
+        height *= maxWidth / width;
+        width = maxWidth;
+      }
+    } else {
+      if (height > maxHeight) {
+        width *= maxHeight / height;
+        height = maxHeight;
+      }
+    }
+
+    const canvas = document.createElement('canvas');
+    canvas.width = width;
+    canvas.height = height;
+
+    const ctx = canvas.getContext('2d');
+    ctx.drawImage(img, 0, 0, width, height);
+
+    const resizedImage = canvas.toDataURL('image/jpeg');
+    callback(resizedImage);
+  };
+}
+// handleFileInput(event: Event): void {
+
+//   const file = (event.target as HTMLInputElement).files[0];
+//   const reader = new FileReader();
+
+//   reader.onload = () => {
+//     const imageData = reader.result as string;
+//     // Actualizar solo el campo 'image' en el documento del fletero
+//     const dataToUpdate = { image: imageData };
+//     this.db.updateDoc(path, res.uid, dataToUpdate)
+//       .then(() => {
+//         console.log('Imagen actualizada correctamente para el fletero');
+//       })
+//       .catch(error => {
+//         console.error('Error al actualizar la imagen para el fletero:', error);
+//       });
+//   };
+
+//   if (file) {
+//     reader.readAsDataURL(file);
+//   }
+// }   
+// })
+// }
 
 openFileInput(): void {
   this.fileInput.nativeElement.click();

@@ -10,7 +10,7 @@
     
     
     <div class="avatar-holder">
-      <img [src]="DatosU.image">
+      <img [src]="DatosU?.image" *ngIf="DatosU">
     </div>
     <div class="name">
       <h2><a  target="_blank">{{DatosU.nombre}} {{DatosU.apellido}}</a></h2>
