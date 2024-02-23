@@ -28,7 +28,6 @@ export class ProfileFleteroComponent implements OnInit {
     this.auth.stateUser<UserF>().subscribe( res  => {
       if (res) {
         this.login = true;
-        this.getDatosUser(res.uid);
         this.getDatosVehicular(res.uid);
         this.getDatosG(res.uid)
       } else {
@@ -57,22 +56,6 @@ getDatosG(uid: string) {
   })
 }
 
-getDatosUser(uid: string) {
-  const path = `Fleteros/${uid}/DatosPersonales`;
-  const id = uid;
-  
-  this.db.getDoc<UserF>(path, id).subscribe( res => {
-    if (res ) {
-      this.DatosF = res;
-      // console.log('id personal -> ', uid);
-      // console.log('trae esto-->', res );
-      // console.log('datos vehicular', this.DatosV );
-      }
-      else{
-        // console.log('Tiene errores -> ');
-      }
-  })
-}
 
 getDatosVehicular(uid: string) {
   const path = `Fleteros/${uid}/DatosVehiculares`;
@@ -90,25 +73,35 @@ getDatosVehicular(uid: string) {
 }
 
 
-openFileInput(): void {
-  this.fileInput.nativeElement.click();
-}
-
 handleFileInput(event: Event): void {
+  this.auth.stateUser<UserF>().subscribe( res  => {
+    if (res) {
   const file = (event.target as HTMLInputElement).files[0];
   const reader = new FileReader();
 
   reader.onload = () => {
     const imageData = reader.result as string;
-    // Actualizar la imagen en la base de datos
-    this.DatosF.image = imageData;
-    const path = `Usuarios`
-    this.db.updateDoc(path, this.DatosF.uid, imageData)
+    // Actualizar solo el campo 'image' en el documento del fletero
+    const path = `Fleteros`;
+    const dataToUpdate = { image: imageData };
+    this.db.updateDoc(path, res.uid, dataToUpdate)
+      .then(() => {
+        console.log('Imagen actualizada correctamente para el fletero');
+      })
+      .catch(error => {
+        console.error('Error al actualizar la imagen para el fletero:', error);
+      });
   };
 
   if (file) {
     reader.readAsDataURL(file);
   }
+}   
+})
+}
+
+openFileInput(): void {
+  this.fileInput.nativeElement.click();
 }
 
 

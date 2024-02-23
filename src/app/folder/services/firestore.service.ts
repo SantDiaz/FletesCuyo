@@ -129,6 +129,34 @@ createDocument<tipo>(data: tipo, enlace: string, id: string) {
   // updateDoc3(path: string, data: any): Promise<void> {
   //   return this.firestore.doc(path).update(data);
   // }
+  
+  // crea un id unico 
+  createId() {
+    return this.firestore.createId();
+  }
+  
+  getCollection<tipo>(path: string) { 
+    
+    const collection = this.firestore.collection<tipo>(path);
+    return collection.valueChanges();
+    
+  }
+
+  getCollection2<tipo>(path: string, id : string) {
+
+    const collection = this.firestore.collection<tipo>(path);
+    return collection.valueChanges(id);
+  }
+  
+  
+  getDoc<tipo>(path: string, id: string) {
+    return this.firestore.collection(path).doc<tipo>(id).valueChanges()
+  }
+  getDoc2<tipo>(path: string) {
+    return this.firestore.doc<tipo>(path).valueChanges();
+  }
+  
+  
   updateDoc3(path: string, data: any): Promise<void> {
     return this.firestore.doc(path).set(data, { merge: true });
   }
@@ -140,47 +168,25 @@ createDocument<tipo>(data: tipo, enlace: string, id: string) {
       console.log("error", err);
     }
   }
-
-// crea un id unico 
-  createId() {
-    return this.firestore.createId();
-  }
-
-  getCollection<tipo>(path: string) { 
-
-    const collection = this.firestore.collection<tipo>(path);
-    return collection.valueChanges();
-
-  }
-
-  getCollection2<tipo>(path: string, id : string) {
-
-    const collection = this.firestore.collection<tipo>(path);
-    return collection.valueChanges(id);
-  }
-
-
-  getDoc<tipo>(path: string, id: string) {
-   return this.firestore.collection(path).doc<tipo>(id).valueChanges()
-  }
-  getDoc2<tipo>(path: string) {
-    return this.firestore.doc<tipo>(path).valueChanges();
-}
-
-
   updateDoc(path: string, id: string, data: any) {
     return  this.firestore.collection(path).doc(id).update(data);
   }
-
+  
   //para recomendacion
   updateDoc2(path: string, id: string, data: any) {
     return  this.firestore.collection(path).doc(id).update(data);
   }
   
+  //setear
+  setDoc<T>(path: string, id: string, data: T): Promise<void> {
+    const documentRef = this.firestore.collection<T>(path).doc<T>(id);
+    return documentRef.set(data);
+  }
+  
   deleteDoc(path: string, id: string){
     return this.firestore.collection(path).doc(id).delete();
   }
-
+  
   getCollectionRef(path: string): AngularFirestoreCollection<any> {
     return this.firestore.collection(path);
   }

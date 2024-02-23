@@ -146,6 +146,7 @@ export class Paso2FComponent implements OnInit {
         // Check if a document for this user already exists
         this.firestore.getDoc<UserF>(path, res.uid).subscribe(res2 => {
           const datosPersonales = {
+            uid: this.registerF.uid,
             nombre: this.registerF.nombre,
             apellido: this.registerF.apellido,
             dni: this.registerF.dni,

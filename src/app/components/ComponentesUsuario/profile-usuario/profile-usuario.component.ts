@@ -57,7 +57,7 @@ getDatosUser(uid: string) {
 }
 
 getDatosGmail(uid: string) {
-  const path = `Usuarios`;
+  const path = `Usuarios/${uid}`;
   const id = uid;
   
   this.db.getDoc<UserU>(path, id).subscribe( res => {
@@ -82,16 +82,23 @@ handleFileInput(event: Event): void {
 
   reader.onload = () => {
     const imageData = reader.result as string;
-    // Actualizar la imagen en la base de datos
-    this.DatosU.image = imageData;
-    const path = `Usuarios`
-    this.db.updateDoc(path, this.DatosU.uid, imageData)
+    // Actualizar solo el campo 'image' en el documento
+    const path = `Usuarios/${this.DatosU.uid}/DatosPersonales`;
+    const dataToUpdate = { image: imageData };
+    this.db.updateDoc(path, this.DatosU.uid, dataToUpdate)
+      .then(() => {
+        console.log('Imagen actualizada correctamente');
+      })
+      .catch(error => {
+        console.error('Error al actualizar la imagen:', error);
+      });
   };
 
   if (file) {
     reader.readAsDataURL(file);
   }
 }
+
 
 
 // cambiarFoto(){
