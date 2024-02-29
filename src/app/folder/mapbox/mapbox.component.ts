@@ -2,9 +2,9 @@ import { Component, ElementRef, OnInit, Renderer2, ViewChild, Input } from '@ang
 import { MapCustomService } from '../mapbox/map-custom.service';
 import * as mapboxgl from 'mapbox-gl';
 import { GeolocateControl } from 'mapbox-gl';
-import { Paso2Component } from '../fletes/pasos/paso2/paso2.component';
 import { ModalController } from '@ionic/angular';
 import { Popup } from 'mapbox-gl';
+import { Paso1Component } from '../fletes/pasos/paso1/paso1.component';
 
 @Component({
   selector: 'app-mapbox',
@@ -14,7 +14,7 @@ import { Popup } from 'mapbox-gl';
 export class MapboxComponent implements OnInit {
   @ViewChild('map') mapContainer: ElementRef;
   @ViewChild('asGeocoder') asGeocoder: ElementRef;
-  @Input() paso2ComponentRef: Paso2Component; // Recibe la referencia al componente Paso2Component
+  @Input() paso1ComponentRef: Paso1Component; // Recibe la referencia al componente Paso2Component
   map: mapboxgl.Map;
   modeInput = 'start';
   startMarker: mapboxgl.Marker | null = null;
@@ -198,12 +198,12 @@ export class MapboxComponent implements OnInit {
     const endCoordinates = this.endMarker.getLngLat();
   
     // Almacena las coordenadas en propiedades de Paso2Component
-    this.paso2ComponentRef.startCoordinates = {
+    this.paso1ComponentRef.startCoordinates = {
       latitude: startCoordinates.lat,
       longitude: startCoordinates.lng
     };
   
-    this.paso2ComponentRef.endCoordinates = {
+    this.paso1ComponentRef.endCoordinates = {
       latitude: endCoordinates.lat,
       longitude: endCoordinates.lng
     };
@@ -214,7 +214,7 @@ export class MapboxComponent implements OnInit {
         // Aquí tienes los nombres de las calles, puedes hacer lo que necesites con ellos
         // console.log('Nombre de la calle de inicio:', startStreetName);
         // console.log('Nombre de la calle de fin:', endStreetName);
-        this.paso2ComponentRef.confirmarUbicaciones([startStreetName, endStreetName]);
+        this.paso1ComponentRef.confirmarUbicaciones([startStreetName, endStreetName]);
   
         // Llama a receiveCoordinates para pasar las coordenadas a Paso2Component
         const coordinatesData = {
@@ -227,7 +227,7 @@ export class MapboxComponent implements OnInit {
             longitude: endCoordinates.lng,
           },
         };
-        this.paso2ComponentRef.receiveCoordinates(coordinatesData);
+        this.paso1ComponentRef.receiveCoordinates(coordinatesData);
       });
     });
   }
@@ -261,7 +261,7 @@ sendCoordinatesToPaso2(): void {
   };
 
   // Llama al método del componente Paso2Component para pasar las coordenadas
-  this.paso2ComponentRef.receiveCoordinates(coordinatesData);
+  this.paso1ComponentRef.receiveCoordinates(coordinatesData);
 
   // Cierra el modal
   this.modalController.dismiss();

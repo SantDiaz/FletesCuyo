@@ -134,7 +134,6 @@ export class CardComponent implements OnInit {
               });
           });
           this.fletes = allFletes; // Asignar todos los pedidos al arreglo fletes al final
-          this.loadOrdersAndCheckCargo();
 
         })
         .catch((error) => {
@@ -143,73 +142,6 @@ export class CardComponent implements OnInit {
     }
     
     
-    
-
-    loadOrdersAndCheckCargo() {
-      const usersCollectionPath = 'Usuarios';
-      const allFletes = []; // Arreglo que almacenará todos los pedidos de todos los usuarios
-    
-      firebase
-        .firestore()
-        .collection(usersCollectionPath)
-        .get()
-        .then((querySnapshot) => {
-          const userIDs = querySnapshot.docs.map((doc) => doc.id);
-    
-          userIDs.forEach((uid) => {
-            const pedidosCollectionPath = `PedirFlete/${uid}/Pedidos/`;
-            this.database
-              .getAll(pedidosCollectionPath)
-              .then((res) => {
-                res.subscribe((resRef) => {
-                  const userFletes = resRef.map((pasosRef) => {
-                    let pasosFlete = pasosRef.payload.doc.data() as DatosFlete;
-                    pasosFlete['id'] = pasosRef.payload.doc.id;
-    
-                    // Verifica si el pedido está en la lista de ocultos
-                    allFletes.push(pasosFlete); // Agregar el pedido si no está oculto
-    
-                    // Verifica si el pedido tiene fecha y cargamento
-                    if (!pasosFlete.fecha || !pasosFlete.cargamento) {
-                      // Si el pedido no tiene fecha ni cargamento, espera antes de eliminarlo
-                      setTimeout(() => {
-                        // Verifica nuevamente si el pedido sigue sin tener fecha ni cargamento
-                        const index = allFletes.findIndex((flete) => flete.id === pasosFlete.id);
-                        if (index !== -1 && (!allFletes[index].fecha || !allFletes[index].cargamento)) {
-                          // Si el pedido aún está incompleto después de la actualización, elimínalo
-                          this.deleteOrder(uid, pasosFlete.id);
-                          // Remueve el pedido de la lista
-                          allFletes.splice(index, 1);
-                        }
-                      }, 40000); // Espera 60 segundos antes de verificar nuevamente
-                    }
-    
-                    return pasosFlete;
-                  });
-    
-                  this.cdr.detectChanges(); // Actualiza la vista de Angular después de cargar los datos
-                });
-              })
-              .catch((error) => {
-                console.error(`Error fetching pedidos for user with ID ${uid}:`, error);
-              });
-          });
-    
-          this.fletes = allFletes; // Asignar todos los pedidos al arreglo fletes al final
-        })
-        .catch((error) => {
-          console.error('Error fetching user IDs:', error);
-        });
-    }
-    
-    
-    deleteOrder(userId: string, orderId: string) {
-      // Aquí puedes agregar la lógica para eliminar el pedido con el ID proporcionado
-      console.log('Pedido eliminado:', orderId);
-      const path = `PedirFlete/${userId}/Pedidos`;
-      this.db.deleteDoc(path, orderId);
-    }
-
 
 
 

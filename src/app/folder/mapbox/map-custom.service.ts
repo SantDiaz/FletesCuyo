@@ -76,7 +76,7 @@ export class MapCustomService {
     console.log('url:', url);
   
     this.httpClient.get(url).subscribe((res: any) => {
-      console.log('Response:', res); // Agrega este mensaje de depuración
+      // console.log('Response:', res); // Agrega este mensaje de depuración
       const data = res.routes[0];
       const route = data.geometry.coordinates;
       console.log('route:', route);
@@ -165,7 +165,6 @@ addStreetName(name: string) {
   this.streetNames.push(name);
 }
 
-
 drawRoute(startCoordinates: mapboxgl.LngLat, endCoordinates: mapboxgl.LngLat): void {
   // Limpia la fuente y la capa existentes si existen
   // this.clearRouteSourceAndLayer();
@@ -177,40 +176,44 @@ drawRoute(startCoordinates: mapboxgl.LngLat, endCoordinates: mapboxgl.LngLat): v
   ].join('');
 
   this.httpClient.get(url).subscribe((res: any) => {
-    const data = res.routes[0];
-    const route = data.geometry.coordinates;
+    if (res.routes && res.routes.length > 0 && res.routes[0].geometry) {
+      const data = res.routes[0];
+      const route = data.geometry.coordinates;
 
-    const sourceConfig: mapboxgl.GeoJSONSourceRaw = {
-      type: 'geojson',
-      data: {
-        type: 'Feature',
-        properties: {},
-        geometry: {
-          type: 'LineString',
-          coordinates: route,
+      const sourceConfig: mapboxgl.GeoJSONSourceRaw = {
+        type: 'geojson',
+        data: {
+          type: 'Feature',
+          properties: {},
+          geometry: {
+            type: 'LineString',
+            coordinates: route,
+          },
         },
-      },
-    };
+      };
 
-    this.map.addSource('route', sourceConfig);
-    this.map.addLayer({
-      id: 'route',
-      type: 'line',
-      source: 'route',
-      layout: {
-        'line-join': 'round',
-        'line-cap': 'round',
-      },
-      paint: {
-        'line-color': 'red',
-        'line-width': 5,
-      },
-    });
+      this.map.addSource('route', sourceConfig);
+      this.map.addLayer({
+        id: 'route',
+        type: 'line',
+        source: 'route',
+        layout: {
+          'line-join': 'round',
+          'line-cap': 'round',
+        },
+        paint: {
+          'line-color': 'red',
+          'line-width': 5,
+        },
+      });
 
-    this.wayPoints = route;
-    this.map.fitBounds([route[0], route[route.length - 1]], {
-      padding: 100,
-    });
+      this.wayPoints = route;
+      this.map.fitBounds([route[0], route[route.length - 1]], {
+        padding: 100,
+      });
+    } else {
+      console.error('No se encontraron rutas válidas');
+    }
   });
 }
 
