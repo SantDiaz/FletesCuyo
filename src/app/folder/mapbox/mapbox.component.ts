@@ -31,7 +31,7 @@ export class MapboxComponent implements OnInit {
       .then(({ map, geocoder }) => {
         this.map = map;
         this.renderer2.appendChild(this.asGeocoder.nativeElement, geocoder.onAdd(map));
-        console.log('Carga', map);
+        // console.log('Carga', map);
   
         // Inicializar los marcadores en posiciones vacías
         this.startMarker = this.createMarker(new mapboxgl.LngLat(0, 0), 'start');
@@ -150,7 +150,7 @@ export class MapboxComponent implements OnInit {
   }
 
   updateMarkerPosition(marker: mapboxgl.Marker, coordinates: mapboxgl.LngLat): void {
-    console.log('Updating marker position:', coordinates); // Agrega este mensaje de depuración
+    // console.log('Updating marker position:', coordinates); // Agrega este mensaje de depuración
     marker.setLngLat(coordinates).addTo(this.map);
   
     // Habilitar el arrastre del marcador
@@ -160,7 +160,7 @@ export class MapboxComponent implements OnInit {
 
   drawRoute(): void {
     if (!this.startMarker || !this.endMarker) {
-      console.log('Selecciona puntos de inicio y final primero.');
+      // console.log('Selecciona puntos de inicio y final primero.');
       return;
     }
   
@@ -175,7 +175,7 @@ export class MapboxComponent implements OnInit {
 
   changeModel(mode: string): void {
     this.modeInput = mode;
-    console.log('modeInput:', this.modeInput);
+    // console.log('modeInput:', this.modeInput);
   }
 
 
@@ -189,7 +189,7 @@ export class MapboxComponent implements OnInit {
 
   enviarDatos(): void {
     if (!this.startMarker || !this.endMarker) {
-      console.log('Selecciona puntos de inicio y final primero.');
+      // console.log('Selecciona puntos de inicio y final primero.');
       return;
     }
   
@@ -212,8 +212,8 @@ export class MapboxComponent implements OnInit {
     this.mapCustom.getStreetName(startCoordinates).subscribe((startStreetName) => {
       this.mapCustom.getStreetName(endCoordinates).subscribe((endStreetName) => {
         // Aquí tienes los nombres de las calles, puedes hacer lo que necesites con ellos
-        console.log('Nombre de la calle de inicio:', startStreetName);
-        console.log('Nombre de la calle de fin:', endStreetName);
+        // console.log('Nombre de la calle de inicio:', startStreetName);
+        // console.log('Nombre de la calle de fin:', endStreetName);
         this.paso2ComponentRef.confirmarUbicaciones([startStreetName, endStreetName]);
   
         // Llama a receiveCoordinates para pasar las coordenadas a Paso2Component
@@ -240,7 +240,7 @@ export class MapboxComponent implements OnInit {
 
 sendCoordinatesToPaso2(): void {
   if (!this.startMarker || !this.endMarker) {
-    console.log('Selecciona puntos de inicio y final primero.');
+    // console.log('Selecciona puntos de inicio y final primero.');
     return;
   }
 

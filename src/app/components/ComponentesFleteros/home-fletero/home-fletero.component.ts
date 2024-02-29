@@ -42,13 +42,13 @@ export class HomeFleteroComponent implements OnInit {
     VerFletes() {
       this.authS.stateUser<UserF>().subscribe(res => {
         if (res) {
-          console.log("respuestacomun", res.uid);
+          // console.log("respuestacomun", res.uid);
           const path = `Fleteros`;
           this.db.getDoc<UserF>(path, res.uid).subscribe(res2 => {
             if (res2.verificado === false) {
               // this.router.navigate(['/paso4F']);
               this.router.navigate(['/fletes']);
-              console.log("No verificado");
+              // console.log("No verificado");
             } else {
               this.router.navigate(['/fletes']);
             }
@@ -75,7 +75,7 @@ export class HomeFleteroComponent implements OnInit {
           data.nombre = res2.nombre
           data.apellido = res2.apellido
           // data.id = res.uid;
-          console.log("estos:", data.id);
+          // console.log("estos:", data.id);
   
       const enlace = `Opiniones`;
       

@@ -66,17 +66,6 @@ export class PreciosComponent implements OnInit {
         this.db.getAllPedidos().subscribe((pedidos: DatosFlete[]) => {
           pedidos.forEach((pedido) => {
             // Validar si el cargamento está vacío y eliminar el pedido
-            if (!pedido.cargamento) {
-              // Utiliza el operador take(1) para que la suscripción se complete después de emitir el primer valor
-              interval(120000).pipe(
-                take(3)
-              ).subscribe(() => {
-                this.db.deleteDoc(path, pedido.id);
-                this.interacion.presentToast("Su pedido se elimino por no contener datos.")
-                console.log('Pedido Eliminado por no tener datos:', pedido.id);
-                this.validacion = false;
-              });
-            } else {
               const pedidoID = pedido.id;
               const rutaPedido = `PedirFlete/${res.uid}/Pedidos/`;
               // const rutaPedido = `PedirFlete/${res.uid}/Pedidos/${pedidoID}`;
@@ -100,7 +89,6 @@ export class PreciosComponent implements OnInit {
                 }
               });
               console.log(this.precios);
-            }
           });
         });
       } else {
