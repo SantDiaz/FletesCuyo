@@ -7,7 +7,7 @@ import { LoginComponent } from '../login/login.component';
 import { ProfileComponent } from '../profile/profile.component';
 import { FletesPage } from './fletes.page';
 import { Paso1Component } from './pasos/paso1/paso1.component';
-import { Paso2Component } from './pasos/paso2/paso2.component';
+// import { Paso2Component } from './pasos/paso2/paso2.component';
 import { Paso3Component } from './pasos/paso3/paso3.component';
 import { AngularFireAuthGuard } from '@angular/fire/compat/auth-guard';
 import { map } from 'rxjs/operators';
@@ -57,14 +57,14 @@ const routes: Routes = [
     component: IniciarAppComponent
   },
   
-  {
-    path: 'paso2',
-    component: Paso2Component
-  },
-  {
-    path: 'paso3',
-    component: Paso3Component
-  },
+  // {
+  //   path: 'paso2',
+  //   component: Paso2Component
+  // },
+  // {
+  //   path: 'paso3',
+  //   component: Paso3Component
+  // },
   {
     path: 'login',
     component: LoginComponent,

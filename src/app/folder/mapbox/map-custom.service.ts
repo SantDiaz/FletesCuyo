@@ -62,7 +62,7 @@ export class MapCustomService {
   
   
   loadCoords(coords): void {
-    console.log('coords -------->', coords);
+    // console.log('coords -------->', coords);
   
     // Limpia la fuente y la capa existentes si existen
     this.clearRouteSourceAndLayer();
@@ -73,13 +73,13 @@ export class MapCustomService {
       `?steps=true&geometries=geojson&access_token=${environment.apiKey}`, 
     ].join('');
   
-    console.log('url:', url);
+    // console.log('url:', url);
   
     this.httpClient.get(url).subscribe((res: any) => {
       // console.log('Response:', res); // Agrega este mensaje de depuración
       const data = res.routes[0];
       const route = data.geometry.coordinates;
-      console.log('route:', route);
+      // console.log('route:', route);
   
       const sourceConfig: mapboxgl.GeoJSONSourceRaw = {
         type: 'geojson',
@@ -120,7 +120,7 @@ export class MapCustomService {
 
 
 addMarkerCustom(coords): void {
-  console.log('coords:', coords);
+  // console.log('coords:', coords);
   const el = document.createElement('div');
   el.className = 'marker';
   this.markerDriver = new mapboxgl.Marker(el);

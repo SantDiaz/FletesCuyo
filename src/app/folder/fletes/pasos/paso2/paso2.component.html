@@ -1,5 +1,4 @@
-  <ion-content class="background2">
-    <!-- Scroll -->
+  <!-- <ion-content class="background2">
       <ion-segment  (ionChange)="segmentChanged($event)" [value]="valueSelected"  color="dark">
         <ion-segment-button value="2">
           <ion-icon name="documents-outline"></ion-icon>
@@ -18,34 +17,28 @@
                       <label for="name-6659" class="u-label">Desde</label>
                       <input [(ngModel)]="pasosFlete.uDesde" type="text" placeholder="Punto de partida" id="name-ae7a" name="name-3"
                         class="u-border-1 u-border-grey-60 u-input u-input-rectangle" required>
-                      <!-- Validación para campo requerido -->
                       <div *ngIf="!pasosFlete.uDesde && (pasosFlete.uDesde !== null) && (pasosFlete.uDesde !== '')">
                         <p class="error-message">Este campo es requerido.</p>
                       </div>
                     </div>
-                    <!-- Repite el mismo patrón para otros campos -->
                     
                     <div (click)="abrirMapa()" class="u-form-group u-form-name u-form-partition-factor-2 u-label-top u-form-group-3">
                       <label for="name-6659" class="u-label">Hasta</label>
                       <input [(ngModel)]="pasosFlete.uHasta" type="text" placeholder="Punto de llegada" id="name-6659" name="name"
                         class="u-border-1 u-border-grey-60 u-input u-input-rectangle" required>
-                      <!-- Validación para campo requerido -->
                       <div *ngIf="!pasosFlete.uHasta && (pasosFlete.uHasta !== null) && (pasosFlete.uHasta !== '')">
                         <p class="error-message">Este campo es requerido.</p>
                       </div>
                     </div>
-                    <!-- Repite el mismo patrón para otros campos -->
                     
                     <div class="u-form-group u-form-name u-label-top u-form-group-4">
                       <label for="name-7156" class="u-label">Cargamento</label>
                       <input [(ngModel)]="pasosFlete.cargamento" type="text" placeholder="Introduzca su nombre" id="name-7156" name="name-1"
                         class="u-border-1 u-border-grey-60 u-input u-input-rectangle" required>
-                      <!-- Validación para campo requerido -->
                       <div *ngIf="!pasosFlete.cargamento && (pasosFlete.cargamento !== null) && (pasosFlete.cargamento !== '')">
                         <p class="error-message">Este campo es requerido.</p>
                       </div>
                     </div>
-                    <!-- Repite el mismo patrón para otros campos -->
                     
                     <div class="u-form-group u-form-partition-factor-2 u-form-select u-label-top u-form-group-6">
                       <label for="select-f8ed" class="u-label">Tipo de vehiculo</label>
@@ -58,7 +51,6 @@
                           xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="16px" height="16px" viewBox="0 0 16 16"
                           style="fill:currentColor;" xml:space="preserve"><polygon class="st0" points="8,12 2,4 14,4 "></polygon></svg>
                       </div>
-                      <!-- Mostrar mensaje de error si la validación de tipoVehiculo falla -->
                       <div *ngIf="validateTipoVehiculo()">
                         <p class="error-message">Seleccione un tipo de vehículo válido.</p>
                       </div>
@@ -75,7 +67,6 @@
                           xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="16px" height="16px" viewBox="0 0 16 16"
                           style="fill:currentColor;" xml:space="preserve"><polygon class="st0" points="8,12 2,4 14,4 "></polygon></svg>
                       </div>
-                      <!-- Mostrar mensaje de error si la validación de ayudantes falla -->
                       <div *ngIf="validateAyudantes()">
                         <p class="error-message">Seleccione la cantidad de ayudantes.</p>
                       </div>
@@ -93,4 +84,4 @@
         </section>  
       </div>
 
-    </ion-content>
+    </ion-content> -->
