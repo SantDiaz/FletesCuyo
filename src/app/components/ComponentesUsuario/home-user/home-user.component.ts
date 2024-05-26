@@ -75,4 +75,9 @@ op: Opiniones = {
   }) 
     }
 
+    opcionNoHabilitada(): void {
+      alert("Esta opción aún no está habilitada");
+  }
+  
+
 }

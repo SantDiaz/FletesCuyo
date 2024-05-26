@@ -96,4 +96,9 @@ export class HomeFleteroComponent implements OnInit {
   }) 
     }
 
+     opcionNoHabilitada(): void {
+      alert("Esta opción aún no está habilitada");
+  }
+  
+
 }

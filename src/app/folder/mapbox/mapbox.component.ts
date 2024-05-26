@@ -100,38 +100,40 @@ export class MapboxComponent implements OnInit {
   
 
 
-
   centerToUserLocation(): void {
     if ('geolocation' in navigator) {
-      // Utiliza el API de geolocalización del navegador para obtener la ubicación del usuario
-      navigator.geolocation.getCurrentPosition((position) => {
-        const userLocation: [number, number] = [position.coords.longitude, position.coords.latitude];
-  
-        // Centra el mapa en la ubicación del usuario
-        this.map.flyTo({
-          center: userLocation, // Ahora TypeScript sabe que es un arreglo válido
-          zoom: 14, // Puedes ajustar el nivel de zoom según tus preferencias
+        // Utiliza el API de geolocalización del navegador para obtener la ubicación del usuario
+        navigator.geolocation.getCurrentPosition((position) => {
+            const userLocation: [number, number] = [position.coords.longitude, position.coords.latitude];
+
+            // Centra el mapa en la ubicación del usuario
+            this.map.flyTo({
+                center: userLocation, // Ahora TypeScript sabe que es un arreglo válido
+                zoom: 14, // Puedes ajustar el nivel de zoom según tus preferencias
+            });
+
+            // Configurar el contenido del popup con clases CSS
+            const popupContent = `
+                <div class="popup-content">
+                    <h1 class="popUp">Haz click en la pantalla para seleccion punto de Inicio y Fin</h1>
+                </div>
+            `;
+
+            // Crear el popup en la ubicación del usuario
+            this.popup = new mapboxgl.Popup({ closeButton: false })
+                .setLngLat(userLocation) // Usar las coordenadas del usuario
+                .setHTML(popupContent)
+                .addTo(this.map);
+        }, (error) => {
+            console.error('Error al obtener la ubicación del usuario', error);
+            // Aquí puedes manejar errores si ocurren al obtener la ubicación del usuario
         });
-  
-        // Configurar el contenido del popup
-        const popupContent = '<H1>Haz click en la pantalla para seleccion punto de Inicio y Fin</H1>' ;
-  
-        // Crear el popup en la ubicación del usuario
-        this.popup = new mapboxgl.Popup({ closeButton: false })
-          .setLngLat(userLocation) // Usar las coordenadas del usuario
-          .setHTML(popupContent)
-          .addTo(this.map);
-      }, (error) => {
-        console.error('Error al obtener la ubicación del usuario', error);
-        // Aquí puedes manejar errores si ocurren al obtener la ubicación del usuario
-      });
     } else {
-      console.error('Geolocalización no soportada en este navegador');
-      // Aquí puedes manejar el caso en el que la geolocalización no esté disponible en el navegador
+        console.error('Geolocalización no soportada en este navegador');
+        // Aquí puedes manejar el caso en el que la geolocalización no esté disponible en el navegador
     }
-  }
-  
-  
+}
+
   
 
   createMarker(coordinates: mapboxgl.LngLat, label: string): mapboxgl.Marker {
