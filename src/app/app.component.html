@@ -14,7 +14,7 @@
 
             <ion-item  *ngIf="login == true " class="menu-item" [routerLink]="['/profile']"   >
               <ion-label >
-                Perfil
+                Cuenta
               </ion-label>
               <ion-icon slot="start" name="person-outline"></ion-icon>
             </ion-item>
@@ -26,12 +26,12 @@
                 </ion-label>
                 <ion-icon slot="start" name="home-outline"></ion-icon>
               </ion-item>
-
+              
               <ion-item *ngIf="rol === 'Usuario' && login == true " class="menu-item" [routerLink]="['/precios']"  >
                 <ion-label  > 
                   Mis pedidos
                 </ion-label>
-                <ion-icon slot="start" name="home-outline"></ion-icon>
+                <ion-icon slot="start"  name="folder-outline"></ion-icon>
               </ion-item>
 
               <ion-item *ngIf="rol === 'Usuario' && login == true " class="menu-item"  [routerLink]="['/fletes']"   >

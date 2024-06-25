@@ -39985,11 +39985,16 @@ a.u-link.u-text-hover-grey-90:hover {
  html { font-size: 16px; }
  /*end-variables base-font-size*/
 
-.button-container {
+ .button-container {
   text-align: center;
   padding: 30px;
 }
-
+.button-container h1,
+.button-container h4,
+.button-container h5 {
+  color: #ffffff; /* Cambia el color del texto a blanco */
+  margin: 10px 0;
+}
 .custom-button {
   margin-right: 20px;
   height: 60px;

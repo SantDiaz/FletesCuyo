@@ -1,31 +1,50 @@
-/* To learn more about this file see: https://angular.io/config/tsconfig. */
+
+// {
+//   "compileOnSave": false,
+//   "compilerOptions": {
+//     "baseUrl": "./",
+//     "outDir": "./dist/out-tsc",
+//     "sourceMap": true,
+//     "declaration": false,
+//     "downlevelIteration": true,
+//     "experimentalDecorators": true,
+//     "moduleResolution": "node",
+//     "importHelpers": true,
+//     "lib": ["ES2022", "dom"]
+//   },
+//   "types": ["node"],
+//   "angularCompilerOptions": {
+//     "enableI18nLegacyMessageIdFormat": false,
+//     "strictInjectionParameters": true,
+//     "strictInputAccessModifiers": true,
+//     "strictTemplates": true
+//   }
+// }
+
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
-    "outDir": "./dist/out-tsc",
-    "sourceMap": true,
-    "declaration": false,
-    "downlevelIteration": true,
-    "experimentalDecorators": true,
-    "moduleResolution": "node",
-    "importHelpers": true,
-    "target": "es2015",
-    "module": "es2020",
-    "lib": ["es2018", "dom"]
+  "baseUrl": "./",
+  "outDir": "./dist/out-tsc",
+  "sourceMap": true,
+  "declaration": false,
+  "downlevelIteration": true,
+  "experimentalDecorators": true,
+  "moduleResolution": "node",
+  "importHelpers": true,
+  "target": "es2022", //2015 estaba
+  "module": "es2020",
+  "lib": ["es2020", "dom"]
   },
   "types":[
-    "node"
+  "node"
   ],
   "angularCompilerOptions": {
-    "enableI18nLegacyMessageIdFormat": false,
-    "strictInjectionParameters": true,
-    "strictInputAccessModifiers": true,
-    "strictTemplates": true
+  "enableI18nLegacyMessageIdFormat": false,
+  "strictInjectionParameters": true,
+  "strictInputAccessModifiers": true,
+  "strictTemplates": true
+  },
+  "exclude": ["node_modules", "dist"]
+
   }
-}
-
-
-
-
-
