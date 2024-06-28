@@ -69,7 +69,7 @@ export class Paso1UComponent implements OnInit {
   }
 
   volver(){
-    this.routes.navigate(['/registrarse']);
+    this.routes.navigate(['/login']);
   }
 
 

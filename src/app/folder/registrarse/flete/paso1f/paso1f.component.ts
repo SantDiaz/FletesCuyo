@@ -68,7 +68,7 @@ export class Paso1fComponent implements OnInit {
   }
 
   volver(){
-    this.routes.navigate(['/registrarse']);
+    this.routes.navigate(['/login']);
   }
 
   customEmailValidator(value: string): { [key: string]: any } | null {
