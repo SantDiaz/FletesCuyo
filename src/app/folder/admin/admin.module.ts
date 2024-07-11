@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AdminComponent } from './admin.component';
+// import { AdminComponent } from './admin.component';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
@@ -8,7 +8,7 @@ import { IonicModule } from '@ionic/angular';
 
 @NgModule({
   declarations: [
-    AdminComponent,
+    // AdminComponent,
   ],
   imports: [
     CommonModule,
@@ -16,7 +16,7 @@ import { IonicModule } from '@ionic/angular';
     IonicModule,
   ],
   exports: [
-    AdminComponent,
+    // AdminComponent,
   ]
 })
 export class AdminModule { }

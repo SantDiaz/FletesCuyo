@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoadingController, ToastController } from '@ionic/angular';
+import { LoadingController, ToastController, ModalController } from '@ionic/angular'; // Import ModalController
 import { DatosFlete, UserF, UserU, respuesta } from 'src/app/folder/models/models';
 import { AuthService } from 'src/app/folder/services/auth.service';
 import { FirestoreService } from 'src/app/folder/services/firestore.service';
@@ -19,8 +19,10 @@ export class PedidosFinalizadosComponent implements OnInit {
   rol: 'Usuario' | 'Fletero'| 'Admin' = null;
   precios = []
   private formularioEnviado: boolean = false;
-// Variable booleana para controlar la visibilidad del botón
-botonVisible: boolean = true;
+  autenticandoUsuario: boolean = false; // Define autenticandoUsuario
+  isModalOpen: boolean = false; // Define isModalOpen
+  respuestas: any[] = []; // Define respuestas
+  botonVisible: boolean = true;
   constructor(
           private auth: AuthService,
           private router: Router,
@@ -32,6 +34,7 @@ botonVisible: boolean = true;
           private loadingCtrl: LoadingController, 
           private fleteroService: FleteroServiceService,
           private interaction : InteractionService,
+          private modalController: ModalController,
 
 
   ) { }
@@ -119,5 +122,8 @@ botonVisible: boolean = true;
     toast.present();
   }
 
+  async cerrar(data: any) {
+    await this.modalController.dismiss(data);
+  }
 
 }

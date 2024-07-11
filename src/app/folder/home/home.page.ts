@@ -21,7 +21,7 @@ menuVisible: boolean = false;
 itemsU = [];
 itemsF = [];
 DatoVehicular: datosVehiculo;
-valueSelected:string = "1";
+valueSelected: number = 1; // Cambiado a tipo number
   constructor( private auth: AuthService,
                private router: Router,
                private interaction: InteractionService,

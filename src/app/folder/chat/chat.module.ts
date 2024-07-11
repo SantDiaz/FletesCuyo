@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ChatComponent } from './chat.component';
+// import { ChatComponent } from './chat.component';
 import { IonicModule } from '@ionic/angular';
 import { HomePageModule } from '../home/home.module';
 import { HomePageRoutingModule } from '../home/home-routing.module';
@@ -10,7 +10,7 @@ import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
-    ChatComponent,
+    // ChatComponent,
   ],
   imports: [
     CommonModule,
@@ -19,7 +19,7 @@ import { FormsModule } from '@angular/forms';
     FormsModule
   ],
   exports: [
-    ChatComponent,
+    // ChatComponent,
   ]
 })
 export class ChatModule { }

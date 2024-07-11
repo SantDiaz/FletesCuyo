@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AdminComponent } from '../admin/admin.component';
-import { ChatComponent } from '../chat/chat.component';
-import { HomeLogComponent } from '../homeF/home-log.component';
+// import { AdminComponent } from '../admin/admin.component';
+// import { ChatComponent } from '../chat/chat.component';
+// import { HomeLogComponent } from '../homeF/home-log.component';
 import { LoginComponent } from '../login/login.component';
 import { ProfileComponent } from '../profile/profile.component';
 import { FletesPage } from './fletes.page';
 import { Paso1Component } from './pasos/paso1/paso1.component';
 // import { Paso2Component } from './pasos/paso2/paso2.component';
-import { Paso3Component } from './pasos/paso3/paso3.component';
+// import { Paso3Component } from './pasos/paso3/paso3.component';
 import { AngularFireAuthGuard } from '@angular/fire/compat/auth-guard';
 import { map } from 'rxjs/operators';
 import { canActivate } from '@angular/fire/compat/auth-guard';
@@ -22,10 +22,10 @@ import { ProfileUsuarioComponent } from 'src/app/components/ComponentesUsuario/p
 import { PreciosComponent } from './pasos/precios/precios.component';
 import { RegistrarsePage } from '../registrarse/registrarse.page';
 // import { Paso1fComponent } from '../registrarse/flete/paso1f/paso1f.component';
-import { Paso1UComponent } from '../registrarse/user/paso1-u/paso1-u.component';
-import { Paso2UComponent } from '../registrarse/user/paso2-u/paso2-u.component';
-import { Paso3UComponent } from '../registrarse/user/paso3-u/paso3-u.component';
-import { Paso4UComponent } from '../registrarse/user/paso4-u/paso4-u.component';
+// import { Paso1UComponent } from '../registrarse/user/paso1-u/paso1-u.component';
+// import { Paso2UComponent } from '../registrarse/user/paso2-u/paso2-u.component';
+// import { Paso3UComponent } from '../registrarse/user/paso3-u/paso3-u.component';
+// import { Paso4UComponent } from '../registrarse/user/paso4-u/paso4-u.component';
 import { IniciarAppComponent } from 'src/app/components/ComponentesFleteros/iniciar-app/iniciar-app.component';
 import { MapboxComponent } from '../mapbox/mapbox.component';
 import { PedidosFinalizadosComponent } from './pasos/precios/pedidos-finalizados/pedidos-finalizados.component';
@@ -74,19 +74,18 @@ const routes: Routes = [
     path: 'regi',
     component: RegistrarsePage,
   },
-  {
-    path: 'chat',
-    component: ChatComponent,
-  },
-  {
-    path: 'chat',
-    component: ChatComponent, 
-  },
-  {
-    path: 'admin',
-    component: AdminComponent, 
-    // ...canActivate(onlyAdmin) 
-  },
+  // {
+  //   path: 'chat',
+  //   component: ChatComponent,
+  // },
+  // {
+  //   path: 'chat',
+  //   component: ChatComponent, 
+  // },
+  // {
+  //   path: 'admin',
+  //   component: AdminComponent, 
+  // },
   {
     path: 'profile',
     component: ProfileComponent, canActivate: [AngularFireAuthGuard]

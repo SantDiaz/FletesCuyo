@@ -10,9 +10,8 @@
 
 
 
+<!-- 
 
-
-  <!-- ADMIN -->
   <div *ngIf="login == true && rol == 'Admin'">
     <ion-toolbar>
       <ion-segment (ionChange)="segmentChanged($event)" [value]="valueSelected">
@@ -54,7 +53,7 @@
 
 
 
-    <div *ngIf="valueSelected == 2">
+    <div *ngIf="valueSelected === 2">
       <table class="fleteros-table">
         <thead>
           <tr>
@@ -77,7 +76,6 @@
             <td>{{ itemFlete.verificado }}</td>
             <td>
               <div class="options-button" (click)="showOptionsMenu(itemFlete)">
-                <!-- Icono de tres puntos -->
                 <ion-icon name="ellipsis-vertical"></ion-icon>
               </div>
               <div class="menu" *ngIf="itemFlete.showOptions">
@@ -93,9 +91,8 @@
         <ion-infinite-scroll-content></ion-infinite-scroll-content>
       </ion-infinite-scroll>
     </div>
-  </div>
+  </div> -->
   
   
-  <!-- <app-map-screen></app-map-screen> -->
 </ion-content>
 <app-tabs-u ></app-tabs-u>

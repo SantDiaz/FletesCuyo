@@ -1,181 +1,181 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { AngularFireStorage } from '@angular/fire/compat/storage';
-import { Router } from '@angular/router';
-import { IonModal, LoadingController, ToastController } from '@ionic/angular';
-import { UserF, datosVehiculo, tipoVehiculo } from 'src/app/folder/models/models';
-import { AuthService } from 'src/app/folder/services/auth.service';
-import { FirestoreService } from 'src/app/folder/services/firestore.service';
-import { InteractionService } from 'src/app/folder/services/interaction.service';
-import { NuevoService } from 'src/app/folder/services/nuevo.service';
+// import { Component, OnInit, ViewChild } from '@angular/core';
+// import { AngularFireAuth } from '@angular/fire/compat/auth';
+// import { AngularFirestore } from '@angular/fire/compat/firestore';
+// import { AngularFireStorage } from '@angular/fire/compat/storage';
+// import { Router } from '@angular/router';
+// import { IonModal, LoadingController, ToastController } from '@ionic/angular';
+// import { UserF, datosVehiculo, tipoVehiculo } from 'src/app/folder/models/models';
+// import { AuthService } from 'src/app/folder/services/auth.service';
+// import { FirestoreService } from 'src/app/folder/services/firestore.service';
+// import { InteractionService } from 'src/app/folder/services/interaction.service';
+// import { NuevoService } from 'src/app/folder/services/nuevo.service';
 
-@Component({
-  selector: 'app-paso4f',
-  templateUrl: './paso4f.component.html',
-  styleUrls: ['./paso4f.component.scss'],
-})
-export class Paso4fComponent implements OnInit {
+// @Component({
+//   selector: 'app-paso4f',
+//   templateUrl: './paso4f.component.html',
+//   styleUrls: ['./paso4f.component.scss'],
+// })
+// export class Paso4fComponent implements OnInit {
 
-  @ViewChild(IonModal) modal: IonModal;
+//   @ViewChild(IonModal) modal: IonModal;
 
-  name: string;
-  message = "putoss";
-  selectedPatenteFile: File | null = null;
-  dniImage: File | null = null;
-  carnetImage: File | null = null;
-  registerF: UserF = {
-    uid: null,
-    nombre: null,
-    apellido: null,
-    dni: null,
-    edad: null,
-    domicilio: null,
-    telefono: null,
-    image: null,
-    email: null,
-    password: null,
-    verificado: false,
-    habilitado: false,
-    perfil:  'Fletero',
-    datosVehiculos: null,
-    recomendacion: null,
-  }
-  Datovehicular: datosVehiculo = {
-    uid: null,
-    tipoVehiculo: null,
-    marca: null,
-    modelo: null,
-    patente: null,
-    imagePatente: null,
-    imageDni: null,
-    imageCarnet: null,
-    imageDniDorzal: null,
-    imageCarnetDorzal: null
-  }
+//   name: string;
+//   message = "putoss";
+//   selectedPatenteFile: File | null = null;
+//   dniImage: File | null = null;
+//   carnetImage: File | null = null;
+//   registerF: UserF = {
+//     uid: null,
+//     nombre: null,
+//     apellido: null,
+//     dni: null,
+//     edad: null,
+//     domicilio: null,
+//     telefono: null,
+//     image: null,
+//     email: null,
+//     password: null,
+//     verificado: false,
+//     habilitado: false,
+//     perfil:  'Fletero',
+//     datosVehiculos: null,
+//     recomendacion: null,
+//   }
+//   Datovehicular: datosVehiculo = {
+//     uid: null,
+//     tipoVehiculo: null,
+//     marca: null,
+//     modelo: null,
+//     patente: null,
+//     imagePatente: null,
+//     imageDni: null,
+//     imageCarnet: null,
+//     imageDniDorzal: null,
+//     imageCarnetDorzal: null
+//   }
 
-loading: any;
-vehiculo = tipoVehiculo;
+// loading: any;
+// vehiculo = tipoVehiculo;
 
-  constructor(private routes: Router,
-    private authS: AuthService,      
-    private db: NuevoService,
-    private interaction: InteractionService,    
-    private firestore: FirestoreService,    
-    private afAuth: AngularFireAuth,
-    private router: Router,
-    private storage: AngularFireStorage
+//   constructor(private routes: Router,
+//     private authS: AuthService,      
+//     private db: NuevoService,
+//     private interaction: InteractionService,    
+//     private firestore: FirestoreService,    
+//     private afAuth: AngularFireAuth,
+//     private router: Router,
+//     private storage: AngularFireStorage
 
-  ) { }
+//   ) { }
 
-  ngOnInit() {
-  } 
+//   ngOnInit() {
+//   } 
 
-  onPatenteSelected(event: any): void {
-    this.uploadImageToStorage(event.target.files[0], 'patente');
-  }
+//   onPatenteSelected(event: any): void {
+//     this.uploadImageToStorage(event.target.files[0], 'patente');
+//   }
   
-  onDniSelected(event: any): void {
-    this.uploadImageToStorage(event.target.files[0], 'dni');
-  }
+//   onDniSelected(event: any): void {
+//     this.uploadImageToStorage(event.target.files[0], 'dni');
+//   }
 
-  onDniDorzalSelected(event: any): void {
-    this.uploadImageToStorage(event.target.files[0], 'dniDorzal');
-  }
+//   onDniDorzalSelected(event: any): void {
+//     this.uploadImageToStorage(event.target.files[0], 'dniDorzal');
+//   }
   
-  onCarnetSelected(event: any): void {
-    this.uploadImageToStorage(event.target.files[0], 'carnet');
-  }
-  onCarnetDorzalSelected(event: any): void {
-    this.uploadImageToStorage(event.target.files[0], 'carnetDorzal');
-  }
+//   onCarnetSelected(event: any): void {
+//     this.uploadImageToStorage(event.target.files[0], 'carnet');
+//   }
+//   onCarnetDorzalSelected(event: any): void {
+//     this.uploadImageToStorage(event.target.files[0], 'carnetDorzal');
+//   }
   
   
  
 
 
 
-  async uploadImageToStorage(file: File | null, imageType: string) {
-    if (!file) {
-      return; // Asegúrate de manejar el caso en que el archivo sea nulo
-    }
+//   async uploadImageToStorage(file: File | null, imageType: string) {
+//     if (!file) {
+//       return; // Asegúrate de manejar el caso en que el archivo sea nulo
+//     }
   
-    try {
-      const reader = new FileReader();
-      reader.onload = async (event) => {
-        const fileDataUrl: string = event.target.result as string;
+//     try {
+//       const reader = new FileReader();
+//       reader.onload = async (event) => {
+//         const fileDataUrl: string = event.target.result as string;
   
-        const timestamp = new Date().getTime().toString();
-        const imageName = `${timestamp}.jpg`;
+//         const timestamp = new Date().getTime().toString();
+//         const imageName = `${timestamp}.jpg`;
   
-        const storageRef = this.storage.ref(`images/${imageName}`);
-        const uploadTask = await storageRef.putString(fileDataUrl, 'data_url');
-        const downloadUrl = await uploadTask.ref.getDownloadURL();
+//         const storageRef = this.storage.ref(`images/${imageName}`);
+//         const uploadTask = await storageRef.putString(fileDataUrl, 'data_url');
+//         const downloadUrl = await uploadTask.ref.getDownloadURL();
   
-        // Asigna la URL de descarga al campo correspondiente según el tipo de imagen
-        if (imageType === 'patente') {
-          this.Datovehicular.imagePatente = downloadUrl;
-        } else if (imageType === 'dni') {
-          this.Datovehicular.imageDni = downloadUrl;
-        } else if (imageType === 'carnet') {
-          this.Datovehicular.imageCarnet = downloadUrl;
-        } else if (imageType === 'dniDorzal') {
-          this.Datovehicular.imageDniDorzal = downloadUrl;
-        } else if (imageType === 'carnetDorzal') {
-          this.Datovehicular.imageCarnetDorzal = downloadUrl;
-        }
+//         // Asigna la URL de descarga al campo correspondiente según el tipo de imagen
+//         if (imageType === 'patente') {
+//           this.Datovehicular.imagePatente = downloadUrl;
+//         } else if (imageType === 'dni') {
+//           this.Datovehicular.imageDni = downloadUrl;
+//         } else if (imageType === 'carnet') {
+//           this.Datovehicular.imageCarnet = downloadUrl;
+//         } else if (imageType === 'dniDorzal') {
+//           this.Datovehicular.imageDniDorzal = downloadUrl;
+//         } else if (imageType === 'carnetDorzal') {
+//           this.Datovehicular.imageCarnetDorzal = downloadUrl;
+//         }
         
-      };
+//       };
   
-      reader.readAsDataURL(file);
-    } catch (error) {
-      console.error('Error al subir la imagen a Firebase Storage:', error);
-      // Manejar el error según tus necesidades (por ejemplo, mostrar un mensaje al usuario)
-    }
-  }
+//       reader.readAsDataURL(file);
+//     } catch (error) {
+//       console.error('Error al subir la imagen a Firebase Storage:', error);
+//       // Manejar el error según tus necesidades (por ejemplo, mostrar un mensaje al usuario)
+//     }
+//   }
   
   
   
-  async siguiente() {
-    // this.interaction.presentLoading('Guardando datos Vehiculares...');
-    this.authS.stateUser<UserF>().subscribe((res) => {
-      const path2 = `Fleteros`;
-      this.firestore.getDoc<UserF>(path2, res.uid).subscribe((res1) => {
+//   async siguiente() {
+//     // this.interaction.presentLoading('Guardando datos Vehiculares...');
+//     this.authS.stateUser<UserF>().subscribe((res) => {
+//       const path2 = `Fleteros`;
+//       this.firestore.getDoc<UserF>(path2, res.uid).subscribe((res1) => {
         
 
-      this.registerF.uid = res.uid;
-      console.log("dad", res.uid);
-      const path = `Fleteros/${res.uid}/DatosVehiculares`;
-      this.firestore.getDoc<datosVehiculo>(path, res.uid).subscribe((res2) => {
+//       this.registerF.uid = res.uid;
+//       console.log("dad", res.uid);
+//       const path = `Fleteros/${res.uid}/DatosVehiculares`;
+//       this.firestore.getDoc<datosVehiculo>(path, res.uid).subscribe((res2) => {
 
-        const datosVehicularesConImagen = {
-            uid: res2.uid,
-            tipoVehiculo: res2.tipoVehiculo,
-            marca: res2.marca,
-            modelo: res2.modelo,
-            patente: res2.patente,
-            imageDni: this.Datovehicular.imageDni,
-            imageCarnet: this.Datovehicular.imageCarnet,
-            imageDniDorzal: this.Datovehicular.imageDniDorzal,
-            imageCarnetDorzal: this.Datovehicular.imageCarnetDorzal,
-            patenteImage: this.Datovehicular.imagePatente,
-            verificado: res1.verificado = true,
-            //  dniImage: this.Datovehicular.imageDni,
-            };
+//         const datosVehicularesConImagen = {
+//             uid: res2.uid,
+//             tipoVehiculo: res2.tipoVehiculo,
+//             marca: res2.marca,
+//             modelo: res2.modelo,
+//             patente: res2.patente,
+//             imageDni: this.Datovehicular.imageDni,
+//             imageCarnet: this.Datovehicular.imageCarnet,
+//             imageDniDorzal: this.Datovehicular.imageDniDorzal,
+//             imageCarnetDorzal: this.Datovehicular.imageCarnetDorzal,
+//             patenteImage: this.Datovehicular.imagePatente,
+//             verificado: res1.verificado = true,
+//             //  dniImage: this.Datovehicular.imageDni,
+//             };
 
-            const path3 = `Fleteros/${res.uid}/DatosVehiculares/${res.uid}`;
-            this.db.updateDocument(path3, datosVehicularesConImagen).then(_ => {
-              // Realiza las acciones necesarias después de actualizar
+//             const path3 = `Fleteros/${res.uid}/DatosVehiculares/${res.uid}`;
+//             this.db.updateDocument(path3, datosVehicularesConImagen).then(_ => {
+//               // Realiza las acciones necesarias después de actualizar
               
-              setTimeout(() => {
-                this.router.navigate(['/home']);
-              }, 0); // Change the delay time as needed            }).catch(error => {
-            });
-            })
-      })
-          });
-  }
+//               setTimeout(() => {
+//                 this.router.navigate(['/home']);
+//               }, 0); // Change the delay time as needed            }).catch(error => {
+//             });
+//             })
+//       })
+//           });
+//   }
   
 
-}
+// }
   
