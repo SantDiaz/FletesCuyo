@@ -33,7 +33,7 @@ provincia = provincias;
 fechaBase: Date;
 tiempoTranscurrido: string; 
 items = [];
-valueSelected:string = "1";
+valueSelected:any = "1";
 pasosFlete: DatosFlete={
   nombre: '',
   apellido: '',
@@ -163,8 +163,14 @@ constructor(private routes: Router,
       // Si estamos en el segundo paso, envía los datos
     }
   }
-  
 
+  btn1(){
+      this.valueSelected = '1'; // Asegúrate de que el valor asignado sea una cadena
+  }
+  
+  btn2(){
+      this.valueSelected = '2'; // Asegúrate de que el valor asignado sea una cadena
+  }
 
   // enviarDatos() {
   //   console.log(first)

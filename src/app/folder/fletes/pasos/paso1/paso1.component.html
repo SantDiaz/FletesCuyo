@@ -1,10 +1,10 @@
 <ion-content class="background2">
-  <ion-segment (ionChange)="segmentChanged($event)" [value]="valueSelected" color="dark">
-    <ion-segment-button value="1">
+  <ion-segment [value]="valueSelected" color="dark">
+    <ion-segment-button (click)="btn1()" value="1">
       <ion-icon name="calendar-number-outline"></ion-icon>
       <ion-label>Fecha y hora</ion-label>
     </ion-segment-button>
-    <ion-segment-button value="2">
+    <ion-segment-button (click)="btn2()" value="2">
       <ion-icon name="documents-outline"></ion-icon>
       <ion-label>Datos del flete</ion-label>
     </ion-segment-button>
