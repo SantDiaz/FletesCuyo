@@ -32,9 +32,9 @@ export class AuthService {
   }
 
 
-  registerF(registerU: UserF, habilitado: boolean): Promise<void> {
+  registerF(registerF: UserF, habilitado: boolean): Promise<void> {
     return new Promise<void>((resolve, reject) => {
-      this.authS.createUserWithEmailAndPassword(registerU.email, registerU.password)
+      this.authS.createUserWithEmailAndPassword(registerF.email, registerF.password)
         .then((result) => {
           const user = result.user;
   
@@ -43,8 +43,8 @@ export class AuthService {
           const docRef = collectionRef.doc(user.uid); // Utiliza el UID del usuario como ID del documento
           docRef.set({
             habilitado: habilitado,
-            email: registerU.email,
-            password: registerU.password,
+            email: registerF.email,
+            password: registerF.password,
             perfil: 'Fletero'
             // Otras propiedades que desees guardar
           }).then(() => {
