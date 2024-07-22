@@ -24,6 +24,27 @@
     z-index: 1; /* Asegura que el botón esté por encima del mapa */
   }
   
+/* Clase para el botón rojo en la esquina superior derecha */
+.btn-close {
+  position: absolute;
+  top: 10px; /* Ajusta la distancia desde la parte superior según tus necesidades */
+  right: 10px; /* Ajusta la distancia desde la derecha según tus necesidades */
+  z-index: 1; /* Asegura que el botón esté por encima del mapa */
+  background-color: red; /* Color de fondo rojo */
+  border: none; /* Sin borde */
+  color: white; /* Color del texto en blanco */
+  padding: 7px 10px; /* Espaciado interno */
+  font-size: 16px; /* Tamaño del texto */
+  border-radius: 5px; /* Bordes redondeados */
+  cursor: pointer; /* Cursor de puntero */
+}
+
+/* Estilo adicional para cuando el botón está en foco o al hacer clic */
+.btn-close:focus,
+.btn-close:hover {
+  background-color: darkred; /* Color de fondo más oscuro al hacer hover o foco */
+  outline: none; /* Sin borde de enfoque */
+}
 
   .btn-success {
     position: absolute;

@@ -1,32 +1,21 @@
 <section *ngIf="DatosU">
   <div class="card">
     <div class="ds-top"></div>
-    <!-- Icono de lápiz para editar la foto de perfil -->
     <div (click)="openFileInput()" class="edit-icon">
       <ion-text>Cambiar Foto</ion-text>
       <ion-icon name="create"></ion-icon>
     </div>
     <input #fileInput type="file" style="display: none" accept="image/jpeg, image/png, image/gif" (change)="handleFileInput($event)">
     
-    
     <div class="avatar-holder">
       <img [src]="DatosU?.image" *ngIf="DatosU">
     </div>
-    <div class="name">
-      <h2><a  target="_blank">{{DatosU.nombre}} {{DatosU.apellido}}</a></h2>
-      <h3 title="Followers"><i class="fas fa-users"></i> <span class="followers">Edad: {{DatosU.edad}} años</span></h3>
-      <h2>Domicilio: <i class="fa fa-code" aria-hidden="true"></i></h2>
-      <div class="skill html">
-        <h3><i class="fab fa-html5"></i> {{DatosU.domicilio}} </h3>
-      </div>
-      <h2>Correo Electronico: <i class="fa fa-code" aria-hidden="true"></i></h2>
-      <div *ngIf="DatosG" class="skill html">
-        <h3><i class="fab fa-html5"></i> {{DatosG.email}} </h3>
-      </div>
-      <h2>Telefono: <i class="fa fa-code" aria-hidden="true"></i></h2>
-      <div class="skill html">
-        <h3><i class="fab fa-html5"></i> {{DatosU.telefono}} </h3>
-      </div>
+    <div class="info">
+      <h2>{{DatosU.nombre}} {{DatosU.apellido}}</h2>
+      <p>Edad: {{DatosU.edad}} años</p>
+      <p>Domicilio: {{DatosU.domicilio}}</p>
+      <p>Correo Electrónico: {{DatosG?.email}}</p>
+      <p>Teléfono: {{DatosU.telefono}}</p>
     </div>
   </div>
 </section>

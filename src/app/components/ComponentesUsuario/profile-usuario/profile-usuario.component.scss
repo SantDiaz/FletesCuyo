@@ -6,63 +6,74 @@
   bottom: 0;
   left: 0;
   width: 400px;
-  height: 650px;
-  border-radius: 20px; /* Ajustado a un valor proporcional */
-  box-shadow: 0 15px 37.5px 7.5px rgba(0, 0, 0, 0.2); /* Ajustado a valores proporcionales */
+  height: auto; /* Ajuste automático de la altura */
+  border-radius: 20px;
+  box-shadow: 0 15px 37.5px 7.5px rgba(0, 0, 0, 0.2);
   background: #94f1b4;
   overflow: hidden;
+  padding-bottom: 20px; /* Añadir padding para espaciar el contenido */
 }
 
 .ds-top {
-  position: absolute;
-  margin: auto;
-  top: 0;
-  right: 0;
-  left: 0;
-  width: 400px; /* Ajustado al nuevo ancho */
+  position: relative;
+  width: 100%;
   height: 80px;
   background: rgb(27, 132, 8);
-  animation: dsTop 1.5s;
+}
+
+.edit-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 999;
+  color: white; /* Color del texto del icono */
+  display: flex;
+  align-items: center;
+  gap: 5px; /* Espaciado entre el texto y el icono */
 }
 
 .avatar-holder {
-  position: absolute;
-  margin: auto;
-  top: 60px; /* Ajustado al nuevo valor proporcional */
-  right: 0;
-  left: 0;
-  width: 150px; /* Ajustado al nuevo valor proporcional */
-  height: 150px; /* Ajustado al nuevo valor proporcional */
+  position: relative;
+  margin: 20px auto; /* Centrar la imagen verticalmente */
+  width: 150px;
+  height: 150px;
   border-radius: 50%;
   box-shadow: 0 0 0 7.5px #151515,
-              inset 0 0 0 7.5px #000000,
-              inset 0 0 0 7.5px #000000,
-              inset 0 0 0 7.5px #000000,
               inset 0 0 0 7.5px #000000;
   background: white;
   overflow: hidden;
-  animation: mvTop 1.5s;
+  display: flex; /* Usar flexbox para centrar la imagen */
+  align-items: center;
+  justify-content: center;
 }
 
-.name {
-  color: #000000;
-  position: absolute;
-  margin: auto;
-  top: -90px; /* Ajustado al nuevo valor proporcional */
-  right: 0;
-  bottom: 0;
-  left: 0;
-  width: inherit;
-  height: 40px;
-  text-align: center;
-  animation: fadeIn 2s ease-in;
+.avatar-holder img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.info {
+  text-align: center; /* Centrar el texto */
+  padding: 20px; /* Añadir padding para espaciar el contenido */
+}
+
+.info h2 {
+  margin-bottom: 10px;
+  color: #000;
+}
+
+.info p {
+  margin: 5px 0;
+  color: #333;
 }
 
 .button {
   position: absolute;
   margin: auto;
-  padding: 16px; /* Ajustado al nuevo valor proporcional */
-  top: 30px; /* Ajustado al nuevo valor proporcional */
+  padding: 16px;
+  top: 30px;
   right: 0;
   bottom: 0;
   left: 0;
@@ -75,7 +86,7 @@
 .ds-info {
   position: absolute;
   margin: auto;
-  top: 160px; /* Ajustado al nuevo valor proporcional */
+  top: 160px;
   bottom: 0;
   right: 0;
   left: 0;
@@ -87,62 +98,12 @@
 .ds-skill {
   position: absolute;
   margin: auto;
-  bottom: 25px; /* Ajustado al nuevo valor proporcional */
+  bottom: 25px;
   right: 0;
   left: 20px;
-  width: 300px; /* Ajustado al nuevo valor proporcional */
-  height: 150px; /* Ajustado al nuevo valor proporcional */
-  animation: mvBottom 1.5s;
+  width: 300px;
+  height: 150px;
 }
-
-    h6 {
-      margin-bottom: 5px;
-      font-weight: 700;
-      text-transform: uppercase;
-      color: crimson;
-    }
-    .skill {
-      h6 {
-        font-weight: 400;
-        font-size: 8px;
-        letter-spacing: 0.05em;
-        margin: 4px 0;
-        color: white;
-      }
-      .fab {
-        color: crimson;
-        font-size: 14px;
-      }
-      .bar {
-        height: 5px;
-        background: crimson;
-        text-align: right;
-        p {
-          color: white;
-          font-size: 8px;
-          padding-top: 5px;
-          animation: fadeIn 5s;
-        }
-        &:hover {
-          background: white;
-        }
-      }
-      .bar-html {
-        width: 95%;
-        animation: htmlSkill 1s;
-        animation-delay: .4s;
-      }
-      .bar-css {
-        width: 90%;
-        animation: cssSkill 2s;
-        animation-delay: .4s;
-      }
-      .bar-js {
-        width: 75%;
-        animation: jsSkill 3s;
-        animation-delay: .4s;
-      }
-    }
 
 @keyframes fadeInMove {
   0% {
@@ -193,24 +154,4 @@
 .following {
   color: white;
   background: crimson;
-}
-.card {
-  position: relative; /* Cambiado a relativo */
-  width: 400px;
-  height: 650px;
-}
-
-.edit-icon {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  z-index: 999; /* Asegúrate de que el índice Z sea mayor que el de otros elementos */
-}
-
-.avatar-holder {
-  /* Estilos para el contenedor de la imagen */
-}
-
-.name {
-  /* Estilos para el nombre */
 }
