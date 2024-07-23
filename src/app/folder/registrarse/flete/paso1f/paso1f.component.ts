@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { IonModal } from '@ionic/angular';
-import { UserF } from 'src/app/folder/models/models';
+import { datosVehiculo, tipoVehiculo, UserF } from 'src/app/folder/models/models';
 import { AuthService } from 'src/app/folder/services/auth.service';
 import { FirestoreService } from 'src/app/folder/services/firestore.service';
 import { InteractionService } from 'src/app/folder/services/interaction.service';
@@ -41,6 +41,23 @@ export class Paso1fComponent implements OnInit {
     recomendacion: null,
   }
 
+  
+  Datovehicular: datosVehiculo = {
+    uid: null,
+    tipoVehiculo: null,
+    marca: null,
+    ano: null,
+    modelo: null,
+    patente: '',
+    imagePatente: null,
+    imageDni: null,
+    imageCarnet: null,
+    imageDniDorzal: null,
+    imageCarnetDorzal: null
+  }
+
+loading: any;
+vehiculo = tipoVehiculo;
   
   prefijosTelefonicos = [
     "11", "351", "3543", "379", "370", "221", "380", "261", "299", "343",
@@ -176,9 +193,12 @@ export class Paso1fComponent implements OnInit {
           .subscribe(res => {
             this.db.stopLoading();
             // Your code here
-            
+            if(!res){
+              this.interaction.closeLoading();
+              this.interaction.presentToast('Falta completar datos.');
+
+            }
             const path = `Fleteros`;
-      
             // Check if a document for this user already exists
             this.firestore.getDoc<UserF>(path, res.uid).subscribe(res2 => {
               const datosPersonales = {
@@ -194,7 +214,9 @@ export class Paso1fComponent implements OnInit {
                 verificado: false, // Remove this line or set it to the desired value
                 habilitado: false,
               };
-    
+              
+
+  
               // Define the path for saving the personal data
               const path3 = `Fleteros`;
               // Update or create the document as needed
@@ -203,11 +225,13 @@ export class Paso1fComponent implements OnInit {
                 this.registerF.image = this.registerF.image;
                   this.interaction.closeLoading();
                   this.formularioEnviado = true; // Establece la bandera en true
-                  this.router.navigate(['/home']);
+                  this.valueSelected = '3'; // Asegúrate de que el valor asignado sea una cadena
                 
                 return
+              } else{
+                  this.interaction.closeLoading();
               }
-    
+
             });
           });
       
@@ -340,4 +364,137 @@ export class Paso1fComponent implements OnInit {
       this.valueSelected = '2'; // Asegúrate de que el valor asignado sea una cadena
   }
   
+
+  
+  btn3(){
+    this.valueSelected = '3'; // Asegúrate de que el valor asignado sea una cadena
+}
+
+
+
+
+
+
+
+
+//paso 3 vehiculos
+
+
+
+
+  
+  
+  
+async enviarF() {
+  // Validate the form fields
+  if (this.validateForm()) {
+    // If the form is valid, proceed with saving the data
+    this.authS.stateUser<UserF>().subscribe((res) => {
+      this.interaction.closeLoading();
+          const id = res.uid;
+          const path2 = `Fleteros/${res.uid}/DatosVehiculares`;
+
+          // Actualiza la propiedad patenteImage con la representación en base64
+          const datosVehicularesConImagen = {
+            ...this.Datovehicular,
+          };
+
+          // Ahora, puedes guardar todo el objeto en la colección
+          this.firestore.createDocument<datosVehiculo>(datosVehicularesConImagen, path2, id)
+            this.interaction.presentToast('Registrado con éxito');
+              this.router.navigate(['/home']);
+
+          });
+  } else {
+    // If the form is not valid, display an error messagjjje or take appropriate action
+    console.log("Form validation failed. Please complete all fields correctly.");
+    // You can also display a toast or other error message to the user.
+  }
+}
+
+
+
+validateForm(): boolean {
+  
+  // Validación para el campo tipoVehiculo
+  if (!this.Datovehicular.tipoVehiculo || 
+      (this.Datovehicular.tipoVehiculo !== 'Camioneta' &&
+          this.Datovehicular.tipoVehiculo !== 'Camion' &&
+          this.Datovehicular.tipoVehiculo !== 'Grua' &&
+          this.Datovehicular.tipoVehiculo !== 'Furgonetas' &&
+          this.Datovehicular.tipoVehiculo !== 'Camiones frigoríficos' &&
+          this.Datovehicular.tipoVehiculo !== 'Otro...')) {
+  return false; // Validación fallida para el campo tipoVehiculo
+}
+
+  // Validación para el campo marca
+  if (!this.Datovehicular.marca || this.Datovehicular.marca.trim() === '') {
+    return false; // Validación fallida para el campo marca
+  }
+
+  // Validación para el campo modelo
+  if (!this.Datovehicular.modelo || this.Datovehicular.modelo.trim() === '') {
+    return false; // Validación fallida para el campo modelo
+  }
+
+  // Validación para el campo patente
+  const patentePattern = /^[A-Z0-9]{6,8}$/; // Example pattern for a 6-character alphanumeric patente
+  if (!this.Datovehicular.patente || !patentePattern.test(this.Datovehicular.patente)) {
+    return false; // Validación fallida para el campo patente
+  }
+
+  return (
+    !this.validateTipoVehiculo() &&
+    !this.validateMarca() &&
+    !this.validateModelo() 
+    &&  !this.validatePatente()
+  );  }
+
+
+
+
+
+
+
+  validateTipoVehiculo() {
+    // Check if the tipoVehiculo field is not one of the allowed types
+    const allowedTypes: ('Camioneta' | 'Camion' | 'Grua' | 'Furgonetas' | 'Camiones frigoríficos' | 'Otro...' )[] = ['Camioneta' , 'Camion' , 'Grua' , 'Furgonetas' , 'Camiones frigoríficos' , 'Otro...' ];
+    return !this.Datovehicular.tipoVehiculo || !allowedTypes.includes(this.Datovehicular.tipoVehiculo);
+  }
+  
+  
+  validateMarca() {
+    // Check if the marca field is empty or contains only whitespace
+    return !this.Datovehicular.marca || this.Datovehicular.marca.trim() === '';
+  }
+  
+  validateModelo() {
+    // Check if the modelo field is empty or contains only whitespace
+    return !this.Datovehicular.modelo || this.Datovehicular.modelo.trim() === '';
+  }
+  
+  validatePatente() {
+    // Convert patente to a string and then check if it matches the pattern
+    const patentePattern = /^[A-Z0-9]{6,9}$/; // Pattern for a 6-character alphanumeric patente
+    return !this.Datovehicular.patente.toString() || !patentePattern.test(this.Datovehicular.patente.toString());
+  }
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   }

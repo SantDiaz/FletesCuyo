@@ -1,4 +1,4 @@
-<!-- <app-header></app-header>
+<app-header></app-header>
 <ion-content class="background2">
   <div style="text-align: center;">
     <h2>¡Estas a un paso de ser parte de nuestra comunidad!</h2>
@@ -10,7 +10,7 @@
           <div class="u-form u-palette-1-light-3 u-radius-14 u-form-1">
             <form #vehicleForm="ngForm" class="u-clearfix u-form-spacing-15 u-form-vertical u-inner-form" style="padding: 15px;" source="email" name="form">
               <div class="u-form-group u-form-name u-form-partition-factor-2 u-label-top">
-                <label for="tipoVehiculo" class="u-label">Vehiculo</label>
+                <label for="tipoVehiculo" class="u-label">Tipo de vehiculo</label>
                 <select
                   [(ngModel)]="Datovehicular.tipoVehiculo"
                   id="tipoVehiculo"
@@ -55,12 +55,27 @@
                   <p class="error-message">Ingrese el modelo del automotor.</p>
                 </div>
               </div>
+              <div class="u-form-group u-form-name u-form-partition-factor-2 u-label-top u-form-group-3">
+                <label for="modelo" class="u-label">Año del automotor</label>
+                <input
+                  [(ngModel)]="Datovehicular.ano"
+                  type="text"
+                  placeholder="Ej: 1998"
+                  id="ano"
+                  name="ano"
+                  class="u-border-1 u-border-grey-60 u-input u-input-rectangle"
+                  required
+                >
+                <div *ngIf="vehicleForm.controls.modelo && vehicleForm.controls.modelo.errors?.required">
+                  <p class="error-message">Ingrese el año del automotor.</p>
+                </div>
+              </div>
               <div class="u-form-group u-form-name u-label-top u-form-group-4">
                 <label for="patente" class="u-label">Patente</label>
                 <input
                   [(ngModel)]="Datovehicular.patente"
                   type="text"
-                  placeholder="Ingrese sus 6 valores"
+                  placeholder="Ingrese la patente del vehiculo"
                   id="patente"
                   name="patente"
                   class="u-border-1 u-border-grey-60 u-input u-input-rectangle"
@@ -70,7 +85,7 @@
                   <p class="error-message">Ingrese la patente del vehículo.</p>
                 </div>
                 <div *ngIf="vehicleForm.controls.patente && vehicleForm.controls.patente.errors?.pattern">
-                  <p class="error-message">La patente debe tener 6 caracteres alfanuméricos.</p>
+                  <p class="error-message">La patente debe tener al menos 6 caracteres alfanuméricos.</p>
                 </div>
               </div>
             
@@ -91,4 +106,4 @@
   
   
 </ion-content>
-   -->
+  

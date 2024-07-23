@@ -67,8 +67,9 @@ export interface UserA {
   
   export interface datosVehiculo {
     uid: string;
-    tipoVehiculo:  'Camioneta' | 'Camion' | 'Utilitario';
+    tipoVehiculo: 'Camioneta' | 'Camion' | 'Grua' | 'Furgonetas' | 'Camiones frigoríficos' | 'Otro...'  ;
     marca: string;
+    ano: string;
     modelo: string;
     patente: string;
     imagePatente: string; 
