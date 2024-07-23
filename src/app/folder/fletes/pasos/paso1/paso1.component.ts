@@ -234,12 +234,12 @@ validateCargamento() {
 
 validateTipoVehiculo() {
   // Check if the tipoVehiculo field is not one of the allowed types
-  const allowedTypes: ('Camioneta' | 'Camion' | 'Utilitario')[] = ['Camioneta', 'Camion', 'Utilitario'];
+  const allowedTypes: ('Camioneta' | 'Camion' | 'Grua' | 'Furgonetas' | 'Camiones frigoríficos' | 'Otro...' )[] = ['Camioneta' , 'Camion' , 'Grua' , 'Furgonetas' , 'Camiones frigoríficos' , 'Otro...' ];
   return !this.pasosFlete.tipoVehiculo || !allowedTypes.includes(this.pasosFlete.tipoVehiculo);
 }
 validateAyudantes() {
   // Check if the tipoVehiculo field is not one of the allowed types
-  const allowedTypes: ('Sin ayudantes' | '+1' | '+2'  | '+3')[] = ['Sin ayudantes' , '+1' , '+2'  , '+3'];
+  const allowedTypes: ('Sin ayudantes' | '+1 ayudantes' | '+2 ayudantes'  | '+3 ayudantes')[] = ['Sin ayudantes' , '+1 ayudantes' , '+2 ayudantes'  , '+3 ayudantes'];
   return !this.pasosFlete.ayudantes || !allowedTypes.includes(this.pasosFlete.ayudantes);
 }
 
@@ -249,14 +249,17 @@ validateForm(): boolean {
   if (!this.pasosFlete.tipoVehiculo || 
     (this.pasosFlete.tipoVehiculo !== 'Camioneta' &&
      this.pasosFlete.tipoVehiculo !== 'Camion' &&
-     this.pasosFlete.tipoVehiculo !== 'Utilitario')) {
+     this.pasosFlete.tipoVehiculo !== 'Grua' &&
+     this.pasosFlete.tipoVehiculo !== 'Furgonetas' &&
+     this.pasosFlete.tipoVehiculo !== 'Camiones frigoríficos' &&
+     this.pasosFlete.tipoVehiculo !== 'Otro...')) {
   return false; // Validación fallida para el campo tipoVehiculo
 }
 
 if (!this.pasosFlete.ayudantes || 
   (this.pasosFlete.ayudantes !== 'Sin ayudantes' &&
-   this.pasosFlete.ayudantes !== '+1' &&
-   this.pasosFlete.ayudantes !== '+2' &&  this.pasosFlete.ayudantes !== '+3')) {
+   this.pasosFlete.ayudantes !== '+1 ayudantes' &&
+   this.pasosFlete.ayudantes !== '+2 ayudantes' &&  this.pasosFlete.ayudantes !== '+3 ayudantes')) {
 return false; // Validación fallida para el campo tipoVehiculo
 }
 

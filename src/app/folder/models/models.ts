@@ -94,8 +94,8 @@ export interface UserA {
     uHasta: string;
     km?: number;
     cargamento: string;
-    tipoVehiculo: 'Camioneta' | 'Camion' | 'Utilitario' ;
-    ayudantes:  'Sin ayudantes' | '+1' | '+2'  | '+3' ;
+    tipoVehiculo: 'Camioneta' | 'Camion' | 'Grua' | 'Furgonetas' | 'Camiones frigoríficos' | 'Otro...'  ;
+    ayudantes:  'Sin ayudantes' | '+1 ayudantes' | '+2 ayudantes'  | '+3 ayudantes' ;
     uid: string;
     tiempoTranscurrido?: string;
     precio: number;
@@ -131,7 +131,7 @@ export const provincias = [ 'Buenos Aires', 'Catamarca', 'Chaco', 'Chubut', 'Có
 
   export const hora = ['5 ' , '6 ' , '7 ',' 8 ' , '9 ' , '10 ',' 11 ' , '12 ' , '13 ',' 14 ' , '15 ' , '16 ',' 17 ' ,'18 ' , '19 ',' 20 ' , '21 ' , '22 ',' 23 '];
   export const minutos = ['00' , '15' , '30', '45'];
-  export const tipoVehiculo = ['Camioneta' , 'Camion' , 'Utilitario'];
-  export const ayudantes = ['Sin ayudantes' , '+1' , '+2',  '+3'];
+  export const tipoVehiculo = ['Camioneta' , 'Camion' , 'Grua' , 'Furgonetas' , 'Camiones frigoríficos' , 'Otro...' ];
+  export const ayudantes = ['Sin ayudantes' , '+1 ayudantes' , '+2 ayudantes'  , '+3 ayudantes'];
 export const datosVehiculo =  []
 
