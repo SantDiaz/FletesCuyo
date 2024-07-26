@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { IonModal } from '@ionic/angular';
 import { datosVehiculo, tipoVehiculo, UserF } from 'src/app/folder/models/models';
@@ -9,6 +9,7 @@ import { OverlayEventDetail } from '@ionic/core/components';
 import { getAuth, signInWithPopup, GoogleAuthProvider, sendEmailVerification } from 'firebase/auth';
 import { take } from 'rxjs/operators';
 import { NuevoService } from 'src/app/folder/services/nuevo.service';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 
 
 @Component({
@@ -19,6 +20,7 @@ import { NuevoService } from 'src/app/folder/services/nuevo.service';
 export class Paso1fComponent implements OnInit {
   @ViewChild(IonModal) modal: IonModal;
   private formularioEnviado: boolean = false;
+  @ViewChild('fileInput') fileInput: ElementRef;
 
   name: string;
   message = "putoss"
@@ -71,6 +73,8 @@ vehiculo = tipoVehiculo;
     private firestore : FirestoreService,    
     private router: Router,
     private db: NuevoService,    
+    private storage: AngularFireStorage
+
 
     ) {
 
@@ -281,8 +285,43 @@ vehiculo = tipoVehiculo;
     
 
 
+    onImagePerfil(event: any): void {
+      const file = event.target.files[0];
+      this.uploadImageToStorage(file, 'image');
+    }
+
 
     
+  async uploadImageToStorage(file: File | null, imageType: string) {
+    if (!file) {
+      return; // Asegúrate de manejar el caso en que el archivo sea nulo
+    }
+  
+    try {
+      const reader = new FileReader();
+      reader.onload = async (event) => {
+        const fileDataUrl: string = event.target.result as string;
+  
+        const timestamp = new Date().getTime().toString();
+        const imageName = `${timestamp}.jpg`;
+  
+        const storageRef = this.storage.ref(`images/${imageName}`);
+        const uploadTask = await storageRef.putString(fileDataUrl, 'data_url');
+        const downloadUrl = await uploadTask.ref.getDownloadURL();
+  
+        // Asigna la URL de descarga al campo correspondiente según el tipo de imagen
+        if (imageType === 'image') {
+          this.registerF.image = downloadUrl;
+        } 
+      };
+  
+      reader.readAsDataURL(file);
+    } catch (error) {
+      console.error('Error al subir la imagen a Firebase Storage:', error);
+      // Manejar el error según tus necesidades (por ejemplo, mostrar un mensaje al usuario)
+    }
+  }
+
 
     validateNombre() {
       // Agrega tu lógica de validación personalizada aquí
@@ -310,34 +349,23 @@ vehiculo = tipoVehiculo;
     }
   
     validateTelefono(telefono: string): boolean {
-      // Ensure that telefono is not undefined or empty
       if (!telefono) {
-        return false; // Return false if telefono is undefined or empty
+        return false;
       }
-    
-      // Eliminate spaces and hyphens, if any
       const numeroLimpio = telefono.replace(/\s+/g, '').replace(/-/g, '');
-    
-      // Extract the prefix (first 3 or 4 digits)
       const prefijo = numeroLimpio.substring(0, 3);
-      // Verifica si el prefijo está en el arreglo de prefijos
       if (this.prefijosTelefonicos.includes(prefijo)) {
-        // Verifica si el número tiene entre 10 y 11 dígitos en total
         if (numeroLimpio.length < 10 || numeroLimpio.length > 11) {
-          return false; // La validación falla
+          return false;
         }
-  
-        // Verifica si todos los caracteres son dígitos numéricos
         if (!/^\d+$/.test(numeroLimpio)) {
-          return false; // La validación falla
+          return false;
         }
-  
-        // Si todas las validaciones pasan, consideramos el número válido
         return true;
       }
-  
-      return false; // La validación falla si el prefijo no está en el arreglo
+      return false;
     }
+    
   
     // Resto de tu código aquí...
     

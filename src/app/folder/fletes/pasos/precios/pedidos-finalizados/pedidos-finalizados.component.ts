@@ -126,4 +126,10 @@ export class PedidosFinalizadosComponent implements OnInit {
     await this.modalController.dismiss(data);
   }
 
+
+  atras(){
+    this.router.navigate(['/fletes'])
+
+  }
+
 }

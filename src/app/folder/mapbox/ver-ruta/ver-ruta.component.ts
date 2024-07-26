@@ -101,9 +101,11 @@ export class VerRutaComponent implements AfterViewInit {
     console.log('modeInput:', this.modeInput);
   }
 
-  cerrarModal() {
+  cerrarModal(){
     this.modalController.dismiss();
+
   }
 
+  
   // Resto del código...
 }

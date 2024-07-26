@@ -47,7 +47,10 @@ export class PreciosComponent implements OnInit {
           private fleteroService: FleteroServiceService,
           // private cdr: ChangeDetectorRef
 
-  ) { }
+  ) {
+
+    
+   }
 
   ngOnInit() {
     this.validacion  = true

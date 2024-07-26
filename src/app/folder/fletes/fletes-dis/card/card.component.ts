@@ -143,7 +143,10 @@ export class CardComponent implements OnInit {
     
     
 
+    atras(){
+      this.router.navigate(['/home'])
 
+    }
 
 
 

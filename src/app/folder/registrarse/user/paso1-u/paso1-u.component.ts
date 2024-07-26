@@ -278,7 +278,6 @@ btn2(){
     }
   
     validateTelefono(telefono: string): boolean {
-      // Ensure that telefono is not undefined or empty
       if (!telefono) {
         return false; // Return false if telefono is undefined or empty
       }
