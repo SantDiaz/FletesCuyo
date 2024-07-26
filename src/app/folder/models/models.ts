@@ -102,6 +102,7 @@ export interface UserA {
     precio: number;
      visible?: { [fleteroId: string]: boolean };
      image?: string
+     timestamp?: Date; // Añade esta línea
     }
 
   export interface respuesta {

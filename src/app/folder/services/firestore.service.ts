@@ -57,7 +57,10 @@ export class FirestoreService {
 
 
 
-
+    deleteDocument(path: string, id: string): Promise<void> {
+    return this.firestore.collection(path).doc(id).delete();
+      }
+              
 
 
 // guarda datos sin idÇ

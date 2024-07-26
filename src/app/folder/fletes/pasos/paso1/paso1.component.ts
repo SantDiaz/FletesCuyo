@@ -130,6 +130,8 @@ constructor(private routes: Router,
               data.image = res2.image;
               const enlace = `PedirFlete/${res.uid}/Pedidos`;
               const pedidoId = data.id;
+              data.timestamp = new Date(); // Añade el timestamp del pedido
+
               this.interaction.closeLoading();
               if (this.formularioEnviado === false) {
                 this.db.createDocument<DatosFlete>(data, enlace, pedidoId).then((_) => {
@@ -139,6 +141,8 @@ constructor(private routes: Router,
                   this.valueSelected === "2";
                   this.formularioEnviado = true; // Establece la bandera en true
                   this.router.navigate(['/home']);
+
+                  this.scheduleDeleteOrder(enlace, pedidoId);
                   return;
                 });
               }
@@ -154,6 +158,22 @@ constructor(private routes: Router,
     }
   }
   
+
+  scheduleDeleteOrder(path: string, id: string) {
+    // Calcular el tiempo en milisegundos para 24 horas
+    const millisecondsIn24Hours = 24 * 60 * 60 * 1000;
+
+    // Usar setTimeout para eliminar el pedido después de 24 horas
+    setTimeout(() => {
+      this.db.deleteDocument(path, id).then(() => {
+        console.log(`Pedido ${id} eliminado después de 24 horas`);
+      }).catch(error => {
+        console.error(`Error al eliminar el pedido ${id}: `, error);
+      });
+    }, millisecondsIn24Hours);
+  }
+  
+
 
   siguiente() {
     if (parseInt(this.valueSelected) === 1) {
