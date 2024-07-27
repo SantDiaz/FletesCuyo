@@ -178,32 +178,26 @@ btn2(){
 
     async enviar() {
       // Validar los datos antes de continuar
+    await this.interaction.presentLoading("Registrando...");
 
 
     if (this.customEmailValidator(this.registerU.email)) {
-          this.interaction.closeLoading();
           this.interaction.presentToast('El correo electrónico no es válido.');
           return;
         }
       
         // Validación de contraseña
         if (this.customPasswordValidator(this.registerU.password)) {
-          this.interaction.closeLoading();
           this.interaction.presentToast('La contraseña no cumple con los requisitos.');
           return;
         }
       
         // Si tanto el correo electrónico como la contraseña son válidos, continuar con el registro
         try {
-          console.log("Registro exitoso");
-          this.interaction.closeLoading();
-          this.interaction.presentToast('Registro exitoso.');
     
           await this.authS.registerU(this.registerU);
-                  this.valueSelected = '2'; // Asegúrate de que el valor asignado sea una cadena
         } catch (error) {
           console.log(error);
-          this.interaction.closeLoading();
           this.interaction.presentToast('Error en el registro');
         }
  
@@ -248,6 +242,8 @@ btn2(){
             const id = res.uid;
             const path2 = `Usuarios/${res.uid}/DatosPersonales`
             this.firestore.createDoc(this.registerU, path2, id);
+            this.interaction.closeLoading();
+            this.interaction.presentToast('Registrado con éxito');
             this.router.navigate(['/home']);
           }
         })

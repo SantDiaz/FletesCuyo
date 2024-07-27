@@ -293,15 +293,14 @@ vehiculo = tipoVehiculo;
   
   
 async enviarF() {
+    await this.interaction.presentLoading("Registrando...");
 
       if (this.customEmailValidator(this.registerF.email)) {
-      this.interaction.closeLoading();
       this.interaction.presentToast('El correo electrónico no es válido.');
       return;
     }
   
     if (this.customPasswordValidator(this.registerF.password)) {
-      this.interaction.closeLoading();
       this.interaction.presentToast('La contraseña no cumple con los requisitos.');
       return;
     }
@@ -343,7 +342,6 @@ async enviarF() {
           await this.authS.registerF(this.registerF, habilitado);
           console.log("Registro exitoso");
           this.registerF.habilitado = false;
-          this.interaction.closeLoading();
           // this.valueSelected = '2'; // Asegúrate de que el valor asignado sea una cadena
         } catch (error) {
           console.log(error);
@@ -387,7 +385,6 @@ this.authS.stateUser<UserF>()
     if (this.formularioEnviado === false) {
       this.db.updateDoc(path3,res.uid, datosPersonales)
       this.registerF.image = this.registerF.image;
-        this.interaction.closeLoading();
         this.formularioEnviado = true; // Establece la bandera en true
         this.valueSelected = '3'; // Asegúrate de que el valor asignado sea una cadena
       
@@ -404,7 +401,6 @@ this.authS.stateUser<UserF>()
   if (this.validateForm()) {
     // If the form is valid, proceed with saving the data
     this.authS.stateUser<UserF>().subscribe((res) => {
-      this.interaction.closeLoading();
           const id = res.uid;
           const path2 = `Fleteros/${res.uid}/DatosVehiculares`;
 
@@ -415,11 +411,14 @@ this.authS.stateUser<UserF>()
 
           // Ahora, puedes guardar todo el objeto en la colección
           this.firestore.createDocument<datosVehiculo>(datosVehicularesConImagen, path2, id)
+            this.interaction.closeLoading();
             this.interaction.presentToast('Registrado con éxito');
               this.router.navigate(['/home']);
 
           });
   } else {
+    this.interaction.closeLoading();
+    this.interaction.presentToast('Error en el registro');
     // If the form is not valid, display an error messagjjje or take appropriate action
     console.log("Form validation failed. Please complete all fields correctly.");
     // You can also display a toast or other error message to the user.
