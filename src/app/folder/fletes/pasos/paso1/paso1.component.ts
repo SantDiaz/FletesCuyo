@@ -192,13 +192,7 @@ constructor(private routes: Router,
       this.valueSelected = '2'; // Asegúrate de que el valor asignado sea una cadena
   }
 
-  // enviarDatos() {
-  //   console.log(first)
-  //   // Aquí agregas la lógica para enviar los datos recolectados
-  // }
-    
- 
-  
+
   
     // Métodos para cambiar el paso del stepper
     goToStep(step: number) {
