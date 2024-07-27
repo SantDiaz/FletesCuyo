@@ -26,20 +26,22 @@
          <div class="u-form u-palette-1-light-3 u-radius-14 u-form-1">
            <form  class="u-clearfix u-form-spacing-15 u-form-vertical u-inner-form" style="padding: 15px;" source="email" name="form">
         
-             <div class="u-form-group u-form-name u-label-top u-form-group-2">
-               <label for="name-ae7a" class="u-label">Email</label>
-               <input [(ngModel)]="registerF.email" type="email" placeholder="Ingrese su Email" id="name-ae7a" name="name-3" class="u-border-1 u-border-grey-60 u-input u-input-rectangle" required="">
-               <div class="u-form-group u-form-name u-label-top u-form-group-2" *ngIf="registerF.email && customEmailValidator(registerF.email)">
-                El correo electrónico debe contener '@' y '.com' .
+            <div class="u-form-group u-form-name u-label-top u-form-group-2">
+              <label for="email-input" class="u-label">Email</label>
+              <input [(ngModel)]="registerF.email" type="email" placeholder="Ingrese su Email" id="email-input" name="email" class="u-border-1 u-border-grey-60 u-input u-input-rectangle" required="">
+              <div *ngIf="registerF.email && customEmailValidator(registerF.email)" class="u-form-group u-form-name u-label-top u-form-group-2">
+                El correo electrónico debe contener '@' y '.com'.
               </div>
-             </div>
-             <div class="u-form-group u-form-name u-label-top u-form-group-2">
-               <label for="name-ae7a" class="u-label">Contraseña</label>
-               <input [(ngModel)]="registerF.password" type="password" placeholder="Ingrese su contraseña" id="name-ae7a" name="name-3" class="u-border-1 u-border-grey-60 u-input u-input-rectangle" required="">
-              </div>
-              <div class="u-form-group u-form-name u-label-top u-form-group-2" *ngIf="registerF.password && customPasswordValidator(registerF.password)">
+            </div>
+            
+            <div class="u-form-group u-form-name u-label-top u-form-group-2">
+              <label for="password-input" class="u-label">Contraseña</label>
+              <input [(ngModel)]="registerF.password" type="password" placeholder="Ingrese su contraseña" id="password-input" name="password" class="u-border-1 u-border-grey-60 u-input u-input-rectangle" required="">
+              <div *ngIf="registerF.password && customPasswordValidator(registerF.password)" class="u-form-group u-form-name u-label-top u-form-group-2">
                 La contraseña debe tener al menos 8 caracteres y contener al menos una mayúscula.
               </div>
+            </div>
+            
              
              <div (click)="siguiente()" class="u-align-center u-form-group u-form-submit u-label-top">
                <a  class="u-border-none u-btn u-btn-round u-btn-submit u-button-style u-custom-color-1 u-radius-13 u-btn-1">Siguiente<br>
@@ -111,7 +113,7 @@
                 <input #fileInput (change)="onImagePerfil($event)" type="file" placeholder="Ingrese su foto de perfil" name="Fotoperfil" class="u-border-1 u-border-grey-60 u-input u-input-rectangle" required>
                 <div *ngIf="fileInput.invalid && (fileInput.dirty || fileInput.touched)" class="error-message">El archivo no es válido</div>
               </div> -->
-                <div (click)="enviar()" class="u-align-center u-form-group u-form-submit u-label-top">
+                <div (click)="siguiente2()" class="u-align-center u-form-group u-form-submit u-label-top">
                   <a  class="u-border-none u-btn u-btn-round u-btn-submit u-button-style u-custom-color-1 u-radius-13 u-btn-1">Enviar<br>
                   </a>
                   <input type="submit" value="submit" class="u-form-control-hidden">

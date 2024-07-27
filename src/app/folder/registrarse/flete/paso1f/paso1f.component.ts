@@ -78,23 +78,7 @@ vehiculo = tipoVehiculo;
 
     ) {
 
-      this.registerF = {
-        uid: '',
-        nombre: '',
-        apellido: '',
-        dni: '',
-        edad: null,
-        domicilio: '',
-        telefono: '',
-        image: '',
-        perfil: 'Fletero'  ,
-        email: '',
-        password: '',
-        habilitado: false,
-        verificado: false,
-        datosVehiculos: null,
-        recomendacion: null
-      };
+
      }
 
 
@@ -103,143 +87,46 @@ vehiculo = tipoVehiculo;
   
   }
 
+        btn1(){
+          this.valueSelected = '1'; // Asegúrate de que el valor asignado sea una cadena
+      }
+
+      btn2(){
+          this.valueSelected = '2'; // Asegúrate de que el valor asignado sea una cadena
+      }
+
+
+
+      btn3(){
+        this.valueSelected = '3'; // Asegúrate de que el valor asignado sea una cadena
+      }
+
+
   volver(){
     this.routes.navigate(['/registrarse']);
   }
-
-  customEmailValidator(value: string): { [key: string]: any } | null {
-    if (!value || !value.includes('@') || !value.includes('.')) {
-      return { customEmailError: true };
-    }
-    return null;
-  }
-
-  customPasswordValidator(value: string): { [key: string]: any } | null {
-    if (!value || value.length < 8 || !/[A-Z]/.test(value)) {
-      return { customPasswordError: true };
-    }
-    return null;
-  }
-
-  next(){
-    this.routes.navigate(['/registrarse']);
-  }
-
-  async siguiente() {
-    await this.interaction.presentLoading("Registrando...");
   
-    if (this.customEmailValidator(this.registerF.email)) {
-      this.interaction.closeLoading();
-      this.interaction.presentToast('El correo electrónico no es válido.');
-      return;
-    }
-  
-    if (this.customPasswordValidator(this.registerF.password)) {
-      this.interaction.closeLoading();
-      this.interaction.presentToast('La contraseña no cumple con los requisitos.');
-      return;
-    }
-  
-    try {
-      let habilitado = this.registerF.habilitado;
-      habilitado = false;
-      await this.authS.registerF(this.registerF, habilitado);
-      console.log("Registro exitoso");
-      this.registerF.habilitado = false;
-      this.interaction.closeLoading();
+
+
+
+  siguiente() {
+    if (parseInt(this.valueSelected) === 1) {
+      // Si aún estamos en el primer paso, cambia al segundo paso
       this.valueSelected = '2'; // Asegúrate de que el valor asignado sea una cadena
-    } catch (error) {
-      console.log(error);
-      this.interaction.closeLoading();
-      this.interaction.presentToast('Error en el registro');
+    } else {
+      // Si estamos en el segundo paso, envía los datos
     }
   }
-
   
-
-  async enviar() {
-
-        if (this.validateNombre()) {
-      this.interaction.presentToast('El nombre no es válido.');
-      return;
+  siguiente2() {
+    if (parseInt(this.valueSelected) === 2) {
+      // Si aún estamos en el primer paso, cambia al segundo paso
+      this.valueSelected = '3'; // Asegúrate de que el valor asignado sea una cadena
+    } else {
+      // Si estamos en el segundo paso, envía los datos
     }
+  }
   
-    if (this.validateApellido()) {
-      this.interaction.presentToast('El apellido no es válido.');
-      return;
-    }
-  
-    if (this.validateDNI()) {
-      this.interaction.presentToast('El DNI no es válido.');
-      return;
-    }
-  
-    if (!this.validateTelefono(this.registerF.telefono)) {
-      this.interaction.presentToast('El teléfono no es válido.');
-      return;
-    }
-  
-    if (this.validateDomicilio()) {
-      this.interaction.presentToast('El domicilio no puede estar vacío.');
-      return;
-    }
-  
-    if (this.validateEdad()) {
-      this.interaction.presentToast('La edad no es válida.');
-      return;
-    }
-        // Validate the form before saving data
-          await this.interaction.presentLoading('Guardando datos personales...');
-          
-          // Get the currently authenticated user
-          this.authS.stateUser<UserF>()
-          .pipe(take(1))
-          .subscribe(res => {
-            this.db.stopLoading();
-            // Your code here
-            if(!res){
-              this.interaction.closeLoading();
-              this.interaction.presentToast('Falta completar datos.');
-
-            }
-            const path = `Fleteros`;
-            // Check if a document for this user already exists
-            this.firestore.getDoc<UserF>(path, res.uid).subscribe(res2 => {
-              const datosPersonales = {
-                uid: res.uid ,
-                nombre: this.registerF.nombre,
-                apellido: this.registerF.apellido,
-                dni: this.registerF.dni,
-                edad: this.registerF.edad,
-                domicilio: this.registerF.domicilio,
-                telefono: this.registerF.telefono,
-                email: res2.email,
-                perfil: res2.perfil,
-                verificado: false, // Remove this line or set it to the desired value
-                habilitado: false,
-              };
-              
-
-  
-              // Define the path for saving the personal data
-              const path3 = `Fleteros`;
-              // Update or create the document as needed
-              if (this.formularioEnviado === false) {
-                this.db.updateDoc(path3,res.uid, datosPersonales)
-                this.registerF.image = this.registerF.image;
-                  this.interaction.closeLoading();
-                  this.formularioEnviado = true; // Establece la bandera en true
-                  this.valueSelected = '3'; // Asegúrate de que el valor asignado sea una cadena
-                
-                return
-              } else{
-                  this.interaction.closeLoading();
-              }
-
-            });
-          });
-      
-      }
       
 
 
@@ -384,27 +271,19 @@ vehiculo = tipoVehiculo;
       return false; // La validación pasa
     }
 
-    btn1(){
-      this.valueSelected = '1'; // Asegúrate de que el valor asignado sea una cadena
-  }
-  
-  btn2(){
-      this.valueSelected = '2'; // Asegúrate de que el valor asignado sea una cadena
-  }
-  
-
-  
-  btn3(){
-    this.valueSelected = '3'; // Asegúrate de que el valor asignado sea una cadena
-}
-
-
-
-
-
-
-
-
+    customEmailValidator(value: string): { [key: string]: any } | null {
+      if (!value || !value.includes('@') || !value.includes('.com')) {
+        return { customEmailError: true };
+      }
+      return null;
+    }
+    
+    customPasswordValidator(value: string): { [key: string]: any } | null {
+      if (!value || value.length < 8 || !/[A-Z]/.test(value)) {
+        return { customPasswordError: true };
+      }
+      return null;
+    }
 //paso 3 vehiculos
 
 
@@ -414,6 +293,113 @@ vehiculo = tipoVehiculo;
   
   
 async enviarF() {
+
+      if (this.customEmailValidator(this.registerF.email)) {
+      this.interaction.closeLoading();
+      this.interaction.presentToast('El correo electrónico no es válido.');
+      return;
+    }
+  
+    if (this.customPasswordValidator(this.registerF.password)) {
+      this.interaction.closeLoading();
+      this.interaction.presentToast('La contraseña no cumple con los requisitos.');
+      return;
+    }
+  
+    if (this.validateNombre()) {
+      this.interaction.presentToast('El nombre no es válido.');
+      return;
+    }
+  
+    if (this.validateApellido()) {
+      this.interaction.presentToast('El apellido no es válido.');
+      return;
+    }
+  
+    if (this.validateDNI()) {
+      this.interaction.presentToast('El DNI no es válido.');
+      return;
+    }
+  
+    if (!this.validateTelefono(this.registerF.telefono)) {
+      this.interaction.presentToast('El teléfono no es válido.');
+      return;
+    }
+  
+    if (this.validateDomicilio()) {
+      this.interaction.presentToast('El domicilio no puede estar vacío.');
+      return;
+    }
+  
+    if (this.validateEdad()) {
+      this.interaction.presentToast('La edad no es válida.');
+      return;
+    }
+
+
+    try {
+          let habilitado = this.registerF.habilitado;
+          habilitado = false;
+          await this.authS.registerF(this.registerF, habilitado);
+          console.log("Registro exitoso");
+          this.registerF.habilitado = false;
+          this.interaction.closeLoading();
+          // this.valueSelected = '2'; // Asegúrate de que el valor asignado sea una cadena
+        } catch (error) {
+          console.log(error);
+          this.interaction.closeLoading();
+          this.interaction.presentToast('Error en el registro');
+        }
+       
+
+
+
+// PASO2 STEPPER
+this.authS.stateUser<UserF>()
+.pipe(take(1))
+.subscribe(res => {
+  this.db.stopLoading();
+  // Your code here
+  if(!res){
+    this.interaction.closeLoading();
+    this.interaction.presentToast('Falta completar datos.');
+
+  }
+  const path = `Fleteros`;
+  // Check if a document for this user already exists
+  this.firestore.getDoc<UserF>(path, res.uid).subscribe(res2 => {
+    const datosPersonales = {
+      uid: res.uid ,
+      nombre: this.registerF.nombre,
+      apellido: this.registerF.apellido,
+      dni: this.registerF.dni,
+      edad: this.registerF.edad,
+      domicilio: this.registerF.domicilio,
+      telefono: this.registerF.telefono,
+      email: res2.email,
+      perfil: res2.perfil,
+      verificado: false, // Remove this line or set it to the desired value
+      habilitado: false,
+    };
+    // Define the path for saving the personal data
+    const path3 = `Fleteros`;
+    // Update or create the document as needed
+    if (this.formularioEnviado === false) {
+      this.db.updateDoc(path3,res.uid, datosPersonales)
+      this.registerF.image = this.registerF.image;
+        this.interaction.closeLoading();
+        this.formularioEnviado = true; // Establece la bandera en true
+        this.valueSelected = '3'; // Asegúrate de que el valor asignado sea una cadena
+      
+      return
+    } else{
+        this.interaction.closeLoading();
+    }
+  });
+});
+
+
+// PASO3 STEPPER
   // Validate the form fields
   if (this.validateForm()) {
     // If the form is valid, proceed with saving the data
@@ -514,13 +500,123 @@ validateForm(): boolean {
 
 
 
+// PASO1
+  // async siguiente() {
+  //   await this.interaction.presentLoading("Registrando...");
+  
+  //   if (this.customEmailValidator(this.registerF.email)) {
+  //     this.interaction.closeLoading();
+  //     this.interaction.presentToast('El correo electrónico no es válido.');
+  //     return;
+  //   }
+  
+  //   if (this.customPasswordValidator(this.registerF.password)) {
+  //     this.interaction.closeLoading();
+  //     this.interaction.presentToast('La contraseña no cumple con los requisitos.');
+  //     return;
+  //   }
+  
+  //   try {
+  //     let habilitado = this.registerF.habilitado;
+  //     habilitado = false;
+  //     await this.authS.registerF(this.registerF, habilitado);
+  //     console.log("Registro exitoso");
+  //     this.registerF.habilitado = false;
+  //     this.interaction.closeLoading();
+  //     this.valueSelected = '2'; // Asegúrate de que el valor asignado sea una cadena
+  //   } catch (error) {
+  //     console.log(error);
+  //     this.interaction.closeLoading();
+  //     this.interaction.presentToast('Error en el registro');
+  //   }
+  // }
 
 
 
 
+//   async enviar() {
+
+//     if (this.validateNombre()) {
+//   this.interaction.presentToast('El nombre no es válido.');
+//   return;
+// }
+
+// if (this.validateApellido()) {
+//   this.interaction.presentToast('El apellido no es válido.');
+//   return;
+// }
+
+// if (this.validateDNI()) {
+//   this.interaction.presentToast('El DNI no es válido.');
+//   return;
+// }
+
+// if (!this.validateTelefono(this.registerF.telefono)) {
+//   this.interaction.presentToast('El teléfono no es válido.');
+//   return;
+// }
+
+// if (this.validateDomicilio()) {
+//   this.interaction.presentToast('El domicilio no puede estar vacío.');
+//   return;
+// }
+
+// if (this.validateEdad()) {
+//   this.interaction.presentToast('La edad no es válida.');
+//   return;
+// }
+//     // Validate the form before saving data
+//       await this.interaction.presentLoading('Guardando datos personales...');
+      
+//       // Get the currently authenticated user
+//       this.authS.stateUser<UserF>()
+//       .pipe(take(1))
+//       .subscribe(res => {
+//         this.db.stopLoading();
+//         // Your code here
+//         if(!res){
+//           this.interaction.closeLoading();
+//           this.interaction.presentToast('Falta completar datos.');
+
+//         }
+//         const path = `Fleteros`;
+//         // Check if a document for this user already exists
+//         this.firestore.getDoc<UserF>(path, res.uid).subscribe(res2 => {
+//           const datosPersonales = {
+//             uid: res.uid ,
+//             nombre: this.registerF.nombre,
+//             apellido: this.registerF.apellido,
+//             dni: this.registerF.dni,
+//             edad: this.registerF.edad,
+//             domicilio: this.registerF.domicilio,
+//             telefono: this.registerF.telefono,
+//             email: res2.email,
+//             perfil: res2.perfil,
+//             verificado: false, // Remove this line or set it to the desired value
+//             habilitado: false,
+//           };
+          
 
 
+//           // Define the path for saving the personal data
+//           const path3 = `Fleteros`;
+//           // Update or create the document as needed
+//           if (this.formularioEnviado === false) {
+//             this.db.updateDoc(path3,res.uid, datosPersonales)
+//             this.registerF.image = this.registerF.image;
+//               this.interaction.closeLoading();
+//               this.formularioEnviado = true; // Establece la bandera en true
+//               this.valueSelected = '3'; // Asegúrate de que el valor asignado sea una cadena
+            
+//             return
+//           } else{
+//               this.interaction.closeLoading();
+//           }
 
+//         });
+//       });
+  
+//   }
 
 
 
