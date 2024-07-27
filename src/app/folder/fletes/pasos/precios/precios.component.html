@@ -36,9 +36,8 @@
 <!-- <a (click)="verPedidos()" class="u-active-none u-border-2 u-border-active-palette-2-dark-1 u-border-hover-palette-2-base u-border-no-left u-border-no-right u-border-no-top u-border-palette-1-base u-btn u-button-style u-hover-none u-none u-text-hover-palette-2-base u-text-palette-1-base u-btn-1">Ver pedido</a> -->
 </div>
 </div>
-<div (click)="verPedidos(true, datos)" class="u-border-2 u-border-grey-75 u-btn u-btn-round u-button-style u-custom-color-1 u-hover-custom-color-3 u-radius-50 u-btn-2">
-<a>Ver {{ contarRespuestas() }} Respuestas</a>
-</div >
+<button (click)="verPedidos(true, datos)" class="u-border-2 u-border-grey-75 u-btn u-btn-round u-button-style u-custom-color-1 u-hover-custom-color-3 u-radius-50 u-btn-2"><strong>Ver {{ contarRespuestas() }} Respuestas</strong></button>
+
 <!-- <ion-button   (click)="verPedidos(true, datos)"class="u-border-2 u-border-grey-75 u-btn u-btn-round u-button-style u-custom-color-1 u-hover-custom-color-3 u-radius-50 u-btn-2">Ver Respuestas</ion-button> -->
 <ion-modal class="background2"  [isOpen]="isModalOpen">
   <ng-template >
@@ -57,7 +56,8 @@
             <ion-item class="item-respuesta" >
               <ion-label>{{ respuesta.nombre }} {{ respuesta.apellido }}</ion-label>
               <ion-label>${{ respuesta.precio }}</ion-label>
-              <ion-button class="boton-aceptar" (click)="moverPedidoAPedidosFinalizados(datos, respuesta)">Aceptar</ion-button>
+              <button (click)="moverPedidoAPedidosFinalizados(datos, respuesta)" class="u-border-2 u-border-grey-75 u-btn u-btn-round u-button-style u-custom-color-1 u-hover-custom-color-3 u-radius-50 u-btn-2"><strong>Aceptar</strong></button>
+
             </ion-item>
           </li>
         </ul>

@@ -281,6 +281,7 @@ cargarRespuestas(pedidoId: string, pedidoUser: string) {
             if (resRef) {
               console.log('respuesta', resRef);
               this.respuestas = resRef.map((respuestaRef) => {
+                this.contarRespuestas();
                 return respuestaRef.payload.doc.data();
               });
             } else {

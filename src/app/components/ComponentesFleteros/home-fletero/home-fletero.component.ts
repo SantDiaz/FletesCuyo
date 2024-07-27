@@ -38,17 +38,16 @@ export class HomeFleteroComponent implements OnInit {
     ChatV(){
       this.router.navigate(['/chat']);
     }
-
     VerFletes() {
       this.authS.stateUser<UserF>().subscribe(res => {
         if (res) {
-          // console.log("respuestacomun", res.uid);
           const path = `Fleteros`;
           this.db.getDoc<UserF>(path, res.uid).subscribe(res2 => {
             if (res2.verificado === false) {
-              // this.router.navigate(['/paso4F']);
-              this.router.navigate(['/fletes']);
-              // console.log("No verificado");
+              // Show an alert message
+              alert("Tu cuenta no está verificada. Por favor, completa la verificación.");
+              // Redirect to the paso4F page
+              this.router.navigate(['/paso4F']);
             } else {
               this.router.navigate(['/fletes']);
             }

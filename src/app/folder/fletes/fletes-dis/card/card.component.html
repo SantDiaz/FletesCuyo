@@ -2,7 +2,7 @@
 
   <ion-segment [(ngModel)]="selectedSegment">
     <ion-segment-button value="Pedidos">
-     Pedidos
+      <h1 class="u-align-center u-text u-text-1">Ultimos fletes disponibles</h1>
     </ion-segment-button>
     <!-- <ion-segment-button value="seccion2">
       Sección 2
@@ -13,7 +13,6 @@
     <ion-list class="background2" *ngSwitchCase="'seccion1'">
       <section  class="u-clearfix u-section-1" id="sec-ecfb">
         <div  class="u-clearfix u-sheet u-sheet-1">
-          <h1 class="u-align-center u-text u-text-1">Ultimos fletes disponibles</h1>
           <div   class="u-list u-list-1">
             <div  *ngIf="selectedSegment === 'seccion1'" class="u-repeater u-repeater-1">
               <div *ngFor="let datos of fletes" class="u-container-style u-list-item u-palette-1-light-3 u-repeater-item u-list-item-3">
